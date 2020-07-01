@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    datatable = $("#table").DataTable({
+    $("#table").DataTable({
         processing: true,
         ajax: {
             url: "../php/fetchProd.php",

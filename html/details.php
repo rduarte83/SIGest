@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SIGest | Lista de Produtos</title>
+    <title>SIGest | Detalhes</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -29,12 +29,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Lista de Produtos</h1>
+                        <h1>Detalhes</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="/SIGest/index.php">Início</a></li>
-                            <li class="breadcrumb-item active">Lista de Produtos</li>
+                            <li class="breadcrumb-item active">Listar Visitas</li>
                         </ol>
                     </div>
                 </div>
@@ -51,11 +51,13 @@
                                 <table id="table" class="table table-bordered table-hover">
                                     <thead>
                                         <th>Id</th>
-                                        <th>Tipo</th>
-                                        <th>Marca</th>
-                                        <th>Modelo</th>
-                                        <th>Número Série</th>
                                         <th>Cliente</th>
+                                        <th>Ultima Visita</th>
+                                        <th>Motivo</th>
+                                        <th>Produto</th>
+                                        <th>Tecnico</th>
+                                        <th>Descrição</th>
+                                        <th>Próxima Visita</th>
                                         <th>Operações</th>
                                     </thead>
                                     <tbody>
@@ -86,10 +88,9 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/b-1.6.2/b-html5-1.6.2/b-print-1.6.2/r-2.2.5/datatables.min.js"></script>
-
 <!-- AdminLTE App -->
 <script src="../js/adminlte.min.js"></script>
 <!-- page script -->
-<script src="../js/produtos.js"></script>
+<script src="../js/visitas.js"></script>
 </body>
 </html>

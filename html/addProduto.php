@@ -3,10 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SIGest | Adicionar Cliente</title>
+    <title>SIGest | Adicionar Produto</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- Font Awesome -->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -25,12 +24,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Novo Cliente</h1>
+                        <h1>Novo Produto</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="../index.php">Início</a></li>
-                            <li class="breadcrumb-item active">Adicionar Cliente</li>
+                            <li class="breadcrumb-item active">Adicionar Produto</li>
                         </ol>
                     </div>
                 </div>
@@ -43,28 +42,47 @@
                 <!-- Horizontal Form -->
                 <div class="card card-info">
                     <div class="card-header">
-                        <h3 class="card-title">Dados do Cliente</h3>
+                        <h3 class="card-title">Dados do Produto</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
                     <form method="post" id="addForm" enctype="multipart/form-data" class="form-horizontal">
                         <div class="card-body">
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Cliente</label>
+                                <label class="col-form-label col-sm-2">Cliente</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="cliente" name="cliente" class="form-control" required>
+                                    <select class="custom-select form-control" id="cli" name="cliente_id" required>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Zona</label>
+                                <label class="col-form-label col-sm-2">Tipo</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="zona" name="zona" class="form-control" required>
+                                    <input type="text" id="tipo" name="tipo" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-sm-2">Marca</label>
+                                <div class="col-sm-10">
+                                    <input type="text" id="marca" name="marca" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-sm-2">Modelo</label>
+                                <div class="col-sm-10">
+                                    <input type="text" id="modelo" name="modelo" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-sm-2">Número Série</label>
+                                <div class="col-sm-10">
+                                    <input type="text" id="num_serie" name="num_serie" class="form-control" required>
                                 </div>
                             </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            <input type="hidden" name="op" value="addCli">
+                            <input type="hidden" name="op" value="addProd">
                             <a href="../index.php">
                                 <button type="button" class="btn btn-default ">Cancelar</button>
                             </a>
@@ -89,7 +107,7 @@
 <!-- AdminLTE App -->
 <script src="../js/adminlte.min.js"></script>
 
-<script src="../js/addCli.js"></script>
+<script src="../js/addProd.js"></script>
 
 </body>
 </html>

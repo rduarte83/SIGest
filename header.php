@@ -48,10 +48,16 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="/SIGest/html/hist.php" class="nav-link <?= (basename($_SERVER['PHP_SELF'])=="hist.php")?"active":""; ?>">
+                        <i class="fa fa-table nav-icon"></i>
+                        <p>Visitas por Cliente</p>
+                    </a>
+                </li>
                 <li class="nav-item has-treeview menu-open">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-table"></i>
-                        <p>Listagens
+                        <p>Listas
                             <i class="fa fa-angle-left right"></i>
                         </p>
                     </a>
@@ -59,19 +65,19 @@
                         <li class="nav-item">
                             <a href="/SIGest/html/clientes.php" class="nav-link <?= (basename($_SERVER['PHP_SELF'])=="clientes.php")?"active":""; ?>">
                                 <i class="fa fa-circle nav-icon"></i>
-                                <p>Listar Clientes</p>
+                                <p>Clientes</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="/SIGest/html/produtos.php" class="nav-link <?= (basename($_SERVER['PHP_SELF'])=="produtos.php")?"active":""; ?>">
                                 <i class="fa fa-circle nav-icon"></i>
-                                <p>Listar Produtos</p>
+                                <p>Produtos</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="/SIGest/html/visitas.php" class="nav-link <?= (basename($_SERVER['PHP_SELF'])=="visitas.php")?"active":""; ?>">
                                 <i class="fa fa-circle nav-icon"></i>
-                                <p>Listar Visitas</p>
+                                <p>Visitas</p>
                             </a>
                         </li>
 

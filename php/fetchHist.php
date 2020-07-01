@@ -3,18 +3,22 @@ include('db.php');
 $output = array();
 $query = "
         SELECT v.*, c.cliente, p.tipo, p.marca, p.modelo 
-        FROM visitas v INNER JOIN produtos p ON v.produto_id=p.id 
-            INNER JOIN clientes c ON v.cliente_id=c.id
+        FROM visitas v INNER JOIN produtos p ON v.produto_id=p.id INNER JOIN clientes c 
+            ON v.cliente_id=c.id WHERE v.cliente_id = :cliente_id
         ";
 
 $statement = $conn->prepare($query);
-$statement->execute();
+$statement->execute(
+    array(
+        ':cliente_id' => $_POST["cliente_id"]
+    )
+);
 $result = $statement->fetchAll();
 $data = array();
 
 foreach ($result as $row) {
-    $cli = $row["tipo"]." ".$row["marca"]." ".$row["modelo"];
-    $prod = $row["tipo"]." ".$row["marca"]." ".$row["modelo"];
+    $cli = $row["tipo"] . " " . $row["marca"] . " " . $row["modelo"];
+    $prod = $row["tipo"] . " " . $row["marca"] . " " . $row["modelo"];
     $sub_array = array();
     $sub_array[] = $row["id"];
     $sub_array[] = $row["cliente"];
@@ -25,9 +29,6 @@ foreach ($result as $row) {
     $sub_array[] = $row["descricao"];
     $sub_array[] = $row["prox_vis"];
     $sub_array[] = '
-                    <a href="details.php" class="edit btn btn-primary btn-sm" data-id="' . $row["id"] . '">
-                        <i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Detalhes"></i>
-                    </a>
                     <a href="#editModal" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '" data-toggle="modal">
                         <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>
                     </a>
