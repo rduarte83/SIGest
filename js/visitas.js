@@ -1,3 +1,9 @@
+$(document).on('click','.details', function () {
+    var visita_id = $(this).attr("data-id");
+    localStorage.setItem("visita_id", visita_id);
+    console.log(visita_id);
+});
+
 $(document).ready(function () {
     $("#table").DataTable({
         processing: true,
@@ -93,7 +99,7 @@ $(document).ready(function () {
             $("#table").DataTable({
                 processing: true,
                 ajax: {
-                    url: "../php/fetchHist.php",
+                    url: "../php/fetchVisCli.php",
                     type: "POST",
                     data: {
                         cliente_id: $("#cli").val()

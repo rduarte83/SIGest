@@ -29,6 +29,9 @@ foreach ($result as $row) {
     $sub_array[] = $row["descricao"];
     $sub_array[] = $row["prox_vis"];
     $sub_array[] = '
+                    <a href="details.php" class="details btn btn-primary btn-sm" data-id="' . $row["id"] . '">
+                        <i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Detalhes"></i>
+                    </a>
                     <a href="#editModal" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '" data-toggle="modal">
                         <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>
                     </a>
