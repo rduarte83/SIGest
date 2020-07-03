@@ -56,12 +56,10 @@ $(document).ready(function () {
     });
 
     $("#cli").on('change', function () {
-
         if ($.fn.dataTable.isDataTable('#table')) {
             $("#table").DataTable().destroy();
         }
         ;
-
         if ($("#cli").val() == 0) {
             $("#table").DataTable({
                 processing: true,

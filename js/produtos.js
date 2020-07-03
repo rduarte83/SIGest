@@ -2,8 +2,11 @@ $(document).ready(function () {
     $("#table").DataTable({
         processing: true,
         ajax: {
-            url: "../php/fetchProd.php",
+            url: "../php/queries.php",
             type: "POST",
+            data: {
+                op: 'fetchProd'
+            }
         },
         dom: 'Bfrtip',
         columnDefs: [

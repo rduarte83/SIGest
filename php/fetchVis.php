@@ -2,9 +2,10 @@
 include('db.php');
 $output = array();
 $query = "
-        SELECT v.*, c.cliente, p.tipo, p.marca, p.modelo 
-        FROM visitas v INNER JOIN produtos p ON v.produto_id=p.id 
-            INNER JOIN clientes c ON v.cliente_id=c.id
+        SELECT v.*, c.cliente, p.tipo, p.marca, p.modelo, m.motivo FROM visitas v 
+            INNER JOIN produtos p ON v.produto_id=p.id 
+            INNER JOIN clientes c ON v.cliente_id=c.nif
+            INNER JOIN motivos m ON v.motivo_id=m.id
         ";
 
 $statement = $conn->prepare($query);
@@ -13,7 +14,6 @@ $result = $statement->fetchAll();
 $data = array();
 
 foreach ($result as $row) {
-    $cli = $row["tipo"]." ".$row["marca"]." ".$row["modelo"];
     $prod = $row["tipo"]." ".$row["marca"]." ".$row["modelo"];
     $sub_array = array();
     $sub_array[] = $row["id"];

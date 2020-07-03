@@ -48,12 +48,6 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="/SIGest/html/hist.php" class="nav-link <?= (basename($_SERVER['PHP_SELF'])=="hist.php")?"active":""; ?>">
-                        <i class="fa fa-table nav-icon"></i>
-                        <p>Visitas por Cliente</p>
-                    </a>
-                </li>
                 <li class="nav-item has-treeview menu-open">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-table"></i>

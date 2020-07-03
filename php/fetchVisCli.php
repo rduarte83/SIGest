@@ -17,7 +17,6 @@ $result = $statement->fetchAll();
 $data = array();
 
 foreach ($result as $row) {
-    $cli = $row["tipo"] . " " . $row["marca"] . " " . $row["modelo"];
     $prod = $row["tipo"] . " " . $row["marca"] . " " . $row["modelo"];
     $sub_array = array();
     $sub_array[] = $row["id"];

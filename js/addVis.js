@@ -11,7 +11,7 @@ $(document).ready(function () {
             $("#cli").html("");
             $("#cli").html('<option value="0">Seleccionar Cliente</option>');
             $.each(dataResult.data, function () {
-                $("#cli").append($("<option/>").val(this[0]).text(this[1]));
+                $("#cli").append($("<option/>").val(this[0]).text(this[2]));
             });
         }
     });
@@ -23,7 +23,7 @@ $(document).ready(function () {
             url: "../php/queries.php",
             type: "POST",
             data: {
-                op: 'fetchProd',
+                op: 'fetchProdCli',
                 cliente_id: $("#cli").val()
             },
             success: function (dataResult) {
@@ -36,6 +36,23 @@ $(document).ready(function () {
                 });
             }
         });
+    });
+
+    //Fetch Motivo
+    $.ajax({
+        url: "../php/queries.php",
+        type: "POST",
+        data: {
+            op: 'fetchMot'
+        },
+        success: function (dataResult) {
+            var dataResult = JSON.parse(dataResult);
+            $("#mot").html("");
+            $("#mot").html('<option value="0">Seleccionar Motivo</option>');
+            $.each(dataResult.data, function () {
+                $("#mot").append($("<option/>").val(this[0]).text(this[1]));
+            });
+        }
     });
 
     //<!-- Add visit -->

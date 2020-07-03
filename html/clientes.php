@@ -50,9 +50,12 @@
                             <div class="card-body">
                                 <table id="table" class="table table-bordered table-hover">
                                     <thead>
+                                        <th>NIF</th>
                                         <th>Id</th>
                                         <th>Cliente</th>
                                         <th>Zona</th>
+                                        <th>Contacto</th>
+                                        <th>Email</th>
                                         <th>Operações</th>
                                     </thead>
                                     <tbody>

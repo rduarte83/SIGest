@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="../css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -47,21 +49,85 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
-                        <!-- /.card -->
+                <!-- Horizontal Form -->
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">Dados da Visita</h3>
                     </div>
-                    <!-- /.col -->
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form method="post" id="addForm" enctype="multipart/form-data" class="form-horizontal">
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label class="col-form-label col-sm-2">Id</label>
+                                <div class="col-sm-10">
+                                    <input type="name" id="id" name="id" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-sm-2">Cliente</label>
+                                <div class="col-sm-10">
+                                    <input type="name" id="cli" name="cliente_id" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-sm-2">Produto</label>
+                                <div class="col-sm-10">
+                                    <input type="name" id="prod" name="produto_id" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-sm-2">Última Visita</label>
+                                <div class="col-sm-10">
+                                    <input type="date" id="ult_vis" name="ult_vis" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-sm-2">Motivo</label>
+                                <div class="col-sm-10">
+                                    <input type="text" id="motivo" name="motivo" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-sm-2">Descrição</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" name="descricao" id="descricao" rows="8"
+                                              readonly></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-sm-2">Técnico</label>
+                                <div class="col-sm-10">
+                                    <input type="text" id="tecnico" name="tecnico" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-sm-2">Próxima Visita</label>
+                                <div class="col-sm-10">
+                                    <input type="date" id="prox_vis" name="prox_vis" class="form-control" readonly>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="noprint">
+                            <div class="card-footer">
+                                <input type="hidden" name="op" value="addVis">
+                                <a href="../index.php">
+                                    <button type="button" class="btn btn-default">Cancelar</button>
+                                </a>
+                                <button type="submit" class="btn btn-success float-right">Confirmar</button>
+                                <button type="button" class="btn btn-info float-right mr-3 fa fa-print"
+                                        onclick="javascript:window.print()"> Imprimir
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.card-footer -->
+                    </form>
                 </div>
-                <!-- /.row -->
-            </div>
-            <!-- /.container-fluid -->
+                <!-- /.card -->
+                <!-- /.container-fluid -->
         </section>
         <!-- /.content -->
     </div>
@@ -81,6 +147,6 @@
 <!-- AdminLTE App -->
 <script src="../js/adminlte.min.js"></script>
 <!-- page script -->
-<script src="../js/visitas.js"></script>
+<script src="../js/details.js"></script>
 </body>
 </html>

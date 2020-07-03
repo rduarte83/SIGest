@@ -3,8 +3,61 @@ include 'db.php';
 
 if ($_POST['op'] == 'fetchCli') {
     $output = array();
+    $query = "SELECT * FROM clientes";
+
+    $statement = $conn->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $data = array();
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["nif"];
+        $sub_array[] = $row["id"];
+        $sub_array[] = $row["cliente"];
+        $sub_array[] = $row["zona"];
+        $sub_array[] = $row["contacto"];
+        $sub_array[] = $row["email"];
+        $sub_array[] = '
+                    <a href="#editModal" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . ' " data-toggle="modal">
+                        <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>
+                    </a>
+                    <a href="#deleteModal" class="delete btn btn-danger btn-sm" data-id="' . $row["id"] . ' " data-toggle="modal">
+                        <i class="fa fa-trash" aria-hidden="true" data-toggle="tooltip" title="Eliminar"></i>
+                    </a>
+                    ';
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+
+}
+
+if ($_POST['op'] == 'addCli') {
     $query = "
-        SELECT * FROM clientes
+            INSERT INTO clientes (nif,id,cliente,zona,contacto,email) VALUES (:nif,:id,:cliente,:zona,:contacto,:email)
+		";
+
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':nif' => $_POST["nif"],
+            ':id' => $_POST["id"],
+            ':cliente' => $_POST["cliente"],
+            ':zona' => $_POST["zona"],
+            ':contacto' => $_POST["contacto"],
+            ':email' => $_POST["email"]
+
+
+        )
+    );
+}
+
+if ($_POST['op'] == 'fetchProd') {
+    $output = array();
+    $query = "
+        SELECT p.*,c.cliente, c.zona FROM produtos p INNER JOIN clientes c ON p.cliente_id=c.nif
         ";
 
     $statement = $conn->prepare($query);
@@ -14,8 +67,19 @@ if ($_POST['op'] == 'fetchCli') {
     foreach ($result as $row) {
         $sub_array = array();
         $sub_array[] = $row["id"];
+        $sub_array[] = $row["tipo"];
+        $sub_array[] = $row["marca"];
+        $sub_array[] = $row["modelo"];
+        $sub_array[] = $row["num_serie"];
         $sub_array[] = $row["cliente"];
-        $sub_array[] = $row["zona"];
+        $sub_array[] = '
+                    <a href="#editModal" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '" data-toggle="modal">
+                        <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>
+                    </a>
+                    <a href="#deleteModal" class="delete btn btn-danger btn-sm" data-id="' . $row["id"] . '" data-toggle="modal">
+                        <i class="fa fa-trash" aria-hidden="true" data-toggle="tooltip" title="Eliminar"></i>
+                    </a>
+                    ';
 
         $data[] = $sub_array;
     }
@@ -23,20 +87,6 @@ if ($_POST['op'] == 'fetchCli') {
         "data" => $data
     );
     echo json_encode($output);
-}
-
-if ($_POST['op'] == 'addCli') {
-    $query = "
-            INSERT INTO clientes (cliente,zona) VALUES (:cliente, :zona);
-		";
-
-    $statement = $conn->prepare($query);
-    $result = $statement->execute(
-        array(
-            ':cliente' => $_POST["cliente"],
-            ':zona' => $_POST["zona"]
-        )
-    );
 }
 
 if ($_POST['op'] == 'addProd') {
@@ -57,7 +107,7 @@ if ($_POST['op'] == 'addProd') {
     );
 }
 
-if ($_POST['op'] == 'fetchProd') {
+if ($_POST['op'] == 'fetchProdCli') {
     $output = array();
     $query = "
         SELECT * FROM produtos WHERE cliente_id = :cliente_id
@@ -105,4 +155,60 @@ if ($_POST['op'] == 'addVis') {
     );
 }
 
+if ($_POST['op'] == 'fetchVisS') {
+    $output = array();
+    $query = "
+        SELECT v.*, c.cliente, p.tipo, p.marca, p.modelo, m.motivo FROM visitas v 
+            INNER JOIN produtos p ON v.produto_id=p.id 
+            INNER JOIN clientes c ON v.cliente_id=c.nif
+            INNER JOIN motivos m ON v.motivo_id=m.id
+            WHERE v.id = :visita_id
+        ";
+    $statement = $conn->prepare($query);
+    $statement->execute(
+        array(
+            ':visita_id' => $_POST["visita_id"]
+        )
+    );
+    $result = $statement->fetchAll();
+    $data = array();
+    foreach ($result as $row) {
+        $prod = $row["tipo"] . " " . $row["marca"] . " " . $row["modelo"];
+        $sub_array = array();
+        $sub_array[] = $row["id"];
+        $sub_array[] = $row["cliente"];
+        $sub_array[] = $row["ult_vis"];
+        $sub_array[] = $row["motivo"];
+        $sub_array[] = $prod;
+        $sub_array[] = $row["tecnico"];
+        $sub_array[] = $row["descricao"];
+        $sub_array[] = $row["prox_vis"];
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
 
+if ($_POST['op'] == 'fetchMot') {
+    $output = array();
+    $query = "
+        SELECT * FROM motivos
+        ";
+
+    $statement = $conn->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $data = array();
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["id"];
+        $sub_array[] = $row["motivo"];
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}

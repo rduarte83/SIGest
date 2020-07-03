@@ -50,6 +50,18 @@
                     <form method="post" id="addForm" enctype="multipart/form-data" class="form-horizontal">
                         <div class="card-body">
                             <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">NIF</label>
+                                <div class="col-sm-10">
+                                    <input type="number" id="nif" name="nif" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Id</label>
+                                <div class="col-sm-10">
+                                    <input type="number" id="id" name="id" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Cliente</label>
                                 <div class="col-sm-10">
                                     <input type="text" id="cliente" name="cliente" class="form-control" required>
@@ -59,6 +71,18 @@
                                 <label class="col-sm-2 col-form-label">Zona</label>
                                 <div class="col-sm-10">
                                     <input type="text" id="zona" name="zona" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Contacto</label>
+                                <div class="col-sm-10">
+                                    <input type="tel" id="contacto" name="contacto" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="email" id="email" name="email" class="form-control" required>
                                 </div>
                             </div>
                         </div>

@@ -11,8 +11,7 @@ $(document).ready(function () {
             $("#cli").html("");
             $("#cli").html('<option value="0">Seleccionar Cliente</option>');
             $.each(dataResult.data, function () {
-                console.log(  )
-                $("#cli").append($("<option/>").val(this[0]).text(this[1]));
+                $("#cli").append($("<option/>").val(this[0]).text(this[2]));
             });
         }
     });

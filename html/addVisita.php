@@ -72,7 +72,8 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Motivo</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="motivo" name="motivo" class="form-control" required>
+                                    <select class="custom-select form-control" name="motivo_id" id="mot" required>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">
