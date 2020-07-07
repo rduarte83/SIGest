@@ -5,13 +5,10 @@ function createDT() {
             url: "../php/queries.php",
             type: "POST",
             data: {
-                op: 'fetchProd'
-            }
+                op: 'fetchPen'
+            },
         },
         dom: 'Bfrtip',
-        columnDefs: [
-            // {"visible": false, "targets": 0}
-        ],
         buttons: {
             buttons: [
                 {
@@ -37,7 +34,7 @@ function createDT() {
         processData: false,
         language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
     });
-}
+};
 
 $(document).ready(function () {
     createDT();
@@ -74,37 +71,36 @@ $(document).ready(function () {
                     url: "../php/queries.php",
                     type: "POST",
                     data: {
-                        op: 'fetchProdCli',
-                        cliente_id: $("#cli").val()
+                        cliente_id: $("#cli").val(),
+                        op: 'fetchVisCli'
                     },
-                },
-                dom: 'Bfrtip',
-                buttons: {
-                    buttons: [
-                        {
-                            extend: 'print',
-                            'text': '<i class="fa fa-print" aria-hidden="true"></i>',
-                            "className": 'btn btn-default btn-xs'
-                        },
-                        {
-                            extend: 'pdf',
-                            'text': '<i class="fa fa-file-pdf-o" aria-hidden="true"></i>',
-                            "className": 'btn btn-default btn-xs'
-                        },
-                        {
-                            extend: 'excel',
-                            'text': '<i class="fa fa-file-excel-o" aria-hidden="true"></i>',
-                            "className": 'btn btn-default btn-xs'
-                        }
-                    ],
-                },
-                responsive: true,
-                autoWidth: false,
-                contentType: false,
-                processData: false,
-                language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
+                    dom: 'Bfrtip',
+                    buttons: {
+                        buttons: [
+                            {
+                                extend: 'print',
+                                'text': '<i class="fa fa-print" aria-hidden="true"></i>',
+                                "className": 'btn btn-default btn-xs'
+                            },
+                            {
+                                extend: 'pdf',
+                                'text': '<i class="fa fa-file-pdf-o" aria-hidden="true"></i>',
+                                "className": 'btn btn-default btn-xs'
+                            },
+                            {
+                                extend: 'excel',
+                                'text': '<i class="fa fa-file-excel-o" aria-hidden="true"></i>',
+                                "className": 'btn btn-default btn-xs'
+                            }
+                        ],
+                    },
+                    responsive: true,
+                    autoWidth: false,
+                    language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
+                }
             });
-
         }
     });
 });
+
+

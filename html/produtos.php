@@ -48,6 +48,14 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
+                                <label class="col-form-label col-sm-2">Seleccionar Cliente</label>
+                                <select class="custom-select form-control" id="cli" name="cliente_id" required>
+                                </select>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
                                 <table id="table" class="table table-bordered table-hover">
                                     <thead>
                                         <th>Id</th>

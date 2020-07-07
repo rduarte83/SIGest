@@ -118,9 +118,8 @@
                                     <button type="button" class="btn btn-default">Cancelar</button>
                                 </a>
                                 <button type="submit" class="btn btn-success float-right">Confirmar</button>
-                                <button type="button" class="btn btn-info float-right mr-3 fa fa-print"
-                                        onclick="javascript:window.print()"> Imprimir
-                                </button>
+                                <a href="details-print.php" id="print" target="_blank"
+                                   class="btn btn-info float-right mr-3 fa fa-print">Imprimir</a>
                             </div>
                         </div>
                         <!-- /.card-footer -->
