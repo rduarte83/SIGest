@@ -6,7 +6,7 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fa fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/SIGest/index.php" class="nav-link">Home</a>
+            <a href="/SIGest/index.php" class="nav-link">Início</a>
         </li>
     </ul>
 
@@ -45,11 +45,42 @@
                         <p>Início</p>
                     </a>
                 </li>
+                <li class="nav-item has-treeview menu-open">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fa fa-print"></i>
+                        <p>Contratos de Cópia
+                            <i class="fa fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview menu-open">
+                        <li class="nav-item">
+                            <a href="/SIGest/html/copia.php"
+                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "copia.php") ? "active" : ""; ?>">
+                                <i class="fa fa-circle nav-icon"></i>
+                                <p>Listar Contratos</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/SIGest/html/addCopia.php"
+                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "addCopia.php") ? "active" : ""; ?>">
+                                <i class="fa fa-circle nav-icon"></i>
+                                <p>Adicionar Contrato</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/SIGest/html/addContagem.php"
+                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "addContagem.php") ? "active" : ""; ?>">
+                                <i class="fa fa-circle nav-icon"></i>
+                                <p>Nova Contagem</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a href="/SIGest/html/pendentes.php"
                        class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "pendentes.php") ? "active" : ""; ?>">
                         <i class="nav-icon fa fa-th"></i>
-                        <p>Pendentes</p>
+                        <p>Visitas em Atraso</p>
                         <span class="badge badge-danger right" id="numPen"></span>
                     </a>
                 </li>

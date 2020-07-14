@@ -37,8 +37,8 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="/SIGest/index.php">Início</a></li>
-                            <li class="breadcrumb-item"><a href="/SIGest/php/visitas.php">Listar Visitas</a></li>
+                            <li class="breadcrumb-item"><a href="../index.php">Início</a></li>
+                            <li class="breadcrumb-item"><a href="visitas.php">Lista de Visitas</a></li>
                             <li class="breadcrumb-item active">Detalhes</li>
                         </ol>
                     </div>
@@ -113,11 +113,9 @@
                         <!-- /.card-body -->
                         <div class="noprint">
                             <div class="card-footer">
-                                <input type="hidden" name="op" value="addVis">
-                                <a href="../index.php">
+                                <a href="visitas.php">
                                     <button type="button" class="btn btn-default">Cancelar</button>
                                 </a>
-                                <button type="submit" class="btn btn-success float-right">Confirmar</button>
                                 <a href="details-print.php" id="print" target="_blank"
                                    class="btn btn-info float-right mr-3 fa fa-print">Imprimir</a>
                             </div>
@@ -131,6 +129,9 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+
+    <?php include '../footer.php' ?>
+
 </div>
 <!-- ./wrapper -->
 

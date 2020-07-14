@@ -242,7 +242,7 @@ if ($_POST['op'] == 'fetchVis') {
     $data = array();
 
     foreach ($result as $row) {
-        $prod = $row["tipo"]." ".$row["marca"]." ".$row["modelo"];
+        $prod = $row["tipo"] . " " . $row["marca"] . " " . $row["modelo"];
         $sub_array = array();
         $sub_array[] = $row["id"];
         $sub_array[] = $row["cliente"];
@@ -284,7 +284,7 @@ if ($_POST['op'] == 'fetchVisCli') {
 
     $statement = $conn->prepare($query);
     $statement->execute(
-        array(
+        $data = array(
             ':cliente_id' => $_POST["cliente_id"]
         )
     );
@@ -337,7 +337,7 @@ if ($_POST['op'] == 'fetchPen') {
     $data = array();
 
     foreach ($result as $row) {
-        $prod = $row["tipo"]." ".$row["marca"]." ".$row["modelo"];
+        $prod = $row["tipo"] . " " . $row["marca"] . " " . $row["modelo"];
         $sub_array = array();
         $sub_array[] = $row["id"];
         $sub_array[] = $row["cliente"];

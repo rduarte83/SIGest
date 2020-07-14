@@ -11,8 +11,6 @@ $(document).ready(function () {
     var contacto = localStorage.getItem('contacto')
     var email = localStorage.getItem('email')
 
-    console.log( produto );
-
     $("#id").text(id);
     $("#cli").text(cliente);
     $("#morada").text(morada);
@@ -24,7 +22,5 @@ $(document).ready(function () {
     $("#prox_vis").text(prox_vis);
     $("#contacto").text(contacto);
     $("#email").text(email);
-
-
 });
 

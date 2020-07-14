@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SIGest | Adicionar Visita</title>
+    <title>SIGest | Nova Contagem</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -24,12 +24,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Nova Visita</h1>
+                        <h1>Nova Contagem</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="../index.php">Início</a></li>
-                            <li class="breadcrumb-item active">Adicionar Visita</li>
+                            <li class="breadcrumb-item active">Nova Contagem</li>
                         </ol>
                     </div>
                 </div>
@@ -42,65 +42,47 @@
                 <!-- Horizontal Form -->
                 <div class="card card-info">
                     <div class="card-header">
-                        <h3 class="card-title">Dados da Visita</h3>
+                        <h3 class="card-title">Nova Contagem</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
                     <form method="post" id="addForm" enctype="multipart/form-data" class="form-horizontal">
                         <div class="card-body">
                             <div class="form-group row">
-                                <label class="col-form-label col-sm-2">Cliente</label>
+                                <label class="col-form-label col-sm-2">Contrato</label>
                                 <div class="col-sm-10">
-                                    <select class="custom-select form-control" id="cli" name="cliente_id" required>
+                                    <select class="custom-select form-control" id="contrato" name="contrato_id"
+                                            required>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-sm-2">Produto</label>
+                                <label class="col-form-label col-sm-2">Data Contagem</label>
                                 <div class="col-sm-10">
-                                    <select class="custom-select form-control" id="prod" name="produto_id" required>
-                                        <option value="0">Seleccionar Produto</option>
-                                    </select>
+                                    <input type="date" id="data" name="data_cont" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-sm-2">Última Visita</label>
+                                <label class="col-form-label col-sm-2">Contagem Preto</label>
                                 <div class="col-sm-10">
-                                    <input type="date" id="ult_vis" name="ult_vis" class="form-control" required>
+                                    <input type="number" id="cont_p" name="cont_p" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-sm-2">Motivo</label>
+                                <label class="col-form-label col-sm-2">Contagem Cor</label>
                                 <div class="col-sm-10">
-                                    <select class="custom-select form-control" name="motivo_id" id="mot" required>
-                                    </select>
+                                    <input type="number" id="cont_c" name="cont_c" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-sm-2">Descrição</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" name="descricao" id="descricao" rows="8"></textarea>
-                                </div>
+                            <div class="form-check">
+                                <input type="checkbox" id="fact" name="fact" class="form-check-input">
+                                <label class="form-check-label">Facturar</label>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-sm-2">Técnico</label>
-                                <div class="col-sm-10">
-                                    <input type="text" id="tecnico" name="tecnico" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-sm-2">Próxima Visita</label>
-                                <div class="col-sm-10">
-                                    <input type="date" id="prox_vis" name="prox_vis" class="form-control" required>
-                                </div>
-                            </div>
-
-
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            <input type="hidden" name="op" value="addVis">
-                            <a href="../index.php">
+                            <input type="hidden" name="op" id="op" value="addCont">
+                            <a href="copia.php">
                                 <button type="button" class="btn btn-default ">Cancelar</button>
                             </a>
                             <button type="submit" class="btn btn-success float-right">Confirmar</button>
@@ -126,8 +108,10 @@
 <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../js/adminlte.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
-<script src="../js/addVis.js"></script>
+<script src="../js/addCont.js"></script>
 
 </body>
 </html>

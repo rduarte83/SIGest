@@ -22,6 +22,7 @@
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
+
     <?php include '../header.php' ?>
 
     <!-- Content Wrapper. Contains page content -->
@@ -88,6 +89,9 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+
+    <?php include '../footer.php' ?>
+
 </div>
 <!-- ./wrapper -->
 
