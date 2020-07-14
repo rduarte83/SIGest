@@ -11,7 +11,7 @@ $(document).ready(function () {
             $("#contrato").html("");
             $("#contrato").html('<option value="0">Seleccionar Contrato</option>');
             $.each(dataResult.data, function () {
-                $("#contrato").append($("<option/>").val(this[0]).text(this[0]+ " - " +this[1]+" - "+this[2]));
+                $("#contrato").append($("<option/>").val(this[0]).text(this[0] + " - " + this[1] + " - " + this[2]));
             });
         }
     });
@@ -46,25 +46,21 @@ $('#addForm').on('submit', function (e) {
             var total_p = (cont_p - ult_p - inc) * preco_p;
             var total_c = (cont_c - ult_c) * preco_c;
             var total = Number(valor) + Number(total_p) + Number(total_c);
-            console.log("Total: "+total);
+            console.log("Total: " + total);
 
             Swal.fire({
                 position: 'top',
                 title: 'Valor a Facturar',
-                text: total+" €",
+                text: total + " €",
                 icon: 'success',
                 showCancelButton: true,
                 confirmButtonText: 'Imprimir',
                 cancelButtonText: 'Cancelar',
                 reverseButtons: true
-            }).then( function (result) {
-                if (result.value) {
-                    window.print();
-                } else {
-                    window.location = "index.php";
-                }
+            }).then(function (result) {
+                if (result.value) window.location = "../html/cont-print.php.php";
+                else window.location = "../html/copia.php";
             });
-
 
             $.ajax({
                 url: "../php/copia.php",
@@ -86,25 +82,4 @@ $('#addForm').on('submit', function (e) {
             }
         }
     });
-});
-
-$('#teste').on('click', function () {
-    var cont_p = $("#cont_p").val();
-    var cont_c = $("#cont_c").val();
-    var data_cont = $("#data").val();
-
-    //Fetch Details
-    $.ajax({
-        url: "../php/copia.php",
-        type: "POST",
-        data: {
-            op: 'fetchEquip',
-            cliente: $("#cli option:selected").text()
-        },
-        success: function (dataResult) {
-            var dataResult = JSON.parse(dataResult);
-            console.log (dataResult);
-        }
-    });
-
 });

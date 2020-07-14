@@ -52,7 +52,8 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Cliente</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="cliente" name="cliente" class="form-control" required>
+                                    <select class="custom-select form-control" name="cliente_id" id="cli" required>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -98,13 +99,13 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Custo Preto</label>
                                 <div class="col-sm-10">
-                                    <input type="number" id="inc" name="inc" class="form-control" required>
+                                    <input type="number" step="0.0001" id="preco_p" name="preco_p" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Custo Cor</label>
                                 <div class="col-sm-10">
-                                    <input type="number" id="inc" name="inc" class="form-control" required>
+                                    <input type="number" step="0.0001" id="preco_c" name="preco_c" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -124,7 +125,7 @@
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            <input type="hidden" name="op" value="addCli">
+                            <input type="hidden" name="op" value="addCopia">
                             <a href="copia.php>
                                 <button type=" button" class="btn btn-default ">Cancelar</button>
                             </a>
@@ -152,6 +153,6 @@
 <!-- AdminLTE App -->
 <script src="../js/adminlte.min.js"></script>
 
-<script src="../js/addCli.js"></script>
+<script src="../js/addCopia.js"></script>
 </body>
 </html>

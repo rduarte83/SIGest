@@ -191,3 +191,49 @@ if ($_POST['op'] == 'fetchContS') {
     );
     echo json_encode($output);
 }
+
+if ($_POST['op'] == 'fetchCli') {
+    $output = array();
+    $query = "
+            SELECT * FROM clientes;
+        ";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute();
+    $result = $statement->fetchAll();
+    $data = array();
+
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["nif"];
+        $sub_array[] = $row["cliente"];
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
+if ($_POST['op'] == 'addCopia') {
+    $output = array();
+    $query = "
+                INSERT INTO contratos(cliente_id, equipamento, inicio, fim, tipo, valor, inc, preco_p, preco_c)
+                    VALUES (:cliente_id, :equipamento, :inicio, :fim, :tipo, :valor, :inc, :preco_p, :preco_c);
+                INSERT INTO contagens(contrato_id, ult_p, ult_c, ult_data) 
+	                VALUES ((SELECT id FROM contratos WHERE cliente_id = 1 ORDER BY ID DESC LIMIT 1), 100, 100, CURDATE());
+    ";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':cliente_id'   => $_POST["cliente_id"],
+            ':equipamento'  => $_POST["equipamento"],
+            ':inicio'       => $_POST["inicio"],
+            ':fim'          => $_POST["fim"],
+            ':tipo'         => $_POST["tipo"],
+            ':valor'        => $_POST["valor"],
+            ':inc'          => $_POST["inc"],
+            ':preco_p'      => $_POST["preco_p"],
+            ':preco_c'      => $_POST["preco_c"]
+        )
+    );
+}
