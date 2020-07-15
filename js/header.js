@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $.ajax({
-        url: "/SIGest/php/queries.php",
+        url: "/sigest/php/queries.php",
         type: "POST",
         data: {
             op: 'countPen'

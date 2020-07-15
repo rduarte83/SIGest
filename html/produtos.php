@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SIGest | Lista de Produtos</title>
+    <title>sigest | Lista de Produtos</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -35,7 +35,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="/SIGest/index.php">Início</a></li>
+                            <li class="breadcrumb-item"><a href="/sigest/index.php">Início</a></li>
                             <li class="breadcrumb-item active">Lista de Produtos</li>
                         </ol>
                     </div>
