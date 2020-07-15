@@ -113,8 +113,8 @@
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            <a href="copia.php>
-                                <button type=" button" class="btn btn-default ">Cancelar</button>
+                            <a href="copia.php">
+                                <button type="button" class="btn btn-default ">Cancelar</button>
                             </a>
                         </div>
                         <!-- /.card-footer -->

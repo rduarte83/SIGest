@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>SIGest | Início</title>
+    <title>SIGest | Visitas Pendentes</title>
 
     <!-- Font Awesome Icons -->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
@@ -32,7 +32,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="index.php">Início</a></li>
-                            <li class="breadcrumb-item active">Pendentes</li>
+                            <li class="breadcrumb-item active">Visitas Pendentes</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -63,7 +63,7 @@
                                     <th>Ultima Visita</th>
                                     <th>Motivo</th>
                                     <th>Produto</th>
-                                    <th>Tecnico</th>
+                                    <th>Vendedor</th>
                                     <th>Descrição</th>
                                     <th>Próxima Visita</th>
                                     </thead>

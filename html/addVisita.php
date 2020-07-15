@@ -83,9 +83,9 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-sm-2">Técnico</label>
+                                <label class="col-form-label col-sm-2">Vendedor</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="tecnico" name="tecnico" class="form-control" required>
+                                    <input type="text" id="vendedor" name="vendedor" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group row">

@@ -113,6 +113,13 @@
                                 <p>Visitas</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="/SIGest/html/assistencias.php"
+                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "assistencias.php") ? "active" : ""; ?>">
+                                <i class="fa fa-circle nav-icon"></i>
+                                <p>Assistências Técnicas</p>
+                            </a>
+                        </li>
 
                     </ul>
                 </li>
@@ -145,7 +152,13 @@
                                 <p>Visita</p>
                             </a>
                         </li>
-
+                        <li class="nav-item">
+                            <a href="/SIGest/html/addAssist.php"
+                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "addAssist.php") ? "active" : ""; ?>">
+                                <i class="fa fa-circle nav-icon"></i>
+                                <p>Assistência Técnica</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
             </ul>
