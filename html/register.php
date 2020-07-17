@@ -1,5 +1,94 @@
 <?php
-require_once "../php/register.php";
+// Include config file
+require_once "../php/db.php";
+
+// Define variables and initialize with empty values
+$username = $password = $confirm_password = "";
+$username_err = $password_err = $confirm_password_err = "";
+
+// Processing form data when form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    // Validate username
+    if (empty(trim($_POST["username"]))) {
+        $username_err = "Please enter a username.";
+    } else {
+        // Prepare a select statement
+        $sql = "SELECT id FROM users WHERE username = :username";
+
+        if ($stmt = $conn->prepare($sql)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
+
+            // Set parameters
+            $param_username = trim($_POST["username"]);
+
+            // Attempt to execute the prepared statement
+            if ($stmt->execute()) {
+                if ($stmt->rowCount() == 1) {
+                    $username_err = "This username is already taken.";
+                } else {
+                    $username = trim($_POST["username"]);
+                }
+            } else {
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+
+            // Close statement
+            unset($stmt);
+        }
+    }
+
+    // Validate password
+    if (empty(trim($_POST["password"]))) {
+        $password_err = "Please enter a password.";
+    } elseif (strlen(trim($_POST["password"])) < 8) {
+        $password_err = "Password must have atleast 8 characters.";
+    } else {
+        $password = trim($_POST["password"]);
+    }
+
+    // Validate confirm password
+    if (empty(trim($_POST["confirm_password"]))) {
+        $confirm_password_err = "Please confirm password.";
+    } else {
+        $confirm_password = trim($_POST["confirm_password"]);
+        if (empty($password_err) && ($password != $confirm_password)) {
+            $confirm_password_err = "Password did not match.";
+        }
+    }
+
+    // Check input errors before inserting in database
+    if (empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
+
+        // Prepare an insert statement
+        $sql = "INSERT INTO users (username, password) VALUES (:username, :password)";
+
+        if ($stmt = $conn->prepare($sql)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
+            $stmt->bindParam(":password", $param_password, PDO::PARAM_STR);
+
+            // Set parameters
+            $param_username = $username;
+            $param_password = $password;
+
+            // Attempt to execute the prepared statement
+            if ($stmt->execute()) {
+                // Redirect to login page
+                header("location: login.php");
+            } else {
+                echo "Something went wrong. Please try again later.";
+            }
+
+            // Close statement
+            unset($stmt);
+        }
+    }
+
+    // Close connection
+    unset($conn);
+}
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +99,6 @@ require_once "../php/register.php";
     <title>SIGest | Página de Registo</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- Font Awesome -->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -18,6 +106,7 @@ require_once "../php/register.php";
     <link rel="stylesheet" href="../css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
 </head>
 <body class="hold-transition register-page">
 <div class="register-box">
@@ -29,51 +118,29 @@ require_once "../php/register.php";
         <div class="card-body register-card-body">
             <p class="login-box-msg">Registar um novo utilizador</p>
 
-            <form action="../index.php" method="post">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Nome">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fa fa-user"></span>
-                        </div>
-                    </div>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+                    <label>Utilizador</label>
+                    <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
+                    <div class="invalid-feedback"><?php echo $username_err; ?></div>
                 </div>
-                <div class="input-group mb-3">
-                    <input type="email" class="form-control" placeholder="Email">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fa fa-envelope"></span>
-                        </div>
-                    </div>
+                <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+                    <label>Palavra-passe</label>
+                    <input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
+                    <div class="invalid-feedback"><?php echo $password_err; ?></div>
                 </div>
-                <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Palavra-passe">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fa fa-lock"></span>
-                        </div>
-                    </div>
+                <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
+                    <label>Confirmar Palavra-passe</label>
+                    <input type="password" name="confirm_password" class="form-control"
+                           value="<?php echo $confirm_password; ?>">
+                    <div class="invalid-feedback"><?php echo $confirm_password_err; ?></div>
                 </div>
-                <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Reintroduza a palavra-passe">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fa fa-lock"></span>
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <input type="submit" id="sub" class="btn btn-primary" value="Submeter">
+                    <input type="reset" class="btn btn-default" value="Limpar">
                 </div>
-                <div class="row">
-                    <div class="col-8">
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">Registar</button>
-                    </div>
-                    <!-- /.col -->
-                </div>
+                <a href="login.php" class="text-center">Já tenho uma conta</a>
             </form>
-
-            <a href="login.html" class="text-center">Já tenho uma conta</a>
         </div>
         <!-- /.form-box -->
     </div><!-- /.card -->
@@ -86,5 +153,6 @@ require_once "../php/register.php";
 <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../js/adminlte.min.js"></script>
+
 </body>
 </html>

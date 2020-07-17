@@ -16,6 +16,7 @@ if ($_POST['op'] == 'fetchCli') {
         $sub_array[] = $row["cliente"];
         $sub_array[] = $row["morada"];
         $sub_array[] = $row["zona"];
+        $sub_array[] = $row["responsavel"];
         $sub_array[] = $row["contacto"];
         $sub_array[] = $row["email"];
         $sub_array[] = '
@@ -36,7 +37,8 @@ if ($_POST['op'] == 'fetchCli') {
 
 if ($_POST['op'] == 'addCli') {
     $query = "
-            INSERT INTO clientes (nif,id,cliente,morada,zona,contacto,email) VALUES (:nif,:id,:cliente,:morada,:zona,:contacto,:email)
+            INSERT INTO clientes (nif,id,cliente,morada,zona,responsavel,contacto,email) 
+                VALUES (:nif,:id,:cliente,:morada,:zona,:responsavel,:contacto,:email)
 		";
 
     $statement = $conn->prepare($query);
@@ -47,6 +49,7 @@ if ($_POST['op'] == 'addCli') {
             ':cliente' => $_POST["cliente"],
             ':morada' => $_POST["morada"],
             ':zona' => $_POST["zona"],
+            ':responsavel' => $_POST["responsavel"],
             ':contacto' => $_POST["contacto"],
             ':email' => $_POST["email"]
         )

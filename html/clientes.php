@@ -55,7 +55,9 @@
                                     <th>NIF</th>
                                     <th>Id</th>
                                     <th>Cliente</th>
+                                    <th>Morada</th>
                                     <th>Zona</th>
+                                    <th>Responsavel</th>
                                     <th>Contacto</th>
                                     <th>Email</th>
                                     <th>Operações</th>
