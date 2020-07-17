@@ -12,13 +12,8 @@ require_once "../php/register.php";
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Font Awesome -->
-    <!-- Font Awesome -->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
@@ -39,7 +34,7 @@ require_once "../php/register.php";
                     <input type="text" class="form-control" placeholder="Nome">
                     <div class="input-group-append">
                         <div class="input-group-text">
-                            <span class="fas fa-user"></span>
+                            <span class="fa fa-user"></span>
                         </div>
                     </div>
                 </div>
@@ -47,7 +42,7 @@ require_once "../php/register.php";
                     <input type="email" class="form-control" placeholder="Email">
                     <div class="input-group-append">
                         <div class="input-group-text">
-                            <span class="fas fa-envelope"></span>
+                            <span class="fa fa-envelope"></span>
                         </div>
                     </div>
                 </div>
@@ -55,7 +50,7 @@ require_once "../php/register.php";
                     <input type="password" class="form-control" placeholder="Palavra-passe">
                     <div class="input-group-append">
                         <div class="input-group-text">
-                            <span class="fas fa-lock"></span>
+                            <span class="fa fa-lock"></span>
                         </div>
                     </div>
                 </div>
@@ -63,7 +58,7 @@ require_once "../php/register.php";
                     <input type="password" class="form-control" placeholder="Reintroduza a palavra-passe">
                     <div class="input-group-append">
                         <div class="input-group-text">
-                            <span class="fas fa-lock"></span>
+                            <span class="fa fa-lock"></span>
                         </div>
                     </div>
                 </div>

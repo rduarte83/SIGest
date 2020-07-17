@@ -36,7 +36,7 @@ if ($_POST['op'] == 'fetchCli') {
 
 if ($_POST['op'] == 'addCli') {
     $query = "
-            INSERT INTO clientes (nif,id,cliente,zona,contacto,email) VALUES (:nif,:id,:cliente,:zona,:contacto,:email)
+            INSERT INTO clientes (nif,id,cliente,morada,zona,contacto,email) VALUES (:nif,:id,:cliente,:morada,:zona,:contacto,:email)
 		";
 
     $statement = $conn->prepare($query);

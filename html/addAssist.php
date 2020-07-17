@@ -127,6 +127,5 @@
 <script src="../js/adminlte.min.js"></script>
 
 <script src="../js/addAss.js"></script>
-
 </body>
 </html>
