@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validate username
     if (empty(trim($_POST["username"]))) {
-        $username_err = "Please enter a username.";
+        $username_err = "Introduza um utilizador.";
     } else {
         // Prepare a select statement
         $sql = "SELECT id FROM users WHERE username = :username";
@@ -26,12 +26,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
                 if ($stmt->rowCount() == 1) {
-                    $username_err = "This username is already taken.";
+                    $username_err = "O utilizador já existe.";
                 } else {
                     $username = trim($_POST["username"]);
                 }
             } else {
-                echo "Oops! Something went wrong. Please try again later.";
+                echo "Ocorreu um erro. Tente mais tarde";
             }
 
             // Close statement
@@ -41,20 +41,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validate password
     if (empty(trim($_POST["password"]))) {
-        $password_err = "Please enter a password.";
+        $password_err = "Introduza uma palavra-passe.";
     } elseif (strlen(trim($_POST["password"])) < 8) {
-        $password_err = "Password must have atleast 8 characters.";
+        $password_err = "A palavra-passe tem de conter pelo menos 8 caracteres.";
     } else {
         $password = trim($_POST["password"]);
     }
 
     // Validate confirm password
     if (empty(trim($_POST["confirm_password"]))) {
-        $confirm_password_err = "Please confirm password.";
+        $confirm_password_err = "Confirme a palavra-passe.";
     } else {
         $confirm_password = trim($_POST["confirm_password"]);
         if (empty($password_err) && ($password != $confirm_password)) {
-            $confirm_password_err = "Password did not match.";
+            $confirm_password_err = "A palavra-passe não confere.";
         }
     }
 
@@ -71,14 +71,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Set parameters
             $param_username = $username;
-            $param_password = $password;
-
+            $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
                 // Redirect to login page
-                header("location: login.php");
+                header("location: ../login.php");
             } else {
-                echo "Something went wrong. Please try again later.";
+                echo "Ocorreu um erro. Tente mais tarde.";
             }
 
             // Close statement
@@ -106,34 +105,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="../css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- Bootstrap 4 -->
     <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
 </head>
 <body class="hold-transition register-page">
 <div class="register-box">
     <div class="register-logo">
-        <a href="../index.php"><b>SIGest</b></a>
+        <a href="../index.php"><h2>SIGest</h2></a>
     </div>
 
     <div class="card">
         <div class="card-body register-card-body">
             <p class="login-box-msg">Registar um novo utilizador</p>
 
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" novalidate>
                 <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                     <label>Utilizador</label>
                     <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
-                    <div class="invalid-feedback"><?php echo $username_err; ?></div>
+                    <div class="invalid-feedback d-block"><?php echo $username_err; ?></div>
                 </div>
                 <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
                     <label>Palavra-passe</label>
                     <input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
-                    <div class="invalid-feedback"><?php echo $password_err; ?></div>
+                    <div class="invalid-feedback d-block"><?php echo $password_err; ?></div>
                 </div>
                 <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
                     <label>Confirmar Palavra-passe</label>
                     <input type="password" name="confirm_password" class="form-control"
                            value="<?php echo $confirm_password; ?>">
-                    <div class="invalid-feedback"><?php echo $confirm_password_err; ?></div>
+                    <div class="invalid-feedback d-block"><?php echo $confirm_password_err; ?></div>
                 </div>
                 <div class="form-group">
                     <input type="submit" id="sub" class="btn btn-primary" value="Submeter">

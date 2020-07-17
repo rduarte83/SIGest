@@ -9,7 +9,12 @@
             <a href="/sigest/index.php" class="nav-link">Início</a>
         </li>
     </ul>
-
+    <ul class="navbar-nav ml-auto">
+        <!-- Messages Dropdown Menu -->
+        <li class="nav-item dropdown">
+            <a class="nav-link" href="html/logout.php">Sair</a>
+        </li>
+    </ul>
 </nav>
 <!-- /.navbar -->
 

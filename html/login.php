@@ -1,3 +1,91 @@
+<?php
+// Initialize the session
+session_start();
+
+// Check if the user is already logged in, if yes then redirect him to welcome page
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+    header("location: ../index.php");
+    exit;
+}
+
+// Include config file
+require_once "../php/db.php";
+
+// Define variables and initialize with empty values
+$username = $password = "";
+$username_err = $password_err = "";
+
+// Processing form data when form is submitted
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+    // Check if username is empty
+    if(empty(trim($_POST["username"]))){
+        $username_err = "Please enter username.";
+    } else{
+        $username = trim($_POST["username"]);
+    }
+
+    // Check if password is empty
+    if(empty(trim($_POST["password"]))){
+        $password_err = "Please enter your password.";
+    } else{
+        $password = trim($_POST["password"]);
+    }
+
+    // Validate credentials
+    if(empty($username_err) && empty($password_err)){
+        // Prepare a select statement
+        $sql = "SELECT id, username, password FROM users WHERE username = :username";
+
+        if($stmt = $conn->prepare($sql)){
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
+
+            // Set parameters
+            $param_username = trim($_POST["username"]);
+
+            // Attempt to execute the prepared statement
+            if($stmt->execute()){
+                // Check if username exists, if yes then verify password
+                if($stmt->rowCount() == 1){
+                    if($row = $stmt->fetch()){
+                        $id = $row["id"];
+                        $username = $row["username"];
+                        $hashed_password = $row["password"];
+                        if(password_verify($password, $hashed_password)){
+                            // Password is correct, so start a new session
+                            session_start();
+
+                            // Store data in session variables
+                            $_SESSION["loggedin"] = true;
+                            $_SESSION["id"] = $id;
+                            $_SESSION["username"] = $username;
+
+                            // Redirect user to welcome page
+                            header("location: ../index.php");
+                        } else{
+                            // Display an error message if password is not valid
+                            $password_err = "The password you entered was not valid.";
+                        }
+                    }
+                } else{
+                    // Display an error message if username doesn't exist
+                    $username_err = "No account found with that username.";
+                }
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+
+            // Close statement
+            unset($stmt);
+        }
+    }
+
+    // Close connection
+    unset($pdo);
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,54 +102,34 @@
     <link rel="stylesheet" href="../css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <b>SIGest</b>
+        <h2>SIGest</h2>
     </div>
     <!-- /.login-logo -->
     <div class="card">
         <div class="card-body login-card-body">
             <p class="login-box-msg">Iniciar Sessão</p>
-            <form action="../index.php" method="post">
-                <div class="input-group mb-3">
-                    <input type="email" class="form-control" placeholder="Email">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fa fa-envelope"></span>
-                        </div>
-                    </div>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+                    <label>Utilizador</label>
+                    <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
+                    <div class="invalid-feedback d-block"><?php echo $username_err; ?></div>
                 </div>
-                <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Palavra-passe">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fa fa-lock"></span>
-                        </div>
-                    </div>
+                <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+                    <label>Palavra-passe</label>
+                    <input type="password" name="password" class="form-control">
+                    <div class="invalid-feedback d-block"><?php echo $password_err; ?></div>
                 </div>
-                <div class="row">
-                    <div class="col-8">
-                        <div class="icheck-primary">
-                            <input type="checkbox" id="remember">
-                            <label for="remember">Lembrar-me</label>
-                        </div>
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-4">
-                        <button type="submit" id="login" class="btn btn-primary btn-block">Entrar</button>
-                    </div>
-                    <!-- /.col -->
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Entrar">
                 </div>
+                <p>Não tem conta? <a href="register.php">Registe-se aqui</a>.</p>
             </form>
-
-            <p class="mb-1">
-                <a href="forgot-password.html">Esqueci-me da palavra-passe</a>
-            </p>
-            <p class="mb-0">
-                <a href="register.html" class="text-center">Registar novo utilizador</a>
-            </p>
         </div>
         <!-- /.login-card-body -->
     </div>
@@ -74,7 +142,5 @@
 <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../js/adminlte.min.js"></script>
-
-<script src="../js/login.js"></script>
 </body>
 </html>
