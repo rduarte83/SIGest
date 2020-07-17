@@ -1,13 +1,4 @@
-<?php
-
-session_start();
-
-// If session variable is not set it will redirect to login page
-if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
-    header("location: html/login.php");
-    exit;
-}
-?>
+<?php include_once 'php/session.php'?>
 
 <!DOCTYPE html>
 <html lang="en">

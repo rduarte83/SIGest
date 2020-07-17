@@ -1,3 +1,5 @@
+<?php include_once '../php/session.php'?>
+
 <!DOCTYPE html>
 <html>
 <head>

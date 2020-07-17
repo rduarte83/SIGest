@@ -3,7 +3,7 @@
 session_start();
 
 // Check if the user is already logged in, if yes then redirect him to welcome page
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
     header("location: ../index.php");
     exit;
 }
@@ -16,28 +16,28 @@ $username = $password = "";
 $username_err = $password_err = "";
 
 // Processing form data when form is submitted
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Check if username is empty
-    if(empty(trim($_POST["username"]))){
-        $username_err = "Please enter username.";
-    } else{
+    if (empty(trim($_POST["username"]))) {
+        $username_err = "Introduza o nome de utilizador";
+    } else {
         $username = trim($_POST["username"]);
     }
 
     // Check if password is empty
-    if(empty(trim($_POST["password"]))){
-        $password_err = "Please enter your password.";
-    } else{
+    if (empty(trim($_POST["password"]))) {
+        $password_err = "Introduza a palavra-passe.";
+    } else {
         $password = trim($_POST["password"]);
     }
 
     // Validate credentials
-    if(empty($username_err) && empty($password_err)){
+    if (empty($username_err) && empty($password_err)) {
         // Prepare a select statement
         $sql = "SELECT id, username, password FROM users WHERE username = :username";
 
-        if($stmt = $conn->prepare($sql)){
+        if ($stmt = $conn->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
             $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
 
@@ -45,14 +45,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_username = trim($_POST["username"]);
 
             // Attempt to execute the prepared statement
-            if($stmt->execute()){
+            if ($stmt->execute()) {
                 // Check if username exists, if yes then verify password
-                if($stmt->rowCount() == 1){
-                    if($row = $stmt->fetch()){
+                if ($stmt->rowCount() == 1) {
+                    if ($row = $stmt->fetch()) {
                         $id = $row["id"];
                         $username = $row["username"];
                         $hashed_password = $row["password"];
-                        if(password_verify($password, $hashed_password)){
+                        if (password_verify($password, $hashed_password)) {
                             // Password is correct, so start a new session
                             session_start();
 
@@ -63,17 +63,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                             // Redirect user to welcome page
                             header("location: ../index.php");
-                        } else{
+                        } else {
                             // Display an error message if password is not valid
-                            $password_err = "The password you entered was not valid.";
+                            $password_err = "Palavra-passe inválida.";
                         }
                     }
-                } else{
+                } else {
                     // Display an error message if username doesn't exist
-                    $username_err = "No account found with that username.";
+                    $username_err = "O utilizador não existe.";
                 }
-            } else{
-                echo "Oops! Something went wrong. Please try again later.";
+            } else {
+                echo "Ocorreu um erro. Tente mais tarde.";
             }
 
             // Close statement

@@ -11,8 +11,8 @@
     </ul>
     <ul class="navbar-nav ml-auto">
         <!-- Messages Dropdown Menu -->
-        <li class="nav-item dropdown">
-            <a class="nav-link" href="html/logout.php">Sair</a>
+        <li class="nav-item">
+            <a class="nav-link" href="/sigest/html/logout.php">Terminar Sessão</a>
         </li>
     </ul>
 </nav>

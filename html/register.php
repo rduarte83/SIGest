@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
                 // Redirect to login page
-                header("location: ../login.php");
+                header("location: login.php");
             } else {
                 echo "Ocorreu um erro. Tente mais tarde.";
             }
@@ -136,7 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="invalid-feedback d-block"><?php echo $confirm_password_err; ?></div>
                 </div>
                 <div class="form-group">
-                    <input type="submit" id="sub" class="btn btn-primary" value="Submeter">
+                    <input type="submit" id="sub" class="btn btn-primary" value="Registar">
                     <input type="reset" class="btn btn-default" value="Limpar">
                 </div>
                 <a href="login.php" class="text-center">Já tenho uma conta</a>
