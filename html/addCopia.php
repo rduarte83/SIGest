@@ -57,9 +57,11 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Equipamento</label>
+                                <label class="col-form-label col-sm-2">Equipamento</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="equip" name="equipamento" class="form-control" required>
+                                    <select class="custom-select form-control" id="equip" name="produto" required>
+                                        <option value="0">Seleccionar Equipamento</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">

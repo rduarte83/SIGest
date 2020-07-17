@@ -25,7 +25,7 @@ if ($_POST['op'] == 'fetchCopia') {
         $sub_array = array();
         $sub_array[] = $row["id"];
         $sub_array[] = $row["cliente"];
-        $sub_array[] = $row["equipamento"];
+        $sub_array[] = $row["produto"];
         $sub_array[] = $row["inicio"];
         $sub_array[] = $row["fim"];
         $sub_array[] = $row["tipo"];
@@ -62,7 +62,7 @@ if ($_POST['op'] == 'fetchCopia') {
 if ($_POST['op'] == 'fetchContrato') {
     $output = array();
     $query = "
-            SELECT c.id, l.cliente, c.equipamento FROM contratos c 
+            SELECT c.id, l.cliente, c.produto FROM contratos c 
                 INNER JOIN clientes l ON c.cliente_id = l.nif
                 ORDER BY id;
         ";
@@ -76,7 +76,7 @@ if ($_POST['op'] == 'fetchContrato') {
         $sub_array = array();
         $sub_array[] = $row["id"];
         $sub_array[] = $row["cliente"];
-        $sub_array[] = $row["equipamento"];
+        $sub_array[] = $row["produto"];
         $data[] = $sub_array;
     }
     $output = array(
@@ -176,7 +176,7 @@ if ($_POST['op'] == 'fetchContS') {
     foreach ($result as $row) {
         $sub_array = array();
         $sub_array[] = $row["cliente"];
-        $sub_array[] = $row["equipamento"];
+        $sub_array[] = $row["produto"];
         $sub_array[] = $row["inicio"];
         $sub_array[] = $row["fim"];
         $sub_array[] = $row["tipo"];
@@ -214,11 +214,40 @@ if ($_POST['op'] == 'fetchCli') {
     echo json_encode($output);
 }
 
+if ($_POST['op'] == 'fetchProdCli') {
+    $output = array();
+    $query = "
+        SELECT * FROM produtos WHERE cliente_id = :cliente_id
+        ";
+
+    $statement = $conn->prepare($query);
+    $statement->execute(
+        array(
+            ':cliente_id' => $_POST["cliente_id"]
+        )
+    );
+    $result = $statement->fetchAll();
+    $data = array();
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["id"];
+        $sub_array[] = $row["tipo"];
+        $sub_array[] = $row["marca"];
+        $sub_array[] = $row["modelo"];
+        $sub_array[] = $row["num_serie"];
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
 if ($_POST['op'] == 'addCopia') {
     $output = array();
     $query = "
-                INSERT INTO contratos(cliente_id, equipamento, inicio, fim, tipo, valor, inc, preco_p, preco_c)
-                    VALUES (:cliente_id, :equipamento, :inicio, :fim, :tipo, :valor, :inc, :preco_p, :preco_c);
+                INSERT INTO contratos(cliente_id, produto, inicio, fim, tipo, valor, inc, preco_p, preco_c)
+                    VALUES (:cliente_id, :produto, :inicio, :fim, :tipo, :valor, :inc, :preco_p, :preco_c);
                 INSERT INTO contagens(contrato_id, ult_p, ult_c, ult_data) 
 	                VALUES ((SELECT id FROM contratos WHERE cliente_id = 1 ORDER BY ID DESC LIMIT 1), 100, 100, CURDATE());
     ";
@@ -226,7 +255,7 @@ if ($_POST['op'] == 'addCopia') {
     $result = $statement->execute(
         array(
             ':cliente_id'   => $_POST["cliente_id"],
-            ':equipamento'  => $_POST["equipamento"],
+            ':produto'  => $_POST["produto"],
             ':inicio'       => $_POST["inicio"],
             ':fim'          => $_POST["fim"],
             ':tipo'         => $_POST["tipo"],

@@ -14,6 +14,7 @@ if ($_POST['op'] == 'fetchCli') {
         $sub_array[] = $row["nif"];
         $sub_array[] = $row["id"];
         $sub_array[] = $row["cliente"];
+        $sub_array[] = $row["morada"];
         $sub_array[] = $row["zona"];
         $sub_array[] = $row["contacto"];
         $sub_array[] = $row["email"];
@@ -31,7 +32,6 @@ if ($_POST['op'] == 'fetchCli') {
         "data" => $data
     );
     echo json_encode($output);
-
 }
 
 if ($_POST['op'] == 'addCli') {
@@ -45,11 +45,10 @@ if ($_POST['op'] == 'addCli') {
             ':nif' => $_POST["nif"],
             ':id' => $_POST["id"],
             ':cliente' => $_POST["cliente"],
+            ':morada' => $_POST["morada"],
             ':zona' => $_POST["zona"],
             ':contacto' => $_POST["contacto"],
             ':email' => $_POST["email"]
-
-
         )
     );
 }
@@ -110,7 +109,7 @@ if ($_POST['op'] == 'addProd') {
 if ($_POST['op'] == 'fetchProdCli') {
     $output = array();
     $query = "
-        SELECT * FROM produtos WHERE cliente_id = :cliente_id
+        SELECT p.*,c.cliente, c.zona FROM produtos p INNER JOIN clientes c ON p.cliente_id=c.nif WHERE cliente_id = :cliente_id
         ";
 
     $statement = $conn->prepare($query);
@@ -128,6 +127,7 @@ if ($_POST['op'] == 'fetchProdCli') {
         $sub_array[] = $row["marca"];
         $sub_array[] = $row["modelo"];
         $sub_array[] = $row["num_serie"];
+        $sub_array[] = $row["cliente"];
         $sub_array[] = '
                     <a href="#editModal" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '" data-toggle="modal">
                         <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>

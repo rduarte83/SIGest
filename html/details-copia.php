@@ -65,7 +65,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Equipamento</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="equip" name="equipamento" class="form-control" readonly>
+                                    <input type="text" id="equip" name="produto" class="form-control" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
