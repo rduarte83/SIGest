@@ -3,11 +3,11 @@ $(document).ready(function () {
         url: "/sigest/php/queries.php",
         type: "POST",
         data: {
-            op: 'countPen'
+            op: 'countVisPen'
         },
         success: function (dataResult) {
             var dataResult = JSON.parse(dataResult);
-            $('#numPen').text(dataResult.data[0][0]);
+            $('#visPen').text(dataResult.data[0][0]);
         }
     });
 });

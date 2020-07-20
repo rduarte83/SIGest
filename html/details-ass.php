@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>sigest | Detalhes</title>
+    <title>sigest | Detalhes da Assistência</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -21,8 +21,6 @@
     <link rel="stylesheet" href="../css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
-    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -35,12 +33,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Detalhes</h1>
+                        <h1>Detalhes da Assistência Técnica</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="../index.php">Início</a></li>
-                            <li class="breadcrumb-item"><a href="visitas.php">Lista de Visitas</a></li>
+                            <li class="breadcrumb-item"><a href="assistencias.php">Lista de Assistências</a></li>
                             <li class="breadcrumb-item active">Detalhes</li>
                         </ol>
                     </div>
@@ -54,7 +52,7 @@
                 <!-- Horizontal Form -->
                 <div class="card card-info">
                     <div class="card-header">
-                        <h3 class="card-title">Dados da Visita</h3>
+                        <h3 class="card-title">Dados da Assistência Técnica</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
@@ -63,25 +61,25 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Id</label>
                                 <div class="col-sm-10">
-                                    <input type="name" id="id" name="id" class="form-control" readonly>
+                                    <input type="text" id="id" name="id" class="form-control" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Cliente</label>
                                 <div class="col-sm-10">
-                                    <input type="name" id="cli" name="cliente_id" class="form-control" readonly>
+                                    <input type="text" id="cli" name="cliente_id" class="form-control" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Produto</label>
                                 <div class="col-sm-10">
-                                    <input type="name" id="prod" name="produto_id" class="form-control" readonly>
+                                    <input type="text" id="prod" name="produto_id" class="form-control" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-sm-2">Última Visita</label>
+                                <label class="col-form-label col-sm-2">Data Pedido</label>
                                 <div class="col-sm-10">
-                                    <input type="date" id="ult_vis" name="ult_vis" class="form-control" readonly>
+                                    <input type="text" id="data_p" name="data_p" class="form-control" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -91,34 +89,82 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-sm-2">Descrição</label>
+                                <label class="col-form-label col-sm-2">Local</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="descricao" id="descricao" rows="8"
+                                    <input type="text" id="local" name="local" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-sm-2">Técnico</label>
+                                <div class="col-sm-10">
+                                    <input type="text" id="tecnico" name="tecnico" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-sm-2">Material Entregue</label>
+                                <div class="col-sm-10">
+                                    <input type="text" id="entregue" name="entregue" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-sm-2">Problema</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" name="problema" id="problema" rows="8"
                                               readonly></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-sm-2">Vendedor</label>
+                                <label class="col-form-label col-sm-2">Data Intervenção</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="vendedor" name="vendedor" class="form-control" readonly>
+                                    <input type="text" id="data_i" name="data_i" class="form-control" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-sm-2">Próxima Visita</label>
+                                <label class="col-form-label col-sm-2">Resolucao do Problema</label>
                                 <div class="col-sm-10">
-                                    <input type="date" id="prox_vis" name="prox_vis" class="form-control" readonly>
+                                    <textarea class="form-control" name="resolucao" id="resolucao" rows="8"
+                                              readonly></textarea>
                                 </div>
                             </div>
-
-
+                            <div class="form-group row">
+                                <label class="col-form-label col-sm-2">Material Usado</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" name="material" id="material" rows="5"
+                                              readonly></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-sm-2">Tempo</label>
+                                <div class="col-sm-10">
+                                    <input type="number" id="tempo" name="tempo" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-sm-2">Valor</label>
+                                <div class="col-sm-10">
+                                    <input type="number" id="valor" name="valor" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-sm-2">Facturado</label>
+                                <div class="col-sm-10">
+                                    <input type="text" id="facturado" name="facturado" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-sm-2">Número de Factura</label>
+                                <div class="col-sm-10">
+                                    <input type="number" id="factura" name="factura" class="form-control" readonly>
+                                </div>
+                            </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="noprint">
                             <div class="card-footer">
-                                <a href="visitas.php">
+                                <a href="assistencias.php">
                                     <button type="button" class="btn btn-default">Cancelar</button>
                                 </a>
-                                <a href="details-print.php" id="print" target="_blank"
+                                <a href="details-ass-print.php" id="print" target="_blank"
                                    class="btn btn-info float-right mr-3 fa fa-print">Imprimir</a>
                             </div>
                         </div>
@@ -149,6 +195,6 @@
 <!-- AdminLTE App -->
 <script src="../js/adminlte.min.js"></script>
 <!-- page script -->
-<script src="../js/details.js"></script>
+<script src="../js/details-ass.js"></script>
 </body>
 </html>

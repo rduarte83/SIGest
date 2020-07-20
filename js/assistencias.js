@@ -1,6 +1,6 @@
 $(document).on('click','.details', function () {
-    var visita_id = $(this).attr("data-id");
-    localStorage.setItem("assist_id", assist_id);
+    var ass_id = $(this).attr("data-id");
+    localStorage.setItem("ass_id", ass_id);
 });
 
 function createDT() {

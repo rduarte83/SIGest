@@ -1,0 +1,8 @@
+* {
+    font-size: large;
+}
+
+@page {
+    size: auto;
+    margin: 3mm;
+}

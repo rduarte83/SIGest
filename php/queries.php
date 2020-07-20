@@ -167,46 +167,6 @@ if ($_POST['op'] == 'addVis') {
     );
 }
 
-if ($_POST['op'] == 'fetchVisS') {
-    $output = array();
-    $query = "
-        SELECT v.*, c.nif, c.cliente, c.zona, c.contacto, c.email, p.tipo, p.marca, p.modelo, m.motivo FROM visitas v 
-            INNER JOIN produtos p ON v.produto_id=p.id 
-            INNER JOIN clientes c ON v.cliente_id=c.nif
-            INNER JOIN motivos m ON v.motivo_id=m.id
-            WHERE v.id = :visita_id
-        ";
-    $statement = $conn->prepare($query);
-    $statement->execute(
-        array(
-            ':visita_id' => $_POST["visita_id"]
-        )
-    );
-    $result = $statement->fetchAll();
-    $data = array();
-    foreach ($result as $row) {
-        $sub_array = array();
-        $sub_array[] = $row["id"];
-        $sub_array[] = $row["cliente"];
-        $sub_array[] = $row["ult_vis"];
-        $sub_array[] = $row["motivo"];
-        $sub_array[] = $row["tipo"];
-        $sub_array[] = $row["marca"];
-        $sub_array[] = $row["modelo"];
-        $sub_array[] = $row["vendedor"];
-        $sub_array[] = $row["descricao"];
-        $sub_array[] = $row["prox_vis"];
-        $sub_array[] = $row["zona"];
-        $sub_array[] = $row["contacto"];
-        $sub_array[] = $row["email"];
-        $data[] = $sub_array;
-    }
-    $output = array(
-        "data" => $data
-    );
-    echo json_encode($output);
-}
-
 if ($_POST['op'] == 'fetchMot') {
     $output = array();
     $query = "
@@ -255,9 +215,6 @@ if ($_POST['op'] == 'fetchVis') {
         $sub_array[] = $row["descricao"];
         $sub_array[] = $row["prox_vis"];
         $sub_array[] = '
-                    <a href="details.php" class="details btn btn-primary btn-sm" data-id="' . $row["id"] . '">
-                        <i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Detalhes"></i>
-                    </a>
                     <a href="#editModal" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '" data-toggle="modal">
                         <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>
                     </a>
@@ -357,7 +314,7 @@ if ($_POST['op'] == 'fetchPen') {
     echo json_encode($output);
 }
 
-if ($_POST['op'] == 'countPen') {
+if ($_POST['op'] == 'countVisPen') {
     $output = array();
     $query = "
         SELECT COUNT(id) AS count FROM visitas WHERE prox_vis < CURDATE()
@@ -396,15 +353,24 @@ if ($_POST['op'] == 'fetchAss') {
         $sub_array = array();
         $sub_array[] = $row["id"];
         $sub_array[] = $row["cliente"];
+        $sub_array[] = $prod;
         $sub_array[] = $row["data_p"];
         $sub_array[] = $row["motivo"];
-        $sub_array[] = $prod;
+        $sub_array[] = $row["local"];
         $sub_array[] = $row["tecnico"];
+        $sub_array[] = $row["entregue"];
         $sub_array[] = $row["problema"];
+        $sub_array[] = $row["data_i"];
         $sub_array[] = $row["resolucao"];
         $sub_array[] = $row["material"];
-        $sub_array[] = $row["data_i"];
+        $sub_array[] = $row["tempo"];
+        $sub_array[] = $row["valor"];
+        $sub_array[] = $row["facturado"];
+        $sub_array[] = $row["factura"];
         $sub_array[] = '
+                    <a href="details-ass.php" class="details btn btn-primary btn-sm" data-id="' . $row["id"] . '">
+                        <i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Detalhes"></i>
+                    </a>
                     <a href="#editModal" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '" data-toggle="modal">
                         <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>
                     </a>
@@ -444,14 +410,20 @@ if ($_POST['op'] == 'fetchAssCli') {
         $sub_array = array();
         $sub_array[] = $row["id"];
         $sub_array[] = $row["cliente"];
+        $sub_array[] = $prod;
         $sub_array[] = $row["data_p"];
         $sub_array[] = $row["motivo"];
-        $sub_array[] = $prod;
+        $sub_array[] = $row["local"];
         $sub_array[] = $row["tecnico"];
+        $sub_array[] = $row["entregue"];
         $sub_array[] = $row["problema"];
+        $sub_array[] = $row["data_i"];
         $sub_array[] = $row["resolucao"];
         $sub_array[] = $row["material"];
-        $sub_array[] = $row["data_i"];
+        $sub_array[] = $row["tempo"];
+        $sub_array[] = $row["valor"];
+        $sub_array[] = $row["facturado"];
+        $sub_array[] = $row["factura"];
         $sub_array[] = '
                     <a href="#editModal" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '" data-toggle="modal">
                         <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>
@@ -469,21 +441,51 @@ if ($_POST['op'] == 'fetchAssCli') {
     echo json_encode($output);
 }
 
-if ($_POST['op'] == 'addAss') {
+if ($_POST['op'] == 'fetchAssS') {
+    $output = array();
     $query = "
-			INSERT INTO assistencias(cliente_id, produto_id, data_p, motivo, problema, tecnico) 
-			    VALUES (:cliente_id, :produto_id, :data_p, :motivo, :problema, :tecnico)
-		";
+        SELECT a.*, c.cliente, c.morada, c.zona, c.responsavel, c.contacto, p.tipo, p.marca, p.modelo FROM assistencias a
+            INNER JOIN produtos p ON a.produto_id=p.id 
+            INNER JOIN clientes c ON a.cliente_id=c.nif
+            WHERE a.id = :ass_id
+        ";
 
     $statement = $conn->prepare($query);
-    $result = $statement->execute(
-        array(
-            ':cliente_id' => $_POST["cliente_id"],
-            ':produto_id' => $_POST["produto_id"],
-            ':data_p' => $_POST["data_p"],
-            ':motivo' => $_POST["motivo"],
-            ':problema' => $_POST["problema"],
-            ':tecnico' => $_POST["tecnico"]
+    $statement->execute(
+        $data = array(
+            ':ass_id' => $_POST["ass_id"]
         )
     );
+    $result = $statement->fetchAll();
+    $data = array();
+
+    foreach ($result as $row) {
+        $prod = $row["tipo"] . " " . $row["marca"] . " " . $row["modelo"];
+        $sub_array = array();
+        $sub_array[] = $row["id"];
+        $sub_array[] = $row["cliente"];
+        $sub_array[] = $prod;
+        $sub_array[] = $row["data_p"];
+        $sub_array[] = $row["motivo"];
+        $sub_array[] = $row["local"];
+        $sub_array[] = $row["tecnico"];
+        $sub_array[] = $row["entregue"];
+        $sub_array[] = $row["problema"];
+        $sub_array[] = $row["data_i"];
+        $sub_array[] = $row["resolucao"];
+        $sub_array[] = $row["material"];
+        $sub_array[] = $row["tempo"];
+        $sub_array[] = $row["valor"];
+        $sub_array[] = $row["facturado"];
+        $sub_array[] = $row["factura"];
+        $sub_array[] = $row["morada"];
+        $sub_array[] = $row["zona"];
+        $sub_array[] = $row["responsavel"];
+        $sub_array[] = $row["contacto"];
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
 }
