@@ -109,7 +109,10 @@
 <script src="../plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- page script -->
+<!-- AdminLTE App -->
+<script src="../js/adminlte.min.js"></script>
+
 <script src="../js/addProd.js"></script>
+
 </body>
 </html>

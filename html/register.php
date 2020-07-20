@@ -113,9 +113,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="register-logo">
         <a href="../index.php"><h2>SIGest</h2></a>
     </div>
+
     <div class="card">
         <div class="card-body register-card-body">
             <p class="login-box-msg">Registar um novo utilizador</p>
+
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" novalidate>
                 <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                     <label>Utilizador</label>
@@ -149,5 +151,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <script src="../plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../js/adminlte.min.js"></script>
+
 </body>
 </html>
