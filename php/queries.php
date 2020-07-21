@@ -500,6 +500,29 @@ if ($_POST['op'] == 'fetchAssS') {
     echo json_encode($output);
 }
 
+if ($_POST['op'] == 'addAss') {
+    $output = array();
+    $query = "
+			INSERT INTO assistencias(cliente_id, produto_id, data_p, motivo, local, tecnico, entregue, problema, data_i) 
+			    VALUES (:cliente_id, :produto_id, :data_p, :motivo, :local, :tecnico, :entregue, :problema, :data_i)
+		";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':cliente_id' => $_POST["cliente_id"],
+            ':produto_id' => $_POST["produto_id"],
+            ':data_p' => $_POST["data_p"],
+            ':motivo' => $_POST["motivo"],
+            ':local' => $_POST["local"],
+            ':tecnico' => $_POST["tecnico"],
+            ':entregue' => $_POST["entregue"],
+            ':problema' => $_POST["problema"],
+            ':data_i' => $_POST["data_i"]
+        )
+    );
+}
+
+
 if ($_POST['op'] == 'addFact') {
     $query = "
             UPDATE assistencias SET facturado = 'sim', factura = :numFact WHERE id = :ass_id

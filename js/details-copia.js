@@ -13,14 +13,14 @@ $(document).ready(function () {
             console.log(dataResult.data[0]);
 
             $("#cli").val(dataResult.data[0][0]);
-            $("#equip").val(dataResult.data[0][1]);
-            $("#inicio").val(dataResult.data[0][2]);
-            $("#fim").val(dataResult.data[0][3]);
-            $("#tipo").val(dataResult.data[0][4]);
-            $("#valor").val(dataResult.data[0][5]);
-            $("#inc").val(dataResult.data[0][6]);
-            $("#preco_p").val(dataResult.data[0][7]);
-            $("#preco_c").val(dataResult.data[0][8]);
+            $("#equip").val(dataResult.data[0][8]+" "+dataResult.data[0][9]+" "+dataResult.data[0][10]);
+            $("#inicio").val(dataResult.data[0][1]);
+            $("#fim").val(dataResult.data[0][2]);
+            $("#tipo").val(dataResult.data[0][3]);
+            $("#valor").val(dataResult.data[0][4]);
+            $("#inc").val(dataResult.data[0][5]);
+            $("#preco_p").val(dataResult.data[0][6]);
+            $("#preco_c").val(dataResult.data[0][7]);
 
             if (dataResult.statusCode == 201) {
                 alert(dataResult);

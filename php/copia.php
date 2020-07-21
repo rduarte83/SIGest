@@ -13,7 +13,11 @@ if ($_POST['op'] == 'fetchCopia') {
 	            LEFT JOIN (
 	                SELECT l.nif, l.cliente
 	                FROM clientes l
-	            ) AS l ON contratos.cliente_id = l.nif;
+	            ) AS l ON contratos.cliente_id = l.nif
+	            LEFT JOIN (
+	                SELECT p.id AS 'produto_id', p.tipo, p.marca, p.modelo
+	                FROM produtos p
+	            ) AS p ON contratos.produto = produto_id
         ";
 
     $statement = $conn->prepare($query);
@@ -22,10 +26,11 @@ if ($_POST['op'] == 'fetchCopia') {
     $data = array();
 
     foreach ($result as $row) {
+        $prod = $row["tipo"] ." ". $row["marca"] ." ". $row["modelo"];
         $sub_array = array();
         $sub_array[] = $row["id"];
         $sub_array[] = $row["cliente"];
-        $sub_array[] = $row["produto"];
+        $sub_array[] = $prod;
         $sub_array[] = $row["inicio"];
         $sub_array[] = $row["fim"];
         $sub_array[] = $row["tipo"];
@@ -44,7 +49,7 @@ if ($_POST['op'] == 'fetchCopia') {
                     <a href="details-copia.php" class="details btn btn-primary btn-sm" data-id="' . $row["id"] . '">
                         <i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Detalhes"></i>
                     </a>
-                    <a href="#" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '" data-toggle="modal">
+                    <a href="editCopia.php" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '">
                         <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>
                     </a>
                     <a href="#" class="delete btn btn-danger btn-sm" data-id="' . $row["id"] . '" data-toggle="modal">
@@ -160,8 +165,9 @@ if ($_POST['op'] == 'addTotal') {
 if ($_POST['op'] == 'fetchContS') {
     $output = array();
     $query = "
-            SELECT c.*, l.cliente FROM contratos c 
+            SELECT c.*, l.cliente, p.tipo, p.marca, p.modelo FROM contratos c 
                 INNER JOIN clientes l ON c.cliente_id = l.nif 
+                INNER JOIN produtos p ON c.produto = p.id
                 WHERE c.id = :contrato_id;
         ";
     $statement = $conn->prepare($query);
@@ -176,7 +182,6 @@ if ($_POST['op'] == 'fetchContS') {
     foreach ($result as $row) {
         $sub_array = array();
         $sub_array[] = $row["cliente"];
-        $sub_array[] = $row["produto"];
         $sub_array[] = $row["inicio"];
         $sub_array[] = $row["fim"];
         $sub_array[] = $row["tipo"];
@@ -184,6 +189,11 @@ if ($_POST['op'] == 'fetchContS') {
         $sub_array[] = $row["inc"];
         $sub_array[] = $row["preco_p"];
         $sub_array[] = $row["preco_c"];
+        $sub_array[] = $row["tipo"];
+        $sub_array[] = $row["marca"];
+        $sub_array[] = $row["modelo"];
+        $sub_array[] = $row["cliente_id"];
+        $sub_array[] = $row["produto"];
         $data[] = $sub_array;
     }
     $output = array(
@@ -244,7 +254,6 @@ if ($_POST['op'] == 'fetchProdCli') {
 }
 
 if ($_POST['op'] == 'addCopia') {
-    $output = array();
     $query = "
                 INSERT INTO contratos(cliente_id, produto, inicio, fim, tipo, valor, inc, preco_p, preco_c)
                     VALUES (:cliente_id, :produto, :inicio, :fim, :tipo, :valor, :inc, :preco_p, :preco_c);
@@ -263,6 +272,41 @@ if ($_POST['op'] == 'addCopia') {
             ':inc'          => $_POST["inc"],
             ':preco_p'      => $_POST["preco_p"],
             ':preco_c'      => $_POST["preco_c"]
+        )
+    );
+}
+
+if ($_POST['op'] == 'delCopia') {
+    $query = "
+                DELETE FROM contratos WHERE id = :contrato_id
+    ";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':contrato_id'   => $_POST["contrato_id"],
+        )
+    );
+}
+
+if ($_POST['op'] == 'editCopia') {
+    $query = "UPDATE contratos SET cliente_id=:cliente_id, produto=:produto, 
+                     inicio=:inicio, fim=:fim, tipo=:tipo, valor=:valor, inc=:inc, 
+                     preco_p=:preco_p, preco_c=:preco_c WHERE id=:id                
+    ";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':id'   => $_POST["id"],
+            ':cliente_id'   => $_POST["cliente_id"],
+            ':produto'   => $_POST["produto"],
+            ':inicio'   => $_POST["inicio"],
+            ':fim'   => $_POST["fim"],
+            ':tipo'   => $_POST["tipo"],
+            ':valor'   => $_POST["valor"],
+            ':inc'   => $_POST["inc"],
+            ':preco_p'   => $_POST["preco_p"],
+            ':preco_c'   => $_POST["preco_c"]
+
         )
     );
 }
