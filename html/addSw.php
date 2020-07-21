@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>sigest | Novo Contrato Software</title>
+    <title>SIGest | Novo Contrato Software</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -70,7 +70,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Contrato</label>
                                 <div class="col-sm-10">
-                                    <select name="sw" id="sw">
+                                    <select name="contrato" id="contrato">
                                           <option value="Aluguer">Aluguer</option>
                                       <option value="Compra">Compra</option>
                                     </select>

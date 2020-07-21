@@ -42,8 +42,8 @@ if ($_POST['op'] == 'fetchSw') {
 
 if ($_POST['op'] == 'addSw') {
     $query = "
-                INSERT INTO software(cliente, sw, contrato, period, data, modulos, estado) 
-                    VALUES (:cliente, :sw, :contrato, :period, :data, :modulos, :estado);
+                INSERT INTO software(cliente, sw, contrato, valor, period, data, modulos, postos, estado)  
+                    VALUES (:cliente, :sw, :contrato, :valor, :period, :data, :modulos, :postos, :estado);
 		";
 
     $statement = $conn->prepare($query);
@@ -52,9 +52,11 @@ if ($_POST['op'] == 'addSw') {
             ':cliente' => $_POST["cliente"],
             ':sw' => $_POST["sw"],
             ':contrato' => $_POST["contrato"],
+            ':valor' => $_POST["valor"],
             ':period' => $_POST["period"],
             ':data' => $_POST["data"],
             ':modulos' => $_POST["modulos"],
+            ':postos' => $_POST["postos"],
             ':estado' => $_POST["estado"]
         )
     );

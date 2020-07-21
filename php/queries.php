@@ -365,11 +365,15 @@ if ($_POST['op'] == 'fetchAss') {
         $sub_array[] = $row["material"];
         $sub_array[] = $row["tempo"];
         $sub_array[] = $row["valor"];
+        $sub_array[] = $row["estado"];
         $sub_array[] = $row["facturado"];
         $sub_array[] = $row["factura"];
         $sub_array[] = '
                     <a href="details-ass.php" class="details btn btn-primary btn-sm" data-id="' . $row["id"] . '">
                         <i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Detalhes"></i>
+                    </a>
+                    <a href="#" class="fact btn btn-primary btn-sm" data-id="' . $row["id"] . '">
+                        <i class="fa fa-eur" aria-hidden="true" data-toggle="tooltip" title="Facturar"></i>
                     </a>
                     <a href="#editModal" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '" data-toggle="modal">
                         <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>
@@ -422,8 +426,13 @@ if ($_POST['op'] == 'fetchAssCli') {
         $sub_array[] = $row["material"];
         $sub_array[] = $row["tempo"];
         $sub_array[] = $row["valor"];
+        $sub_array[] = $row["estado"];
         $sub_array[] = $row["facturado"];
         $sub_array[] = $row["factura"];
+        $sub_array[] = $row["morada"];
+        $sub_array[] = $row["zona"];
+        $sub_array[] = $row["responsavel"];
+        $sub_array[] = $row["contacto"];
         $sub_array[] = '
                     <a href="#editModal" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '" data-toggle="modal">
                         <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>
@@ -476,6 +485,7 @@ if ($_POST['op'] == 'fetchAssS') {
         $sub_array[] = $row["material"];
         $sub_array[] = $row["tempo"];
         $sub_array[] = $row["valor"];
+        $sub_array[] = $row["estado"];
         $sub_array[] = $row["facturado"];
         $sub_array[] = $row["factura"];
         $sub_array[] = $row["morada"];
@@ -488,4 +498,17 @@ if ($_POST['op'] == 'fetchAssS') {
         "data" => $data
     );
     echo json_encode($output);
+}
+
+if ($_POST['op'] == 'addFact') {
+    $query = "
+            UPDATE assistencias SET facturado = 'sim', factura = :numFact WHERE id = :ass_id
+		";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':numFact' => $_POST["numFact"],
+            ':ass_id' => $_POST["ass_id"]
+        )
+    );
 }

@@ -1,14 +1,13 @@
 <?php include_once '../php/session.php'?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-
-    <title>sigest | Assistências Técnicas</title>
-
+    <title>SIGest | Assistências Técnicas</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome Icons -->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -74,6 +73,7 @@
                                     <th>Material Usado</th>
                                     <th>Tempo</th>
                                     <th>Valor a facturar</th>
+                                    <th>Estado</th>
                                     <th>Facturado</th>
                                     <th>Número da Factura</th>
                                     <th>Operações</th>
@@ -112,7 +112,9 @@
         src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/b-1.6.2/b-html5-1.6.2/b-print-1.6.2/r-2.2.5/datatables.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../js/adminlte.min.js"></script>
-
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<!-- local script -->
 <script src="../js/assistencias.js"></script>
 </body>
 </html>

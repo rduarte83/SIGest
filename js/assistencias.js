@@ -1,7 +1,43 @@
-$(document).on('click','.details', function () {
+$(document).on('click', '.details', function () {
     var ass_id = $(this).attr("data-id");
     localStorage.setItem("ass_id", ass_id);
 });
+
+$(document).on('click', '.fact', function () {
+    var ass_id = $(this).attr("data-id");
+    Swal.fire({
+        icon: 'info',
+        position: 'top',
+        title: 'Insira o número da factura',
+        input: 'text',
+        showCancelButton: true,
+        confirmButtonText: 'Confirmar',
+        cancelButtonText: 'Cancelar',
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: '../php/queries.php',
+                type: 'POST',
+                data: {
+                    op: 'addFact',
+                    numFact: result.value,
+                    ass_id: ass_id
+                },
+                success: function () {
+                    Swal.fire({
+                        icon: 'success',
+                        position: 'top',
+                        title: 'Sucesso!'
+                    }).then(function () {
+                        location.reload();
+                    });
+                }
+            });
+        }
+    });
+
+});
+
 
 function createDT() {
     $("#table").DataTable({
@@ -53,7 +89,6 @@ $(document).ready(function () {
         },
         success: function (dataResult) {
             var dataResult = JSON.parse(dataResult);
-            console.log(dataResult);
             $("#cli").html("");
             $("#cli").html('<option value="0">Todos</option>');
             $.each(dataResult.data, function () {
