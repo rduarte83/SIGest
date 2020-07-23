@@ -1,22 +1,8 @@
 var contrato_id = localStorage.getItem("contrato_id")
 
-$("#addForm").on('submit', function (e) {
-    e.preventDefault();
-    $.ajax({
-        url: "../php/copia.php",
-        type: "post",
-        data: new FormData(this),
-        success: function (dataResult) {
-            var dataResult = JSON.parse(dataResult);
-
-            if (dataResult.statusCode == 201) {
-                alert(dataResult);
-            }
-        }
-    });
-});
-
 $(document).ready(function () {
+    $("#id").val(contrato_id);
+
     $.ajax({
         url: "../php/copia.php",
         type: "post",
@@ -101,5 +87,21 @@ $(document).ready(function () {
                 $("#equip option[value=" + $("prod_id").val() + "]").prop("selected", "selected");
             }
         });
+    });
+});
+
+$("#addForm").on('submit', function () {
+    $.ajax({
+        data: new FormData(this),
+        contentType: false,
+        processData: false,
+        type: "post",
+        url: "../php/copia.php",
+        success: function (dataResult) {
+            var dataResult = JSON.parse(dataResult);
+            if (dataResult.statusCode == 201) {
+                alert(dataResult);
+            }
+        }
     });
 });

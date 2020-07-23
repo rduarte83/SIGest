@@ -3,7 +3,7 @@ include_once 'db.php';
 
 if ($_POST['op'] == 'fetchCli') {
     $output = array();
-    $query = "SELECT * FROM clientes";
+    $query = "SELECT * FROM clientes ORDER BY cliente ASC";
 
     $statement = $conn->prepare($query);
     $statement->execute();
@@ -60,6 +60,7 @@ if ($_POST['op'] == 'fetchProd') {
     $output = array();
     $query = "
         SELECT p.*,c.cliente, c.zona FROM produtos p INNER JOIN clientes c ON p.cliente_id=c.nif
+            ORDER BY tipo ASC
         ";
 
     $statement = $conn->prepare($query);
@@ -113,6 +114,7 @@ if ($_POST['op'] == 'fetchProdCli') {
     $output = array();
     $query = "
         SELECT p.*,c.cliente, c.zona FROM produtos p INNER JOIN clientes c ON p.cliente_id=c.nif WHERE cliente_id = :cliente_id
+            ORDER BY tipo ASC
         ";
 
     $statement = $conn->prepare($query);
@@ -358,7 +360,6 @@ if ($_POST['op'] == 'fetchAss') {
         $sub_array[] = $row["motivo"];
         $sub_array[] = $row["local"];
         $sub_array[] = $row["tecnico"];
-        $sub_array[] = $row["entregue"];
         $sub_array[] = $row["problema"];
         $sub_array[] = $row["data_i"];
         $sub_array[] = $row["resolucao"];
@@ -419,7 +420,6 @@ if ($_POST['op'] == 'fetchAssCli') {
         $sub_array[] = $row["motivo"];
         $sub_array[] = $row["local"];
         $sub_array[] = $row["tecnico"];
-        $sub_array[] = $row["entregue"];
         $sub_array[] = $row["problema"];
         $sub_array[] = $row["data_i"];
         $sub_array[] = $row["resolucao"];
@@ -429,11 +429,13 @@ if ($_POST['op'] == 'fetchAssCli') {
         $sub_array[] = $row["estado"];
         $sub_array[] = $row["facturado"];
         $sub_array[] = $row["factura"];
-        $sub_array[] = $row["morada"];
-        $sub_array[] = $row["zona"];
-        $sub_array[] = $row["responsavel"];
-        $sub_array[] = $row["contacto"];
         $sub_array[] = '
+                    <a href="details-ass.php" class="details btn btn-primary btn-sm" data-id="' . $row["id"] . '">
+                        <i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Detalhes"></i>
+                    </a>
+                    <a href="#" class="fact btn btn-primary btn-sm" data-id="' . $row["id"] . '">
+                        <i class="fa fa-eur" aria-hidden="true" data-toggle="tooltip" title="Facturar"></i>
+                    </a>
                     <a href="#editModal" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '" data-toggle="modal">
                         <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>
                     </a>
@@ -482,6 +484,7 @@ if ($_POST['op'] == 'fetchAssS') {
         $sub_array[] = $row["problema"];
         $sub_array[] = $row["data_i"];
         $sub_array[] = $row["resolucao"];
+        $sub_array[] = $row["obs"];
         $sub_array[] = $row["material"];
         $sub_array[] = $row["tempo"];
         $sub_array[] = $row["valor"];
@@ -521,7 +524,6 @@ if ($_POST['op'] == 'addAss') {
         )
     );
 }
-
 
 if ($_POST['op'] == 'addFact') {
     $query = "

@@ -1,4 +1,4 @@
-<?php include_once '../php/session.php'?>
+<?php include_once '../php/session.php' ?>
 
 <!DOCTYPE html>
 <html>
@@ -48,18 +48,24 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form method="post" id="addForm" enctype="multipart/form-data" class="form-horizontal">
+                    <form action="details.php" target="_blank" method="post" id="addForm" enctype="multipart/form-data" class="form-horizontal">
                         <div class="card-body">
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Cliente</label>
-                                <div class="col-sm-10">
-                                    <select class="custom-select form-control" id="cli" name="cliente_id" required>
-                                    </select>
+                                <a href="addCliente.php" data-toggle="tooltip" title="Novo Cliente">
+                                    <i class="fa fa-plus"></i>
+                                </a>
+                                <div class="col-sm">
+                                    <select class="custom-select form-control" id="cli" name="cliente_id"
+                                            required></select>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Produto</label>
-                                <div class="col-sm-10">
+                                <a href="addProduto.php" data-toggle="tooltip" title="Novo Produto">
+                                    <i class="fa fa-plus"></i>
+                                </a>
+                                <div class="col-sm">
                                     <select class="custom-select form-control" id="prod" name="produto_id" required>
                                         <option value="0">Seleccionar Produto</option>
                                     </select>
@@ -68,7 +74,8 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Data do Pedido</label>
                                 <div class="col-sm-10">
-                                    <input type="datetime-local" id="data_p" name="data_p" class="form-control" required>
+                                    <input type="datetime-local" id="data_p" name="data_p" class="form-control"
+                                           required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -103,8 +110,7 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Material Entregue</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="entregue" id="entregue" rows="3"
-                                              required></textarea>
+                                    <textarea class="form-control" name="entregue" id="entregue" rows="3"></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -115,9 +121,16 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-form-label col-sm-2">Observações</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" name="obs" id="obs" rows="2"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Data da Intervenção</label>
                                 <div class="col-sm-10">
-                                    <input type="datetime-local" id="data_i" name="data_i" class="form-control" required>
+                                    <input type="datetime-local" id="data_i" name="data_i" class="form-control"
+                                           required>
                                 </div>
                             </div>
                         </div>

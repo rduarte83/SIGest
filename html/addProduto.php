@@ -78,7 +78,7 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Número Série</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="num_serie" name="num_serie" class="form-control" required>
+                                    <input type="text" id="num_serie" name="num_serie" class="form-control">
                                 </div>
                             </div>
                         </div>

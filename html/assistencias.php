@@ -66,7 +66,6 @@
                                     <th>Motivo</th>
                                     <th>Local</th>
                                     <th>Técnico</th>
-                                    <th>Material Entregue</th>
                                     <th>Problema</th>
                                     <th>Data Intervenção</th>
                                     <th>Resolução</th>

@@ -1,4 +1,4 @@
-<?php include_once '../php/session.php'?>
+<?php include_once '../php/session.php' ?>
 
 <!DOCTYPE html>
 <html>
@@ -127,6 +127,13 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-form-label col-sm-2">Observações</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" name="obs" id="obs" rows="3"
+                                              readonly></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Material Usado</label>
                                 <div class="col-sm-10">
                                     <textarea class="form-control" name="material" id="material" rows="5"
@@ -146,6 +153,12 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-form-label col-sm-2">Estado</label>
+                                <div class="col-sm-10">
+                                    <input type="text" id="estado" name="estado" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Facturado</label>
                                 <div class="col-sm-10">
                                     <input type="text" id="facturado" name="facturado" class="form-control" readonly>
@@ -159,14 +172,12 @@
                             </div>
                         </div>
                         <!-- /.card-body -->
-                        <div class="noprint">
-                            <div class="card-footer">
-                                <a href="assistencias.php">
-                                    <button type="button" class="btn btn-default">Cancelar</button>
-                                </a>
-                                <a href="details-ass-print.php" id="print" target="_blank"
-                                   class="btn btn-info float-right mr-3 fa fa-print">Imprimir</a>
-                            </div>
+                        <div class="card-footer">
+                            <a href="assistencias.php">
+                                <button type="button" class="btn btn-default">Cancelar</button>
+                            </a>
+                            <a href="details-ass-print.php" id="print" target="_blank"
+                               class="btn btn-info float-right mr-3 fa fa-print">Imprimir</a>
                         </div>
                         <!-- /.card-footer -->
                     </form>

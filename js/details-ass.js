@@ -23,16 +23,18 @@ $(document).ready(function () {
             $("#problema").val(dataResult.data[0][8]);
             $("#data_i").val(dataResult.data[0][9]);
             $("#resolucao").val(dataResult.data[0][10]);
-            $("#material").val(dataResult.data[0][11]);
-            $("#tempo").val(dataResult.data[0][12]);
-            $("#valor").val(dataResult.data[0][13]);
-            $("#facturado").val(dataResult.data[0][14]);
-            $("#factura").val(dataResult.data[0][15]);
+            $("#obs").val(dataResult.data[0][11]);
+            $("#material").val(dataResult.data[0][12]);
+            $("#tempo").val(dataResult.data[0][13]);
+            $("#valor").val(dataResult.data[0][14]);
+            $("#estado").val(dataResult.data[0][15]);
+            $("#facturado").val(dataResult.data[0][16]);
+            $("#factura").val(dataResult.data[0][17]);
 
-            localStorage.setItem('morada', dataResult.data[0][16]);
-            localStorage.setItem('zona', dataResult.data[0][17]);
-            localStorage.setItem('responsavel', dataResult.data[0][18]);
-            localStorage.setItem('contacto', dataResult.data[0][19]);
+            localStorage.setItem('morada', dataResult.data[0][18]);
+            localStorage.setItem('zona', dataResult.data[0][19]);
+            localStorage.setItem('responsavel', dataResult.data[0][20]);
+            localStorage.setItem('contacto', dataResult.data[0][21]);
 
             if (dataResult.statusCode == 201) {
                 alert(dataResult);
@@ -55,8 +57,6 @@ $(document).ready(function () {
         localStorage.setItem('material', $("#material").val());
         localStorage.setItem('tempo', $("#tempo").val());
         localStorage.setItem('valor', $("#valor").val());
-        localStorage.setItem('facturado', $("#valor").val());
-        localStorage.setItem('factura', $("#valor").val());
     });
 });
 

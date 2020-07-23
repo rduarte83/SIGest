@@ -44,5 +44,8 @@ $(document).ready(function () {
     $('#data_i').text(data_i);
     $('#tempo').text(tempo);
     $('#valor').text(valor);
+
+    window.print();
+    setTimeout(window.close, 0);
 });
 

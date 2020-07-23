@@ -205,7 +205,7 @@ if ($_POST['op'] == 'fetchContS') {
 if ($_POST['op'] == 'fetchCli') {
     $output = array();
     $query = "
-            SELECT * FROM clientes;
+            SELECT * FROM clientes ORDER BY cliente ASC;
         ";
     $statement = $conn->prepare($query);
     $result = $statement->execute();
@@ -227,7 +227,8 @@ if ($_POST['op'] == 'fetchCli') {
 if ($_POST['op'] == 'fetchProdCli') {
     $output = array();
     $query = "
-        SELECT * FROM produtos WHERE cliente_id = :cliente_id
+        SELECT * FROM produtos WHERE cliente_id = :cliente_id 
+            ORDER BY tipo ASC
         ";
 
     $statement = $conn->prepare($query);
@@ -306,7 +307,6 @@ if ($_POST['op'] == 'editCopia') {
             ':inc'   => $_POST["inc"],
             ':preco_p'   => $_POST["preco_p"],
             ':preco_c'   => $_POST["preco_c"]
-
         )
     );
 }

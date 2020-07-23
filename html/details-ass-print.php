@@ -150,11 +150,11 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-6">
-                    <div class="col-sm text-bold">Assinatura Técnico</div>
+                    <div class="col-sm text-bold">Assinatura do Técnico</div>
                     <textarea style="resize: none" class="form-control" name="data_i" id="data_i" rows="1"></textarea>
                 </div>
                 <div class="col-sm-6">
-                    <div class="col-sm text-bold">Assinatura Cliente</div>
+                    <div class="col-sm text-bold">Assinatura do Cliente</div>
                     <textarea style="resize: none" class="form-control" name="data_i" id="data_i" rows="1"></textarea>
                 </div>
             </div>

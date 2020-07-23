@@ -119,7 +119,10 @@
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <input type="hidden" name="op" value="editCopia">
-                            <input type="hidden" name="id">
+                            <input type="hidden" name="id" id="id">
+                            <a href=#>
+                                <button type="button" id="test" class="btn btn-default ">TESTE</button>
+                            </a>
                             <a href="copia.php">
                                 <button type="button" class="btn btn-default ">Cancelar</button>
                             </a>
