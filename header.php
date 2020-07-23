@@ -48,14 +48,6 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/sigest/html/.php"
-                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == ".php") ? "active" : ""; ?>">
-                                <i class="nav-icon fa fa-circle"></i>
-                                <p>Assistências Técnicas</p>
-                                <span class="badge badge-danger right" id="assPen"></span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="/sigest/html/pendentes.php"
                                class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "pendentes.php") ? "active" : ""; ?>">
                                 <i class="nav-icon fa fa-circle"></i>
@@ -175,7 +167,8 @@
 
                 <li class="nav-item has-treeview
                     <?= (basename($_SERVER['PHP_SELF']) == "assistencias.php") |
-                        (basename($_SERVER['PHP_SELF']) == "addAssist.php")
+                        (basename($_SERVER['PHP_SELF']) == "addAssist.php") |
+                        (basename($_SERVER['PHP_SELF']) == "penAss.php")
                     ? "menu-open" : ""; ?>">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-wrench"></i>
@@ -189,6 +182,14 @@
                                class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "assistencias.php") ? "active" : ""; ?>">
                                 <i class="fa fa-circle nav-icon"></i>
                                 <p>Listar Assistências</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/sigest/html/penAss.php"
+                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "penAss.php") ? "active" : ""; ?>">
+                                <i class="nav-icon fa fa-circle"></i>
+                                <p>Assistências Pendentes</p>
+                                <span class="badge badge-danger right" id="assPen"></span>
                             </a>
                         </li>
                         <li class="nav-item">

@@ -56,7 +56,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form method="post" id="addForm" enctype="multipart/form-data" class="form-horizontal">
+                    <form method="post" action="copia.php" id="addForm" enctype="multipart/form-data" class="form-horizontal">
                         <div class="card-body">
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Cliente</label>
@@ -120,9 +120,6 @@
                         <div class="card-footer">
                             <input type="hidden" name="op" value="editCopia">
                             <input type="hidden" name="id" id="id">
-                            <a href=#>
-                                <button type="button" id="test" class="btn btn-default ">TESTE</button>
-                            </a>
                             <a href="copia.php">
                                 <button type="button" class="btn btn-default ">Cancelar</button>
                             </a>

@@ -88,6 +88,13 @@ function createDT() {
                 op: 'fetchAss'
             },
         },
+        "createdRow": function (row, data, dataIndex) {
+            if (Math.round((Date.now() - new Date(data[8]).getTime()) / 86400000) >= 2 && data[13] == 'Pendente')
+                $(row).addClass('red');
+            if (data[13] == 'Aguarda Peças') $(row).addClass('orange');
+            if (data[13] == 'Resolvido') $(row).addClass('yellow');
+            if (data[14] == 'Sim') $(row).addClass('green');
+        },
         dom: 'Bfrtip',
         buttons: {
             buttons: [
@@ -135,52 +142,51 @@ $(document).ready(function () {
             });
         }
     });
-});
 
-$("#cli").on('change', function () {
-    if ($.fn.dataTable.isDataTable('#table')) {
-        $("#table").DataTable().destroy();
-    }
-    ;
-    if ($("#cli").val() == 0) {
-        createDT();
-    } else {
-        $("#table").DataTable({
-            processing: true,
-            ajax: {
-                url: "../php/queries.php",
-                type: "POST",
-                data: {
-                    cliente_id: $("#cli").val(),
-                    op: 'fetchAssCli'
-                },
-                dom: 'Bfrtip',
-                buttons: {
-                    buttons: [
-                        {
-                            extend: 'print',
-                            'text': '<i class="fa fa-print" aria-hidden="true"></i>',
-                            "className": 'btn btn-default btn-xs'
-                        },
-                        {
-                            extend: 'pdf',
-                            'text': '<i class="fa fa-file-pdf-o" aria-hidden="true"></i>',
-                            "className": 'btn btn-default btn-xs'
-                        },
-                        {
-                            extend: 'excel',
-                            'text': '<i class="fa fa-file-excel-o" aria-hidden="true"></i>',
-                            "className": 'btn btn-default btn-xs'
-                        }
-                    ],
-                },
-                responsive: true,
-                autoWidth: false,
-                language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
-            }
-        });
-    }
+    $("#cli").on('change', function () {
+        if ($.fn.dataTable.isDataTable('#table')) {
+            $("#table").DataTable().destroy();
+        }
+        ;
+        if ($("#cli").val() == 0) {
+            createDT();
+        } else {
+            $("#table").DataTable({
+                processing: true,
+                ajax: {
+                    url: "../php/queries.php",
+                    type: "POST",
+                    data: {
+                        cliente_id: $("#cli").val(),
+                        op: 'fetchAssCli'
+                    },
+                    dom: 'Bfrtip',
+                    buttons: {
+                        buttons: [
+                            {
+                                extend: 'print',
+                                'text': '<i class="fa fa-print" aria-hidden="true"></i>',
+                                "className": 'btn btn-default btn-xs'
+                            },
+                            {
+                                extend: 'pdf',
+                                'text': '<i class="fa fa-file-pdf-o" aria-hidden="true"></i>',
+                                "className": 'btn btn-default btn-xs'
+                            },
+                            {
+                                extend: 'excel',
+                                'text': '<i class="fa fa-file-excel-o" aria-hidden="true"></i>',
+                                "className": 'btn btn-default btn-xs'
+                            }
+                        ],
+                    },
+                    responsive: true,
+                    autoWidth: false,
+                    language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
+                }
+            });
+        }
+    });
 });
-
 
 

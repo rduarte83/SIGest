@@ -369,6 +369,7 @@ if ($_POST['op'] == 'fetchAss') {
         $sub_array[] = $row["estado"];
         $sub_array[] = $row["facturado"];
         $sub_array[] = $row["factura"];
+
         $sub_array[] = '
                     <a href="details-ass.php" class="details btn btn-primary btn-sm" data-id="' . $row["id"] . '">
                         <i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Detalhes"></i>
@@ -376,14 +377,13 @@ if ($_POST['op'] == 'fetchAss') {
                     <a href="#" class="fact btn btn-primary btn-sm" data-id="' . $row["id"] . '">
                         <i class="fa fa-eur" aria-hidden="true" data-toggle="tooltip" title="Facturar"></i>
                     </a>
-                    <a href="#editModal" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '" data-toggle="modal">
+                    <a href="editAss.php" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '">
                         <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>
                     </a>
-                    <a href="#deleteModal" class="delete btn btn-danger btn-sm" data-id="' . $row["id"] . '" data-toggle="modal">
+                    <a href="#" class="delete btn btn-danger btn-sm" data-id="' . $row["id"] . '">
                         <i class="fa fa-trash" aria-hidden="true" data-toggle="tooltip" title="Eliminar"></i>
                     </a>
                     ';
-
         $data[] = $sub_array;
     }
     $output = array(
@@ -436,10 +436,10 @@ if ($_POST['op'] == 'fetchAssCli') {
                     <a href="#" class="fact btn btn-primary btn-sm" data-id="' . $row["id"] . '">
                         <i class="fa fa-eur" aria-hidden="true" data-toggle="tooltip" title="Facturar"></i>
                     </a>
-                    <a href="#editModal" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '" data-toggle="modal">
+                    <a href="editAss.php" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '">
                         <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>
                     </a>
-                    <a href="#deleteModal" class="delete btn btn-danger btn-sm" data-id="' . $row["id"] . '" data-toggle="modal">
+                    <a href="#" class="delete btn btn-danger btn-sm" data-id="' . $row["id"] . '">
                         <i class="fa fa-trash" aria-hidden="true" data-toggle="tooltip" title="Eliminar"></i>
                     </a>
                     ';
@@ -534,6 +534,48 @@ if ($_POST['op'] == 'addFact') {
         array(
             ':numFact' => $_POST["numFact"],
             ':ass_id' => $_POST["ass_id"]
+        )
+    );
+}
+
+if ($_POST['op'] == 'delAss') {
+    $query = "
+                DELETE FROM assistencias WHERE id = :ass_id
+    ";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':ass_id'   => $_POST["ass_id"],
+        )
+    );
+}
+
+if ($_POST['op'] == 'editAss') {
+    $query = "
+                UPDATE assistencias SET data_p=:data_p, motivo=:motivo, local=:local, tecnico=:tecnico, 
+                        material=:material, problema=:problema, data_i=:data_i, resolucao=:resolucao,
+                        obs=:obs, material=:material, tempo=:tempo, valor=:valor, estado=:estado, 
+                        facturado=:facturado, factura=:factura WHERE id=:ass_id               
+    ";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':ass_id'   => $_POST["ass_id"],
+            ':data_p'   => $_POST["data_p"],
+            ':motivo'   => $_POST["motivo"],
+            ':local'   => $_POST["local"],
+            ':tecnico'   => $_POST["tecnico"],
+            ':material'   => $_POST["material"],
+            ':problema'   => $_POST["problema"],
+            ':data_i'   => $_POST["data_i"],
+            ':resolucao'   => $_POST["resolucao"],
+            ':obs'   => $_POST["obs"],
+            ':material'   => $_POST["material"],
+            ':tempo'   => $_POST["tempo"],
+            ':valor'   => $_POST["valor"],
+            ':estado'   => $_POST["estado"],
+            ':facturado'   => $_POST["facturado"],
+            ':facturar'   => $_POST["facturar"]
         )
     );
 }
