@@ -56,12 +56,16 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form method="post" id="addForm" enctype="multipart/form-data" class="form-horizontal">
+                    <form method="post" action="assistencias.php" id="addForm" enctype="multipart/form-data" class="form-horizontal">
                         <div class="card-body">
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Estado</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="estado" name="estado" class="form-control" >
+                                    <select class="form-control" id="estado" name="estado">
+                                        <option value="Pendente">Pendente</option>
+                                        <option value="Aguarda Peças">Aguarda Peças</option>
+                                        <option value="Resolvido">Resolvido</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -167,6 +171,8 @@
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
+                            <input type="hidden" name="id" id="id">
+                            <input type="hidden" name="op" value="editAss">
                             <a href="assistencias.php">
                                 <button type="button" class="btn btn-default">Cancelar</button>
                             </a>

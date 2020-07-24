@@ -88,6 +88,7 @@ function createDT() {
                 op: 'fetchAss'
             },
         },
+        order: [8, 'desc'],
         dom: 'Bfrtip',
         buttons: {
             buttons: [
@@ -154,6 +155,7 @@ $("#cli").on('change', function () {
                     cliente_id: $("#cli").val(),
                     op: 'fetchAssCli'
                 },
+                order: [8, 'desc'],
                 dom: 'Bfrtip',
                 buttons: {
                     buttons: [

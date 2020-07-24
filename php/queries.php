@@ -342,7 +342,8 @@ if ($_POST['op'] == 'fetchAss') {
     $query = "
         SELECT a.*, c.cliente, p.tipo, p.marca, p.modelo FROM assistencias a
             INNER JOIN produtos p ON a.produto_id=p.id 
-            INNER JOIN clientes c ON a.cliente_id=c.nif
+            INNER JOIN clientes c ON a.cliente_id=c.nif 
+            ORDER BY data_i DESC
         ";
 
     $statement = $conn->prepare($query);
@@ -458,7 +459,6 @@ if ($_POST['op'] == 'fetchAssS') {
         SELECT a.*, c.cliente, c.morada, c.zona, c.responsavel, c.contacto, p.tipo, p.marca, p.modelo FROM assistencias a
             INNER JOIN produtos p ON a.produto_id=p.id 
             INNER JOIN clientes c ON a.cliente_id=c.nif
-            WHERE a.id = :ass_id
         ";
 
     $statement = $conn->prepare($query);
@@ -553,19 +553,19 @@ if ($_POST['op'] == 'delAss') {
 if ($_POST['op'] == 'editAss') {
     $query = "
                 UPDATE assistencias SET data_p=:data_p, motivo=:motivo, local=:local, tecnico=:tecnico, 
-                        material=:material, problema=:problema, data_i=:data_i, resolucao=:resolucao,
+                        entregue=:entregue, problema=:problema, data_i=:data_i, resolucao=:resolucao,
                         obs=:obs, material=:material, tempo=:tempo, valor=:valor, estado=:estado, 
-                        facturado=:facturado, factura=:factura WHERE id=:ass_id               
+                        facturado=:facturado, factura=:factura WHERE id=:id               
     ";
     $statement = $conn->prepare($query);
     $result = $statement->execute(
         array(
-            ':ass_id'   => $_POST["ass_id"],
+            ':id'   => $_POST["id"],
             ':data_p'   => $_POST["data_p"],
             ':motivo'   => $_POST["motivo"],
             ':local'   => $_POST["local"],
             ':tecnico'   => $_POST["tecnico"],
-            ':material'   => $_POST["material"],
+            ':entregue'   => $_POST["entregue"],
             ':problema'   => $_POST["problema"],
             ':data_i'   => $_POST["data_i"],
             ':resolucao'   => $_POST["resolucao"],
@@ -575,7 +575,7 @@ if ($_POST['op'] == 'editAss') {
             ':valor'   => $_POST["valor"],
             ':estado'   => $_POST["estado"],
             ':facturado'   => $_POST["facturado"],
-            ':facturar'   => $_POST["facturar"]
+            ':factura'   => $_POST["factura"]
         )
     );
 }

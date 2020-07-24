@@ -60,7 +60,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Software</label>
                                 <div class="col-sm-10">
-                                    <select name="sw" id="sw">
+                                    <select class="custom-select form-control" name="sw" id="sw">
                                         <option value="Pix">Pix</option>
                                         <option value="ZoneSoft">ZoneSoft</option>
                                         <option value="Sage">Sage</option>
@@ -70,7 +70,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Contrato</label>
                                 <div class="col-sm-10">
-                                    <select name="contrato" id="contrato">
+                                    <select class="custom-select form-control" name="contrato" id="contrato">
                                           <option value="Aluguer">Aluguer</option>
                                       <option value="Compra">Compra</option>
                                     </select>
@@ -85,7 +85,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Periodicidade</label>
                                 <div class="col-sm-10">
-                                    <select name="period" id="period">
+                                    <select class="custom-select form-control" name="period" id="period">
                                         <option value="Mensal">Mensal</option>
                                         <option value="Trimestral">Trimestral</option>
                                         <option value="Anual">Anual</option>
@@ -108,15 +108,6 @@
                                 <label class="col-sm-2 col-form-label">Postos Extra</label>
                                 <div class="col-sm-10">
                                     <input type="number" id="postos" name="postos" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Estado</label>
-                                <div class="col-sm-10">
-                                    <select name="estado" id="estado">
-                                        <option value="Activo">Activo</option>
-                                        <option value="Inactivo">Inactivo</option>
-                                    </select>
                                 </div>
                             </div>
                         </div>

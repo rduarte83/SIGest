@@ -1,3 +1,8 @@
+<!--TODO Assistencias:add-ok edit-ok det-ok del-ok-->
+<!--TODO Copia:add-ok edit-ok det-ok del-ok-->
+<!--TODO SW:add-ok edit-ok del-ok-->
+
+
 <?php include_once 'php/session.php'?>
 
 <!DOCTYPE html>

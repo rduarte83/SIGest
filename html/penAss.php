@@ -48,14 +48,6 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <label class="col-form-label col-sm-2">Seleccionar Cliente</label>
-                                <select class="custom-select form-control" id="cli" name="cliente_id" required>
-                                </select>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
                         <!-- /.card -->
                         <div class="card">
                             <div class="card-body">

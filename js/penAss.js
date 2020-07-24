@@ -3,7 +3,7 @@ $(document).on('click', '.details', function () {
     localStorage.setItem("ass_id", ass_id);
 });
 
-$(document).on('click','.delete', function () {
+$(document).on('click', '.delete', function () {
     var ass_id = $(this).attr("data-id");
     Swal.fire({
         icon: 'info',
@@ -39,7 +39,7 @@ $(document).on('click','.delete', function () {
     });
 });
 
-$(document).on('click','.edit', function () {
+$(document).on('click', '.edit', function () {
     var ass_id = $(this).attr("data-id");
     localStorage.setItem("ass_id", ass_id);
 });
@@ -78,8 +78,8 @@ $(document).on('click', '.fact', function () {
     });
 });
 
-function createDT() {
-    $("#table").DataTable({
+$(document).ready(function () {
+    var datable = $("#table").DataTable({
         processing: true,
         ajax: {
             url: "../php/queries.php",
@@ -88,13 +88,14 @@ function createDT() {
                 op: 'fetchAss'
             },
         },
-        "createdRow": function (row, data, dataIndex) {
+        createdRow: function (row, data, dataIndex) {
             if (Math.round((Date.now() - new Date(data[8]).getTime()) / 86400000) >= 2 && data[13] == 'Pendente')
                 $(row).addClass('red');
             if (data[13] == 'Aguarda Peças') $(row).addClass('orange');
             if (data[13] == 'Resolvido') $(row).addClass('yellow');
             if (data[14] == 'Sim') $(row).addClass('green');
         },
+        order: [8, 'desc'],
         dom: 'Bfrtip',
         buttons: {
             buttons: [
@@ -120,72 +121,6 @@ function createDT() {
         contentType: false,
         processData: false,
         language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
-    });
-};
-
-$(document).ready(function () {
-    createDT();
-
-    //Fetch Client
-    $.ajax({
-        url: "../php/queries.php",
-        type: "POST",
-        data: {
-            op: 'fetchCli'
-        },
-        success: function (dataResult) {
-            var dataResult = JSON.parse(dataResult);
-            $("#cli").html("");
-            $("#cli").html('<option value="0">Todos</option>');
-            $.each(dataResult.data, function () {
-                $("#cli").append($("<option/>").val(this[0]).text(this[2]));
-            });
-        }
-    });
-
-    $("#cli").on('change', function () {
-        if ($.fn.dataTable.isDataTable('#table')) {
-            $("#table").DataTable().destroy();
-        }
-        ;
-        if ($("#cli").val() == 0) {
-            createDT();
-        } else {
-            $("#table").DataTable({
-                processing: true,
-                ajax: {
-                    url: "../php/queries.php",
-                    type: "POST",
-                    data: {
-                        cliente_id: $("#cli").val(),
-                        op: 'fetchAssCli'
-                    },
-                    dom: 'Bfrtip',
-                    buttons: {
-                        buttons: [
-                            {
-                                extend: 'print',
-                                'text': '<i class="fa fa-print" aria-hidden="true"></i>',
-                                "className": 'btn btn-default btn-xs'
-                            },
-                            {
-                                extend: 'pdf',
-                                'text': '<i class="fa fa-file-pdf-o" aria-hidden="true"></i>',
-                                "className": 'btn btn-default btn-xs'
-                            },
-                            {
-                                extend: 'excel',
-                                'text': '<i class="fa fa-file-excel-o" aria-hidden="true"></i>',
-                                "className": 'btn btn-default btn-xs'
-                            }
-                        ],
-                    },
-                    responsive: true,
-                    autoWidth: false,
-                    language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
-                }
-            });
-        }
     });
 });
 

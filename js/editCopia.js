@@ -96,7 +96,7 @@ $("#addForm").on('submit', function () {
         contentType: false,
         processData: false,
         type: "post",
-        url: "../php/copia.php",
+        url: "../php/queries.php",
         success: function (dataResult) {
             var dataResult = JSON.parse(dataResult);
             if (dataResult.statusCode == 201) {

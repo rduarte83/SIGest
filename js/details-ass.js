@@ -10,6 +10,7 @@ $(document).ready(function () {
         },
         success: function (dataResult) {
             var dataResult = JSON.parse(dataResult);
+
             console.log(dataResult.data[0]);
 
             $("#id").val(dataResult.data[0][0]);
@@ -41,22 +42,41 @@ $(document).ready(function () {
             }
         }
     });
+});
 
-    $('#print').on('click', function () {
-        localStorage.setItem('id', $("#id").val());
-        localStorage.setItem('cliente', $("#cli").val());
-        localStorage.setItem('produto', $("#prod").val());
-        localStorage.setItem('data_p', $("#data_p").val());
-        localStorage.setItem('motivo', $("#motivo").val());
-        localStorage.setItem('local', $("#local").val());
-        localStorage.setItem('tecnico', $("#tecnico").val());
-        localStorage.setItem('entregue', $("#entregue").val());
-        localStorage.setItem('problema', $("#problema").val());
-        localStorage.setItem('data_i', $("#data_i").val());
-        localStorage.setItem('resolucao', $("#resolucao").val());
-        localStorage.setItem('material', $("#material").val());
-        localStorage.setItem('tempo', $("#tempo").val());
-        localStorage.setItem('valor', $("#valor").val());
+$('#print').on('click', function () {
+    localStorage.setItem('id', $("#id").val());
+    localStorage.setItem('cliente', $("#cli").val());
+    localStorage.setItem('produto', $("#prod").val());
+    localStorage.setItem('data_p', $("#data_p").val());
+    localStorage.setItem('motivo', $("#motivo").val());
+    localStorage.setItem('local', $("#local").val());
+    localStorage.setItem('tecnico', $("#tecnico").val());
+    localStorage.setItem('entregue', $("#entregue").val());
+    localStorage.setItem('problema', $("#problema").val());
+    localStorage.setItem('data_i', $("#data_i").val());
+    localStorage.setItem('resolucao', $("#resolucao").val());
+    localStorage.setItem('material', $("#material").val());
+    localStorage.setItem('tempo', $("#tempo").val());
+    localStorage.setItem('valor', $("#valor").val());
+});
+
+$("#addForm").on('submit', function (e) {
+    $("#id").val(ass_id);
+
+    $.ajax({
+        data: new FormData(this),
+        contentType: false,
+        processData: false,
+        type: "post",
+        url: "../php/queries.php",
+        success: function (dataResult) {
+            var dataResult = JSON.parse(dataResult);
+
+            if (dataResult.statusCode == 201) {
+                alert(dataResult);
+            }
+        }
     });
 });
 
