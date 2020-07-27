@@ -168,7 +168,8 @@
                 <li class="nav-item has-treeview
                     <?= (basename($_SERVER['PHP_SELF']) == "assistencias.php") |
                         (basename($_SERVER['PHP_SELF']) == "addAssist.php") |
-                        (basename($_SERVER['PHP_SELF']) == "penAss.php")
+                        (basename($_SERVER['PHP_SELF']) == "penAss.php") |
+                        (basename($_SERVER['PHP_SELF']) == "calAss.php")
                     ? "menu-open" : ""; ?>">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-wrench"></i>
@@ -177,6 +178,13 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview menu-open">
+                        <li class="nav-item">
+                            <a href="/sigest/html/calAss.php"
+                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "calAss.php") ? "active" : ""; ?>">
+                                <i class="fa fa-calendar nav-icon"></i>
+                                <p>Calendário de Assistências</p>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="/sigest/html/assistencias.php"
                                class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "assistencias.php") ? "active" : ""; ?>">
@@ -204,7 +212,8 @@
 
                 <li class="nav-item has-treeview
                     <?= (basename($_SERVER['PHP_SELF']) == "visitas.php") |
-                (basename($_SERVER['PHP_SELF']) == "addVisita.php")
+                        (basename($_SERVER['PHP_SELF']) == "addVisita.php") |
+                        (basename($_SERVER['PHP_SELF']) == "calVis.php")
                     ? "menu-open" : ""; ?>">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-user"></i>
@@ -213,6 +222,13 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview menu-open">
+                        <li class="nav-item">
+                            <a href="/sigest/html/calVis.php"
+                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "calVis.php") ? "active" : ""; ?>">
+                                <i class="fa fa-calendar nav-icon"></i>
+                                <p>Calendário de Visitas</p>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="/sigest/html/visitas.php"
                                class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "visitas.php") ? "active" : ""; ?>">
