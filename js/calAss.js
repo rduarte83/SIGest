@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', function () {
         slotMinTime: '09:00:00',
         slotMaxTime: '19:00:00',
         resources: [
-            {id: 'Rui', building: 'Rui'},
-            {id: 'João', building: 'João'}
+            {id: 'rui', building: 'Rui'},
+            {id: 'joao', building: 'João'}
         ],
         locale: 'pt-pt',
         customButtons: {

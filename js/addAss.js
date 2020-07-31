@@ -2,6 +2,44 @@ $(document).ready(function () {
     var now = moment().format("YYYY-MM-DDTHH:mm");
     $("#data_p").val(now);
 
+    //Fetch Clientes - autocomplete
+    $.ajax({
+        type:'post',
+        url: '../php/queries.php',
+        data: {
+            op: 'fetchCliAuto',
+        },
+        success: function (dataResult) {
+            var dataResult= JSON.parse(dataResult);
+
+            $( "#cli" ).autocomplete({
+                source:dataResult,
+                minLength: 2,
+                select: function (event, ui) {
+                    $("#cli").val(ui.item.id);
+
+                    $.ajax({
+                        url: "../php/queries.php",
+                        type: "POST",
+                        data: {
+                            op: 'fetchProdCli',
+                            cliente_id: $("#cli").val()
+                        },
+                        success: function (dataResult) {
+                            var dataResult = JSON.parse(dataResult);
+
+                            $("#prod").html('<option value="0">Seleccionar Produto</option>');
+                            $.each(dataResult.data, function () {
+                                $("#prod").append($("<option/>").val(this[0]).text(this[1] + " " + this[2] + " " + this[3]));
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    });
+
+
     //Fetch Tecnicos
     $.ajax({
         url: "../php/queries.php",
@@ -16,83 +54,8 @@ $(document).ready(function () {
                 $("#tecnico").append($("<option/>").val(this[0]).text(this[1]));
             });
         }
-    })
-
-    //Fetch Client
-    $.ajax({
-        url: "../php/queries.php",
-        type: "POST",
-        data: {
-            op: 'fetchCli'
-        },
-        success: function (dataResult) {
-            var dataResult = JSON.parse(dataResult);
-            var search = new URLSearchParams(window.location.search);
-
-            $("#cli").html("");
-            $("#cli").html('<option value="0">Seleccionar Cliente</option>');
-            $.each(dataResult.data, function () {
-                if (search.has("cli")) {
-                    var param = search.get("cli");
-                    $("#cli").val(param);
-                }
-                ;
-                $("#cli").append($("<option/>").val(this[0]).text(this[2]));
-            });
-            if (search.has("prod")) {
-                var param = search.get("prod");
-                console.log(param);
-                $("#prod").val(param);
-                console.log($("#prod").val(param));
-            }
-            ;
-            $.ajax({
-                url: "../php/queries.php",
-                type: "POST",
-                data: {
-                    op: 'fetchProdCli',
-                    cliente_id: $("#cli").val()
-                },
-                success: function (dataResult) {
-                    var dataResult = JSON.parse(dataResult);
-                    var search = new URLSearchParams(window.location.search);
-
-                    $("#prod").html('<option value="0">Seleccionar Produto</option>');
-                    $.each(dataResult.data, function () {
-                        if (search.has("prod")) {
-                            var param = search.get("prod");
-                            $("#prod").val(param);
-                        }
-                        ;
-                        $("#prod").append($("<option/>").val(this[0]).text(this[1] + " " + this[2] + " " + this[3]));
-                    });
-                }
-            });
-        }
     });
 });
-
-//Fetch Product
-$("#cli").on('change', function () {
-    //Fetch Product
-    $.ajax({
-        url: "../php/queries.php",
-        type: "POST",
-        data: {
-            op: 'fetchProdCli',
-            cliente_id: $("#cli").val()
-        },
-        success: function (dataResult) {
-            var dataResult = JSON.parse(dataResult);
-
-            $("#prod").html('<option value="0">Seleccionar Produto</option>');
-            $.each(dataResult.data, function () {
-                $("#prod").append($("<option/>").val(this[0]).text(this[1] + " " + this[2] + " " + this[3]));
-            });
-        }
-    });
-});
-
 
 //<!-- Add assist -->
 $('#addForm').on('submit', function (e) {

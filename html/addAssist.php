@@ -62,101 +62,100 @@
                                         <i class="fa fa-plus"></i>
                                     </a>
                                     <div class="col-sm">
-                                        <select class="custom-select form-control" id="cli" name="cliente_id" required></select>
+                                        <input type="text" id="cli" name="cliente_id" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-sm-2">Produto</label>
+                                    <a href="#" id="newProd" data-toggle="tooltip" title="Novo Produto">
+                                        <i class="fa fa-plus"></i>
+                                    </a>
+                                    <div class="col-sm">
+                                        <select class="custom-select form-control" id="prod" name="produto_id" required>
+                                            <option value="0">Seleccionar Produto</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-sm-2">Data do Pedido</label>
+                                    <div class="col-sm-10">
+                                        <input type="datetime-local" id="data_p" name="data_p" class="form-control"
+                                               required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-sm-2">Motivo</label>
+                                    <div class="col-sm-10">
+                                        <select class="custom-select form-control" name="motivo" id="mot" required>
+                                            <option value="0">Seleccionar Motivo</option>
+                                            <option value="Manutenção">Manutenção</option>
+                                            <option value="Assistência de Hardware">Assistência de Hardware</option>
+                                            <option value="Assistência de Software">Assistência de Software</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-sm-2">Local</label>
+                                    <div class="col-sm-10">
+                                        <select class="custom-select form-control" name="local" id="local" required>
+                                            <option value="0">Seleccionar Local</option>
+                                            <option value="Cliente">Cliente</option>
+                                            <option value="Loja 1">Loja 1</option>
+                                            <option value="Loja 2">Loja 2</option>
+                                            <option value="Loja 3">Loja 3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-sm-2">Técnico</label>
+                                    <div class="col-sm-10">
+                                        <select name="tecnico" id="tecnico" class="form-control" required></select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-sm-2">Material Entregue</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" name="entregue" id="entregue"
+                                                  rows="3"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-sm-2">Problema</label>
+                                    <div class="col-sm-10">
+                                    <textarea class="form-control" name="problema" id="problema" rows="8"
+                                              required></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-sm-2">Observações</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" name="obs" id="obs" rows="2"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-sm-2">Data da Intervenção</label>
+                                    <div class="col-sm-10">
+                                        <input type="datetime-local" id="data_i" name="data_i" class="form-control"
+                                               required>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-sm-2">Produto</label>
-                                <a href="#" id="newProd" data-toggle="tooltip" title="Novo Produto">
-                                    <i class="fa fa-plus"></i>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                <input type="hidden" name="op" value="addAss">
+                                <a href="../index.php">
+                                    <button type="button" class="btn btn-default ">Cancelar</button>
                                 </a>
-                                <div class="col-sm">
-                                    <select class="custom-select form-control" id="prod" name="produto_id" required>
-                                        <option value="0">Seleccionar Produto</option>
-                                    </select>
-                                </div>
+                                <a href="#">
+                                    <button type="button" id="t" class="btn btn-default ">Teste</button>
+                                </a>
+                                <button type="submit" class="btn btn-success float-right">Confirmar</button>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-sm-2">Data do Pedido</label>
-                                <div class="col-sm-10">
-                                    <input type="datetime-local" id="data_p" name="data_p" class="form-control"
-                                           required>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-sm-2">Motivo</label>
-                                <div class="col-sm-10">
-                                    <select class="custom-select form-control" name="motivo" id="mot" required>
-                                        <option value="0">Seleccionar Motivo</option>
-                                        <option value="Manutenção">Manutenção</option>
-                                        <option value="Assistência de Hardware">Assistência de Hardware</option>
-                                        <option value="Assistência de Software">Assistência de Software</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-sm-2">Local</label>
-                                <div class="col-sm-10">
-                                    <select class="custom-select form-control" name="local" id="local" required>
-                                        <option value="0">Seleccionar Local</option>
-                                        <option value="Cliente">Cliente</option>
-                                        <option value="Loja 1">Loja 1</option>
-                                        <option value="Loja 2">Loja 2</option>
-                                        <option value="Loja 3">Loja 3</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-sm-2">Técnico</label>
-                                <div class="col-sm-10">
-                                    <select name="tecnico" id="tecnico" class="form-control" required></select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-sm-2">Material Entregue</label>
-                                <div class="col-sm-10">
-                                        <textarea class="form-control" name="entregue" id="entregue"
-                                                  rows="3"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-sm-2">Problema</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" name="problema" id="problema" rows="8"
-                                              required></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-sm-2">Observações</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" name="obs" id="obs" rows="2"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-sm-2">Data da Intervenção</label>
-                                <div class="col-sm-10">
-                                    <input type="datetime-local" id="data_i" name="data_i" class="form-control"
-                                           required>
-                                </div>
-                            </div>
+                            <!-- /.card-footer -->
+                        </form>
                     </div>
-                    <!-- /.card-body -->
-                    <div class="card-footer">
-                        <input type="hidden" name="op" value="addAss">
-                        <a href="../index.php">
-                            <button type="button" class="btn btn-default ">Cancelar</button>
-                        </a>
-                        <a href="#">
-                            <button type="button" id="t" class="btn btn-default ">Teste</button>
-                        </a>
-                        <button type="submit" class="btn btn-success float-right">Confirmar</button>
-                    </div>
-                    <!-- /.card-footer -->
-                    </form>
-                </div>
-                <!-- /.card -->
-                <!-- /.container-fluid -->
+                    <!-- /.card -->
+                    <!-- /.container-fluid -->
             </section>
             <!-- /.content -->
         </div>

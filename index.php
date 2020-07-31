@@ -6,7 +6,6 @@ TODO-pioridade nas assist
 TODO-cor nas assist (cal)
 TODO-mudar produto cliente
 TODO-autocomplete
-
 TODO-criar user list
 TODO-permissoes users
 TODO-login autorização - definir role

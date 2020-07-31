@@ -676,3 +676,19 @@ if ($_POST['op'] == 'fetchLastAss') {
     );
     echo json_encode($output);
 }
+
+if ($_POST['op'] == 'fetchCliAuto') {
+    $query = "SELECT * FROM clientes ORDER BY cliente ASC";
+
+    $statement = $conn->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $data = array();
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array['id'] = $row["nif"];
+        $sub_array['value'] = $row["cliente"];
+        $data[] = $sub_array;
+    }
+    echo json_encode($data);
+}
