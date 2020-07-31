@@ -17,7 +17,7 @@ $(document).ready(function () {
             });
         }
     })
-    
+
     //Fetch Client
     $.ajax({
         url: "../php/queries.php",
@@ -62,7 +62,8 @@ $(document).ready(function () {
                         if (search.has("prod")) {
                             var param = search.get("prod");
                             $("#prod").val(param);
-                        };
+                        }
+                        ;
                         $("#prod").append($("<option/>").val(this[0]).text(this[1] + " " + this[2] + " " + this[3]));
                     });
                 }
@@ -136,17 +137,19 @@ $('#addForm').on('submit', function (e) {
                     $("#contacto-p").text(dataResult.data[0][21]);
 
                     window.print();
-                    window.onafterprint = function(){
+                    window.onafterprint = function () {
                         console.log("PRINTED");
                         var search = new URLSearchParams(window.location.search);
                         if (search.has("op")) {
                             var param = search.get("op");
                             if (param == "cal") window.location.href = "../html/calAss.php";
                             else window.location.href = "../html/assistencias.php";
-                        };
+                        }
+                        ;
                         if (dataResult.statusCode == 201) {
                             alert(dataResult);
-                        };
+                        }
+                        ;
                     }
                 }
             });
@@ -160,8 +163,7 @@ $("#newCli").click(function (e) {
     if (search.has("op")) {
         var param = search.get("op");
         if (param == "cal") window.location.href = "../html/addCliente.php?op=cal";
-        else window.location.href = "../html/addCliente?op=ass.php";
-    };
+    } else window.location.href = "../html/addCliente.php?op=ass.php";
 });
 
 $("#newProd").click(function (e) {
@@ -170,8 +172,7 @@ $("#newProd").click(function (e) {
     if (search.has("op")) {
         var param = search.get("op");
         if (param == "cal") window.location.href = "../html/addProduto.php?op=cal&cli=" + $("#cli").val();
-        else window.location.href = "../html/addProduto.php?op=ass&cli=" + $("#cli").val();
-    };
+    } else window.location.href = "../html/addProduto.php?op=ass&cli=" + $("#cli").val();
 });
 
 
