@@ -49,6 +49,7 @@ $(document).ready(function () {
                 op: 'fetchSw'
             }
         },
+        order: [[6, 'asc']],
         dom: 'Bfrtip',
         buttons: {
             buttons: [

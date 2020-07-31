@@ -74,7 +74,6 @@ if ($_POST['op'] == 'delSw') {
     );
 }
 
-
 if ($_POST['op'] == 'fetchSwS') {
     $output = array();
     $query = "

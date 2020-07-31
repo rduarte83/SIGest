@@ -27,9 +27,7 @@ $(document).ready(function () {
     });
 });
 
-$("#addForm").on('submit', function (e) {
-    e.preventDefault();
-
+$("#addForm").on('submit', function () {
     $("#id").val(id);
 
     $.ajax({
@@ -38,11 +36,5 @@ $("#addForm").on('submit', function (e) {
         processData: false,
         type: "post",
         url: "../php/sw.php",
-        success: function (dataResult) {
-            var dataResult = JSON.parse(dataResult);
-            if (dataResult.statusCode == 201) {
-                alert(dataResult);
-            }
-        }
     });
 });

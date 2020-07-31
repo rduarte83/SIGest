@@ -5,14 +5,12 @@ TODO-mostrar zona no calendario
 TODO-pioridade nas assist
 TODO-cor nas assist (cal)
 TODO-mudar produto cliente
-TODO-autocomplete
 TODO-criar user list
 TODO-permissoes users
 TODO-login autorização - definir role
 -->
 
 <?php include_once 'php/session.php'?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

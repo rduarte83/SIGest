@@ -49,7 +49,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form method="post" id="addForm" enctype="multipart/form-data" class="form-horizontal">
+                    <form method="post" id="addForm" action="sw.php" enctype="multipart/form-data" class="form-horizontal">
                         <div class="card-body">
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Cliente</label>

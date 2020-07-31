@@ -39,40 +39,6 @@
                         <p>Início</p>
                     </a>
                 </li>
-                <li class="nav-item has-treeview <?= (basename($_SERVER['PHP_SELF']) == "pendentes.php") ? "menu-open" : ""; ?>">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fa fa-exclamation-triangle "></i>
-                        <p>Pendentes
-                            <i class="fa fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/sigest/html/pendentes.php"
-                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "pendentes.php") ? "active" : ""; ?>">
-                                <i class="nav-icon fa fa-circle"></i>
-                                <p>Visitas a Clientes</p>
-                                <span class="badge badge-danger right" id="visPen"></span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/sigest/html/swPen.php"
-                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "swPen.php") ? "active" : ""; ?>">
-                                <i class="nav-icon fa fa-circle"></i>
-                                <p>Contratos de Software</p>
-                                <span class="badge badge-danger right" id="swPen"></span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/sigest/html/copiaPen.php"
-                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "copiaPen.php") ? "active" : ""; ?>">
-                                <i class="nav-icon fa fa-circle"></i>
-                                <p>Contratos de Cópia</p>
-                                <span class="badge badge-danger right" id="copiaPen"></span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
 
                 <li class="nav-item has-treeview
                     <?= (basename($_SERVER['PHP_SELF']) == "addCliente.php") |
@@ -213,7 +179,8 @@
                 <li class="nav-item has-treeview
                     <?= (basename($_SERVER['PHP_SELF']) == "visitas.php") |
                         (basename($_SERVER['PHP_SELF']) == "addVisita.php") |
-                        (basename($_SERVER['PHP_SELF']) == "calVis.php")
+                        (basename($_SERVER['PHP_SELF']) == "calVis.php") |
+                        (basename($_SERVER['PHP_SELF']) == "pendentes.php")
                     ? "menu-open" : ""; ?>">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-user"></i>
@@ -234,6 +201,14 @@
                                class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "visitas.php") ? "active" : ""; ?>">
                                 <i class="fa fa-circle nav-icon"></i>
                                 <p>Listar Visitas</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/sigest/html/pendentes.php"
+                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "pendentes.php") ? "active" : ""; ?>">
+                                <i class="nav-icon fa fa-circle"></i>
+                                <p>Visitas Pendentes</p>
+                                <span class="badge badge-danger right" id="visPen"></span>
                             </a>
                         </li>
                         <li class="nav-item">
