@@ -64,6 +64,7 @@
                                     <select class="form-control" id="estado" name="estado">
                                         <option value="Pendente">Pendente</option>
                                         <option value="Aguarda Peças">Aguarda Peças</option>
+                                        <option value="Não Resolvido">Não Resolvido</option>
                                         <option value="Resolvido">Resolvido</option>
                                     </select>
                                 </div>

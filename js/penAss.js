@@ -91,9 +91,9 @@ $(document).ready(function () {
         createdRow: function (row, data, dataIndex) {
             if (Math.round((Date.now() - new Date(data[8]).getTime()) / 86400000) >= 2 && data[13] == 'Pendente')
                 $(row).addClass('red');
-            if (data[13] == 'Aguarda Peças') $(row).addClass('orange');
-            if (data[13] == 'Resolvido') $(row).addClass('yellow');
-            if (data[14] == 'Sim') $(row).addClass('green');
+            if (data[10] == 'Aguarda Peças') $(row).addClass('orange');
+            if (data[10] == 'Resolvido') $(row).addClass('yellow');
+            if (data[11] == 'Sim') $(row).addClass('green');
         },
         order: [8, 'desc'],
         dom: 'Bfrtip',

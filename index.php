@@ -1,7 +1,16 @@
-<!--TODO Assistencias:add-ok edit-ok det-ok del-ok-->
-<!--TODO Copia:add-ok edit-ok det-ok del-ok-->
-<!--TODO SW:add-ok edit-ok del-ok-->
+<!--
+TODO-editar clientes
+TODO-editar produto
+TODO-mostrar zona no calendario
+TODO-pioridade nas assist
+TODO-cor nas assist (cal)
+TODO-mudar produto cliente
+TODO-autocomplete
 
+TODO-criar user list
+TODO-permissoes users
+TODO-login autorização - definir role
+-->
 
 <?php include_once 'php/session.php'?>
 
@@ -77,6 +86,5 @@
         src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/b-1.6.2/b-html5-1.6.2/b-print-1.6.2/r-2.2.5/datatables.min.js"></script>
 <!-- AdminLTE App -->
 <script src="js/adminlte.min.js"></script>
-
 </body>
 </html>

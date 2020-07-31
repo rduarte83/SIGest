@@ -32,13 +32,13 @@ document.addEventListener('DOMContentLoaded', function () {
         ],
         locale: 'pt-pt',
         customButtons: {
-          print:{
-              text: 'Imprimir',
-              click: function () {
+            print: {
+                text: 'Imprimir',
+                click: function () {
                     window.print();
-              },
-              bootstrapFontAwesome: 'fa-print'
-          }
+                },
+                bootstrapFontAwesome: 'fa-print'
+            }
         },
         headerToolbar: {
             left: 'prev,next today',
@@ -49,16 +49,21 @@ document.addEventListener('DOMContentLoaded', function () {
         events: '../php/fetchCalAss.php',
         themeSystem: 'bootstrap',
         editable: true,
+        selectable: true,
         eventDurationEditable: true,
         eventClick: function (info) {
+            localStorage.setItem("cal_id", info.event.id);
+            window.location.href = "../html/editAss.php";
+        },
+        select: function (start, end) {
+            console.log(start+" "+end);
+            window.location.href = "../html/addAssist.php?op=cal";
         },
         eventResize: function (info) {
             updEvents(info);
         },
         eventDrop: function (info) {
             updEvents(info);
-        },
-        eventReceive: function (info) {
         }
     });
     calendar.render();

@@ -21,7 +21,8 @@
 
 </head>
 <body>
-<div class="wrapper">
+<div class="print">
+    <div class="wrapper">
     <!-- Main content -->
     <div class="card-body">
         <div class="card-body">
@@ -160,6 +161,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 <!-- ./wrapper -->
 <!-- jQuery -->

@@ -340,9 +340,10 @@ if ($_POST['op'] == 'countVisPen') {
 if ($_POST['op'] == 'fetchAss') {
     $output = array();
     $query = "
-        SELECT a.*, c.cliente, p.tipo, p.marca, p.modelo FROM assistencias a
+        SELECT a.*, u.username, c.cliente, p.tipo, p.marca, p.modelo FROM assistencias a
             INNER JOIN produtos p ON a.produto_id=p.id 
-            INNER JOIN clientes c ON a.cliente_id=c.nif 
+            INNER JOIN clientes c ON a.cliente_id=c.nif
+            INNER JOIN users u ON a.tecnico=u.id
             ORDER BY data_i DESC
         ";
 
@@ -360,12 +361,9 @@ if ($_POST['op'] == 'fetchAss') {
         $sub_array[] = $row["data_p"];
         $sub_array[] = $row["motivo"];
         $sub_array[] = $row["local"];
-        $sub_array[] = $row["tecnico"];
+        $sub_array[] = $row["username"];
         $sub_array[] = $row["problema"];
         $sub_array[] = $row["data_i"];
-        $sub_array[] = $row["resolucao"];
-        $sub_array[] = $row["material"];
-        $sub_array[] = $row["tempo"];
         $sub_array[] = $row["valor"];
         $sub_array[] = $row["estado"];
         $sub_array[] = $row["facturado"];
@@ -396,9 +394,10 @@ if ($_POST['op'] == 'fetchAss') {
 if ($_POST['op'] == 'fetchAssCli') {
     $output = array();
     $query = "
-        SELECT a.*, c.cliente, p.tipo, p.marca, p.modelo FROM assistencias a 
+        SELECT a.*, u.username, c.cliente, p.tipo, p.marca, p.modelo FROM assistencias a 
             INNER JOIN produtos p ON a.produto_id=p.id 
             INNER JOIN clientes c ON a.cliente_id=c.nif
+            INNER JOIN users u ON a.tecnico=u.id
             WHERE a.cliente_id = :cliente_id
         ";
 
@@ -420,12 +419,9 @@ if ($_POST['op'] == 'fetchAssCli') {
         $sub_array[] = $row["data_p"];
         $sub_array[] = $row["motivo"];
         $sub_array[] = $row["local"];
-        $sub_array[] = $row["tecnico"];
+        $sub_array[] = $row["username"];
         $sub_array[] = $row["problema"];
         $sub_array[] = $row["data_i"];
-        $sub_array[] = $row["resolucao"];
-        $sub_array[] = $row["material"];
-        $sub_array[] = $row["tempo"];
         $sub_array[] = $row["valor"];
         $sub_array[] = $row["estado"];
         $sub_array[] = $row["facturado"];
@@ -456,9 +452,11 @@ if ($_POST['op'] == 'fetchAssCli') {
 if ($_POST['op'] == 'fetchAssS') {
     $output = array();
     $query = "
-        SELECT a.*, c.cliente, c.morada, c.zona, c.responsavel, c.contacto, p.tipo, p.marca, p.modelo FROM assistencias a
+        SELECT a.*, u.username, c.cliente, c.morada, c.zona, c.responsavel, c.contacto, p.tipo, p.marca, p.modelo FROM assistencias a
             INNER JOIN produtos p ON a.produto_id=p.id 
             INNER JOIN clientes c ON a.cliente_id=c.nif
+            INNER JOIN users u ON a.tecnico=u.id
+            WHERE a.id = :ass_id
         ";
 
     $statement = $conn->prepare($query);
@@ -479,7 +477,7 @@ if ($_POST['op'] == 'fetchAssS') {
         $sub_array[] = $row["data_p"];
         $sub_array[] = $row["motivo"];
         $sub_array[] = $row["local"];
-        $sub_array[] = $row["tecnico"];
+        $sub_array[] = $row["username"];
         $sub_array[] = $row["entregue"];
         $sub_array[] = $row["problema"];
         $sub_array[] = $row["data_i"];
@@ -578,4 +576,103 @@ if ($_POST['op'] == 'editAss') {
             ':factura'   => $_POST["factura"]
         )
     );
+}
+
+if ($_POST['op'] == 'fetchLastProd') {
+    $output = array();
+    $query = "
+        SELECT * FROM produtos WHERE cliente_id = :cliente_id ORDER BY id DESC LIMIT 1
+        ";
+
+    $statement = $conn->prepare($query);
+    $statement->execute(
+        $data = array(
+            ':cliente_id' => $_POST["cliente_id"]
+        )
+    );
+    $result = $statement->fetchAll();
+    $data = array();
+
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["id"];
+
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
+if ($_POST['op'] == 'fetchTec') {
+    $output = array();
+    $query = "
+        SELECT * FROM users WHERE role='tecnico'
+        ";
+
+    $statement = $conn->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $data = array();
+
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["id"];
+        $sub_array[] = $row["username"];
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
+if ($_POST['op'] == 'fetchLastAss') {
+    $output = array();
+    $query = "
+        SELECT a.*, c.cliente, c.morada, c.zona, c.responsavel, c.contacto, p.tipo, p.marca, p.modelo FROM assistencias a
+            INNER JOIN produtos p ON a.produto_id=p.id 
+            INNER JOIN clientes c ON a.cliente_id=c.nif
+            ORDER BY id DESC LIMIT 1;
+        ";
+
+    $statement = $conn->prepare($query);
+    $statement->execute(
+        $data = array()
+    );
+    $result = $statement->fetchAll();
+    $data = array();
+
+    foreach ($result as $row) {
+        $prod = $row["tipo"] . " " . $row["marca"] . " " . $row["modelo"];
+        $sub_array = array();
+        $sub_array[] = $row["id"];
+        $sub_array[] = $row["cliente"];
+        $sub_array[] = $prod;
+        $sub_array[] = $row["data_p"];
+        $sub_array[] = $row["motivo"];
+        $sub_array[] = $row["local"];
+        $sub_array[] = $row["tecnico"];
+        $sub_array[] = $row["entregue"];
+        $sub_array[] = $row["problema"];
+        $sub_array[] = $row["data_i"];
+        $sub_array[] = $row["resolucao"];
+        $sub_array[] = $row["obs"];
+        $sub_array[] = $row["material"];
+        $sub_array[] = $row["tempo"];
+        $sub_array[] = $row["valor"];
+        $sub_array[] = $row["estado"];
+        $sub_array[] = $row["facturado"];
+        $sub_array[] = $row["factura"];
+        $sub_array[] = $row["morada"];
+        $sub_array[] = $row["zona"];
+        $sub_array[] = $row["responsavel"];
+        $sub_array[] = $row["contacto"];
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
 }

@@ -72,7 +72,6 @@ $("#addForm").on('submit', function (e) {
         url: "../php/queries.php",
         success: function (dataResult) {
             var dataResult = JSON.parse(dataResult);
-
             if (dataResult.statusCode == 201) {
                 alert(dataResult);
             }

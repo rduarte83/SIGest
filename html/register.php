@@ -79,12 +79,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 echo "Ocorreu um erro. Tente mais tarde.";
             }
-
             // Close statement
             unset($stmt);
         }
     }
-
     // Close connection
     unset($conn);
 }
@@ -119,7 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p class="login-box-msg">Registar um novo utilizador</p>
 
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" novalidate>
-                <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+                <div class="form-grou   dp <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                     <label>Utilizador</label>
                     <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
                     <div class="invalid-feedback d-block"><?php echo $username_err; ?></div>

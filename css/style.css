@@ -13,3 +13,16 @@
 .green {
     background-color: green !important;
 }
+
+.print {
+    display: none;
+}
+
+@media print {
+    .no-print {
+        display: none;
+    }
+    .print {
+        display: block;
+    }
+}

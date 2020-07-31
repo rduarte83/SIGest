@@ -1,4 +1,4 @@
-$(document).on('click', '.details', function () {
+$(document).on('click', '.details', function (e) {
     var ass_id = $(this).attr("data-id");
     localStorage.setItem("ass_id", ass_id);
 });
