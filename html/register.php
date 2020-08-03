@@ -3,7 +3,7 @@
 require_once "../php/db.php";
 
 // Define variables and initialize with empty values
-$username = $password = $confirm_password = "";
+$username = $password = $confirm_password = $role = "";
 $username_err = $password_err = $confirm_password_err = "";
 
 // Processing form data when form is submitted
@@ -62,16 +62,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
 
         // Prepare an insert statement
-        $sql = "INSERT INTO users (username, password) VALUES (:username, :password)";
+        $sql = "INSERT INTO users (username, password, role) VALUES (:username, :password, :role)";
 
         if ($stmt = $conn->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
             $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
             $stmt->bindParam(":password", $param_password, PDO::PARAM_STR);
+            $stmt->bindParam(":role", $param_role, PDO::PARAM_STR);
 
             // Set parameters
             $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+            //Role
+            $param_role = $_POST['role'];
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
                 // Redirect to login page
@@ -107,17 +110,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
 </head>
 <body class="hold-transition register-page">
+<div class="register-logo">
+    <img src="../img/logo.png" alt="logo">
+    <h1 class="text-success">SIGest</h1>
+</div>
 <div class="register-box">
-    <div class="register-logo">
-        <a href="../index.php"><h2>SIGest</h2></a>
-    </div>
-
     <div class="card">
         <div class="card-body register-card-body">
             <p class="login-box-msg">Registar um novo utilizador</p>
-
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" novalidate>
-                <div class="form-grou   dp <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+                <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                     <label>Utilizador</label>
                     <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
                     <div class="invalid-feedback d-block"><?php echo $username_err; ?></div>
@@ -133,6 +135,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                            value="<?php echo $confirm_password; ?>">
                     <div class="invalid-feedback d-block"><?php echo $confirm_password_err; ?></div>
                 </div>
+                <div class="form-group>">
+                    <label>Função</label>
+                    <select class="custom-select form-control" name="role" id="role">
+                        <option value="0">Seleccionar Função</option>
+                        <option value="administrador">Administrador</option>
+                        <option value="tecnico">Técnico</option>
+                        <option value="comercial">Comercial</option>
+                        <option value="administrativo">Administrativo</option>
+                    </select>
+                    <div></div>
+                </div>
+                <br>
                 <div class="form-group">
                     <input type="submit" id="sub" class="btn btn-primary" value="Registar">
                     <input type="reset" class="btn btn-default" value="Limpar">

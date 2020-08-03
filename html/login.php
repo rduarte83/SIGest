@@ -106,10 +106,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
 </head>
 <body class="hold-transition login-page">
-<div class="login-box">
-    <div class="login-logo">
-        <h2>SIGest</h2>
+<div class="login-logo">
+    <div class="register-logo">
+        <img src="../img/logo.png" alt="logo">
+        <h1 class="text-success">SIGest</h1>
     </div>
+</div>
+<div class="login-box">
     <!-- /.login-logo -->
     <div class="card">
         <div class="card-body login-card-body">

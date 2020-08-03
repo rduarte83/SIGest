@@ -5,7 +5,6 @@ TODO-cor nas assist (cal)
 TODO-mudar produto cliente
 TODO-criar user list
 TODO-permissoes users
-TODO-login autorização - definir role
 -->
 
 <?php include_once 'php/session.php'?>
