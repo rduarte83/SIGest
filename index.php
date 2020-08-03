@@ -1,6 +1,4 @@
 <!--
-TODO-editar clientes
-TODO-editar produto
 TODO-mostrar zona no calendario
 TODO-pioridade nas assist
 TODO-cor nas assist (cal)

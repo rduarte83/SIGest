@@ -1,3 +1,44 @@
+$(document).on('click','.edit', function () {
+    var id = $(this).attr("data-id");
+    localStorage.setItem("id", id);
+});
+
+$(document).on('click','.delete', function (e) {
+    var id = $(this).attr("data-id");
+    Swal.fire({
+        icon: 'info',
+        position: 'top',
+        title: 'Tem a certeza que deseja eliminar este registo?',
+        text: 'Esta acção não pode ser revertida!',
+        showCancelButton: true,
+        confirmButtonColor: '#00cc00',
+        cancelButtonColor: '#cc0000',
+        confirmButtonText: 'Confirmar',
+        cancelButtonText: 'Cancelar',
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: '../php/queries.php',
+                type: 'POST',
+                data: {
+                    op: 'delCli',
+                    id: id
+                },
+                success: function () {
+                    Swal.fire({
+                        icon: 'success',
+                        position: 'top',
+                        title: 'Eliminado!',
+                        text: 'Registo eliminado com sucesso!'
+                    }).then(function () {
+                        location.reload();
+                    });
+                }
+            });
+        }
+    });
+});
+
 $(document).ready(function () {
     $("#table").DataTable({
         processing: true,

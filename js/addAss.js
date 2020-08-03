@@ -125,8 +125,8 @@ $("#newCli").click(function (e) {
     var search = new URLSearchParams(window.location.search);
     if (search.has("op")) {
         var param = search.get("op");
-        if (param == "cal") window.location.href = "../html/addCliente.php?op=cal";
-    } else window.location.href = "../html/addCliente.php?op=ass.php";
+        if (param == "cal") window.location.href = "../html/addCli.php?op=cal";
+    } else window.location.href = "../html/addCli.php?op=ass.php";
 });
 
 $("#newProd").click(function (e) {

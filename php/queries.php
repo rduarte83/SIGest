@@ -20,10 +20,10 @@ if ($_POST['op'] == 'fetchCli') {
         $sub_array[] = $row["contacto"];
         $sub_array[] = $row["email"];
         $sub_array[] = '
-                    <a href="#editModal" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . ' " data-toggle="modal">
+                    <a href="editCli.php" class="edit btn btn-info btn-sm" data-id="' . $row["nif"] . ' ">
                         <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>
                     </a>
-                    <a href="#deleteModal" class="delete btn btn-danger btn-sm" data-id="' . $row["id"] . ' " data-toggle="modal">
+                    <a href="#" class="delete btn btn-danger btn-sm" data-id="' . $row["nif"] . ' " data-toggle="modal">
                         <i class="fa fa-trash" aria-hidden="true" data-toggle="tooltip" title="Eliminar"></i>
                     </a>
                     ';
@@ -56,6 +56,68 @@ if ($_POST['op'] == 'addCli') {
     );
 }
 
+if ($_POST['op'] == 'fetchCliS') {
+    $output = array();
+    $query = "SELECT * FROM clientes WHERE nif=:nif";
+
+    $statement = $conn->prepare($query);
+    $statement->execute(
+        array(
+            ':nif' => $_POST["id"]
+        )
+    );
+    $result = $statement->fetchAll();
+    $data = array();
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["nif"];
+        $sub_array[] = $row["id"];
+        $sub_array[] = $row["cliente"];
+        $sub_array[] = $row["morada"];
+        $sub_array[] = $row["zona"];
+        $sub_array[] = $row["responsavel"];
+        $sub_array[] = $row["contacto"];
+        $sub_array[] = $row["email"];
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
+if ($_POST['op'] == 'editCli') {
+    $query = "
+                UPDATE clientes SET nif=:nif, id=:id, cliente=:cliente, morada=:morada, zona=:zona,
+                    responsavel=:responsavel, contacto=:contacto, email=:email WHERE nif=:nif
+    ";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':nif' => $_POST["nif"],
+            ':id' => $_POST["id"],
+            ':cliente' => $_POST["cliente"],
+            ':morada' => $_POST["morada"],
+            ':zona' => $_POST["zona"],
+            ':responsavel' => $_POST["responsavel"],
+            ':contacto' => $_POST["contacto"],
+            ':email' => $_POST["email"]
+        )
+    );
+}
+
+if ($_POST['op'] == 'delCli') {
+    $query = "
+                DELETE FROM clientes WHERE nif = :nif
+    ";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':nif' => $_POST["id"],
+        )
+    );
+}
+
 if ($_POST['op'] == 'fetchProd') {
     $output = array();
     $query = "
@@ -76,14 +138,13 @@ if ($_POST['op'] == 'fetchProd') {
         $sub_array[] = $row["num_serie"];
         $sub_array[] = $row["cliente"];
         $sub_array[] = '
-                    <a href="#editModal" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '" data-toggle="modal">
+                    <a href="editProd.php" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '">
                         <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>
                     </a>
                     <a href="#deleteModal" class="delete btn btn-danger btn-sm" data-id="' . $row["id"] . '" data-toggle="modal">
                         <i class="fa fa-trash" aria-hidden="true" data-toggle="tooltip" title="Eliminar"></i>
                     </a>
                     ';
-
         $data[] = $sub_array;
     }
     $output = array(
@@ -106,6 +167,65 @@ if ($_POST['op'] == 'addProd') {
             ':marca' => $_POST["marca"],
             ':modelo' => $_POST["modelo"],
             ':num_serie' => $_POST["num_serie"],
+        )
+    );
+}
+
+if ($_POST['op'] == 'fetchProdS') {
+    $output = array();
+    $query = "SELECT p.*, c.cliente FROM produtos p 
+                INNER JOIN clientes c ON p.cliente_id = c.nif 
+                WHERE p.id=:id";
+
+    $statement = $conn->prepare($query);
+    $statement->execute(
+        array(
+            ':id' => $_POST["id"]
+        )
+    );
+    $result = $statement->fetchAll();
+    $data = array();
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["id"];
+        $sub_array[] = $row["tipo"];
+        $sub_array[] = $row["marca"];
+        $sub_array[] = $row["modelo"];
+        $sub_array[] = $row["num_serie"];
+        $sub_array[] = $row["cliente"];
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
+if ($_POST['op'] == 'editProd') {
+    $query = "
+                UPDATE produtos SET tipo=:tipo, marca=:marca, modelo=:modelo, num_serie=:num_serie
+                    WHERE id=:id
+    ";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':id' => $_POST["id"],
+            ':tipo' => $_POST["tipo"],
+            ':marca' => $_POST["marca"],
+            ':modelo' => $_POST["modelo"],
+            ':num_serie' => $_POST["num_serie"]
+        )
+    );
+}
+
+if ($_POST['op'] == 'delProd') {
+    $query = "
+                DELETE FROM produtos WHERE id = :id
+    ";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':id' => $_POST["id"],
         )
     );
 }
@@ -543,7 +663,7 @@ if ($_POST['op'] == 'delAss') {
     $statement = $conn->prepare($query);
     $result = $statement->execute(
         array(
-            ':ass_id'   => $_POST["ass_id"],
+            ':ass_id' => $_POST["ass_id"],
         )
     );
 }
@@ -558,22 +678,22 @@ if ($_POST['op'] == 'editAss') {
     $statement = $conn->prepare($query);
     $result = $statement->execute(
         array(
-            ':id'   => $_POST["id"],
-            ':data_p'   => $_POST["data_p"],
-            ':motivo'   => $_POST["motivo"],
-            ':local'   => $_POST["local"],
-            ':tecnico'   => $_POST["tecnico"],
-            ':entregue'   => $_POST["entregue"],
-            ':problema'   => $_POST["problema"],
-            ':data_i'   => $_POST["data_i"],
-            ':resolucao'   => $_POST["resolucao"],
-            ':obs'   => $_POST["obs"],
-            ':material'   => $_POST["material"],
-            ':tempo'   => $_POST["tempo"],
-            ':valor'   => $_POST["valor"],
-            ':estado'   => $_POST["estado"],
-            ':facturado'   => $_POST["facturado"],
-            ':factura'   => $_POST["factura"]
+            ':id' => $_POST["id"],
+            ':data_p' => $_POST["data_p"],
+            ':motivo' => $_POST["motivo"],
+            ':local' => $_POST["local"],
+            ':tecnico' => $_POST["tecnico"],
+            ':entregue' => $_POST["entregue"],
+            ':problema' => $_POST["problema"],
+            ':data_i' => $_POST["data_i"],
+            ':resolucao' => $_POST["resolucao"],
+            ':obs' => $_POST["obs"],
+            ':material' => $_POST["material"],
+            ':tempo' => $_POST["tempo"],
+            ':valor' => $_POST["valor"],
+            ':estado' => $_POST["estado"],
+            ':facturado' => $_POST["facturado"],
+            ':factura' => $_POST["factura"]
         )
     );
 }
