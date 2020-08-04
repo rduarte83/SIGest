@@ -91,7 +91,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Valor</label>
                                 <div class="col-sm-10">
-                                    <input type="number" id="valor" name="valor" class="form-control" required>
+                                    <input type="number" id="valor" step="0.01" name="valor" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group row">

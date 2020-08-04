@@ -240,7 +240,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/sigest/html/addCli.php"
+                            <a href="/sigest/html/addProduto.php"
                                class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "addProduto.php") ? "active" : ""; ?>">
                                 <i class="fa fa-plus nav-icon"></i>
                                 <p>Novo Produto</p>

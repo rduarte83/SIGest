@@ -96,9 +96,8 @@ if ($_POST['op'] == 'addCont') {
                     SET act_p=:cont_p, act_c=:cont_c, act_data=:data_cont 
                     WHERE contrato_id=:contrato_id ORDER BY id DESC LIMIT 1;
 		";
-
     $statement = $conn->prepare($query);
-    $result = $statement->execute(
+    $statement->execute(
         array(
             ':contrato_id' => $_POST["contrato_id"],
             ':data_cont' => $_POST["data_cont"],
@@ -109,20 +108,26 @@ if ($_POST['op'] == 'addCont') {
 }
 
 if ($_POST['op'] == 'addContFact') {
-    $query = "
+    $output = array();
+    $queryU = "
                 UPDATE contagens 
                     SET act_p=:cont_p, act_c=:cont_c, act_data=:data_cont 
                     WHERE contrato_id=:contrato_id ORDER BY id DESC LIMIT 1;
+                ";
+    $queryS = "
                 SELECT c.*, t.valor, t.inc, t.preco_p, t.preco_c FROM contagens c 
                     INNER JOIN contratos t ON c.contrato_id=t.id 
                     WHERE contrato_id=:contrato_id ORDER BY c.id DESC LIMIT 1;
+                            
+		";
+    $queryI = "
                 INSERT INTO contagens (contrato_id, estado, ult_p, ult_c, ult_data) 
                     VALUES (:contrato_id,1,:cont_p,:cont_c,:data_cont);
-                
-		";
+                ";
 
-    $statement = $conn->prepare($query);
-    $result = $statement->execute(
+    //Update
+    $statementU = $conn->prepare($queryU);
+    $statementU->execute(
         array(
             ':contrato_id' => $_POST["contrato_id"],
             ':data_cont' => $_POST["data_cont"],
@@ -130,7 +135,27 @@ if ($_POST['op'] == 'addContFact') {
             ':cont_c' => $_POST["cont_c"]
         )
     );
-    $result = $statement->fetchAll();
+
+    // Select
+    $statementS = $conn->prepare($queryS);
+    $statementS->execute(
+        array(
+            ':contrato_id' => $_POST["contrato_id"]
+        )
+    );
+
+    // Insert
+    $statementI = $conn->prepare($queryI);
+    $statementI->execute(
+        array(
+            ':contrato_id' => $_POST["contrato_id"],
+            ':data_cont' => $_POST["data_cont"],
+            ':cont_p' => $_POST["cont_p"],
+            ':cont_c' => $_POST["cont_c"]
+        )
+    );
+
+    $result = $statementS->fetchAll();
     $data = array();
 
     foreach ($result as $row) {
