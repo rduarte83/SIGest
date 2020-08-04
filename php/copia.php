@@ -284,7 +284,7 @@ if ($_POST['op'] == 'addCopia') {
                 INSERT INTO contratos(cliente_id, produto, inicio, fim, tipo, valor, inc, preco_p, preco_c)
                     VALUES (:cliente_id, :produto, :inicio, :fim, :tipo, :valor, :inc, :preco_p, :preco_c);
                 INSERT INTO contagens(contrato_id, ult_p, ult_c, ult_data) 
-	                VALUES ((SELECT id FROM contratos WHERE cliente_id = 1 ORDER BY ID DESC LIMIT 1), 100, 100, CURDATE());
+	                VALUES ((SELECT id FROM contratos WHERE cliente_id = :cliente_id ORDER BY ID DESC LIMIT 1), 100, 100, CURDATE());
     ";
     $statement = $conn->prepare($query);
     $result = $statement->execute(

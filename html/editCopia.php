@@ -94,7 +94,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Valor</label>
                                 <div class="col-sm-10">
-                                    <input type="number" id="valor" name="valor" class="form-control">
+                                    <input type="number" id="valor" step="0.01" name="valor" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -106,13 +106,13 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Custo Preto</label>
                                 <div class="col-sm-10">
-                                    <input type="number" id="preco_p" name="preco_p" class="form-control">
+                                    <input type="number" step="0.0001" id="preco_p" name="preco_p" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Custo Cor</label>
                                 <div class="col-sm-10">
-                                    <input type="number" id="preco_c" name="preco_c" class="form-control">
+                                    <input type="number" step="0.0001" id="preco_c" name="preco_c" class="form-control">
                                 </div>
                             </div>
                         </div>

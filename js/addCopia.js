@@ -40,7 +40,7 @@ $(document).ready(function () {
     });
 });
 
-//<!-- Add visit -->
+//<!-- Add copia -->
 $('#addForm').on('submit', function () {
     $.ajax({
         data: new FormData(this),
