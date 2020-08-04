@@ -67,9 +67,10 @@ if ($_POST['op'] == 'fetchCopia') {
 if ($_POST['op'] == 'fetchContrato') {
     $output = array();
     $query = "
-            SELECT c.id, l.cliente, c.produto FROM contratos c 
+            SELECT c.id, l.cliente, p.* FROM contratos c 
                 INNER JOIN clientes l ON c.cliente_id = l.nif
-                ORDER BY id;
+			    INNER JOIN produtos p ON c.produto = p.id
+                ORDER BY c.id;
         ";
 
     $statement = $conn->prepare($query);
@@ -81,7 +82,9 @@ if ($_POST['op'] == 'fetchContrato') {
         $sub_array = array();
         $sub_array[] = $row["id"];
         $sub_array[] = $row["cliente"];
-        $sub_array[] = $row["produto"];
+        $sub_array[] = $row["marca"];
+        $sub_array[] = $row["modelo"];
+        $sub_array[] = $row["num_serie"];
         $data[] = $sub_array;
     }
     $output = array(
