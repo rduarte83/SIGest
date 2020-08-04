@@ -73,7 +73,6 @@ $('#addForm').on('submit', function (e) {
                         total: total
                     },
                     success: function (dataResult) {
-                        var dataResult = JSON.parse(dataResult);
                         if (dataResult.statusCode == 201) {
                             alert(dataResult);
                         }

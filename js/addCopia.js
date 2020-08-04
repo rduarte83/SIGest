@@ -33,7 +33,8 @@ $(document).ready(function () {
                 $("#equip").html('<option value="0">Seleccionar Produto</option>');
                 $.each(dataResult.data, function () {
                     console.log(this);
-                    $("#equip").append($("<option/>").val(this[0]).text(this[1] + " " + this[2]));
+                    $("#equip").append($("<option/>").val(this[0]).text(this[1] + " " +
+                        this[2] + " " + this[3] + " " + this[4]));
                 });
             }
         });
