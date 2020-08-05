@@ -1,8 +1,8 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "123";
-$dbname = "sigest";
+$servername = 'localhost';
+$username = 'imprima_master';
+$password = '&yQ6cxRdabu1';
+$dbname = 'imprima_sigest';
 
 // Create connection
 $conn = new PDO('mysql:host=' . $servername . ';dbname=' . $dbname, $username, $password);
