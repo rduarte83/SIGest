@@ -49,6 +49,9 @@ if ($_POST['op'] == 'fetchCopia') {
                     <a href="details-copia.php" class="details btn btn-primary btn-sm" data-id="' . $row["id"] . '">
                         <i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Detalhes"></i>
                     </a>
+                    <a href="#" class="fact btn btn-primary btn-sm" data-id="' . $row["id"] . '">
+                        <i class="fa fa-eur" aria-hidden="true" data-toggle="tooltip" title="Facturar"></i>
+                    </a>
                     <a href="editCopia.php" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '">
                         <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>
                     </a>
@@ -177,6 +180,9 @@ if ($_POST['op'] == 'addContFact') {
 
 if ($_POST['op'] == 'addTotal') {
     $query = "
+                UPDATE contagens SET facturar=:total WHERE id = 
+                        (SELECT id FROM (SELECT * FROM assistencias ORDER BY id DESC LIMIT 2) AS ass 
+                        ORDER BY id LIMIT 1);
                 UPDATE contagens SET facturar=:total WHERE contrato_id=:contrato_id ORDER BY id DESC LIMIT 1;
 		";
     $statement = $conn->prepare($query);

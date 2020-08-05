@@ -1,10 +1,10 @@
 <!--
-TODO-mostrar zona no calendario
 TODO-pioridade nas assist
 TODO-cor nas assist (cal)
 TODO-mudar produto cliente
 TODO-criar user list
 TODO-permissoes users
+TODO-calendario partilhado
 -->
 
 <?php include_once 'php/session.php'?>

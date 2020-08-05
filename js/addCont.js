@@ -49,7 +49,7 @@ $('#addForm').on('submit', function (e) {
                 var preco_c = dataResult.data[0][5];
                 var total_p = (cont_p - ult_p - inc) * preco_p;
                 var total_c = (cont_c - ult_c) * preco_c;
-                var total = Number(valor) + Number(total_p) + Number(total_c);
+                var total = Number(total_p) + Number(total_c);
                 if (total<0) total = 0;
                 console.log("Total: " + total);
 
