@@ -63,7 +63,9 @@
                                     </a>
                                     <div class="col-sm">
                                         <input type="text" id="cli" name="cliente_id" class="form-control">
+                                        <input type="hidden" id="c_id" name="c_id" class="form-control">
                                     </div>
+
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-sm-2">Produto</label>
@@ -145,9 +147,6 @@
                                 <input type="hidden" name="op" value="addAss">
                                 <a href="../index.php">
                                     <button type="button" class="btn btn-default ">Cancelar</button>
-                                </a>
-                                <a href="#">
-                                    <button type="button" id="t" class="btn btn-default ">Teste</button>
                                 </a>
                                 <button type="submit" class="btn btn-success float-right">Confirmar</button>
                             </div>

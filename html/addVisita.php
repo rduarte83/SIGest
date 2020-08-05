@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="../css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- JQuery UI -->
+    <link rel="stylesheet" href="../plugins/jquery-ui-1.12.1/jquery-ui.min.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -48,13 +50,13 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form method="post" id="addForm" enctype="multipart/form-data" class="form-horizontal">
+                    <form action="visitas.php" method="post" id="addForm" enctype="multipart/form-data" class="form-horizontal">
                         <div class="card-body">
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Cliente</label>
                                 <div class="col-sm-10">
-                                    <select class="custom-select form-control" id="cli" name="cliente_id" required>
-                                    </select>
+                                    <input type="text" id="cli" name="cliente_id" class="form-control">
+                                    <input type="hidden" id="c_id" name="c_id" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -68,7 +70,7 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Última Visita</label>
                                 <div class="col-sm-10">
-                                    <input type="date" id="ult_vis" name="ult_vis" class="form-control" required>
+                                    <input type="datetime-local" id="ult_vis" name="ult_vis" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -91,9 +93,15 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-form-label col-sm-2">Técnico</label>
+                                <div class="col-sm-10">
+                                    <select name="tecnico" id="tecnico" class="form-control"></select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Próxima Visita</label>
                                 <div class="col-sm-10">
-                                    <input type="date" id="prox_vis" name="prox_vis" class="form-control" required>
+                                    <input type="datetime-local" id="prox_vis" name="prox_vis" class="form-control" required>
                                 </div>
                             </div>
 
@@ -124,10 +132,14 @@
 
 <!-- jQuery -->
 <script src="../plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI-->
+<script src="../plugins/jquery-ui-1.12.1/jquery-ui.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../js/adminlte.min.js"></script>
+<!-- MomentJS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
 
 <script src="../js/addVis.js"></script>
 

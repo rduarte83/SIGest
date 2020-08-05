@@ -68,6 +68,3 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     calendar.render();
 });
-
-$(document).ready(function () {
-});

@@ -271,20 +271,21 @@ if ($_POST['op'] == 'fetchProdCli') {
 
 if ($_POST['op'] == 'addVis') {
     $query = "
-			INSERT INTO visitas (cliente_id, ult_vis, motivo_id, descricao, vendedor, prox_vis, produto_id) 
-			VALUES (:cliente_id, :ult_vis, :motivo, :descricao, :vendedor, :prox_vis, :produto_id);
+			INSERT INTO visitas (cliente_id, ult_vis, motivo_id, descricao, vendedor, prox_vis, produto_id, tecnico) 
+			VALUES (:cliente_id, :ult_vis, :motivo_id, :descricao, :vendedor, :prox_vis, :produto_id, :tecnico);
 		";
 
     $statement = $conn->prepare($query);
     $result = $statement->execute(
         array(
-            ':cliente_id' => $_POST["cliente_id"],
+            ':cliente_id' => $_POST["c_id"],
             ':ult_vis' => $_POST["ult_vis"],
-            ':motivo' => $_POST["motivo"],
+            ':motivo_id' => $_POST["motivo_id"],
             ':descricao' => $_POST["descricao"],
             ':vendedor' => $_POST["vendedor"],
             ':prox_vis' => $_POST["prox_vis"],
-            ':produto_id' => $_POST["produto_id"]
+            ':produto_id' => $_POST["produto_id"],
+            ':tecnico' => $_POST["tecnico"]
         )
     );
 }
@@ -622,7 +623,6 @@ if ($_POST['op'] == 'fetchAssS') {
 }
 
 if ($_POST['op'] == 'addAss') {
-    $output = array();
     $query = "
 			INSERT INTO assistencias(cliente_id, produto_id, data_p, motivo, local, tecnico, entregue, problema, data_i) 
 			    VALUES (:cliente_id, :produto_id, :data_p, :motivo, :local, :tecnico, :entregue, :problema, :data_i)
@@ -630,7 +630,7 @@ if ($_POST['op'] == 'addAss') {
     $statement = $conn->prepare($query);
     $result = $statement->execute(
         array(
-            ':cliente_id' => $_POST["cliente_id"],
+            ':cliente_id' => $_POST["c_id"],
             ':produto_id' => $_POST["produto_id"],
             ':data_p' => $_POST["data_p"],
             ':motivo' => $_POST["motivo"],

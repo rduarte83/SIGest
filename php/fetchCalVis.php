@@ -12,12 +12,12 @@ $statement->execute();
 $result = $statement->fetchAll();
 $data = array();
 foreach ($result as $row) {
-    $end = new DateTime($row["ult_vis"]);
+    $end = new DateTime($row["prox_vis"]);
     $end->modify('+30 minutes');
     $sub_array = array();
     $sub_array['id'] = $row["id"];
     $sub_array['title'] = $row["cliente"] . " - " . $row["motivo"];
-    $sub_array['start'] = $row["ult_vis"];
+    $sub_array['start'] = $row["prox_vis"];
     $sub_array['end'] = $end;
     $data[] = $sub_array;
 }

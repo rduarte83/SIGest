@@ -4,26 +4,26 @@ $(document).ready(function () {
 
     //Fetch Clientes - autocomplete
     $.ajax({
-        type:'post',
+        type: 'post',
         url: '../php/queries.php',
         data: {
             op: 'fetchCliAuto',
         },
         success: function (dataResult) {
-            var dataResult= JSON.parse(dataResult);
+            var dataResult = JSON.parse(dataResult);
 
-            $( "#cli" ).autocomplete({
-                source:dataResult,
+            $("#cli").autocomplete({
+                source: dataResult,
                 minLength: 2,
                 select: function (event, ui) {
-                    $("#cli").val(ui.item.id);
-
+                    $("#cli").val(ui.item.value);
+                    $("#c_id").val(ui.item.id);
                     $.ajax({
                         url: "../php/queries.php",
                         type: "POST",
                         data: {
                             op: 'fetchProdCli',
-                            cliente_id: $("#cli").val()
+                            cliente_id: $("#c_id").val()
                         },
                         success: function (dataResult) {
                             var dataResult = JSON.parse(dataResult);
@@ -38,7 +38,6 @@ $(document).ready(function () {
             });
         }
     });
-
 
     //Fetch Tecnicos
     $.ajax({
@@ -60,6 +59,7 @@ $(document).ready(function () {
 //<!-- Add assist -->
 $('#addForm').on('submit', function (e) {
     e.preventDefault();
+
     $.ajax({
         data: new FormData(this),
         contentType: false,
