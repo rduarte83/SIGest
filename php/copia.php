@@ -67,7 +67,7 @@ if ($_POST['op'] == 'fetchCopia') {
 if ($_POST['op'] == 'fetchContrato') {
     $output = array();
     $query = "
-            SELECT c.id, l.cliente, p.* FROM contratos c 
+             SELECT c.id, l.cliente, p.marca, p.modelo, p.num_serie FROM contratos c 
                 INNER JOIN clientes l ON c.cliente_id = l.nif
 			    INNER JOIN produtos p ON c.produto = p.id
                 ORDER BY c.id;
@@ -127,7 +127,6 @@ if ($_POST['op'] == 'addContFact') {
                 INSERT INTO contagens (contrato_id, estado, ult_p, ult_c, ult_data) 
                     VALUES (:contrato_id,1,:cont_p,:cont_c,:data_cont);
                 ";
-
     //Update
     $statementU = $conn->prepare($queryU);
     $statementU->execute(
@@ -138,7 +137,6 @@ if ($_POST['op'] == 'addContFact') {
             ':cont_c' => $_POST["cont_c"]
         )
     );
-
     // Select
     $statementS = $conn->prepare($queryS);
     $statementS->execute(

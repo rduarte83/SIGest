@@ -126,7 +126,7 @@ $("#newCli").click(function (e) {
     if (search.has("op")) {
         var param = search.get("op");
         if (param == "cal") window.location.href = "../html/addCli.php?op=cal";
-    } else window.location.href = "../html/addCli.php?op=ass.php";
+    } else window.location.href = "../html/addCli.php?op=ass";
 });
 
 $("#newProd").click(function (e) {
