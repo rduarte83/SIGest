@@ -1,10 +1,13 @@
-var calendar;
+var calendar, tecnico;
 
 function updEvents(info) {
     var start = moment(info.event.start).format("YYYY-MM-DD HH:MM:SS");
     var end = moment(info.event.end).format("YYYY-MM-DD HH:MM:SS");
     var id = info.event.id;
-    var tecnico = info.newResource.id;
+    var resources = info.event.getResources();
+    var resourceIds = resources.map(function(resource) { return resource.id });
+    if (info.oldResource != null) tecnico = info.newResource.id;
+    else tecnico = resourceIds.toString();
 
     $.ajax({
         type: 'post',
@@ -52,11 +55,10 @@ document.addEventListener('DOMContentLoaded', function () {
         selectable: true,
         eventDurationEditable: true,
         eventClick: function (info) {
-            localStorage.setItem("cal_id", info.event.id);
+            localStorage.setItem("ass_id", info.event.id);
             window.location.href = "../html/editAss.php";
         },
         select: function (start, end) {
-            console.log(start+" "+end);
             window.location.href = "../html/addAssist.php?op=cal";
         },
         eventResize: function (info) {

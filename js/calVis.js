@@ -1,3 +1,5 @@
+var calendar;
+
 function updEvents(info) {
     var start = moment(info.event.start).format("YYYY-MM-DD HH:MM:SS");
     var end = moment(info.event.end).format("YYYY-MM-DD HH:MM:SS");

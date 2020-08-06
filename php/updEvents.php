@@ -3,7 +3,9 @@ include_once 'db.php';
 
 if ($_POST['op'] == 'updAss') {
     $query = "
-            UPDATE assistencias SET data_i=:start, tecnico=:tecnico WHERE id=:id
+            UPDATE assistencias SET data_i=:start, 
+                tecnico=(SELECT id FROM users WHERE username = :tecnico) 
+                WHERE id=:id;
 		";
     $statement = $conn->prepare($query);
     $result = $statement->execute(

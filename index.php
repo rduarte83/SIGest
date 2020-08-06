@@ -1,11 +1,9 @@
 <!--
-TODO-pioridade nas assist
-TODO-cor nas assist (cal)
+TODO calendaria a funcionar URGENTE!!!
 TODO-mudar produto cliente
 TODO-criar user list
 TODO-permissoes users
 TODO-calendário visitas
-TODO-calendario partilhado
 -->
 
 <?php include_once 'php/session.php'?>

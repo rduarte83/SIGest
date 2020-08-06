@@ -19,9 +19,11 @@ foreach ($result as $row) {
     $sub_array['id'] = $row["id"];
     $sub_array['title'] = $row["cliente"] . " - " . $row["motivo"];
     $sub_array['start'] = $row["data_i"];
-    $sub_array['end'] = $end;
+    $sub_array['end'] = $end->format('Y-m-d H:m:s');
     $sub_array['resourceId'] = $row["username"];
-    array_push($data, $sub_array);
+    if ($row['prioridade'] == "Alta") $sub_array['color'] = "#FF0000";
+    else $sub_array['color'] = "#007bff";
+    $data[] = $sub_array;
 }
 
 $queryV = "
@@ -40,7 +42,7 @@ foreach ($resultV as $row) {
     $sub_array['id'] = $row["id"];
     $sub_array['title'] = $row["cliente"] . " - " . $row["motivo"];
     $sub_array['start'] = $row["prox_vis"];
-    $sub_array['end'] = $end;
+    $sub_array['end'] = $end->format('Y-m-d H:m:s');
     $sub_array['resourceId'] = $row["username"];
     $data[] = $sub_array;
 }

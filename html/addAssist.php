@@ -141,6 +141,16 @@
                                                required>
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-sm-2">Prioridade</label>
+                                    <div class="col-sm-10">
+                                        <select class="custom-select form-control" name="prio" id="prio" required>
+                                            <option value="0">Seleccionar Prioridade</option>
+                                            <option value="Alta">Alta</option>
+                                            <option value="Baixa">Baixa</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">

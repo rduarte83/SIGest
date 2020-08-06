@@ -624,8 +624,8 @@ if ($_POST['op'] == 'fetchAssS') {
 
 if ($_POST['op'] == 'addAss') {
     $query = "
-			INSERT INTO assistencias(cliente_id, produto_id, data_p, motivo, local, tecnico, entregue, problema, data_i) 
-			    VALUES (:cliente_id, :produto_id, :data_p, :motivo, :local, :tecnico, :entregue, :problema, :data_i)
+			INSERT INTO assistencias(cliente_id, produto_id, data_p, motivo, local, tecnico, entregue, problema, data_i, prioridade) 
+			    VALUES (:cliente_id, :produto_id, :data_p, :motivo, :local, :tecnico, :entregue, :problema, :data_i, :prio)
 		";
     $statement = $conn->prepare($query);
     $result = $statement->execute(
@@ -638,7 +638,8 @@ if ($_POST['op'] == 'addAss') {
             ':tecnico' => $_POST["tecnico"],
             ':entregue' => $_POST["entregue"],
             ':problema' => $_POST["problema"],
-            ':data_i' => $_POST["data_i"]
+            ':data_i' => $_POST["data_i"],
+            ':prio' => $_POST["prio"]
         )
     );
 }
@@ -673,7 +674,7 @@ if ($_POST['op'] == 'editAss') {
                 UPDATE assistencias SET data_p=:data_p, motivo=:motivo, local=:local, tecnico=:tecnico, 
                         entregue=:entregue, problema=:problema, data_i=:data_i, resolucao=:resolucao,
                         obs=:obs, material=:material, tempo=:tempo, valor=:valor, estado=:estado, 
-                        facturado=:facturado, factura=:factura WHERE id=:id               
+                        facturado=:facturado, factura=:factura, prioridade=:prio WHERE id=:id               
     ";
     $statement = $conn->prepare($query);
     $result = $statement->execute(
@@ -693,7 +694,8 @@ if ($_POST['op'] == 'editAss') {
             ':valor' => $_POST["valor"],
             ':estado' => $_POST["estado"],
             ':facturado' => $_POST["facturado"],
-            ':factura' => $_POST["factura"]
+            ':factura' => $_POST["factura"],
+            ':prio' => $_POST["prio"]
         )
     );
 }
