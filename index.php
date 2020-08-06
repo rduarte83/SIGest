@@ -1,5 +1,4 @@
-<!--
-TODO calendaria a funcionar URGENTE!!!
+<!--w
 TODO-mudar produto cliente
 TODO-criar user list
 TODO-permissoes users
