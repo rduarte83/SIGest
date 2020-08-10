@@ -47,19 +47,25 @@ $(document).on('click', '.fact', function () {
     Swal.fire({
         icon: 'info',
         position: 'top',
-        title: 'Insira o número da factura',
-        input: 'text',
+        html: '<label for="swal-valor">Valor a facturar:</label>' +
+            '<input id="swal-valor" class="swal2-input">' +
+            '<label for="swal-fact">Número da Factura:</label>' +
+            '<input id="swal-fact" class="swal2-input">',
         showCancelButton: true,
         confirmButtonText: 'Confirmar',
         cancelButtonText: 'Cancelar',
     }).then((result) => {
         if (result.value) {
+            var valor = $("#swal-valor").val();
+            var fact = $("#swal-fact").val();
+
             $.ajax({
                 url: '../php/queries.php',
                 type: 'POST',
                 data: {
                     op: 'addFact',
-                    numFact: result.value,
+                    numFact: fact,
+                    valor: valor,
                     ass_id: ass_id
                 },
                 success: function () {
@@ -77,7 +83,7 @@ $(document).on('click', '.fact', function () {
 });
 
 $(document).ready(function () {
-    var datable = $("#table").DataTable({
+    var datatable = $("#table").DataTable({
         processing: true,
         ajax: {
             url: "../php/queries.php",
@@ -86,13 +92,14 @@ $(document).ready(function () {
                 op: 'fetchAss'
             },
         },
-        createdRow: function (row, data, dataIndex) {
-            console.log(data);
+        createdRow: function (row, data) {
             if (Math.round((Date.now() - new Date(data[8]).getTime()) / 86400000) >= 2 && data[13] == 'Pendente')
                 $(row).addClass('red');
             if (data[11] == 'Aguarda Peças') $(row).addClass('orange');
             if (data[11] == 'Resolvido') $(row).addClass('yellow');
             if (data[12] == 'Sim') $(row).addClass('green');
+            if (Math.round((Date.now() - new Date(data[8]).getTime()) / 86400000) >= 5 && data[11] == 'Resolvido')
+                datatable.rows($(row)).remove();
         },
         columnDefs: [
             {visible: false, targets: [5, 6, 7]}
