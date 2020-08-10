@@ -3,7 +3,7 @@ $(document).on('click', '.details', function (e) {
     localStorage.setItem("ass_id", ass_id);
 });
 
-$(document).on('click','.delete', function () {
+$(document).on('click', '.delete', function () {
     var ass_id = $(this).attr("data-id");
     Swal.fire({
         icon: 'info',
@@ -11,8 +11,6 @@ $(document).on('click','.delete', function () {
         title: 'Tem a certeza que deseja eliminar este registo?',
         text: 'Esta acção não pode ser revertida!',
         showCancelButton: true,
-        confirmButtonColor: '#28a745',
-        cancelButtonColor: '#cc0000',
         confirmButtonText: 'Confirmar',
         cancelButtonText: 'Cancelar',
     }).then((result) => {
@@ -39,7 +37,7 @@ $(document).on('click','.delete', function () {
     });
 });
 
-$(document).on('click','.edit', function () {
+$(document).on('click', '.edit', function () {
     var ass_id = $(this).attr("data-id");
     localStorage.setItem("ass_id", ass_id);
 });
@@ -49,19 +47,25 @@ $(document).on('click', '.fact', function () {
     Swal.fire({
         icon: 'info',
         position: 'top',
-        title: 'Insira o número da factura',
-        input: 'text',
+        html: '<label for="swal-valor">Valor a facturar:</label>' +
+            '<input id="swal-valor" class="swal2-input">' +
+            '<label for="swal-fact">Número da Factura:</label>' +
+            '<input id="swal-fact" class="swal2-input">',
         showCancelButton: true,
         confirmButtonText: 'Confirmar',
         cancelButtonText: 'Cancelar',
     }).then((result) => {
         if (result.value) {
+            var valor = $("#swal-valor").val();
+            var fact = $("#swal-fact").val();
+
             $.ajax({
                 url: '../php/queries.php',
                 type: 'POST',
                 data: {
                     op: 'addFact',
-                    numFact: result.value,
+                    numFact: fact,
+                    valor: valor,
                     ass_id: ass_id
                 },
                 success: function () {
@@ -88,6 +92,9 @@ function createDT() {
                 op: 'fetchAss'
             },
         },
+        columnDefs: [
+            {visible: false, targets: [5, 6, 7]}
+        ],
         order: [8, 'desc'],
         dom: 'Bfrtip',
         buttons: {

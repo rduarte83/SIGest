@@ -473,6 +473,7 @@ if ($_POST['op'] == 'fetchAss') {
         $sub_array[] = $row["username"];
         $sub_array[] = $row["problema"];
         $sub_array[] = $row["data_i"];
+        $sub_array[] = $row["tempo"];
         $sub_array[] = $row["valor"];
         $sub_array[] = $row["estado"];
         $sub_array[] = $row["facturado"];
@@ -637,11 +638,12 @@ if ($_POST['op'] == 'addAss') {
 
 if ($_POST['op'] == 'addFact') {
     $query = "
-            UPDATE assistencias SET facturado = 'sim', factura = :numFact WHERE id = :ass_id
+            UPDATE assistencias SET valor = :valor, facturado = 'Sim', factura = :numFact WHERE id = :ass_id
 		";
     $statement = $conn->prepare($query);
     $result = $statement->execute(
         array(
+            ':valor' => $_POST["valor"],
             ':numFact' => $_POST["numFact"],
             ':ass_id' => $_POST["ass_id"]
         )

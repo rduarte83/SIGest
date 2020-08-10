@@ -11,8 +11,6 @@ $(document).on('click', '.delete', function () {
         title: 'Tem a certeza que deseja eliminar este registo?',
         text: 'Esta acção não pode ser revertida!',
         showCancelButton: true,
-        confirmButtonColor: '#28a745',
-        cancelButtonColor: '#cc0000',
         confirmButtonText: 'Confirmar',
         cancelButtonText: 'Cancelar',
     }).then((result) => {

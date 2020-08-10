@@ -68,6 +68,7 @@
                                     <th>Técnico</th>
                                     <th>Problema</th>
                                     <th>Data Intervenção</th>
+                                    <th>Tempo</th>
                                     <th>Valor a facturar</th>
                                     <th>Estado</th>
                                     <th>Facturado</th>
