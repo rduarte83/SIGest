@@ -60,7 +60,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Id</label>
                                 <div class="col-sm-10">
-                                    <input type="number" id="id" name="id" class="form-control">
+                                    <input type="number" id="id" name="id" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -72,19 +72,19 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Morada</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="morada" name="morada" class="form-control">
+                                    <input type="text" id="morada" name="morada" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Zona</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="zona" name="zona" class="form-control">
+                                    <input type="text" id="zona" name="zona" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Responsável</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="responsavel" name="responsavel" class="form-control">
+                                    <input type="text" id="responsavel" name="responsavel" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -96,7 +96,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Email</label>
                                 <div class="col-sm-10">
-                                    <input type="email" id="email" name="email" class="form-control">
+                                    <input type="email" id="email" name="email" class="form-control" required>
                                 </div>
                             </div>
                         </div>

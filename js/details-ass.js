@@ -20,6 +20,7 @@ $(document).ready(function () {
             $("#motivo").val(dataResult.data[0][4]);
             $("#local").val(dataResult.data[0][5]);
             $("#tecnico").val(dataResult.data[0][6]);
+            $("#t_id").val(dataResult.data[0][24]);
             $("#entregue").val(dataResult.data[0][7]);
             $("#problema").val(dataResult.data[0][8]);
             $("#data_i").val(dataResult.data[0][9]);
@@ -32,11 +33,50 @@ $(document).ready(function () {
             $("#facturado").val(dataResult.data[0][16]);
             $("#factura").val(dataResult.data[0][17]);
 
-            localStorage.setItem('morada', dataResult.data[0][18]);
-            localStorage.setItem('zona', dataResult.data[0][19]);
-            localStorage.setItem('responsavel', dataResult.data[0][20]);
-            localStorage.setItem('contacto', dataResult.data[0][21]);
+            var cli_id = dataResult.data[0][22];
+            var prod_id = dataResult.data[0][23]
 
+            //Fetch Client
+            $.ajax({
+                url: "../php/queries.php",
+                type: "POST",
+                data: {
+                    op: 'fetchCli'
+                },
+                success: function (dataResult) {
+                    var dataResult = JSON.parse(dataResult);
+                    $("#cli").html("");
+                    $("#cli").html('<option value="0">Seleccionar Cliente</option>');
+                    $.each(dataResult.data, function () {
+                        if (this[0] == cli_id) {
+                            $("#cli").append($("<option/>").val(this[0]).text(this[2]).prop("selected", "selected"));
+                        } else $("#cli").append($("<option/>").val(this[0]).text(this[2]));
+                    });
+                }
+            });
+            if (dataResult.statusCode == 201) {
+                alert(dataResult);
+            }
+            //Fetch Product
+            $.ajax({
+                url: "../php/queries.php",
+                type: "POST",
+                data: {
+                    op: 'fetchProdCli',
+                    cliente_id: cli_id
+                },
+                success: function (dataResult) {
+                    var dataResult = JSON.parse(dataResult);
+                    $("#prod").html("");
+                    $("#prod").html('<option value="0">Seleccionar Produto</option>');
+                    $.each(dataResult.data, function () {
+                        if (this[0] == prod_id) {
+                            $("#prod").append($("<option/>").val(this[0]).text(this[1] + " " + this[2]).prop("selected", "selected"));
+                        } else $("#prod").append($("<option/>").val(this[0]).text(this[1] + " " + this[2]));
+                    });
+                    $("#prod option[value=" + $("prod_id").val() + "]").prop("selected", "selected");
+                }
+            });
             if (dataResult.statusCode == 201) {
                 alert(dataResult);
             }
@@ -44,39 +84,67 @@ $(document).ready(function () {
     });
 });
 
-$('#print').on('click', function () {
-    localStorage.setItem('id', $("#id").val());
-    localStorage.setItem('cliente', $("#cli").val());
-    localStorage.setItem('produto', $("#prod").val());
-    localStorage.setItem('data_p', $("#data_p").val());
-    localStorage.setItem('motivo', $("#motivo").val());
-    localStorage.setItem('local', $("#local").val());
-    localStorage.setItem('tecnico', $("#tecnico").val());
-    localStorage.setItem('entregue', $("#entregue").val());
-    localStorage.setItem('problema', $("#problema").val());
-    localStorage.setItem('data_i', $("#data_i").val());
-    localStorage.setItem('resolucao', $("#resolucao").val());
-    localStorage.setItem('material', $("#material").val());
-    localStorage.setItem('tempo', $("#tempo").val());
-    localStorage.setItem('valor', $("#valor").val());
-});
-
 $("#addForm").on('submit', function (e) {
     $("#id").val(ass_id);
-
     $.ajax({
         data: new FormData(this),
         contentType: false,
         processData: false,
         type: "post",
         url: "../php/queries.php",
+    });
+});
+
+$('#print').on('click', function (e) {
+    e.preventDefault();
+    $.ajax({
+        type: "post",
+        url: "../php/queries.php",
+        data: {
+            ass_id: ass_id,
+            op: 'fetchAssS'
+        },
         success: function (dataResult) {
             var dataResult = JSON.parse(dataResult);
-            if (dataResult.statusCode == 201) {
-                alert(dataResult);
+            console.log(dataResult.data[0]);
+
+            $("#id-p").text(dataResult.data[0][0]);
+            $("#cli-p").text(dataResult.data[0][1]);
+            $("#prod-p").text(dataResult.data[0][2]);
+            $("#data_p-p").text(dataResult.data[0][3]);
+            $("#motivo-p").text(dataResult.data[0][4]);
+            $("#local-p").text(dataResult.data[0][5]);
+            $("#tecnico-p").text(dataResult.data[0][6]);
+            $("#entregue-p").text(dataResult.data[0][7]);
+            $("#problema-p").text(dataResult.data[0][8]);
+            $("#data_i-p").text(dataResult.data[0][9]);
+            $("#resolucao-p").text(dataResult.data[0][10]);
+            $("#obs-p").text(dataResult.data[0][11]);
+            $("#material-p").text(dataResult.data[0][12]);
+            $("#tempo-p").text(dataResult.data[0][13]);
+            $("#valor-p").text(dataResult.data[0][14]);
+            $("#facturado").text(dataResult.data[0][16]);
+            $("#factura").text(dataResult.data[0][17]);
+            $("#morada-p").text(dataResult.data[0][18]);
+            $("#zona-p").text(dataResult.data[0][19]);
+            $("#resp-p").text(dataResult.data[0][20]);
+            $("#contacto-p").text(dataResult.data[0][21]);
+
+            window.print();
+            window.onafterprint = function () {
+                console.log("PRINTED");
+                var search = new URLSearchParams(window.location.search);
+                if (search.has("op")) {
+                    var param = search.get("op");
+                    if (param == "cal") window.location.href = "../html/calAss.php";
+                    else window.location.href = "../html/assistencias.php";
+                }
+                ;
+                if (dataResult.statusCode == 201) {
+                    alert(dataResult);
+                }
+                ;
             }
         }
     });
 });
-
-

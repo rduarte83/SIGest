@@ -13,6 +13,7 @@ function createDT() {
                 op: 'fetchVis'
             },
         },
+        order: [[ 0, "desc" ]],
         dom: 'Bfrtip',
         buttons: {
             buttons: [

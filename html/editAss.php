@@ -70,39 +70,42 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-sm-2">Cliente</label>
+                                <label class="col-sm-2 col-form-label">Cliente</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="cli" name="cliente_id" class="form-control" readonly>
+                                    <select class="custom-select form-control" name="cliente_id" id="cli" required>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Produto</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="prod" name="produto_id" class="form-control" readonly>
+                                    <select class="custom-select form-control" id="prod" name="produto" required>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Data Pedido</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="data_p" name="data_p" class="form-control" >
+                                    <input type="text" id="data_p" name="data_p" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Motivo</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="motivo" name="motivo" class="form-control" >
+                                    <input type="text" id="motivo" name="motivo" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Local</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="local" name="local" class="form-control" >
+                                    <input type="text" id="local" name="local" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Técnico</label>
                                 <div class="col-sm-10">
                                     <input type="text" id="tecnico" name="tecnico" class="form-control" >
+                                    <input type="hidden" name="t_id" id="t_id" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group row">

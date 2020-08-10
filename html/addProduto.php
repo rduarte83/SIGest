@@ -85,7 +85,7 @@
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <input type="hidden" name="op" value="addProd">
-                            <a href="../index.php">
+                            <a href="#">
                                 <button type="button" class="btn btn-default ">Cancelar</button>
                             </a>
                             <button type="submit" class="btn btn-success float-right">Confirmar</button>

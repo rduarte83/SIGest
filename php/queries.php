@@ -272,7 +272,7 @@ if ($_POST['op'] == 'fetchProdCli') {
 if ($_POST['op'] == 'addVis') {
     $query = "
 			INSERT INTO visitas (cliente_id, ult_vis, motivo_id, descricao, vendedor, prox_vis, produto_id, tecnico) 
-			VALUES (:cliente_id, :ult_vis, :motivo_id, :descricao, :vendedor, :prox_vis, :produto_id, :tecnico);
+			    VALUES (:cliente_id, :ult_vis, :motivo_id, :descricao, :vendedor, :prox_vis, :produto_id, :tecnico); 
 		";
 
     $statement = $conn->prepare($query);
@@ -315,8 +315,7 @@ if ($_POST['op'] == 'fetchMot') {
 if ($_POST['op'] == 'fetchVis') {
     $output = array();
     $query = "
-        SELECT v.*, c.cliente, p.tipo, p.marca, p.modelo, m.motivo FROM visitas v 
-            INNER JOIN produtos p ON v.produto_id=p.id 
+        SELECT v.*, c.cliente, m.motivo FROM visitas v  
             INNER JOIN clientes c ON v.cliente_id=c.nif
             INNER JOIN motivos m ON v.motivo_id=m.id
         ";
@@ -327,13 +326,11 @@ if ($_POST['op'] == 'fetchVis') {
     $data = array();
 
     foreach ($result as $row) {
-        $prod = $row["tipo"] . " " . $row["marca"] . " " . $row["modelo"];
         $sub_array = array();
         $sub_array[] = $row["id"];
         $sub_array[] = $row["cliente"];
         $sub_array[] = $row["ult_vis"];
         $sub_array[] = $row["motivo"];
-        $sub_array[] = $prod;
         $sub_array[] = $row["vendedor"];
         $sub_array[] = $row["descricao"];
         $sub_array[] = $row["prox_vis"];
@@ -357,8 +354,7 @@ if ($_POST['op'] == 'fetchVis') {
 if ($_POST['op'] == 'fetchVisCli') {
     $output = array();
     $query = "
-        SELECT v.*, c.cliente, p.tipo, p.marca, p.modelo, m.motivo FROM visitas v 
-            INNER JOIN produtos p ON v.produto_id=p.id 
+        SELECT v.*, c.cliente, m.motivo FROM visitas v  
             INNER JOIN clientes c ON v.cliente_id=c.nif
             INNER JOIN motivos m ON v.motivo_id=m.id
             WHERE v.cliente_id = :cliente_id
@@ -374,20 +370,15 @@ if ($_POST['op'] == 'fetchVisCli') {
     $data = array();
 
     foreach ($result as $row) {
-        $prod = $row["tipo"] . " " . $row["marca"] . " " . $row["modelo"];
         $sub_array = array();
         $sub_array[] = $row["id"];
         $sub_array[] = $row["cliente"];
         $sub_array[] = $row["ult_vis"];
         $sub_array[] = $row["motivo"];
-        $sub_array[] = $prod;
         $sub_array[] = $row["vendedor"];
         $sub_array[] = $row["descricao"];
         $sub_array[] = $row["prox_vis"];
         $sub_array[] = '
-                    <a href="details.php" class="details btn btn-primary btn-sm" data-id="' . $row["id"] . '">
-                        <i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Detalhes"></i>
-                    </a>
                     <a href="#editModal" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '" data-toggle="modal">
                         <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>
                     </a>
@@ -407,8 +398,7 @@ if ($_POST['op'] == 'fetchVisCli') {
 if ($_POST['op'] == 'fetchPen') {
     $output = array();
     $query = "
-        SELECT v.*, c.cliente, p.tipo, p.marca, p.modelo, m.motivo FROM visitas v 
-            INNER JOIN produtos p ON v.produto_id=p.id 
+        SELECT v.*, c.cliente, m.motivo FROM visitas v  
             INNER JOIN clientes c ON v.cliente_id=c.nif
             INNER JOIN motivos m ON v.motivo_id=m.id
             HAVING v.prox_vis < CURDATE() ORDER BY v.ult_vis
@@ -419,13 +409,11 @@ if ($_POST['op'] == 'fetchPen') {
     $data = array();
 
     foreach ($result as $row) {
-        $prod = $row["tipo"] . " " . $row["marca"] . " " . $row["modelo"];
         $sub_array = array();
         $sub_array[] = $row["id"];
         $sub_array[] = $row["cliente"];
         $sub_array[] = $row["ult_vis"];
         $sub_array[] = $row["motivo"];
-        $sub_array[] = $prod;
         $sub_array[] = $row["vendedor"];
         $sub_array[] = $row["descricao"];
         $sub_array[] = $row["prox_vis"];
@@ -590,11 +578,10 @@ if ($_POST['op'] == 'fetchAssS') {
     $data = array();
 
     foreach ($result as $row) {
-        $prod = $row["tipo"] . " " . $row["marca"] . " " . $row["modelo"];
         $sub_array = array();
         $sub_array[] = $row["id"];
         $sub_array[] = $row["cliente"];
-        $sub_array[] = $prod;
+        $sub_array[] = $row["tipo"] . " " . $row["marca"] . " " . $row["modelo"];
         $sub_array[] = $row["data_p"];
         $sub_array[] = $row["motivo"];
         $sub_array[] = $row["local"];
@@ -614,6 +601,10 @@ if ($_POST['op'] == 'fetchAssS') {
         $sub_array[] = $row["zona"];
         $sub_array[] = $row["responsavel"];
         $sub_array[] = $row["contacto"];
+        $sub_array[] = $row["cliente_id"];
+        $sub_array[] = $row["produto_id"];
+        $sub_array[] = $row["tecnico"];
+
         $data[] = $sub_array;
     }
     $output = array(
@@ -674,7 +665,7 @@ if ($_POST['op'] == 'editAss') {
                 UPDATE assistencias SET data_p=:data_p, motivo=:motivo, local=:local, tecnico=:tecnico, 
                         entregue=:entregue, problema=:problema, data_i=:data_i, resolucao=:resolucao,
                         obs=:obs, material=:material, tempo=:tempo, valor=:valor, estado=:estado, 
-                        facturado=:facturado, factura=:factura, prioridade=:prio WHERE id=:id               
+                        facturado=:facturado, factura=:factura WHERE id=:id               
     ";
     $statement = $conn->prepare($query);
     $result = $statement->execute(
@@ -683,7 +674,7 @@ if ($_POST['op'] == 'editAss') {
             ':data_p' => $_POST["data_p"],
             ':motivo' => $_POST["motivo"],
             ':local' => $_POST["local"],
-            ':tecnico' => $_POST["tecnico"],
+            ':tecnico' => $_POST["t_id"],
             ':entregue' => $_POST["entregue"],
             ':problema' => $_POST["problema"],
             ':data_i' => $_POST["data_i"],
@@ -694,8 +685,7 @@ if ($_POST['op'] == 'editAss') {
             ':valor' => $_POST["valor"],
             ':estado' => $_POST["estado"],
             ':facturado' => $_POST["facturado"],
-            ':factura' => $_POST["factura"],
-            ':prio' => $_POST["prio"]
+            ':factura' => $_POST["factura"]
         )
     );
 }
@@ -753,9 +743,10 @@ if ($_POST['op'] == 'fetchTec') {
 if ($_POST['op'] == 'fetchLastAss') {
     $output = array();
     $query = "
-        SELECT a.*, c.cliente, c.morada, c.zona, c.responsavel, c.contacto, p.tipo, p.marca, p.modelo FROM assistencias a
+        SELECT a.*, u.username,c.cliente, c.morada, c.zona, c.responsavel, c.contacto, p.tipo, p.marca, p.modelo FROM assistencias a
             INNER JOIN produtos p ON a.produto_id=p.id 
             INNER JOIN clientes c ON a.cliente_id=c.nif
+            INNER JOIN users u ON a.tecnico=u.id
             ORDER BY id DESC LIMIT 1;
         ";
 
@@ -775,7 +766,7 @@ if ($_POST['op'] == 'fetchLastAss') {
         $sub_array[] = $row["data_p"];
         $sub_array[] = $row["motivo"];
         $sub_array[] = $row["local"];
-        $sub_array[] = $row["tecnico"];
+        $sub_array[] = $row["username"];
         $sub_array[] = $row["entregue"];
         $sub_array[] = $row["problema"];
         $sub_array[] = $row["data_i"];

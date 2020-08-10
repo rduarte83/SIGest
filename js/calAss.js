@@ -1,4 +1,4 @@
-var calendar, tecnico;
+var tecnico;
 
 function updEvents(info) {
     var start = moment(info.event.start).format("YYYY-MM-DD HH:MM:SS");
@@ -24,7 +24,7 @@ function updEvents(info) {
 
 document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
-    calendar = new FullCalendar.Calendar(calendarEl, {
+    var calendar = new FullCalendar.Calendar(calendarEl, {
         schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
         initialView: 'resourceTimeGridDay',
         slotMinTime: '09:00:00',
@@ -58,8 +58,10 @@ document.addEventListener('DOMContentLoaded', function () {
             localStorage.setItem("ass_id", info.event.id);
             window.location.href = "../html/editAss.php";
         },
-        select: function (start, end) {
-            window.location.href = "../html/addAssist.php?op=cal";
+        select: function (info) {
+            console.log(info.start);
+            console.log(info.end);
+            //window.location.href = "../html/addAssist.php?op=cal";
         },
         eventResize: function (info) {
             updEvents(info);

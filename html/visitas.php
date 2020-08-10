@@ -68,7 +68,6 @@
                                     <th>Cliente</th>
                                     <th>Ultima Visita</th>
                                     <th>Motivo</th>
-                                    <th>Produto</th>
                                     <th>Vendedor</th>
                                     <th>Descrição</th>
                                     <th>Próxima Visita</th>

@@ -49,7 +49,7 @@ $(document).ready(function () {
                             var param = search.get("op");
                             if (param == "cal") window.location.href = "../html/addAssist.php?op=cal&cli="+$("#cli").val()+"&prod="+prod_id;
                             if (param == "ass") window.location.href = "../html/addAssist.php?op=ass&cli="+$("#cli").val()+"&prod="+prod_id;
-                        } else window.location.href = "../index.php";
+                        } else window.location.href = "../html/produtos.php";
 
                     }
                 });

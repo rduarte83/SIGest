@@ -1,8 +1,13 @@
-<!--w
+<!--
+TODO-auditoria (registo alteracoes)
+TODO-aprovar registos de novos users
+TODO-permitir mudar o cliente/prod da visita
 TODO-mudar produto cliente
 TODO-criar user list
 TODO-permissoes users
 TODO-calendário visitas
+TODO-não editavel a partir de 2a feira
+TODO-não compra à mais de 3 meses - aviso
 -->
 
 <?php include_once 'php/session.php'?>
@@ -78,5 +83,9 @@ TODO-calendário visitas
         src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/b-1.6.2/b-html5-1.6.2/b-print-1.6.2/r-2.2.5/datatables.min.js"></script>
 <!-- AdminLTE App -->
 <script src="js/adminlte.min.js"></script>
+<!-- Chart.JS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<!-- Local Script -->
+<script src="js/index.js"></script>
 </body>
 </html>
