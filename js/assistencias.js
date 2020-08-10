@@ -162,6 +162,9 @@ $("#cli").on('change', function () {
                     cliente_id: $("#cli").val(),
                     op: 'fetchAssCli'
                 },
+                columnDefs: [
+                    {visible: false, targets: [5, 6, 7]}
+                ],
                 order: [8, 'desc'],
                 dom: 'Bfrtip',
                 buttons: {

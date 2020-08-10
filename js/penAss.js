@@ -87,12 +87,16 @@ $(document).ready(function () {
             },
         },
         createdRow: function (row, data, dataIndex) {
+            console.log(data);
             if (Math.round((Date.now() - new Date(data[8]).getTime()) / 86400000) >= 2 && data[13] == 'Pendente')
                 $(row).addClass('red');
-            if (data[10] == 'Aguarda Peças') $(row).addClass('orange');
-            if (data[10] == 'Resolvido') $(row).addClass('yellow');
-            if (data[11] == 'Sim') $(row).addClass('green');
+            if (data[11] == 'Aguarda Peças') $(row).addClass('orange');
+            if (data[11] == 'Resolvido') $(row).addClass('yellow');
+            if (data[12] == 'Sim') $(row).addClass('green');
         },
+        columnDefs: [
+            {visible: false, targets: [5, 6, 7]}
+        ],
         order: [8, 'desc'],
         dom: 'Bfrtip',
         buttons: {
