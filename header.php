@@ -299,6 +299,6 @@
 <!-- SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <!-- AdminLTE App -->
-<script src="../js/adminlte.min.js"></script>
+<script src="/sigest/js/adminlte.min.js"></script>
 <!-- Local Script -->
 <script src="/sigest/js/header.js"></script>
