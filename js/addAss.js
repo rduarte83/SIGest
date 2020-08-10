@@ -88,7 +88,7 @@ $('#addForm').on('submit', function (e) {
                     $("#problema-p").text(dataResult.data[0][8]);
                     //$("#data_i-p").text(dataResult.data[0][9]);
                     //$("#resolucao-p").text(dataResult.data[0][10]);
-                    //$("#obs-p").text(dataResult.data[0][11]);
+                    $("#obs-p").text(dataResult.data[0][11]);
                     //$("#material-p").text(dataResult.data[0][12]);
                     //$("#tempo-p").text(dataResult.data[0][13]);
                     //$("#valor-p").text(dataResult.data[0][14]);

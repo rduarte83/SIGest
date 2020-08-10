@@ -16,7 +16,7 @@
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <!-- JQuery UI -->
-    <link rel="stylesheet" href="../plugins/jquery-ui-1.12.1/jquery-ui.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -252,6 +252,15 @@
                         <div class="col-sm-4 text-bold">Descrição do Problema</div>
                         <div class="col-sm-8" id="problema-p"></div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-4 text-bold">Observações</div>
+                    <textarea style="resize: none" class="form-control" name="obs" id="obs-p"
+                              rows="2"></textarea>
                 </div>
             </div>
         </div>

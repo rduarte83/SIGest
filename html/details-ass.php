@@ -280,6 +280,15 @@
         <div class="card">
             <div class="card-body">
                 <div class="row">
+                    <div class="col-sm-4 text-bold">Observações</div>
+                    <textarea style="resize: none" class="form-control" name="obs" id="obs-p"
+                              rows="2"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
                     <div class="col-sm-12">
                         <div class="col-sm-4 text-bold">Material Entregue</div>
                         <div class="col-sm-8" id="entregue-p"></div>
