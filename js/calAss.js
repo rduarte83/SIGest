@@ -1,4 +1,5 @@
 var tecnico;
+var calendar;
 
 function updEvents(info) {
     var start = moment(info.event.start).format("YYYY-MM-DD HH:MM:SS");
@@ -24,7 +25,7 @@ function updEvents(info) {
 
 document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
-    var calendar = new FullCalendar.Calendar(calendarEl, {
+    calendar = new FullCalendar.Calendar(calendarEl, {
         schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
         initialView: 'resourceTimeGridDay',
         slotMinTime: '09:00:00',
@@ -33,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
             {id: 'rui', building: 'Rui'},
             {id: 'joao', building: 'João'}
         ],
+        weekends: false,
         locale: 'pt-pt',
         customButtons: {
             print: {
@@ -53,15 +55,12 @@ document.addEventListener('DOMContentLoaded', function () {
         themeSystem: 'bootstrap',
         editable: true,
         selectable: true,
-        eventDurationEditable: true,
         eventClick: function (info) {
             localStorage.setItem("ass_id", info.event.id);
             window.location.href = "../html/editAss.php";
         },
         select: function (info) {
-            console.log(info.start);
-            console.log(info.end);
-            //window.location.href = "../html/addAssist.php?op=cal";
+            window.location.href = "../html/addAssist.php?op=cal";
         },
         eventResize: function (info) {
             updEvents(info);
@@ -71,4 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
     calendar.render();
+});
+
+$(document).ready(function () {
 });

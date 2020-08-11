@@ -104,8 +104,8 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Técnico</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="tecnico" name="tecnico" class="form-control" >
-                                    <input type="hidden" name="t_id" id="t_id" class="form-control">
+                                    <select class="custom-select form-control" id="tecnico" name="tecnico" required>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">

@@ -1,8 +1,6 @@
 <!--
 TODO-auditoria (registo alteracoes)
 TODO-aprovar registos de novos users
-TODO-permitir mudar o cliente/prod da visita
-TODO-mudar produto cliente
 TODO-criar user list
 TODO-permissoes users
 TODO-calendário visitas

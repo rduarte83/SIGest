@@ -14,13 +14,9 @@ $(document).ready(function () {
             console.log(dataResult.data[0]);
 
             $("#id").val(dataResult.data[0][0]);
-            $("#cli").val(dataResult.data[0][1]);
-            $("#prod").val(dataResult.data[0][2]);
             $("#data_p").val(dataResult.data[0][3]);
             $("#motivo").val(dataResult.data[0][4]);
             $("#local").val(dataResult.data[0][5]);
-            $("#tecnico").val(dataResult.data[0][6]);
-            $("#t_id").val(dataResult.data[0][24]);
             $("#entregue").val(dataResult.data[0][7]);
             $("#problema").val(dataResult.data[0][8]);
             $("#data_i").val(dataResult.data[0][9]);
@@ -35,6 +31,7 @@ $(document).ready(function () {
 
             var cli_id = dataResult.data[0][22];
             var prod_id = dataResult.data[0][23]
+            var t_id = dataResult.data[0][24]
 
             //Fetch Client
             $.ajax({
@@ -74,9 +71,27 @@ $(document).ready(function () {
                             $("#prod").append($("<option/>").val(this[0]).text(this[1] + " " + this[2]).prop("selected", "selected"));
                         } else $("#prod").append($("<option/>").val(this[0]).text(this[1] + " " + this[2]));
                     });
-                    $("#prod option[value=" + $("prod_id").val() + "]").prop("selected", "selected");
                 }
             });
+
+            //Fetch Tecnicos
+            $.ajax({
+                url: "../php/queries.php",
+                type: "POST",
+                data: {
+                    op: 'fetchTec',
+                },
+                success: function (dataResult) {
+                    var dataResult = JSON.parse(dataResult);
+                    $("#tecnico").html('<option value="0">Seleccionar Técnico</option>');
+                    $.each(dataResult.data, function () {
+                        if (this[0] == t_id) {
+                            $("#tecnico").append($("<option/>").val(this[0]).text(this[1]).prop("selected", "selected"));
+                        } else $("#tecnico").append($("<option/>").val(this[0]).text(this[1]));
+                    });
+                }
+            });
+
             if (dataResult.statusCode == 201) {
                 alert(dataResult);
             }
@@ -84,7 +99,30 @@ $(document).ready(function () {
     });
 });
 
+//Fetch Product
+$("#cli").on('change', function () {
+    //Fetch Product
+    $.ajax({
+        url: "../php/copia.php",
+        type: "POST",
+        data: {
+            op: 'fetchProdCli',
+            cliente_id: $("#cli").val()
+        },
+        success: function (dataResult) {
+            var dataResult = JSON.parse(dataResult);
+            $("#prod").html("");
+            $("#prod").html('<option value="0">Seleccionar Produto</option>');
+            $.each(dataResult.data, function () {
+                $("#prod").append($("<option/>").val(this[0]).text(this[1] + " " +
+                    this[2] + " " + this[3] + " " + this[4]));
+            });
+        }
+    });
+});
+
 $("#addForm").on('submit', function (e) {
+    e.preventDefault();
     $("#id").val(ass_id);
     $.ajax({
         data: new FormData(this),

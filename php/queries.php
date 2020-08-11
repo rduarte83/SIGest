@@ -193,6 +193,7 @@ if ($_POST['op'] == 'fetchProdS') {
         $sub_array[] = $row["modelo"];
         $sub_array[] = $row["num_serie"];
         $sub_array[] = $row["cliente"];
+        $sub_array[] = $row["cliente_id"];
         $data[] = $sub_array;
     }
     $output = array(
@@ -203,17 +204,18 @@ if ($_POST['op'] == 'fetchProdS') {
 
 if ($_POST['op'] == 'editProd') {
     $query = "
-                UPDATE produtos SET tipo=:tipo, marca=:marca, modelo=:modelo, num_serie=:num_serie
+                UPDATE produtos SET tipo=:tipo, marca=:marca, modelo=:modelo, num_serie=:num_serie, cliente_id=:cliente_id
                     WHERE id=:id
     ";
     $statement = $conn->prepare($query);
     $result = $statement->execute(
         array(
-            ':id' => $_POST["id"],
+            ':id' => $_POST["produto_id"],
             ':tipo' => $_POST["tipo"],
             ':marca' => $_POST["marca"],
             ':modelo' => $_POST["modelo"],
-            ':num_serie' => $_POST["num_serie"]
+            ':num_serie' => $_POST["num_serie"],
+            ':cliente_id' => $_POST["cliente_id"]
         )
     );
 }
@@ -271,8 +273,8 @@ if ($_POST['op'] == 'fetchProdCli') {
 
 if ($_POST['op'] == 'addVis') {
     $query = "
-			INSERT INTO visitas (cliente_id, ult_vis, motivo_id, descricao, vendedor, prox_vis, produto_id, tecnico) 
-			    VALUES (:cliente_id, :ult_vis, :motivo_id, :descricao, :vendedor, :prox_vis, :produto_id, :tecnico); 
+			INSERT INTO visitas (cliente_id, ult_vis, motivo_id, descricao, vendedor, prox_vis, tecnico) 
+			    VALUES (:cliente_id, :ult_vis, :motivo_id, :descricao, :vendedor, :prox_vis, :tecnico); 
 		";
 
     $statement = $conn->prepare($query);
@@ -664,19 +666,21 @@ if ($_POST['op'] == 'delAss') {
 
 if ($_POST['op'] == 'editAss') {
     $query = "
-                UPDATE assistencias SET data_p=:data_p, motivo=:motivo, local=:local, tecnico=:tecnico, 
-                        entregue=:entregue, problema=:problema, data_i=:data_i, resolucao=:resolucao,
-                        obs=:obs, material=:material, tempo=:tempo, valor=:valor, estado=:estado, 
+                UPDATE assistencias SET cliente_id=:cliente_id, produto_id=:produto_id ,data_p=:data_p, motivo=:motivo, 
+                        local=:local, tecnico=:tecnico, entregue=:entregue, problema=:problema, data_i=:data_i, 
+                        resolucao=:resolucao, obs=:obs, material=:material, tempo=:tempo, valor=:valor, estado=:estado, 
                         facturado=:facturado, factura=:factura WHERE id=:id               
     ";
     $statement = $conn->prepare($query);
     $result = $statement->execute(
         array(
             ':id' => $_POST["id"],
+            ':cliente_id' => $_POST["cliente_id"],
+            ':produto_id' => $_POST["produto"],
             ':data_p' => $_POST["data_p"],
             ':motivo' => $_POST["motivo"],
             ':local' => $_POST["local"],
-            ':tecnico' => $_POST["t_id"],
+            ':tecnico' => $_POST["tecnico"],
             ':entregue' => $_POST["entregue"],
             ':problema' => $_POST["problema"],
             ':data_i' => $_POST["data_i"],

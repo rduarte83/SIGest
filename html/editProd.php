@@ -53,7 +53,7 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Cliente</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="cli" name="cliente_id" readonly class="form-control">
+                                    <select name="cliente_id" id="cli" class="form-control"></select>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -83,6 +83,7 @@
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
+                            <input type="hidden" id=prod_id name="produto_id">
                             <input type="hidden" name="op" value="editProd">
                             <a href="produtos.php">
                                 <button type="button" class="btn btn-default ">Cancelar</button>

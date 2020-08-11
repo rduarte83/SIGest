@@ -41,9 +41,7 @@ $(document).ready(function () {
                     });
                 }
             });
-            if (dataResult.statusCode == 201) {
-                alert(dataResult);
-            }
+
             //Fetch Product
             $.ajax({
                 url: "../php/copia.php",
@@ -64,6 +62,10 @@ $(document).ready(function () {
                     $("#equip option[value=" + $("prod_id").val() + "]").prop("selected", "selected");
                 }
             });
+
+            if (dataResult.statusCode == 201) {
+                alert(dataResult);
+            }
         }
     });
 
