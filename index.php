@@ -8,7 +8,7 @@ TODO-não editavel a partir de 2a feira
 TODO-não compra à mais de 3 meses - aviso
 -->
 
-<?php include_once 'php/session.php'?>
+<?php include_once 'php/session.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,6 +25,10 @@ TODO-não compra à mais de 3 meses - aviso
     <link rel="stylesheet" href="css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- Chart.JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"
+          integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w=="
+          crossorigin="anonymous"/>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -54,6 +58,16 @@ TODO-não compra à mais de 3 meses - aviso
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- Insert Content Here -->
+                                <canvas id="chart"></canvas>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
                     <!-- /.col -->
                 </div>
                 <!-- /.row -->
@@ -70,7 +84,9 @@ TODO-não compra à mais de 3 meses - aviso
 <!-- ./wrapper -->
 
 <!-- Chart.JS -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
+        integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg=="
+        crossorigin="anonymous"></script>
 <!-- Local Script -->
 <script src="js/index.js"></script>
 </body>

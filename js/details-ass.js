@@ -46,8 +46,8 @@ $(document).ready(function () {
                     $("#cli").html('<option value="0">Seleccionar Cliente</option>');
                     $.each(dataResult.data, function () {
                         if (this[0] == cli_id) {
-                            $("#cli").append($("<option/>").val(this[0]).text(this[2]).prop("selected", "selected"));
-                        } else $("#cli").append($("<option/>").val(this[0]).text(this[2]));
+                            $("#prod").append($("<option/>").val(this[0]).text(this[1] + " " + this[2] + " " + this[3]).prop("selected", "selected"));
+                        } else $("#prod").append($("<option/>").val(this[0]).text(this[1] + " " + this[2] + " " + this[3]));
                     });
                 }
             });
@@ -68,8 +68,8 @@ $(document).ready(function () {
                     $("#prod").html('<option value="0">Seleccionar Produto</option>');
                     $.each(dataResult.data, function () {
                         if (this[0] == prod_id) {
-                            $("#prod").append($("<option/>").val(this[0]).text(this[1] + " " + this[2]).prop("selected", "selected"));
-                        } else $("#prod").append($("<option/>").val(this[0]).text(this[1] + " " + this[2]));
+                            $("#prod").append($("<option/>").val(this[0]).text(this[1] + " " + this[2] + " " + this[3]).prop("selected", "selected"));
+                        } else $("#prod").append($("<option/>").val(this[0]).text(this[1] + " " + this[2] + " " + this[3]));
                     });
                 }
             });
@@ -122,7 +122,6 @@ $("#cli").on('change', function () {
 });
 
 $("#addForm").on('submit', function (e) {
-    e.preventDefault();
     $("#id").val(ass_id);
     $.ajax({
         data: new FormData(this),
