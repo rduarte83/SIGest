@@ -60,7 +60,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-sm-2">Data da Visita</label>
+                                <label class="col-form-label col-sm-2">Data</label>
                                 <div class="col-sm-10">
                                     <input type="datetime-local" id="ult_vis" name="ult_vis" class="form-control" required>
                                 </div>

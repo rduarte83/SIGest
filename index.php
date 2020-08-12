@@ -1,17 +1,13 @@
 <!--
-TODO-calendário visitas
-TODO-edit remove visitas
 TODO-modulo cobrancas
-TODO-auditoria (registo alteracoes)
+TODO-assumir data onclick cal
+TODO- CSW contacto - email
 TODO-aprovar registos de novos users
 TODO-criar user list
 TODO-permissoes users
+TODO-auditoria (registo alteracoes)
 TODO-não editavel a partir de 2a feira
 TODO-não compra à mais de 3 meses - aviso
-TODO-details as assistencias
-TODO-visitas-reformular
-
-TODO- CSW contacto - email
 -->
 
 <?php include_once 'php/session.php' ?>
