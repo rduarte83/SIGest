@@ -1,3 +1,5 @@
+var calendar;
+
 function updEvents(info) {
     var start = moment(info.event.start).format("YYYY-MM-DD HH:MM:SS");
     var end = moment(info.event.end).format("YYYY-MM-DD HH:MM:SS");
@@ -17,12 +19,13 @@ function updEvents(info) {
 
 document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
-    var calendar = new FullCalendar.Calendar(calendarEl, {
+    calendar = new FullCalendar.Calendar(calendarEl, {
         schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
         initialView: 'timeGridDay',
         slotMinTime: '09:00:00',
         slotMaxTime: '19:00:00',
         locale: 'pt-pt',
+        weekends: false,
         customButtons: {
             print: {
                 text: 'Imprimir',
@@ -42,13 +45,19 @@ document.addEventListener('DOMContentLoaded', function () {
         themeSystem: 'bootstrap',
         editable: true,
         selectable: true,
-        eventDurationEditable: true,
+        eventClick: function (info) {
+            localStorage.setItem("vis_id", info.event.id);
+            window.location.href = "../html/editVis.php?op=cal";
+        },
+        select: function (info) {
+            window.location.href = "../html/addVisita.php?op=cal";
+        },
         eventResize: function (info) {
             updEvents(info);
         },
         eventDrop: function (info) {
             updEvents(info);
-        }
+        },
     });
     calendar.render();
 });

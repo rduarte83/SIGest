@@ -5,7 +5,7 @@ function createDT() {
             url: "../php/queries.php",
             type: "POST",
             data: {
-                op: 'fetchPen'
+                op: 'fetchVisPen'
             },
         },
         dom: 'Bfrtip',

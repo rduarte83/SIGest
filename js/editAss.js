@@ -122,6 +122,7 @@ $("#cli").on('change', function () {
 });
 
 $("#addForm").on('submit', function (e) {
+    e.preventDefault();
     $("#id").val(ass_id);
     $.ajax({
         data: new FormData(this),
@@ -129,6 +130,14 @@ $("#addForm").on('submit', function (e) {
         processData: false,
         type: "post",
         url: "../php/queries.php",
+        success: function (dataResult) {
+            var search = new URLSearchParams(window.location.search);
+            if (search.has("op")) {
+                var param = search.get("op");
+                if (param == "cal") window.location.href = "../html/calAss.php";
+                else window.location.href = "../html/assistencias.php";
+            };
+        }
     });
 });
 

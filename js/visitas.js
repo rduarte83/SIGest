@@ -1,6 +1,40 @@
-$(document).on('click','.details', function () {
-    var visita_id = $(this).attr("data-id");
-    localStorage.setItem("visita_id", visita_id);
+$(document).on('click','.edit', function () {
+    var vis_id = $(this).attr("data-id");
+    localStorage.setItem("vis_id", vis_id);
+});
+
+$(document).on('click', '.delete', function () {
+    var vis_id = $(this).attr("data-id");
+    Swal.fire({
+        icon: 'info',
+        position: 'top',
+        title: 'Tem a certeza que deseja eliminar este registo?',
+        text: 'Esta acção não pode ser revertida!',
+        showCancelButton: true,
+        confirmButtonText: 'Confirmar',
+        cancelButtonText: 'Cancelar',
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: '../php/queries.php',
+                type: 'POST',
+                data: {
+                    op: 'delVis',
+                    id: vis_id
+                },
+                success: function () {
+                    Swal.fire({
+                        icon: 'success',
+                        position: 'top',
+                        title: 'Eliminado!',
+                        text: 'Registo eliminado com sucesso!'
+                    }).then(function () {
+                        location.reload();
+                    });
+                }
+            });
+        }
+    });
 });
 
 function createDT() {

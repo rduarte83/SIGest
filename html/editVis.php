@@ -1,11 +1,11 @@
-<?php include_once '../php/session.php'?>
+<?php include_once '../php/session.php' ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SIGest | Detalhes do Contrato de Cópia</title>
+    <title>SIGest | Editar Visita</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -33,13 +33,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Detalhes</h1>
+                        <h1>Editar Visita</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="/sigest/index.php">Início</a></li>
-                            <li class="breadcrumb-item"><a href="copia.php">Contratos de Cópia</a></li>
-                            <li class="breadcrumb-item active">Detalhes</li>
+                            <li class="breadcrumb-item"><a href="../index.php">Início</a></li>
+                            <li class="breadcrumb-item"><a href="visitas.php">Lista de Visitas</a></li>
+                            <li class="breadcrumb-item active">Editar</li>
                         </ol>
                     </div>
                 </div>
@@ -52,75 +52,59 @@
                 <!-- Horizontal Form -->
                 <div class="card card-info">
                     <div class="card-header">
-                        <h3 class="card-title">Dados do Contrato</h3>
+                        <h3 class="card-title">Dados da Visita</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form method="post" id="addForm" enctype="multipart/form-data" class="form-horizontal">
+                    <form action="visitas.php" method="post" id="addForm" enctype="multipart/form-data" class="form-horizontal">
                         <div class="card-body">
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Cliente</label>
+                                <label class="col-form-label col-sm-2">Cliente</label>
                                 <div class="col-sm-10">
-                                    <select class="custom-select form-control" name="cliente_id" id="cli" readonly>
+                                    <select class="custom-select form-control" name="cliente_id" id="cli" required>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-sm-2">Equipamento</label>
+                                <label class="col-form-label col-sm-2">Data da Visita</label>
                                 <div class="col-sm-10">
-                                    <select class="custom-select form-control" id="equip" name="produto" readonly>
-                                        <option value="0">Seleccionar Equipamento</option>
+                                    <input type="text" id="ult_vis" name="ult_vis" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-sm-2">Motivo</label>
+                                <div class="col-sm-10">
+                                    <select class="custom-select form-control" name="motivo_id" id="mot" required>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Data de Início</label>
+                                <label class="col-form-label col-sm-2">Descrição</label>
                                 <div class="col-sm-10">
-                                    <input type="date" id="inicio" name="inicio" class="form-control" readonly>
+                                    <textarea class="form-control" name="descricao" id="descricao" rows="8"></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Data de Fim</label>
+                                <label class="col-form-label col-sm-2">Vendedor</label>
                                 <div class="col-sm-10">
-                                    <input type="date" id="fim" name="fim" class="form-control" readonly>
+                                    <input type="text" id="vendedor" name="vendedor" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-sm-2">Tipo</label>
+                                <label class="col-form-label col-sm-2">Técnico</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="tipo" name="tipo" class="form-control" readonly>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Valor</label>
-                                <div class="col-sm-10">
-                                    <input type="number" id="valor" name="valor" class="form-control" readonly>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Cópias Incluídas</label>
-                                <div class="col-sm-10">
-                                    <input type="number" id="inc" name="inc" class="form-control" readonly>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Custo Preto</label>
-                                <div class="col-sm-10">
-                                    <input type="number" id="preco_p" name="preco_p" class="form-control" readonly>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Custo Cor</label>
-                                <div class="col-sm-10">
-                                    <input type="number" id="preco_c" name="preco_c" class="form-control" readonly>
+                                    <select name="tecnico" id="tecnico" class="form-control"></select>
                                 </div>
                             </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            <a href="copia.php">
+                            <input type="hidden" name="id" id="id">
+                            <input type="hidden" name="op" value="editVis">
+                            <a href="../index.php">
                                 <button type="button" class="btn btn-default ">Cancelar</button>
                             </a>
+                            <button type="submit" class="btn btn-success float-right">Confirmar</button>
                         </div>
                         <!-- /.card-footer -->
                     </form>
@@ -137,6 +121,6 @@
 </div>
 <!-- ./wrapper -->
 
-<script src="../js/editCopia.js"></script>
+<script src="../js/editVis.js"></script>
 </body>
 </html>

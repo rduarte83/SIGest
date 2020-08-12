@@ -1,5 +1,4 @@
-var tecnico;
-var calendar;
+var calendar, tecnico;
 
 function updEvents(info) {
     var start = moment(info.event.start).format("YYYY-MM-DD HH:MM:SS");
@@ -34,8 +33,8 @@ document.addEventListener('DOMContentLoaded', function () {
             {id: 'rui', building: 'Rui'},
             {id: 'joao', building: 'João'}
         ],
-        weekends: false,
         locale: 'pt-pt',
+        weekends: false,
         customButtons: {
             print: {
                 text: 'Imprimir',
@@ -57,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
         selectable: true,
         eventClick: function (info) {
             localStorage.setItem("ass_id", info.event.id);
-            window.location.href = "../html/editAss.php";
+            window.location.href = "../html/editAss.php?op=cal";
         },
         select: function (info) {
             window.location.href = "../html/addAssist.php?op=cal";
@@ -67,10 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         eventDrop: function (info) {
             updEvents(info);
-        }
+        },
     });
     calendar.render();
-});
-
-$(document).ready(function () {
 });

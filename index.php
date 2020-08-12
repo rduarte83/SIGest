@@ -1,6 +1,7 @@
 <!--
-TODO-modulo cobrancas
 TODO-calendário visitas
+TODO-edit remove visitas
+TODO-modulo cobrancas
 TODO-auditoria (registo alteracoes)
 TODO-aprovar registos de novos users
 TODO-criar user list

@@ -39,7 +39,7 @@
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="../index.php">Início</a></li>
                             <li class="breadcrumb-item"><a href="assistencias.php">Lista de Assistências</a></li>
-                            <li class="breadcrumb-item active">Detalhes</li>
+                            <li class="breadcrumb-item active">Editar</li>
                         </ol>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form method="post" action="assistencias.php" id="addForm" enctype="multipart/form-data" class="form-horizontal">
+                    <form method="post" id="addForm" enctype="multipart/form-data" class="form-horizontal">
                         <div class="card-body">
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Estado</label>
@@ -197,6 +197,6 @@
 </div>
 <!-- ./wrapper -->
 
-<script src="../js/details-ass.js"></script>
+<script src="../js/editAss.js"></script>
 </body>
 </html>

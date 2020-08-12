@@ -50,6 +50,11 @@ $(document).ready(function () {
             $.each(dataResult.data, function () {
                 $("#tecnico").append($("<option/>").val(this[0]).text(this[1]));
             });
+
+            $("#tecnico_prox").html('<option value="0">Seleccionar Técnico</option>');
+            $.each(dataResult.data, function () {
+                $("#tecnico_prox").append($("<option/>").val(this[0]).text(this[1]));
+            });
         }
     });
 
@@ -67,12 +72,19 @@ $(document).ready(function () {
             $.each(dataResult.data, function () {
                 $("#mot").append($("<option/>").val(this[0]).text(this[1]));
             });
+
+            $("#mot_prox").html("");
+            $("#mot_prox").html('<option value="0">Seleccionar Motivo</option>');
+            $.each(dataResult.data, function () {
+                $("#mot_prox").append($("<option/>").val(this[0]).text(this[1]));
+            });
         }
     });
 });
 
 //<!-- Add visit -->
-$('#addForm').on('submit', function () {
+$('#addForm').on('submit', function (e) {
+    e.preventDefault();
     $.ajax({
         data: new FormData(this),
         contentType: false,

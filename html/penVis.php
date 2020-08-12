@@ -65,7 +65,6 @@
                                     <th>Motivo</th>
                                     <th>Vendedor</th>
                                     <th>Descrição</th>
-                                    <th>Próxima Visita</th>
                                     </thead>
                                     <tbody>
                                     </tbody>
@@ -89,6 +88,6 @@
 </div>
 <!-- ./wrapper -->
 
-<script src="../js/pendentes.js"></script>
+<script src="../js/penVis.js"></script>
 </body>
 </html>

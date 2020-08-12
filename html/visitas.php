@@ -69,8 +69,8 @@
                                     <th>Data da Visita</th>
                                     <th>Motivo</th>
                                     <th>Vendedor</th>
+                                    <th>Técnico</th>
                                     <th>Descrição</th>
-                                    <th>Próxima Visita</th>
                                     <th>Operações</th>
                                     </thead>
                                     <tbody>

@@ -14,12 +14,10 @@ $data = array();
 $sub_array = array();
 
 foreach ($result as $row) {
-    $end = new DateTime($row["data_i"]);
-    $end->modify('+1 hour');
     $sub_array['id'] = $row["id"];
     $sub_array['title'] = $row["cliente"] . " - " . $row["motivo"];
     $sub_array['start'] = $row["data_i"];
-    $sub_array['end'] = $end;
+    $sub_array['end'] = $row["data_i_end"];
     $sub_array['resourceId'] = $row["username"];
     if ($row['prioridade'] == "Alta") $sub_array['color'] = "#FF0000";
     else $sub_array['color'] = "#007bff";
@@ -37,14 +35,11 @@ $statementV = $conn->prepare($queryV);
 $statementV->execute();
 $resultV = $statementV->fetchAll();
 foreach ($resultV as $row) {
-    $end = new DateTime($row["prox_vis"]);
-    $end->modify('+30 minutes');
     $sub_array['id'] = $row["id"];
     $sub_array['title'] = $row["cliente"] . " - " . $row["motivo"];
-    $sub_array['start'] = $row["prox_vis"];
-    $sub_array['end'] = $end->format('Y-m-d H:m:s');
+    $sub_array['start'] = $row["ult_vis"];
+    $sub_array['end'] = $row["ult_vis_end"];
     $sub_array['resourceId'] = $row["username"];
     $data[] = $sub_array;
 }
-
 echo json_encode($data);

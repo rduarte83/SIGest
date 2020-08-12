@@ -34,7 +34,8 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a href="/sigest/index.php" class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "index.php") ? "active" : ""; ?>">
+                    <a href="/sigest/index.php"
+                       class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "index.php") ? "active" : ""; ?>">
                         <i class="nav-icon fa fa-tachometer"></i>
                         <p>Início</p>
                     </a>
@@ -81,12 +82,12 @@
                 </li>
                 <li class="nav-item has-treeview
                     <?= (basename($_SERVER['PHP_SELF']) == "sw.php") |
-                        (basename($_SERVER['PHP_SELF']) == "addSw.php")
-                            ? "menu-open" : ""; ?>">
+                (basename($_SERVER['PHP_SELF']) == "addSw.php")
+                    ? "menu-open" : ""; ?>">
                     <a href="#" class="nav-link
                     <?= (basename($_SERVER['PHP_SELF']) == "sw.php") |
-                        (basename($_SERVER['PHP_SELF']) == "addSw.php")
-                            ? "active" : ""; ?>">
+                    (basename($_SERVER['PHP_SELF']) == "addSw.php")
+                        ? "active" : ""; ?>">
                         <i class="nav-icon fa fa-cutlery"></i>
                         <p>Contratos de Software
                             <i class="fa fa-angle-left right"></i>
@@ -112,16 +113,16 @@
 
                 <li class="nav-item has-treeview
                     <?= (basename($_SERVER['PHP_SELF']) == "assistencias.php") |
-                        (basename($_SERVER['PHP_SELF']) == "addAssist.php") |
-                        (basename($_SERVER['PHP_SELF']) == "penAss.php") |
-                        (basename($_SERVER['PHP_SELF']) == "calAss.php")
+                (basename($_SERVER['PHP_SELF']) == "addAssist.php") |
+                (basename($_SERVER['PHP_SELF']) == "penAss.php") |
+                (basename($_SERVER['PHP_SELF']) == "calAss.php")
                     ? "menu-open" : ""; ?>">
                     <a href="#" class="nav-link
                     <?= (basename($_SERVER['PHP_SELF']) == "assistencias.php") |
-                        (basename($_SERVER['PHP_SELF']) == "addAssist.php") |
-                        (basename($_SERVER['PHP_SELF']) == "penAss.php") |
-                        (basename($_SERVER['PHP_SELF']) == "calAss.php")
-                            ? "active" : ""; ?>">
+                    (basename($_SERVER['PHP_SELF']) == "addAssist.php") |
+                    (basename($_SERVER['PHP_SELF']) == "penAss.php") |
+                    (basename($_SERVER['PHP_SELF']) == "calAss.php")
+                        ? "active" : ""; ?>">
                         <i class="nav-icon fa fa-wrench"></i>
                         <p>Assistências Técnicas
                             <i class="fa fa-angle-left right"></i>
@@ -162,16 +163,16 @@
 
                 <li class="nav-item has-treeview
                     <?= (basename($_SERVER['PHP_SELF']) == "visitas.php") |
-                        (basename($_SERVER['PHP_SELF']) == "addVisita.php") |
-                        (basename($_SERVER['PHP_SELF']) == "calVis.php") |
-                        (basename($_SERVER['PHP_SELF']) == "pendentes.php")
+                (basename($_SERVER['PHP_SELF']) == "addVisita.php") |
+                (basename($_SERVER['PHP_SELF']) == "calVis.php") |
+                (basename($_SERVER['PHP_SELF']) == "penVis.php")
                     ? "menu-open" : ""; ?>">
                     <a href="#" class="nav-link
                     <?= (basename($_SERVER['PHP_SELF']) == "visitas.php") |
-                        (basename($_SERVER['PHP_SELF']) == "addVisita.php") |
-                        (basename($_SERVER['PHP_SELF']) == "calVis.php") |
-                        (basename($_SERVER['PHP_SELF']) == "pendentes.php")
-                            ? "active" : ""; ?>">
+                    (basename($_SERVER['PHP_SELF']) == "addVisita.php") |
+                    (basename($_SERVER['PHP_SELF']) == "calVis.php") |
+                    (basename($_SERVER['PHP_SELF']) == "penVis.php")
+                        ? "active" : ""; ?>">
                         <i class="nav-icon fa fa-user"></i>
                         <p>Visitas
                             <i class="fa fa-angle-left right"></i>
@@ -193,8 +194,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/sigest/html/pendentes.php"
-                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "pendentes.php") ? "active" : ""; ?>">
+                            <a href="/sigest/html/penVis.php"
+                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "penVis.php") ? "active" : ""; ?>">
                                 <i class="nav-icon fa fa-history"></i>
                                 <p>Visitas em Atraso</p>
                                 <span class="badge badge-danger right" id="visPen"></span>
@@ -263,12 +264,12 @@
 
                 <li class="nav-item has-treeview
                     <?= (basename($_SERVER['PHP_SELF']) == "clientes.php") |
-                        (basename($_SERVER['PHP_SELF']) == "addCli.php")
+                (basename($_SERVER['PHP_SELF']) == "addCli.php")
                     ? "menu-open" : ""; ?>">
                     <a href="#" class="nav-link
                     <?= (basename($_SERVER['PHP_SELF']) == "clientes.php") |
-                        (basename($_SERVER['PHP_SELF']) == "addCli.php")
-                            ? "active" : ""; ?>">
+                    (basename($_SERVER['PHP_SELF']) == "addCli.php")
+                        ? "active" : ""; ?>">
                         <i class="nav-icon fa fa-address-card-o"></i>
                         <p>Clientes
                             <i class="fa fa-angle-left right"></i>
@@ -294,12 +295,12 @@
 
                 <li class="nav-item has-treeview
                     <?= (basename($_SERVER['PHP_SELF']) == "produtos.php") |
-                        (basename($_SERVER['PHP_SELF']) == "addProduto.php")
+                (basename($_SERVER['PHP_SELF']) == "addProduto.php")
                     ? "menu-open" : ""; ?>">
                     <a href="#" class="nav-link
                     <?= (basename($_SERVER['PHP_SELF']) == "produtos.php") |
-                        (basename($_SERVER['PHP_SELF']) == "addProduto.php")
-                            ? "active" : ""; ?>">
+                    (basename($_SERVER['PHP_SELF']) == "addProduto.php")
+                        ? "active" : ""; ?>">
                         <i class="nav-icon fa fa-shopping-cart"></i>
                         <p>Produtos
                             <i class="fa fa-angle-left right"></i>
@@ -331,25 +332,33 @@
 
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <!-- Bootstrap 4 -->
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
 <!-- jQuery UI-->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 <!-- MomentJS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
+        integrity="sha512-rmZcZsyhe0/MAjquhTgiUcb4d9knaFc7b5xAfju483gbEXTkeJRUMIPk6s3ySZMYUHEcjKbjLjyddGWMrNEvZg=="
+        crossorigin="anonymous"></script>
 <!-- DataTables -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
 <script type="text/javascript"
         src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/b-1.6.2/b-html5-1.6.2/b-print-1.6.2/r-2.2.5/datatables.min.js"></script>
 <!-- FullCalendar -->
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.2.0/main.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.2.0/locales/pt.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.2.0/main.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.2.0/locales/pt.js"></script>
 <!-- SweetAlert2 -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <!-- AdminLTE App -->
-<script src="/sigest/js/adminlte.min.js"></script>
+<script type="text/javascript" src="/sigest/js/adminlte.min.js"></script>
 <!-- Local Script -->
-<script src="/sigest/js/header.js"></script>
+<script type="text/javascript" src="/sigest/js/header.js"></script>

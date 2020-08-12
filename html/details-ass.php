@@ -356,6 +356,6 @@
 </div>
 <!-- ./wrapper -->
 
-<script src="../js/details-ass.js"></script>
+<script src="../js/editAss.js"></script>
 </body>
 </html>
