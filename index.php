@@ -6,6 +6,11 @@ TODO-permissoes users
 TODO-calendário visitas
 TODO-não editavel a partir de 2a feira
 TODO-não compra à mais de 3 meses - aviso
+TODO-details as assistencias
+TODO-visitas-reformular
+TODO-contratos SW mais 3 meses
+TODO-contratos copia mais 6 meses
+TODO- CSW contacto - email
 -->
 
 <?php include_once 'php/session.php' ?>
@@ -62,7 +67,7 @@ TODO-não compra à mais de 3 meses - aviso
                         <div class="card">
                             <div class="card-body">
                                 <!-- Insert Content Here -->
-                                <canvas id="chart"></canvas>
+<!--                                <canvas id="chart"></canvas>-->
                             </div>
                             <!-- /.card-body -->
                         </div>

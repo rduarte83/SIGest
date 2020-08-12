@@ -204,7 +204,7 @@
                             <div class="col-sm-8" id="morada-p"></div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-4 text-bold">Zona:</div>
+                            <div class="col-sm-4 text-bold">Cód. Postal:</div>
                             <div class="col-sm-8" id="zona-p"></div>
                         </div>
                         <div class="row">

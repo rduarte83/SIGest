@@ -46,8 +46,8 @@ $(document).ready(function () {
                     $("#cli").html('<option value="0">Seleccionar Cliente</option>');
                     $.each(dataResult.data, function () {
                         if (this[0] == cli_id) {
-                            $("#prod").append($("<option/>").val(this[0]).text(this[1] + " " + this[2] + " " + this[3]).prop("selected", "selected"));
-                        } else $("#prod").append($("<option/>").val(this[0]).text(this[1] + " " + this[2] + " " + this[3]));
+                            $("#cli").append($("<option/>").val(this[0]).text(this[2]).prop("selected", "selected"));
+                        } else $("#cli").append($("<option/>").val(this[0]).text(this[2]));
                     });
                 }
             });

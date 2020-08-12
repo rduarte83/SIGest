@@ -52,6 +52,12 @@ $(document).ready(function () {
                 op: 'fetchCopia'
             }
         },
+        createdRow: function (row, data) {
+            console.log(data);
+            //86400000 - 1 day in ms")
+            if (Math.round((Date.now() - new Date(data[4]).getTime()) / 86400000) >= 90)
+                $(row).addClass('red');
+        },
         dom: 'Bfrtip',
         columnDefs: [
             {"visible": false, "targets": [6,7,8,9]}

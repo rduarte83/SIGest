@@ -427,27 +427,6 @@ if ($_POST['op'] == 'fetchPen') {
     echo json_encode($output);
 }
 
-if ($_POST['op'] == 'countVisPen') {
-    $output = array();
-    $query = "
-        SELECT COUNT(id) AS count FROM visitas WHERE prox_vis < CURDATE()
-        ";
-    $statement = $conn->prepare($query);
-    $statement->execute();
-    $result = $statement->fetchAll();
-    $data = array();
-
-    foreach ($result as $row) {
-        $sub_array = array();
-        $sub_array[] = $row["count"];
-        $data[] = $sub_array;
-    }
-    $output = array(
-        "data" => $data
-    );
-    echo json_encode($output);
-}
-
 if ($_POST['op'] == 'fetchAss') {
     $output = array();
     $query = "
@@ -475,6 +454,7 @@ if ($_POST['op'] == 'fetchAss') {
         $sub_array[] = $row["username"];
         $sub_array[] = $row["problema"];
         $sub_array[] = $row["data_i"];
+        $sub_array[] = $row["obs"];
         $sub_array[] = $row["tempo"];
         $sub_array[] = $row["valor"];
         $sub_array[] = $row["estado"];
@@ -534,6 +514,7 @@ if ($_POST['op'] == 'fetchAssCli') {
         $sub_array[] = $row["username"];
         $sub_array[] = $row["problema"];
         $sub_array[] = $row["data_i"];
+        $sub_array[] = $row["obs"];
         $sub_array[] = $row["valor"];
         $sub_array[] = $row["estado"];
         $sub_array[] = $row["facturado"];

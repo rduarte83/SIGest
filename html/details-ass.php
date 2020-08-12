@@ -65,15 +65,17 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-form-label col-sm-2">Cliente</label>
+                                    <label class="col-sm-2 col-form-label">Cliente</label>
                                     <div class="col-sm-10">
-                                        <input type="text" id="cli" name="cliente_id" class="form-control" readonly>
+                                        <select class="custom-select form-control" name="cliente_id" id="cli" readonly>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-sm-2">Produto</label>
                                     <div class="col-sm-10">
-                                        <input type="text" id="prod" name="produto_id" class="form-control" readonly>
+                                        <select class="custom-select form-control" id="prod" name="produto" readonly>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -97,7 +99,8 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-sm-2">Técnico</label>
                                     <div class="col-sm-10">
-                                        <input type="text" id="tecnico" name="tecnico" class="form-control" readonly>
+                                        <select class="custom-select form-control" id="tecnico" name="tecnico" readonly>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -226,7 +229,7 @@
                             <div class="col-sm-8" id="morada-p"></div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-4 text-bold">Zona:</div>
+                            <div class="col-sm-4 text-bold">Cód. Postal:</div>
                             <div class="col-sm-8" id="zona-p"></div>
                         </div>
                         <div class="row">

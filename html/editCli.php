@@ -76,7 +76,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Zona</label>
+                                <label class="col-sm-2 col-form-label">Cód. Postal</label>
                                 <div class="col-sm-10">
                                     <input type="text" id="zona" name="zona" class="form-control">
                                 </div>
