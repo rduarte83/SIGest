@@ -66,7 +66,7 @@
                                     <thead>
                                     <th>Id</th>
                                     <th>Cliente</th>
-                                    <th>Ultima Visita</th>
+                                    <th>Data da Visita</th>
                                     <th>Motivo</th>
                                     <th>Vendedor</th>
                                     <th>Descrição</th>

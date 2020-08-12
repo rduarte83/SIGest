@@ -16,11 +16,12 @@
     <!-- DataTables -->
     <link rel="stylesheet" type="text/css"
           href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/b-1.6.2/b-html5-1.6.2/r-2.2.5/datatables.min.css"/>
-
     <!-- Theme style -->
     <link rel="stylesheet" href="../css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- Style -->
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">

@@ -87,7 +87,7 @@
                     <?= (basename($_SERVER['PHP_SELF']) == "sw.php") |
                         (basename($_SERVER['PHP_SELF']) == "addSw.php")
                             ? "active" : ""; ?>">
-                        <i class="nav-icon fa fa-usd"></i>
+                        <i class="nav-icon fa fa-cutlery"></i>
                         <p>Contratos de Software
                             <i class="fa fa-angle-left right"></i>
                         </p>
@@ -173,7 +173,7 @@
                         (basename($_SERVER['PHP_SELF']) == "pendentes.php")
                             ? "active" : ""; ?>">
                         <i class="nav-icon fa fa-user"></i>
-                        <p>Visitas a Clientes
+                        <p>Visitas
                             <i class="fa fa-angle-left right"></i>
                         </p>
                     </a>
@@ -196,7 +196,7 @@
                             <a href="/sigest/html/pendentes.php"
                                class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "pendentes.php") ? "active" : ""; ?>">
                                 <i class="nav-icon fa fa-history"></i>
-                                <p>Visitas Pendentes</p>
+                                <p>Visitas em Atraso</p>
                                 <span class="badge badge-danger right" id="visPen"></span>
                             </a>
                         </li>
@@ -209,6 +209,57 @@
                         </li>
                     </ul>
                 </li>
+
+                <li class="nav-item has-treeview
+                    <?= (basename($_SERVER['PHP_SELF']) == "cobrancas.php") |
+                (basename($_SERVER['PHP_SELF']) == "addCob.php") |
+                (basename($_SERVER['PHP_SELF']) == "calCob.php") |
+                (basename($_SERVER['PHP_SELF']) == "penCob.php")
+                    ? "menu-open" : ""; ?>">
+                    <a href="#" class="nav-link
+                    <?= (basename($_SERVER['PHP_SELF']) == "cobrancas.php") |
+                    (basename($_SERVER['PHP_SELF']) == "addCob.php") |
+                    (basename($_SERVER['PHP_SELF']) == "calCob.php") |
+                    (basename($_SERVER['PHP_SELF']) == "penCob.php")
+                        ? "active" : ""; ?>">
+                        <i class="nav-icon fa fa-dollar"></i>
+                        <p>Cobranças
+                            <i class="fa fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview menu-open">
+                        <li class="nav-item">
+                            <a href="/sigest/html/calCob.php"
+                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "calCob.php") ? "active" : ""; ?>">
+                                <i class="fa fa-calendar nav-icon"></i>
+                                <p>Calendário de Cobranças</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/sigest/html/cobrancas.php"
+                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "cobrancas.php") ? "active" : ""; ?>">
+                                <i class="fa fa-list nav-icon"></i>
+                                <p>Listar Cobranças</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/sigest/html/penCob.php"
+                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "penCob.php") ? "active" : ""; ?>">
+                                <i class="nav-icon fa fa-history"></i>
+                                <p>Cobranças Pendentes</p>
+                                <span class="badge badge-danger right" id="visPen"></span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/sigest/html/addCob.php"
+                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "addCob.php") ? "active" : ""; ?>">
+                                <i class="fa fa-plus-circle nav-icon"></i>
+                                <p>Nova Cobrança</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
 
                 <li class="nav-item has-treeview
                     <?= (basename($_SERVER['PHP_SELF']) == "clientes.php") |

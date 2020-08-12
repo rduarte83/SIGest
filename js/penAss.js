@@ -93,6 +93,7 @@ $(document).ready(function () {
             },
         },
         createdRow: function (row, data) {
+            //86400000 - 1 day in ms")
             if (Math.round((Date.now() - new Date(data[8]).getTime()) / 86400000) >= 2 && data[13] == 'Pendente')
                 $(row).addClass('red');
             if (data[11] == 'Aguarda Peças') $(row).addClass('orange');

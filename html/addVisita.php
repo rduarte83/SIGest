@@ -60,15 +60,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-sm-2">Produto</label>
-                                <div class="col-sm-10">
-                                    <select class="custom-select form-control" id="prod" name="produto_id" required>
-                                        <option value="0">Seleccionar Produto</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-sm-2">Última Visita</label>
+                                <label class="col-form-label col-sm-2">Data da Visita</label>
                                 <div class="col-sm-10">
                                     <input type="datetime-local" id="ult_vis" name="ult_vis" class="form-control" required>
                                 </div>

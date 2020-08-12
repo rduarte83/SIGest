@@ -1,15 +1,15 @@
 <!--
+TODO-modulo cobrancas
+TODO-calendário visitas
 TODO-auditoria (registo alteracoes)
 TODO-aprovar registos de novos users
 TODO-criar user list
 TODO-permissoes users
-TODO-calendário visitas
 TODO-não editavel a partir de 2a feira
 TODO-não compra à mais de 3 meses - aviso
 TODO-details as assistencias
 TODO-visitas-reformular
-TODO-contratos SW mais 3 meses
-TODO-contratos copia mais 6 meses
+
 TODO- CSW contacto - email
 -->
 
@@ -67,7 +67,7 @@ TODO- CSW contacto - email
                         <div class="card">
                             <div class="card-body">
                                 <!-- Insert Content Here -->
-<!--                                <canvas id="chart"></canvas>-->
+                                <!--<canvas id="chart"></canvas>-->
                             </div>
                             <!-- /.card-body -->
                         </div>
