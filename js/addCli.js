@@ -14,9 +14,6 @@ $("#addForm").on('submit',function (e) {
                 if (param == "cal") window.location.href = "../html/addAssist.php?op=cal&cli=" + $("#nif").val();
                 if (param == "ass") window.location.href = "../html/addAssist.php?op=ass&cli=" + $("#nif").val();
             } else window.location.href = "../html/clientes.php";
-            if (dataResult.statusCode == 201) {
-                alert(dataResult);
-            }
         }
     });
 });

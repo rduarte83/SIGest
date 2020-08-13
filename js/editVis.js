@@ -98,8 +98,7 @@ $("#addForm").on('submit', function (e) {
             if (search.has("op")) {
                 var param = search.get("op");
                 if (param == "cal") window.location.href = "../html/calVis.php";
-                else window.location.href = "../html/visitas.php";
-            };
+            } else window.location.href = "../html/visitas.php";
         }
     });
 });

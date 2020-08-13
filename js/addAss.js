@@ -106,11 +106,7 @@ $('#addForm').on('submit', function (e) {
                         if (search.has("op")) {
                             var param = search.get("op");
                             if (param == "cal") window.location.href = "../html/calAss.php";
-                            else window.location.href = "../html/assistencias.php";
-                        };
-                        if (dataResult.statusCode == 201) {
-                            alert(dataResult);
-                        };
+                        } else window.location.href = "../html/assistencias.php";
                     }
                 }
             });

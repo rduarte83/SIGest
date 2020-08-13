@@ -886,10 +886,8 @@ if ($_POST['op'] == 'fetchCob') {
         $sub_array = array();
         $sub_array[] = $row["id"];
         $sub_array[] = $row["cliente"];
-        $sub_array[] = $row["ult_vis"];
+        $sub_array[] = $row["data"];
         $sub_array[] = $row["motivo"];
-        $sub_array[] = $row["vendedor"];
-        $sub_array[] = $row["username"];
         $sub_array[] = $row["descricao"];
         $sub_array[] = '
                     <a href="editCob.php" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '">
@@ -911,17 +909,14 @@ if ($_POST['op'] == 'fetchCob') {
 if ($_POST['op'] == 'fetchCobS') {
     $output = array();
     $query = "
-        SELECT v.*, c.cliente, m.motivo, u.username FROM visitas v  
-            INNER JOIN clientes c ON v.cliente_id=c.nif
-            INNER JOIN motivos m ON v.motivo_id=m.id
-            INNER JOIN users u ON v.tecnico=u.id
-            WHERE v.id = :id
+        SELECT o.*, c.cliente FROM cobrancas o INNER JOIN clientes c ON o.cliente_id=c.nif
+            WHERE o.id=:id;
         ";
 
     $statement = $conn->prepare($query);
     $statement->execute(
         array(
-            ':id' => $_POST["vis_id"]
+            ':id' => $_POST["cob_id"],
         )
     );
     $result = $statement->fetchAll();
@@ -931,15 +926,10 @@ if ($_POST['op'] == 'fetchCobS') {
         $sub_array = array();
         $sub_array[] = $row["id"];
         $sub_array[] = $row["cliente"];
-        $sub_array[] = $row["ult_vis"];
+        $sub_array[] = $row["data"];
         $sub_array[] = $row["motivo"];
-        $sub_array[] = $row["vendedor"];
-        $sub_array[] = $row["tecnico"];
         $sub_array[] = $row["descricao"];
         $sub_array[] = $row["cliente_id"];
-        $sub_array[] = $row["tecnico"];
-        $sub_array[] = $row["motivo_id"];
-
         $data[] = $sub_array;
     }
     $output = array(
@@ -951,10 +941,7 @@ if ($_POST['op'] == 'fetchCobS') {
 if ($_POST['op'] == 'fetchCobCli') {
     $output = array();
     $query = "
-        SELECT v.*, c.cliente, m.motivo FROM visitas v  
-            INNER JOIN clientes c ON v.cliente_id=c.nif
-            INNER JOIN motivos m ON v.motivo_id=m.id
-            WHERE v.cliente_id = :cliente_id
+       SELECT o.*, c.cliente FROM cobrancas o INNER JOIN clientes c ON o.cliente_id=c.nif WHERE cliente_id=:cliente_id
         ";
 
     $statement = $conn->prepare($query);
@@ -970,9 +957,8 @@ if ($_POST['op'] == 'fetchCobCli') {
         $sub_array = array();
         $sub_array[] = $row["id"];
         $sub_array[] = $row["cliente"];
-        $sub_array[] = $row["ult_vis"];
+        $sub_array[] = $row["data"];
         $sub_array[] = $row["motivo"];
-        $sub_array[] = $row["vendedor"];
         $sub_array[] = $row["descricao"];
         $sub_array[] = '
                     <a href="editCob.php" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '">
@@ -989,4 +975,49 @@ if ($_POST['op'] == 'fetchCobCli') {
         "data" => $data
     );
     echo json_encode($output);
+}
+
+if ($_POST['op'] == 'addCob') {
+    $query = "
+			INSERT INTO cobrancas (cliente_id, data, motivo, descricao) VALUES (:cliente_id, :data, :motivo, :descricao)     
+		";
+
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':cliente_id' => $_POST["c_id"],
+            ':data' => $_POST["data"],
+            ':motivo' => $_POST["motivo"],
+            ':descricao' => $_POST["descricao"]
+        )
+    );
+}
+
+if ($_POST['op'] == 'delCob') {
+    $query = "
+                DELETE FROM cobrancas WHERE id = :cob_id
+    ";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':cob_id' => $_POST["cob_id"],
+        )
+    );
+}
+
+if ($_POST['op'] == 'editCob') {
+    $query = "
+                UPDATE cobrancas SET cliente_id=:cliente_id, data=:data, motivo=:motivo, descricao=:descricao 
+                    WHERE id=:id               
+    ";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':id' => $_POST["id"],
+            ':cliente_id' => $_POST["cliente_id"],
+            ':data' => $_POST["data"],
+            ':motivo' => $_POST["motivo"],
+            ':descricao' => $_POST["descricao"]
+        )
+    );
 }

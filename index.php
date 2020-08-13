@@ -1,7 +1,9 @@
 <!--
+TODO-alterar cancel behaviour
 TODO-modulo cobrancas
 TODO-assumir data onclick cal
-TODO- CSW contacto - email
+TODO-alterar estrutura de ficheiros
+TODO- CSW contacto - email - reformular contratos SW
 TODO-aprovar registos de novos users
 TODO-criar user list
 TODO-permissoes users

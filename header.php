@@ -243,14 +243,14 @@
                                 <p>Listar Cobranças</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <!--<li class="nav-item">
                             <a href="/sigest/html/penCob.php"
-                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "penCob.php") ? "active" : ""; ?>">
+                               class="nav-link <?/*= (basename($_SERVER['PHP_SELF']) == "penCob.php") ? "active" : ""; */?>">
                                 <i class="nav-icon fa fa-history"></i>
                                 <p>Cobranças Pendentes</p>
                                 <span class="badge badge-danger right" id="visPen"></span>
                             </a>
-                        </li>
+                        </li>-->
                         <li class="nav-item">
                             <a href="/sigest/html/addCob.php"
                                class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "addCob.php") ? "active" : ""; ?>">

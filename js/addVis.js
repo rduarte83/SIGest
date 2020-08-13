@@ -91,7 +91,16 @@ $('#addForm').on('submit', function (e) {
         processData: false,
         type: "post",
         url: "../php/queries.php",
+        success: function (dataResult) {
+            var search = new URLSearchParams(window.location.search);
+            if (search.has("op")) {
+                var param = search.get("op");
+                if (param == "cal") window.location.href = "../html/calVis.php";
+            } else window.location.href = "../html/visitas.php";
+        }
     });
+
+
 });
 
 
