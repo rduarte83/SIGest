@@ -103,7 +103,7 @@
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <input type="hidden" name="op" value="addCli">
-                            <a href="../index.php">
+                            <a href="clientes.php">
                                 <button type="button" class="btn btn-default ">Cancelar</button>
                             </a>
                             <button type="submit" class="btn btn-success float-right">Confirmar</button>

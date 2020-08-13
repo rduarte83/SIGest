@@ -114,7 +114,7 @@
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <input type="hidden" name="op" value="addSw">
-                            <a href="../index.php">
+                            <a href="sw.php">
                                 <button type="button" class="btn btn-default ">Cancelar</button>
                             </a>
                             <button type="submit" class="btn btn-success float-right">Confirmar</button>

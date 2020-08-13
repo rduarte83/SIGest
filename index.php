@@ -1,7 +1,5 @@
 <!--
 TODO-1 segimprima 2 pedro 10 tiago 15 pablo 18 ricardo
-TODO-alterar cancel behaviour
-TODO-modulo cobrancas
 TODO-assumir data onclick cal
 TODO-alterar estrutura de ficheiros
 TODO- CSW contacto - email - reformular contratos SW
