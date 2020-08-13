@@ -63,7 +63,7 @@
                                     <th>Cliente</th>
                                     <th>Ultima Visita</th>
                                     <th>Motivo</th>
-                                    <th>Vendedor</th>
+                                    <th>Comercial</th>
                                     <th>Descrição</th>
                                     </thead>
                                     <tbody>

@@ -139,7 +139,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label>Função</label>
                     <select class="custom-select form-control" name="role" id="role">
                         <option value="0">Seleccionar Função</option>
-                        <option value="administrador">Administrador</option>
+                        <option value="admin">Administrador</option>
                         <option value="tecnico">Técnico</option>
                         <option value="comercial">Comercial</option>
                         <option value="administrativo">Administrativo</option>

@@ -68,7 +68,7 @@
                                     <th>Cliente</th>
                                     <th>Data</th>
                                     <th>Motivo</th>
-                                    <th>Vendedor</th>
+                                    <th>Comercial</th>
                                     <th>Técnico</th>
                                     <th>Descrição</th>
                                     <th>Operações</th>

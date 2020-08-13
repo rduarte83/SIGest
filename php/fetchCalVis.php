@@ -1,11 +1,16 @@
 <?php
 include_once 'db.php';
+include_once 'session.php';
 
 $query = "
             SELECT v.*, c.cliente, m.motivo FROM visitas v 
                 INNER JOIN clientes c ON v.cliente_id=c.nif 
                 INNER JOIN motivos m ON v.motivo_id=m.id
                 ";
+
+if( $_SESSION["role"] == "comercial") {
+    $query .= " WHERE vendedor=" . "'" .$_SESSION["username"] . "'";
+}
 
 $statement = $conn->prepare($query);
 $statement->execute();

@@ -29,6 +29,15 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="/sigest/img/avatar.png" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="" class="d-block"><?php echo ucfirst($_SESSION["username"])?></a>
+            </div>
+        </div>
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -41,126 +50,141 @@
                     </a>
                 </li>
 
-                <li class="nav-item has-treeview
-                    <?= (basename($_SERVER['PHP_SELF']) == "copia.php") |
-                (basename($_SERVER['PHP_SELF']) == "addCopia.php") |
-                (basename($_SERVER['PHP_SELF']) == "addContagem.php")
-                    ? "menu-open" : ""; ?>">
-                    <a href="#" class="nav-link
+                <?php
+                if ($_SESSION["role"] != "comercial") {
+                    ?>
+                    <li class="nav-item has-treeview
                     <?= (basename($_SERVER['PHP_SELF']) == "copia.php") |
                     (basename($_SERVER['PHP_SELF']) == "addCopia.php") |
                     (basename($_SERVER['PHP_SELF']) == "addContagem.php")
-                        ? "active" : ""; ?>">
-                        <i class="nav-icon fa fa-print"></i>
-                        <p>Contratos de Cópia
-                            <i class="fa fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/sigest/html/copia.php"
-                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "copia.php") ? "active" : ""; ?>">
-                                <i class="fa fa-list nav-icon"></i>
-                                <p>Listar Contratos</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/sigest/html/addCopia.php"
-                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "addCopia.php") ? "active" : ""; ?>">
-                                <i class="fa fa-plus-circle nav-icon"></i>
-                                <p>Novo Contrato</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/sigest/html/addContagem.php"
-                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "addContagem.php") ? "active" : ""; ?>">
-                                <i class="fa fa-plus-circle nav-icon"></i>
-                                <p>Nova Contagem</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item has-treeview
-                    <?= (basename($_SERVER['PHP_SELF']) == "sw.php") |
-                (basename($_SERVER['PHP_SELF']) == "addSw.php")
-                    ? "menu-open" : ""; ?>">
-                    <a href="#" class="nav-link
+                        ? "menu-open" : ""; ?>">
+                        <a href="#" class="nav-link
+                    <?= (basename($_SERVER['PHP_SELF']) == "copia.php") |
+                        (basename($_SERVER['PHP_SELF']) == "addCopia.php") |
+                        (basename($_SERVER['PHP_SELF']) == "addContagem.php")
+                            ? "active" : ""; ?>">
+                            <i class="nav-icon fa fa-print"></i>
+                            <p>Contratos de Cópia
+                                <i class="fa fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/sigest/html/copia.php"
+                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "copia.php") ? "active" : ""; ?>">
+                                    <i class="fa fa-list nav-icon"></i>
+                                    <p>Listar Contratos</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/sigest/html/addCopia.php"
+                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "addCopia.php") ? "active" : ""; ?>">
+                                    <i class="fa fa-plus-circle nav-icon"></i>
+                                    <p>Novo Contrato</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/sigest/html/addContagem.php"
+                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "addContagem.php") ? "active" : ""; ?>">
+                                    <i class="fa fa-plus-circle nav-icon"></i>
+                                    <p>Nova Contagem</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-treeview
                     <?= (basename($_SERVER['PHP_SELF']) == "sw.php") |
                     (basename($_SERVER['PHP_SELF']) == "addSw.php")
-                        ? "active" : ""; ?>">
-                        <i class="nav-icon fa fa-cutlery"></i>
-                        <p>Contratos de Software
-                            <i class="fa fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview menu-open">
-                        <li class="nav-item">
-                            <a href="/sigest/html/sw.php"
-                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "sw.php") ? "active" : ""; ?>">
-                                <i class="fa fa-list nav-icon"></i>
-                                <p>Listar Contratos</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/sigest/html/addSw.php"
-                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "addSw.php") ? "active" : ""; ?>">
-                                <i class="fa fa-plus-circle nav-icon"></i>
-                                <p>Novo Contrato</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                        ? "menu-open" : ""; ?>">
+                        <a href="#" class="nav-link
+                    <?= (basename($_SERVER['PHP_SELF']) == "sw.php") |
+                        (basename($_SERVER['PHP_SELF']) == "addSw.php")
+                            ? "active" : ""; ?>">
+                            <i class="nav-icon fa fa-cutlery"></i>
+                            <p>Contratos de Software
+                                <i class="fa fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview menu-open">
+                            <li class="nav-item">
+                                <a href="/sigest/html/sw.php"
+                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "sw.php") ? "active" : ""; ?>">
+                                    <i class="fa fa-list nav-icon"></i>
+                                    <p>Listar Contratos</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/sigest/html/addSw.php"
+                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "addSw.php") ? "active" : ""; ?>">
+                                    <i class="fa fa-plus-circle nav-icon"></i>
+                                    <p>Novo Contrato</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <?php
+                }
+                ?>
 
-                <li class="nav-item has-treeview
-                    <?= (basename($_SERVER['PHP_SELF']) == "assistencias.php") |
-                (basename($_SERVER['PHP_SELF']) == "addAssist.php") |
-                (basename($_SERVER['PHP_SELF']) == "penAss.php") |
-                (basename($_SERVER['PHP_SELF']) == "calAss.php")
-                    ? "menu-open" : ""; ?>">
-                    <a href="#" class="nav-link
+                <?php
+                if ($_SESSION["role"] != "comercial") {
+                    ?>
+                    <li class="nav-item has-treeview
                     <?= (basename($_SERVER['PHP_SELF']) == "assistencias.php") |
                     (basename($_SERVER['PHP_SELF']) == "addAssist.php") |
                     (basename($_SERVER['PHP_SELF']) == "penAss.php") |
                     (basename($_SERVER['PHP_SELF']) == "calAss.php")
-                        ? "active" : ""; ?>">
-                        <i class="nav-icon fa fa-wrench"></i>
-                        <p>Assistências Técnicas
-                            <i class="fa fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview menu-open">
-                        <li class="nav-item">
-                            <a href="/sigest/html/calAss.php"
-                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "calAss.php") ? "active" : ""; ?>">
-                                <i class="fa fa-calendar nav-icon"></i>
-                                <p>Calendário de Assistências</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/sigest/html/assistencias.php"
-                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "assistencias.php") ? "active" : ""; ?>">
-                                <i class="fa fa-list nav-icon"></i>
-                                <p>Listar Assistências</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/sigest/html/penAss.php"
-                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "penAss.php") ? "active" : ""; ?>">
-                                <i class="nav-icon fa fa-history"></i>
-                                <p>Assistências Pendentes</p>
-                                <span class="badge badge-danger right" id="assPen"></span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/sigest/html/addAssist.php"
-                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "addAssist.php") ? "active" : ""; ?>">
-                                <i class="fa fa-plus-circle nav-icon"></i>
-                                <p>Nova Assistência</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                        ? "menu-open" : ""; ?>">
+                        <a href="#" class="nav-link
+                    <?= (basename($_SERVER['PHP_SELF']) == "assistencias.php") |
+                        (basename($_SERVER['PHP_SELF']) == "addAssist.php") |
+                        (basename($_SERVER['PHP_SELF']) == "penAss.php") |
+                        (basename($_SERVER['PHP_SELF']) == "calAss.php")
+                            ? "active" : ""; ?>">
+                            <i class="nav-icon fa fa-wrench"></i>
+                            <p>Assistências Técnicas
+                                <i class="fa fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview menu-open">
+                            <li class="nav-item">
+                                <a href="/sigest/html/calAss.php"
+                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "calAss.php") ? "active" : ""; ?>">
+                                    <i class="fa fa-calendar nav-icon"></i>
+                                    <p>Calendário de Assistências</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/sigest/html/assistencias.php"
+                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "assistencias.php") ? "active" : ""; ?>">
+                                    <i class="fa fa-list nav-icon"></i>
+                                    <p>Listar Assistências</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/sigest/html/penAss.php"
+                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "penAss.php") ? "active" : ""; ?>">
+                                    <i class="nav-icon fa fa-history"></i>
+                                    <p>Assistências Pendentes</p>
+                                    <span class="badge badge-danger right" id="assPen"></span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/sigest/html/addAssist.php"
+                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "addAssist.php") ? "active" : ""; ?>">
+                                    <i class="fa fa-plus-circle nav-icon"></i>
+                                    <p>Nova Assistência</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <?php
+                }
+                ?>
 
+                <?php
+                if ($_SESSION["role"] == "comercial" || $_SESSION["role"] == "admin" ) {
+                ?>
                 <li class="nav-item has-treeview
                     <?= (basename($_SERVER['PHP_SELF']) == "visitas.php") |
                 (basename($_SERVER['PHP_SELF']) == "addVisita.php") |
@@ -210,56 +234,65 @@
                         </li>
                     </ul>
                 </li>
+                <?php
+                }
+                ?>
 
-                <li class="nav-item has-treeview
-                    <?= (basename($_SERVER['PHP_SELF']) == "cobrancas.php") |
-                (basename($_SERVER['PHP_SELF']) == "addCob.php") |
-                (basename($_SERVER['PHP_SELF']) == "calCob.php") |
-                (basename($_SERVER['PHP_SELF']) == "penCob.php")
-                    ? "menu-open" : ""; ?>">
-                    <a href="#" class="nav-link
+                <?php
+                if ($_SESSION["role"] == "administrativo" || $_SESSION["role"] == "admin") {
+                    ?>
+                    <li class="nav-item has-treeview
                     <?= (basename($_SERVER['PHP_SELF']) == "cobrancas.php") |
                     (basename($_SERVER['PHP_SELF']) == "addCob.php") |
                     (basename($_SERVER['PHP_SELF']) == "calCob.php") |
                     (basename($_SERVER['PHP_SELF']) == "penCob.php")
-                        ? "active" : ""; ?>">
-                        <i class="nav-icon fa fa-dollar"></i>
-                        <p>Cobranças
-                            <i class="fa fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview menu-open">
-                        <li class="nav-item">
-                            <a href="/sigest/html/calCob.php"
-                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "calCob.php") ? "active" : ""; ?>">
-                                <i class="fa fa-calendar nav-icon"></i>
-                                <p>Calendário de Cobranças</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/sigest/html/cobrancas.php"
-                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "cobrancas.php") ? "active" : ""; ?>">
-                                <i class="fa fa-list nav-icon"></i>
-                                <p>Listar Cobranças</p>
-                            </a>
-                        </li>
-                        <!--<li class="nav-item">
+                        ? "menu-open" : ""; ?>">
+                        <a href="#" class="nav-link
+                    <?= (basename($_SERVER['PHP_SELF']) == "cobrancas.php") |
+                        (basename($_SERVER['PHP_SELF']) == "addCob.php") |
+                        (basename($_SERVER['PHP_SELF']) == "calCob.php") |
+                        (basename($_SERVER['PHP_SELF']) == "penCob.php")
+                            ? "active" : ""; ?>">
+                            <i class="nav-icon fa fa-dollar"></i>
+                            <p>Cobranças
+                                <i class="fa fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview menu-open">
+                            <li class="nav-item">
+                                <a href="/sigest/html/calCob.php"
+                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "calCob.php") ? "active" : ""; ?>">
+                                    <i class="fa fa-calendar nav-icon"></i>
+                                    <p>Calendário de Cobranças</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/sigest/html/cobrancas.php"
+                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "cobrancas.php") ? "active" : ""; ?>">
+                                    <i class="fa fa-list nav-icon"></i>
+                                    <p>Listar Cobranças</p>
+                                </a>
+                            </li>
+                            <!--<li class="nav-item">
                             <a href="/sigest/html/penCob.php"
-                               class="nav-link <?/*= (basename($_SERVER['PHP_SELF']) == "penCob.php") ? "active" : ""; */?>">
+                               class="nav-link <?/*= (basename($_SERVER['PHP_SELF']) == "penCob.php") ? "active" : ""; */ ?>">
                                 <i class="nav-icon fa fa-history"></i>
                                 <p>Cobranças Pendentes</p>
                                 <span class="badge badge-danger right" id="visPen"></span>
                             </a>
                         </li>-->
-                        <li class="nav-item">
-                            <a href="/sigest/html/addCob.php"
-                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "addCob.php") ? "active" : ""; ?>">
-                                <i class="fa fa-plus-circle nav-icon"></i>
-                                <p>Nova Cobrança</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                            <li class="nav-item">
+                                <a href="/sigest/html/addCob.php"
+                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "addCob.php") ? "active" : ""; ?>">
+                                    <i class="fa fa-plus-circle nav-icon"></i>
+                                    <p>Nova Cobrança</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <?php ;
+                }
+                ?>
 
 
                 <li class="nav-item has-treeview
