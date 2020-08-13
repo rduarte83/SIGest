@@ -31,3 +31,17 @@ if ($_POST['op'] == 'updVis') {
         )
     );
 }
+
+if ($_POST['op'] == 'updCob') {
+    $query = "
+            UPDATE cobrancas SET data=:start, data_end=:end WHERE id=:id
+		";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':id' => $_POST["id"],
+            ':start' => $_POST["start"],
+            ':end' => $_POST["end"],
+        )
+    );
+}

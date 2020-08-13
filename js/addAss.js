@@ -59,7 +59,6 @@ $(document).ready(function () {
 //<!-- Add assist -->
 $('#addForm').on('submit', function (e) {
     e.preventDefault();
-
     $.ajax({
         data: new FormData(this),
         contentType: false,

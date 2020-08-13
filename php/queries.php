@@ -979,7 +979,8 @@ if ($_POST['op'] == 'fetchCobCli') {
 
 if ($_POST['op'] == 'addCob') {
     $query = "
-			INSERT INTO cobrancas (cliente_id, data, motivo, descricao) VALUES (:cliente_id, :data, :motivo, :descricao)     
+			INSERT INTO cobrancas (cliente_id, data, motivo, descricao, data_end) 
+			    VALUES (:cliente_id, :data, :motivo, :descricao, DATE_ADD(:data, INTERVAL 30 MINUTE))     
 		";
 
     $statement = $conn->prepare($query);

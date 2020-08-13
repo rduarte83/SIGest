@@ -99,8 +99,6 @@ $('#addForm').on('submit', function (e) {
             } else window.location.href = "../html/visitas.php";
         }
     });
-
-
 });
 
 
