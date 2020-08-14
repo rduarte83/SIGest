@@ -13,7 +13,7 @@ require_once "../php/db.php";
 
 // Define variables and initialize with empty values
 $username = $password = "";
-$username_err = $password_err = "";
+$username_err = $password_err = $approved_err = "";
 
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate credentials
     if (empty($username_err) && empty($password_err)) {
         // Prepare a select statement
-        $sql = "SELECT id, username, password, role FROM users WHERE username = :username";
+        $sql = "SELECT id, username, password, role, approved FROM users WHERE username = :username";
 
         if ($stmt = $conn->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
@@ -53,21 +53,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $username = $row["username"];
                         $hashed_password = $row["password"];
                         $role = $row["role"];
-                        if (password_verify($password, $hashed_password)) {
-                            // Password is correct, so start a new session
-                            session_start();
+                        $approved = $row["approved"];
 
-                            // Store data in session variables
-                            $_SESSION["loggedin"] = true;
-                            $_SESSION["id"] = $id;
-                            $_SESSION["username"] = $username;
-                            $_SESSION["role"] = $role;
+                        if ($approved == 'sim') {
 
-                            // Redirect user to welcome page
-                            header("location: ../index.php");
+                            if (password_verify($password, $hashed_password)) {
+                                // Password is correct, so start a new session
+                                session_start();
+
+                                // Store data in session variables
+                                $_SESSION["loggedin"] = true;
+                                $_SESSION["id"] = $id;
+                                $_SESSION["username"] = $username;
+                                $_SESSION["role"] = $role;
+
+                                // Redirect user to welcome page
+                                header("location: ../index.php");
+                            } else {
+                                // Display an error message if password is not valid
+                                $password_err = "Palavra-passe inválida.";
+                            }
                         } else {
-                            // Display an error message if password is not valid
-                            $password_err = "Palavra-passe inválida.";
+                            $approved_err = "Utilizador não aprovado. Contacte o administrador.";
                         }
                     }
                 } else {
@@ -104,10 +111,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="../css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <!-- Bootstrap 4 -->
-    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
 </head>
 <body class="hold-transition login-page">
+<div class="row">
+    <div class="invalid-feedback d-block fixed-top text-center mt-5">
+        <h3><?php echo $approved_err; ?></h3>
+    </div>
+</div>
 <div class="login-logo">
     <div class="register-logo">
         <img src="../img/logo.png" alt="logo">
@@ -142,9 +152,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!-- /.login-box -->
 
 <!-- jQuery -->
-<script src="../plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <!-- Bootstrap 4 -->
-<script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
 <!-- AdminLTE App -->
 <script src="../js/adminlte.min.js"></script>
 </body>

@@ -8,7 +8,6 @@ $username_err = $password_err = $confirm_password_err = "";
 
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
     // Validate username
     if (empty(trim($_POST["username"]))) {
         $username_err = "Introduza um utilizador.";
@@ -106,8 +105,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="../css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <!-- Bootstrap 4 -->
-    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
 </head>
 <body class="hold-transition register-page">
 <div class="register-logo">
@@ -144,7 +141,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <option value="comercial">Comercial</option>
                         <option value="administrativo">Administrativo</option>
                     </select>
-                    <div></div>
                 </div>
                 <br>
                 <div class="form-group">
@@ -160,11 +156,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!-- /.register-box -->
 
 <!-- jQuery -->
-<script src="../plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <!-- Bootstrap 4 -->
-<script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
 <!-- AdminLTE App -->
 <script src="../js/adminlte.min.js"></script>
-
 </body>
 </html>

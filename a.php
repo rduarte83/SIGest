@@ -4,7 +4,5 @@ echo $_SESSION["username"];
 echo "<br>";
 echo $_SESSION["role"];
 echo "<br>";
-$t = "a";
-
-
-echo $t;
+$query = "SELECT * FROM users WHERE username=" . $_SESSION["username"];
+echo $query;

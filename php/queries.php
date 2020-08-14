@@ -1,5 +1,6 @@
 <?php
 include_once 'db.php';
+include_once 'session.php';
 
 if ($_POST['op'] == 'fetchCli') {
     $output = array();
@@ -19,6 +20,7 @@ if ($_POST['op'] == 'fetchCli') {
         $sub_array[] = $row["responsavel"];
         $sub_array[] = $row["contacto"];
         $sub_array[] = $row["email"];
+        $sub_array[] = $row["comercial"];
         $sub_array[] = '
                     <a href="editCli.php" class="edit btn btn-info btn-sm" data-id="' . $row["nif"] . ' ">
                         <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>
@@ -37,8 +39,8 @@ if ($_POST['op'] == 'fetchCli') {
 
 if ($_POST['op'] == 'addCli') {
     $query = "
-            INSERT INTO clientes (nif,id,cliente,morada,zona,responsavel,contacto,email) 
-                VALUES (:nif,:id,:cliente,:morada,:zona,:responsavel,:contacto,:email)
+            INSERT INTO clientes (nif,id,cliente,morada,zona,responsavel,contacto,email,comercial) 
+                VALUES (:nif,:id,:cliente,:morada,:zona,:responsavel,:contacto,:email,:comercial)
 		";
 
     $statement = $conn->prepare($query);
@@ -51,7 +53,8 @@ if ($_POST['op'] == 'addCli') {
             ':zona' => $_POST["zona"],
             ':responsavel' => $_POST["responsavel"],
             ':contacto' => $_POST["contacto"],
-            ':email' => $_POST["email"]
+            ':email' => $_POST["email"],
+            ':comercial' => $_POST["comercial"]
         )
     );
 }
@@ -78,6 +81,7 @@ if ($_POST['op'] == 'fetchCliS') {
         $sub_array[] = $row["responsavel"];
         $sub_array[] = $row["contacto"];
         $sub_array[] = $row["email"];
+        $sub_array[] = $row["comercial"];
         $data[] = $sub_array;
     }
     $output = array(
@@ -89,7 +93,7 @@ if ($_POST['op'] == 'fetchCliS') {
 if ($_POST['op'] == 'editCli') {
     $query = "
                 UPDATE clientes SET nif=:nif, id=:id, cliente=:cliente, morada=:morada, zona=:zona,
-                    responsavel=:responsavel, contacto=:contacto, email=:email WHERE nif=:nif
+                    responsavel=:responsavel, contacto=:contacto, email=:email, comercial=:comercial WHERE nif=:nif
     ";
     $statement = $conn->prepare($query);
     $result = $statement->execute(
@@ -101,7 +105,8 @@ if ($_POST['op'] == 'editCli') {
             ':zona' => $_POST["zona"],
             ':responsavel' => $_POST["responsavel"],
             ':contacto' => $_POST["contacto"],
-            ':email' => $_POST["email"]
+            ':email' => $_POST["email"],
+            ':comercial' => $_POST["comercial"]
         )
     );
 }
@@ -805,6 +810,31 @@ if ($_POST['op'] == 'fetchTec') {
     echo json_encode($output);
 }
 
+if ($_POST['op'] == 'fetchCom') {
+    $output = array();
+    if ($_SESSION["role"] == "comercial") {
+        $query = "SELECT * FROM users WHERE username='" . $_SESSION["username"] . "'";
+    } else {
+        $query = "SELECT * FROM users WHERE role='comercial'";
+    }
+    $statement = $conn->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $data = array();
+
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["id"];
+        $sub_array[] = $row["username"];
+        $sub_array[] = $row["role"];
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
 if ($_POST['op'] == 'fetchLastAss') {
     $output = array();
     $query = "
@@ -1022,3 +1052,79 @@ if ($_POST['op'] == 'editCob') {
         )
     );
 }
+
+if ($_POST['op'] == 'fetchUsers') {
+    $output = array();
+    $query = "
+        SELECT * FROM users; 
+        ";
+
+    $statement = $conn->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $data = array();
+
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["id"];
+        $sub_array[] = $row["username"];
+        $sub_array[] = $row["role"];
+        $sub_array[] = $row["approved"];
+        $sub_array[] = '
+                    <a href="#" class="confirm btn btn-success btn-sm" data-id="' . $row["id"] . '">
+                        <i class="fa fa-check" aria-hidden="true" data-toggle="tooltip" title="Aprovar Registo"></i>
+                    </a>
+                    <a href="editUser.php" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '">
+                        <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>
+                    </a>
+                    ';
+
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
+if ($_POST['op'] == 'fetchUser') {
+    $output = array();
+    $query = "
+        SELECT * FROM users WHERE id=:id; 
+        ";
+
+    $statement = $conn->prepare($query);
+    $statement->execute(
+        array(
+            ':id' => $_POST["id"]
+        )
+    );
+    $result = $statement->fetchAll();
+    $data = array();
+
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["id"];
+        $sub_array[] = $row["username"];
+        $sub_array[] = $row["role"];
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
+if ($_POST['op'] == 'userAp') {
+    $query = "
+			UPDATE users SET approved = 'sim';
+		";
+
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':id' => $_POST["id"]
+        )
+    );
+}
+

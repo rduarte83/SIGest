@@ -99,6 +99,13 @@
                                     <input type="email" id="email" name="email" class="form-control" required>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Comercial</label>
+                                <div class="col-sm-10">
+                                    <select name="comercial" id="comercial" class="form-control">
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
@@ -117,12 +124,9 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-
     <?php include '../footer.php' ?>
-
 </div>
 <!-- ./wrapper -->
-
 <script src="../js/addCli.js"></script>
 </body>
 </html>

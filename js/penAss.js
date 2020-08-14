@@ -93,12 +93,13 @@ $(document).ready(function () {
             },
         },
         createdRow: function (row, data) {
+            console.log(data);
             //86400000 - 1 day in ms")
             if (Math.round((Date.now() - new Date(data[8]).getTime()) / 86400000) >= 2 && data[13] == 'Pendente')
                 $(row).addClass('red');
-            if (data[11] == 'Aguarda Peças') $(row).addClass('orange');
-            if (data[11] == 'Resolvido') $(row).addClass('yellow');
-            if (data[12] == 'Sim') $(row).addClass('green');
+            if (data[12] == 'Aguarda Peças') $(row).addClass('orange');
+            if (data[12] == 'Resolvido') $(row).addClass('yellow');
+            if (data[13] == 'Sim') $(row).addClass('green');
             if (Math.round((Date.now() - new Date(data[8]).getTime()) / 86400000) >= 5 && data[11] == 'Resolvido')
                 datatable.rows($(row)).remove();
         },

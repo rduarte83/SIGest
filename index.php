@@ -1,11 +1,9 @@
 <!--
+TODO-adicionar vendedor nos clientes - auto qd login comercial
 TODO-1 segimprima 2 pedro 10 tiago 15 pablo 18 ricardo
 TODO-assumir data onclick cal
 TODO-alterar estrutura de ficheiros
 TODO- CSW contacto - email - reformular contratos SW
-TODO-aprovar registos de novos users
-TODO-criar user list
-TODO-permissoes users
 TODO-auditoria (registo alteracoes)
 TODO-não editavel a partir de 2a feira
 TODO-não compra à mais de 3 meses - aviso

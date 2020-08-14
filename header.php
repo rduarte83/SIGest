@@ -35,7 +35,7 @@
                 <img src="/sigest/img/avatar.png" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="" class="d-block"><?php echo ucfirst($_SESSION["username"])?></a>
+                <a href="" class="d-block"><?php echo ucfirst($_SESSION["username"]) ?></a>
             </div>
         </div>
         <!-- Sidebar Menu -->
@@ -178,63 +178,64 @@
                             </li>
                         </ul>
                     </li>
+
                     <?php
                 }
                 ?>
 
                 <?php
-                if ($_SESSION["role"] == "comercial" || $_SESSION["role"] == "admin" ) {
-                ?>
-                <li class="nav-item has-treeview
-                    <?= (basename($_SERVER['PHP_SELF']) == "visitas.php") |
-                (basename($_SERVER['PHP_SELF']) == "addVisita.php") |
-                (basename($_SERVER['PHP_SELF']) == "calVis.php") |
-                (basename($_SERVER['PHP_SELF']) == "penVis.php")
-                    ? "menu-open" : ""; ?>">
-                    <a href="#" class="nav-link
+                if ($_SESSION["role"] == "comercial" || $_SESSION["role"] == "admin") {
+                    ?>
+                    <li class="nav-item has-treeview
                     <?= (basename($_SERVER['PHP_SELF']) == "visitas.php") |
                     (basename($_SERVER['PHP_SELF']) == "addVisita.php") |
                     (basename($_SERVER['PHP_SELF']) == "calVis.php") |
                     (basename($_SERVER['PHP_SELF']) == "penVis.php")
-                        ? "active" : ""; ?>">
-                        <i class="nav-icon fa fa-user"></i>
-                        <p>Visitas
-                            <i class="fa fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview menu-open">
-                        <li class="nav-item">
-                            <a href="/sigest/html/calVis.php"
-                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "calVis.php") ? "active" : ""; ?>">
-                                <i class="fa fa-calendar nav-icon"></i>
-                                <p>Calendário de Visitas</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/sigest/html/visitas.php"
-                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "visitas.php") ? "active" : ""; ?>">
-                                <i class="fa fa-list nav-icon"></i>
-                                <p>Listar Visitas</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/sigest/html/penVis.php"
-                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "penVis.php") ? "active" : ""; ?>">
-                                <i class="nav-icon fa fa-history"></i>
-                                <p>Visitas em Atraso</p>
-                                <span class="badge badge-danger right" id="visPen"></span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/sigest/html/addVisita.php"
-                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "addVisita.php") ? "active" : ""; ?>">
-                                <i class="fa fa-plus-circle nav-icon"></i>
-                                <p>Nova Visita</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <?php
+                        ? "menu-open" : ""; ?>">
+                        <a href="#" class="nav-link
+                    <?= (basename($_SERVER['PHP_SELF']) == "visitas.php") |
+                        (basename($_SERVER['PHP_SELF']) == "addVisita.php") |
+                        (basename($_SERVER['PHP_SELF']) == "calVis.php") |
+                        (basename($_SERVER['PHP_SELF']) == "penVis.php")
+                            ? "active" : ""; ?>">
+                            <i class="nav-icon fa fa-user"></i>
+                            <p>Visitas
+                                <i class="fa fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview menu-open">
+                            <li class="nav-item">
+                                <a href="/sigest/html/calVis.php"
+                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "calVis.php") ? "active" : ""; ?>">
+                                    <i class="fa fa-calendar nav-icon"></i>
+                                    <p>Calendário de Visitas</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/sigest/html/visitas.php"
+                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "visitas.php") ? "active" : ""; ?>">
+                                    <i class="fa fa-list nav-icon"></i>
+                                    <p>Listar Visitas</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/sigest/html/penVis.php"
+                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "penVis.php") ? "active" : ""; ?>">
+                                    <i class="nav-icon fa fa-history"></i>
+                                    <p>Visitas em Atraso</p>
+                                    <span class="badge badge-danger right" id="visPen"></span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/sigest/html/addVisita.php"
+                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "addVisita.php") ? "active" : ""; ?>">
+                                    <i class="fa fa-plus-circle nav-icon"></i>
+                                    <p>Nova Visita</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <?php
                 }
                 ?>
 
@@ -293,7 +294,6 @@
                     <?php ;
                 }
                 ?>
-
 
                 <li class="nav-item has-treeview
                     <?= (basename($_SERVER['PHP_SELF']) == "clientes.php") |
@@ -356,6 +356,43 @@
                         </li>
                     </ul>
                 </li>
+
+                <?php
+                if ($_SESSION["role"] == "admin") {
+                    ?>
+                    <li class="nav-item has-treeview
+                    <?= (basename($_SERVER['PHP_SELF']) == "users.php") |
+                    (basename($_SERVER['PHP_SELF']) == "auditoria.php")
+                        ? "menu-open" : ""; ?>">
+                        <a href="#" class="nav-link
+                    <?= (basename($_SERVER['PHP_SELF']) == "users.php") |
+                        (basename($_SERVER['PHP_SELF']) == "auditoria.php")
+                            ? "active" : ""; ?>">
+                            <i class="nav-icon fa fa-lock"></i>
+                            <p>Administração
+                                <i class="fa fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/sigest/html/users.php"
+                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "users.php") ? "active" : ""; ?>">
+                                    <i class="fa fa-group nav-icon"></i>
+                                    <p>Utilizadores</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/sigest/html/auditoria.php"
+                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "auditoria.php") ? "active" : ""; ?>">
+                                    <i class="fa fa-cogs nav-icon"></i>
+                                    <p>Auditoria</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <?php
+                }
+                ?>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
@@ -393,5 +430,3 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <!-- AdminLTE App -->
 <script type="text/javascript" src="/sigest/js/adminlte.min.js"></script>
-<!-- Local Script -->
-<script type="text/javascript" src="/sigest/js/header.js"></script>

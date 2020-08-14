@@ -42,6 +42,7 @@ $(document).ready(function () {
                     },
                     success: function (dataResult) {
                         var dataResult = JSON.parse(dataResult);
+                        console.log(dataResult);
                         var prod_id = dataResult.data[0][0];
 
                         var search = new URLSearchParams(window.location.search);
