@@ -1,31 +1,34 @@
 $(document).ready(function () {
-    //Fetch Client
+    //Fetch Clientes - autocomplete
     $.ajax({
-        url: "../php/copia.php",
-        type: "POST",
+        type: 'post',
+        url: '../php/queries.php',
         data: {
-            op: 'fetchCli'
+            op: 'fetchCliAuto',
         },
         success: function (dataResult) {
             var dataResult = JSON.parse(dataResult);
-            console.log(dataResult.data[0]);
-            $("#cli").html("");
-            $("#cli").html('<option value="0">Seleccionar Cliente</option>');
-            $.each(dataResult.data, function () {
-                $("#cli").append($("<option/>").val(this[0]).text(this[1]));
+
+            $("#cliente").autocomplete({
+                source: dataResult,
+                minLength: 2,
+                select: function (event, ui) {
+                    $("#cliente").val(ui.item.value);
+                    $("#cliente_id").val(ui.item.id);
+                }
             });
         }
     });
 
     //Fetch Product
-    $("#cli").on('change', function () {
+    $("#cliente").on('change', function () {
         //Fetch Product
         $.ajax({
             url: "../php/copia.php",
             type: "POST",
             data: {
                 op: 'fetchProdCli',
-                cliente_id: $("#cli").val()
+                cliente_id: $("#cliente_id").val()
             },
             success: function (dataResult) {
                 var dataResult = JSON.parse(dataResult);

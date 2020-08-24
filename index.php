@@ -1,12 +1,17 @@
 <!--
-TODO-adicionar vendedor nos clientes - auto qd login comercial
-TODO-1 segimprima 2 pedro 10 tiago 15 pablo 18 ricardo
 TODO-assumir data onclick cal
-TODO-alterar estrutura de ficheiros
+TODO modulo contratos horas
+
 TODO- CSW contacto - email - reformular contratos SW
-TODO-auditoria (registo alteracoes)
-TODO-não editavel a partir de 2a feira
+TODO alterar password
+
+TODO-não editavel a partir de 2a feira - bloquear edicao no calendario
 TODO-não compra à mais de 3 meses - aviso
+TODO enviar por mail
+
+TODO-auditoria (registo alteracoes)
+TODO-alterar estrutura de ficheiros
+TODO-1 segimprima 2 pedro 10 tiago 15 pablo 18 ricardo
 -->
 
 <?php include_once 'php/session.php' ?>

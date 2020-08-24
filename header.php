@@ -12,6 +12,9 @@
     <ul class="navbar-nav ml-auto">
         <!-- Messages Dropdown Menu -->
         <li class="nav-item">
+            <a class="nav-link" href="/sigest/html/password.php">Alterar Palavra-Passe</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="/sigest/html/logout.php">Terminar Sessão</a>
         </li>
     </ul>

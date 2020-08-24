@@ -1,25 +1,22 @@
 $(document).ready(function () {
-    //Fetch Client
+    //Fetch Clientes - autocomplete
     $.ajax({
-        url: "../php/queries.php",
-        type: "POST",
+        type: 'post',
+        url: '../php/queries.php',
         data: {
-            op: 'fetchCli'
+            op: 'fetchCliAuto',
         },
         success: function (dataResult) {
             var dataResult = JSON.parse(dataResult);
-            var search = new URLSearchParams(window.location.search);
 
-            $("#cli").html("");
-            $("#cli").html('<option value="0">Seleccionar Cliente</option>');
-            $.each(dataResult.data, function () {
-                if (search.has("cli")) {
-                    var param = search.get("cli");
-                    $("#cli").val(param);
-                };
-                $("#cli").append($("<option/>").val(this[0]).text(this[2]));
+            $("#cliente").autocomplete({
+                source: dataResult,
+                minLength: 2,
+                select: function (event, ui) {
+                    $("#cliente").val(ui.item.value);
+                    $("#cliente_id").val(ui.item.id);
+                }
             });
-
         }
     });
 
@@ -38,7 +35,7 @@ $(document).ready(function () {
                     url: "../php/queries.php",
                     data: {
                         op: "fetchLastProd",
-                        cliente_id: $("#cli").val()
+                        cliente_id: $("#cliente_id").val()
                     },
                     success: function (dataResult) {
                         var dataResult = JSON.parse(dataResult);
@@ -48,8 +45,8 @@ $(document).ready(function () {
                         var search = new URLSearchParams(window.location.search);
                         if (search.has("op")) {
                             var param = search.get("op");
-                            if (param == "cal") window.location.href = "../html/addAssist.php?op=cal&cli="+$("#cli").val()+"&prod="+prod_id;
-                            if (param == "ass") window.location.href = "../html/addAssist.php?op=ass&cli="+$("#cli").val()+"&prod="+prod_id;
+                            if (param == "cal") window.location.href = "../html/addAssist.php?op=cal&cli=" + $("#cliente_id").val() + "&prod=" + prod_id;
+                            if (param == "ass") window.location.href = "../html/addAssist.php?op=ass&cli=" + $("#cliente_id").val() + "&prod=" + prod_id;
                         } else window.location.href = "../html/produtos.php";
 
                     }
