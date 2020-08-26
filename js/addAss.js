@@ -85,7 +85,7 @@ $('#addForm').on('submit', function (e) {
                     $("#tecnico-p").text(dataResult.data[0][6]);
                     $("#entregue-p").text(dataResult.data[0][7]);
                     $("#problema-p").text(dataResult.data[0][8]);
-                    //$("#data_i-p").text(dataResult.data[0][9]);
+                    $("#data_i-p").text(dataResult.data[0][9]);
                     //$("#resolucao-p").text(dataResult.data[0][10]);
                     $("#obs-p").text(dataResult.data[0][11]);
                     //$("#material-p").text(dataResult.data[0][12]);

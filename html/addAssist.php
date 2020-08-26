@@ -297,8 +297,7 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="col-sm text-bold">Data Intervenção</div>
-                        <textarea style="resize: none" class="form-control" name="data_i" id="data_i-p"
-                                  rows="1"></textarea>
+                        <div class="form-control" name="data_i" id="data_i-p"></div>
                     </div>
                     <div class="col-sm-4">
                         <div class="col-sm-4 text-bold">Tempo</div>
