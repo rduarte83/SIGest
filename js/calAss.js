@@ -5,7 +5,9 @@ function updEvents(info) {
     var end = moment(info.event.end).format("YYYY-MM-DD HH:MM:SS");
     var id = info.event.id;
     var resources = info.event.getResources();
-    var resourceIds = resources.map(function(resource) { return resource.id });
+    var resourceIds = resources.map(function (resource) {
+        return resource.id
+    });
     if (info.oldResource != null) tecnico = info.newResource.id;
     else tecnico = resourceIds.toString();
 
@@ -59,7 +61,11 @@ document.addEventListener('DOMContentLoaded', function () {
             window.location.href = "../html/editAss.php?op=cal";
         },
         select: function (info) {
-            window.location.href = "../html/addAssist.php?op=cal";
+           console.log(info);
+           var start = moment(info.start).format("YYYY-MM-DDTHH:MM:SS");
+           var end = moment(info.end).format("YYYY-MM-DDTHH:MM:SS");
+           var id = info.resource.id;
+           window.location.href = "../html/addAssist.php?op=cal&start="+start+"&end="+end+"&id="+id;
         },
         eventResize: function (info) {
             updEvents(info);

@@ -2,6 +2,14 @@ $(document).ready(function () {
     var now = moment().format("YYYY-MM-DDTHH:mm");
     $("#data_p").val(now);
 
+    var search = new URLSearchParams(window.location.search);
+    if (search.has("start")) {
+        var start = search.get("start");
+        var end = search.get("end");
+        var id = search.get("id");
+        $("#data_i").val(start);
+    }
+
     //Fetch Clientes - autocomplete
     $.ajax({
         type: 'post',
@@ -50,7 +58,9 @@ $(document).ready(function () {
             var dataResult = JSON.parse(dataResult);
             $("#tecnico").html('<option value="0">Seleccionar Técnico</option>');
             $.each(dataResult.data, function () {
-                $("#tecnico").append($("<option/>").val(this[0]).text(this[1]));
+                if (this[1] == id) {
+                    $("#tecnico").append($("<option/>").val(this[0]).text(this[1]).prop("selected", "selected"));
+                } else $("#tecnico").append($("<option/>").val(this[0]).text(this[1]));
             });
         }
     });

@@ -1,5 +1,4 @@
 <!--
-TODO-assumir data onclick cal
 TODO modulo contratos horas
 
 TODO- CSW contacto - email - reformular contratos SW
@@ -11,7 +10,6 @@ TODO enviar por mail
 
 TODO-auditoria (registo alteracoes)
 TODO-alterar estrutura de ficheiros
-TODO-1 segimprima 2 pedro 10 tiago 15 pablo 18 ricardo
 -->
 
 <?php include_once 'php/session.php' ?>
