@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
         ],
         locale: 'pt-pt',
         weekends: false,
+        columnHeaderFormat: {weekday: 'long'},
         customButtons: {
             print: {
                 text: 'Imprimir',

@@ -1128,3 +1128,48 @@ if ($_POST['op'] == 'userAp') {
     );
 }
 
+if ($_POST['op'] == 'fetchHoras') {
+    $output = array();
+    $query = "
+        SELECT h.*, c.cliente FROM horas h INNER JOIN clientes c on h.cliente_id = c.nif; 
+        ";
+
+    $statement = $conn->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $data = array();
+
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["id"];
+        $sub_array[] = $row["cliente"];
+        $sub_array[] = $row["data"];
+        $sub_array[] = $row["total"];
+        $sub_array[] = $row["total"] - $row["gasto"];
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
+if ($_POST['op'] == 'addHoras') {
+    $query = "
+			INSERT INTO horas(cliente_id, data, total, gasto) 
+			    VALUES (:cliente_id, :data, :total, 
+			            (SELECT SUM(tempo)/60 FROM assistencias WHERE cliente_id=:cliente_id AND data_i >= :data) 
+            )
+		";
+
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':cliente_id' => $_POST["cliente_id"],
+            ':data' => $_POST["data"],
+            ':total' => $_POST["horas"]
+        )
+    );
+}
+
+

@@ -1,6 +1,4 @@
 <!--
-TODO modulo contratos horas
-
 TODO- CSW contacto - email - reformular contratos SW
 TODO alterar password
 

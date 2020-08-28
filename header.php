@@ -186,6 +186,39 @@
                 }
                 ?>
 
+                <li class="nav-item has-treeview
+                    <?= (basename($_SERVER['PHP_SELF']) == "horas.php") |
+                (basename($_SERVER['PHP_SELF']) == "addHoras.php")
+                    ? "menu-open" : ""; ?>">
+                    <a href="#" class="nav-link
+                    <?= (basename($_SERVER['PHP_SELF']) == "horas.php") |
+                    (basename($_SERVER['PHP_SELF']) == "addHoras.php")
+                        ? "active" : ""; ?>">
+                        <i class="nav-icon fa fa-clock-o"></i>
+                        <p>Packs de Horas
+                            <i class="fa fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/sigest/html/horas.php"
+                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "horas.php") ? "active" : ""; ?>">
+                                <i class="fa fa-list nav-icon"></i>
+                                <p>Listar Packs de Horas</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/sigest/html/addHoras.php"
+                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "addHoras.php") ? "active" : ""; ?>">
+                                <i class="fa fa-plus-circle nav-icon"></i>
+                                <p>Novo Pack de Horas</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+
                 <?php
                 if ($_SESSION["role"] == "comercial" || $_SESSION["role"] == "admin") {
                     ?>

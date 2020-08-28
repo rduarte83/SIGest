@@ -1,8 +1,9 @@
 <?php
 include_once '../php/session.php';
+require_once "../php/db.php";
 
-$old_password = $password = $confirm_password = "";
-$old_password_err = $password_err = $confirm_password_err = "";
+$password = $confirm_password = "";
+$password_err = $confirm_password_err = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate password
@@ -27,34 +28,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check input errors before inserting in database
     if (empty($password_err) && empty($confirm_password_err)) {
 
-        //Check old password
-        $sql = "SELECT password FROM users WHERE id = " . $_SESSION["id"];
-
         // Prepare an insert statement
-        $sql = "INSERT INTO users (username, password, role) VALUES (:username, :password, :role)";
-
+        $sql = "UPDATE users SET password=:password WHERE username=" . $_SESSION['username'];
         if ($stmt = $conn->prepare($sql)) {
-            // Bind variables to the prepared statement as parameters
             $stmt->bindParam(":password", $param_password, PDO::PARAM_STR);
 
-            // Set parameters
-            $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
-            //Role
-            $param_role = $_POST['role'];
-            // Attempt to execute the prepared statement
-            if ($stmt->execute()) {
-                // Redirect to login page
-                header("location: login.php");
-            } else {
-                echo "Ocorreu um erro. Tente mais tarde.";
-            }
-            // Close statement
-            unset($stmt);
         }
     }
-    // Close connection
-    unset($conn);
 }
 
 ?>
@@ -110,20 +91,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                   novalidate>
                                 <div class="card-body">
                                     <!-- Insert Content Here -->
-                                    <div class="form-group <?php echo (!empty($old_password_err)) ? 'has-error' : ''; ?>">
-                                        <label>Actual Palavra-passe</label>
-                                        <input type="password" name="old_password" class="form-control"
-                                               value="<?php echo $old_password; ?>">
-                                        <div class="invalid-feedback d-block"><?php echo $old_password_err; ?></div>
-                                    </div>
                                     <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                                        <label>Nova Palavra-passe</label>
-                                        <input type="password" name="password" class="form-control"
-                                               value="<?php echo $password; ?>">
+                                        <label>Palavra-passe</label>
+                                        <input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
                                         <div class="invalid-feedback d-block"><?php echo $password_err; ?></div>
                                     </div>
                                     <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
-                                        <label>Confirmar Nova Palavra-passe</label>
+                                        <label>Confirmar Palavra-passe</label>
                                         <input type="password" name="confirm_password" class="form-control"
                                                value="<?php echo $confirm_password; ?>">
                                         <div class="invalid-feedback d-block"><?php echo $confirm_password_err; ?></div>
@@ -154,7 +128,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php include '../footer.php' ?>
 </div>
 <!-- ./wrapper -->
-
-<script src="../js/assistencias.js"></script>
 </body>
 </html>

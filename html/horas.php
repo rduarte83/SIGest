@@ -1,11 +1,11 @@
-<?php include_once '../php/session.php'; ?>
+<?php include_once '../php/session.php' ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>SIGest | Title</title>
+    <title>SIGest | Packs de Horas</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome Icons -->
@@ -28,12 +28,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Title</h1>
+                        <h1 class="m-0 text-dark">Packs de Horas</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="index.php">Início</a></li>
-                            <li class="breadcrumb-item active">Title</li>
+                            <li class="breadcrumb-item"><a href="../index.php">Início</a></li>
+                            <li class="breadcrumb-item active">Packs de Horas</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -49,6 +49,17 @@
                         <div class="card">
                             <div class="card-body">
                                 <!-- Insert Content Here -->
+                                <table id="table" class="table table-bordered table-hover">
+                                    <thead>
+                                    <th>Id</th>
+                                    <th>Cliente</th>
+                                    <th>Data</th>
+                                    <th>Horas Totais</th>
+                                    <th>Horas Restantes</th>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -68,6 +79,6 @@
 </div>
 <!-- ./wrapper -->
 
-<script src="../js/assistencias.js"></script>
+<script src="../js/horas.js"></script>
 </body>
 </html>

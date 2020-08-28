@@ -50,7 +50,11 @@ document.addEventListener('DOMContentLoaded', function () {
             window.location.href = "../html/editCob.php?op=cal";
         },
         select: function (info) {
-            window.location.href = "../html/addCob.php?op=cal";
+            console.log(info);
+            var start = moment(info.start).format("YYYY-MM-DDTHH:MM:SS");
+            var end = moment(info.end).format("YYYY-MM-DDTHH:MM:SS");
+            var id = info.resource.id;
+            window.location.href = "../html/addCob.php?op=cal&start="+start+"&end="+end+"&id="+id;
         },
         eventResize: function (info) {
             updEvents(info);
