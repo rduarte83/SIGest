@@ -43,7 +43,13 @@ document.addEventListener('DOMContentLoaded', function () {
         expandRows: true,
         events: '../php/fetchCalCob.php',
         themeSystem: 'bootstrap',
-        editable: true,
+        editable: false,
+        eventDataTransform: function (eventData) {
+            var today = new Date();
+            if (today - eventData.start < 0 || today.getDay() != 1) {
+                eventData.editable = true;
+            }
+        },
         selectable: true,
         eventClick: function (info) {
             localStorage.setItem("vis_id", info.event.id);

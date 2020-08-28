@@ -2,7 +2,6 @@
 TODO- CSW contacto - email - reformular contratos SW
 TODO alterar password
 
-TODO-não editavel a partir de 2a feira - bloquear edicao no calendario
 TODO-não compra à mais de 3 meses - aviso
 TODO enviar por mail
 
