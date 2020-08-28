@@ -56,6 +56,7 @@
                                     <th>Data</th>
                                     <th>Horas Totais</th>
                                     <th>Horas Restantes</th>
+                                    <th>Operações</th>
                                     </thead>
                                     <tbody>
                                     </tbody>

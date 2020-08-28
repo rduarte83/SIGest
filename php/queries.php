@@ -1146,6 +1146,16 @@ if ($_POST['op'] == 'fetchHoras') {
         $sub_array[] = $row["data"];
         $sub_array[] = $row["total"];
         $sub_array[] = $row["total"] - $row["gasto"];
+
+        $sub_array[] = '
+                    <a href="editHoras.php" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '">
+                        <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>
+                    </a>
+                    <a href="#" class="delete btn btn-danger btn-sm" data-id="' . $row["id"] . '">
+                        <i class="fa fa-trash" aria-hidden="true" data-toggle="tooltip" title="Eliminar"></i>
+                    </a>
+                    ';
+
         $data[] = $sub_array;
     }
     $output = array(
@@ -1172,4 +1182,59 @@ if ($_POST['op'] == 'addHoras') {
     );
 }
 
+if ($_POST['op'] == 'delHoras') {
+    $query = "
+                DELETE FROM horas WHERE id = :id
+    ";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':id' => $_POST["id"],
+        )
+    );
+}
 
+if ($_POST['op'] == 'fetchHorasS') {
+    $output = array();
+    $query = "
+        SELECT * FROM horas WHERE id=:id ; 
+        ";
+
+    $statement = $conn->prepare($query);
+    $statement->execute(
+        array(
+            ':id' => $_POST["id"],
+        )
+    );
+    $result = $statement->fetchAll();
+    $data = array();
+
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["id"];
+        $sub_array[] = $row["cliente_id"];
+        $sub_array[] = $row["data"];
+        $sub_array[] = $row["total"];
+
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
+if ($_POST['op'] == 'editHoras') {
+    $query = "
+                 UPDATE horas SET cliente_id=:cliente_id, data=:data, total=:total WHERE id=:id              
+    ";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':id' => $_POST["id"],
+            ':cliente_id' => $_POST["cliente_id"],
+            ':data' => $_POST["data"],
+            ':total' => $_POST["horas"],
+        )
+    );
+}

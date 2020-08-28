@@ -1,4 +1,4 @@
-<?php include_once '../php/session.php'; ?>
+<?php include_once '../php/session.php'?>
 
 <!DOCTYPE html>
 <html>
@@ -68,6 +68,6 @@
 </div>
 <!-- ./wrapper -->
 
-<script src="../js/assistencias.js"></script>
+<script src="../js/.js"></script>
 </body>
 </html>
