@@ -19,7 +19,8 @@ foreach ($result as $row) {
     $sub_array['start'] = $row["data_i"];
     $sub_array['end'] = $row["data_i_end"];
     $sub_array['resourceId'] = $row["username"];
-    if ($row['prioridade'] == "Alta") $sub_array['color'] = "#FF0000";
+    if ($row['estado'] == "Resolvido") $sub_array['color'] = "#808080";
+    elseif ($row['prioridade'] == "Alta") $sub_array['color'] = "#FF0000";
     else $sub_array['color'] = "#007bff";
     $data[] = $sub_array;
 }

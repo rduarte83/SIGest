@@ -1,27 +1,23 @@
 $(document).ready(function () {
-    //Fetch Clientes - autocomplete
+    //Fetch Comercial
     $.ajax({
-        type: 'post',
-        url: '../php/queries.php',
+        url: "../php/queries.php",
+        type: "POST",
         data: {
-            op: 'fetchCliAuto',
+            op: 'fetchCom',
         },
         success: function (dataResult) {
             var dataResult = JSON.parse(dataResult);
-
-            $("#cliente").autocomplete({
-                source: dataResult,
-                minLength: 2,
-                select: function (event, ui) {
-                    $("#cliente").val(ui.item.value);
-                    $("#cliente_id").val(ui.item.id);
-                }
+            $("#comercial").html('<option value="999">Seleccionar Comercial</option>');
+            $.each(dataResult.data, function () {
+                $("#comercial").append($("<option/>").val(this[1]).text(this[1]));
             });
         }
     });
 
-    //<!-- Add horas -->
+    //<!-- Add vendas -->
     $('#addForm').on('submit', function (e) {
+        e.preventDefault();
         $.ajax({
             data: new FormData(this),
             contentType: false,

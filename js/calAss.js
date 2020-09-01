@@ -56,10 +56,15 @@ document.addEventListener('DOMContentLoaded', function () {
         themeSystem: 'bootstrap',
         editable: false,
         eventDataTransform: function (eventData) {
+            console.log(eventData.color);
+
+
+
             var today = new Date();
-            if (today - eventData.start < 0 || today.getDay() != 1) {
+            if (today - eventData.start < 0 && today.getDay() != 1) {
                 eventData.editable = true;
             }
+
         },
         selectable: true,
         eventClick: function (info) {

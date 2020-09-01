@@ -2,17 +2,21 @@
 include_once 'db.php';
 
 $query = "
-            SELECT a.tecnico, u.username, COUNT(a.id) AS total FROM assistencias a 
-                INNER JOIN users u ON a.tecnico=u.id GROUP BY tecnico;
+            SELECT comercial, SUM(valor) AS total FROM vendas GROUP BY comercial
                 ";
 
 $statement = $conn->prepare($query);
 $statement->execute();
 $result = $statement->fetchAll();
 $data = array();
+$total = array();
+$mes = array();
 foreach ($result as $row) {
-    $sub_array = array();
-    $sub_array = $row["total"];
-    $data[] = $sub_array;
+    $total[] = $row["total"];
+    $mes[] = $row["comercial"];
 }
+$data["total"] = $total;
+$data["comercial"] = $mes;
+
 echo json_encode($data);
+//echo date("Y");

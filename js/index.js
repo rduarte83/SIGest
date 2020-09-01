@@ -10,19 +10,15 @@ $(document).ready(function () {
             var chart = new Chart(ctx, {
                 type: 'pie',
                 data: {
-                    labels: ['Rui', 'João'],
+                    labels: dataResult.comercial,
                     datasets: [{
                         label: 'Número de Assistências',
-                        data: dataResult,
+                        data: dataResult.total,
                         backgroundColor: [
                             'red',
-                            'blue'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)'
-                        ],
-                        borderWidth: 1
+                            'blue',
+                            'yellow'
+                        ]
                     }]
                 },
                 options: {

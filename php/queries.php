@@ -1238,3 +1238,18 @@ if ($_POST['op'] == 'editHoras') {
         )
     );
 }
+
+if ($_POST['op'] == 'addVendas') {
+    $query = "
+			INSERT INTO vendas(comercial, valor, mes) VALUES (:comercial, :valor, :mes)
+		";
+
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':comercial' => $_POST["comercial"],
+            ':valor' => $_POST["valor"],
+            ':mes' => $_POST["mes"]
+        )
+    );
+}
