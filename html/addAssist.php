@@ -185,7 +185,7 @@
                             Rua Eng. José Bastos Xavier nº33<br>
                             3750-144 Águeda<br>
                             NIF: 508 726 655<br>
-                            Tlf: 234 077 051<br>
+                            Telefone: 234 077 051<br>
                             Email: tecnica@segimprima.pt
                         </div>
                     </div>

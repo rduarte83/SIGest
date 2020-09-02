@@ -1,7 +1,5 @@
 <!--
-TODO-vendas por mês - histórico
-TODO-inserir vendas mensais por vendedor
-TODO- adicionar numero de toners gastos por máquina
+TODO- Rentabilidade dos contratos de cópia (numToners * preçoToner / contagem = custo/pag)
 
 TODO- CSW contacto - email - reformular contratos SW
 TODO alterar password
@@ -11,7 +9,6 @@ TODO enviar por mail
 
 TODO-auditoria (registo alteracoes)
 TODO-alterar estrutura de ficheiros
-
 -->
 
 <?php include_once 'php/session.php' ?>

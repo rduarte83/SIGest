@@ -345,3 +345,22 @@ if ($_POST['op'] == 'editCopia') {
         )
     );
 }
+
+if ($_POST['op'] == 'addCons') {
+    $query = "
+			INSERT INTO consumiveis (id, tonerP, precoTP, tonerC, precoTC) 
+			    VALUES (:id, :tonerP, :precoTP, :tonerC, :precoTC)     
+			    ON DUPLICATE KEY UPDATE tonerP=:tonerP, precoTP=:precoTP, tonerC=:tonerC, precoTC=:precoTC
+		";
+
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':id' => $_POST["contrato_id"],
+            ':tonerP' => $_POST["tonerP"],
+            ':precoTP' => $_POST["precoTP"],
+            ':tonerC' => $_POST["tonerC"],
+            ':precoTC' => $_POST["precoTC"]
+        )
+    );
+}

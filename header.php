@@ -64,7 +64,9 @@
                         <a href="#" class="nav-link
                     <?= (basename($_SERVER['PHP_SELF']) == "copia.php") |
                         (basename($_SERVER['PHP_SELF']) == "addCopia.php") |
-                        (basename($_SERVER['PHP_SELF']) == "addContagem.php")
+                        (basename($_SERVER['PHP_SELF']) == "addContagem.php") |
+                        (basename($_SERVER['PHP_SELF']) == "rentCopia.php") |
+                        (basename($_SERVER['PHP_SELF']) == "addCons.php")
                             ? "active" : ""; ?>">
                             <i class="nav-icon fa fa-print"></i>
                             <p>Contratos de Cópia
@@ -91,6 +93,20 @@
                                    class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "addContagem.php") ? "active" : ""; ?>">
                                     <i class="fa fa-plus-circle nav-icon"></i>
                                     <p>Nova Contagem</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/sigest/html/rentCopia.php"
+                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "rentCopia.php") ? "active" : ""; ?>">
+                                    <i class="fa fa-eur nav-icon"></i>
+                                    <p>Rentabilidade</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/sigest/html/addCons.php"
+                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "addCons.php") ? "active" : ""; ?>">
+                                    <i class="fa fa-tint nav-icon"></i>
+                                    <p>Consumíveis</p>
                                 </a>
                             </li>
                         </ul>
