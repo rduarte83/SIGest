@@ -34,6 +34,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bindParam(":password", $param_password, PDO::PARAM_STR);
 
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+
+            if ($stmt->execute()) {
+                // Redirect to login page
+                header("location: index.php");
+            } else {
+                echo "Ocorreu um erro. Tente mais tarde.";
+            }
+            // Close statement
+            unset($stmt);
         }
     }
 }

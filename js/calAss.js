@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
     calendar = new FullCalendar.Calendar(calendarEl, {
         schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
-        initialView: 'resourceTimeGridDay',
+        initialView: 'resourceTimeGridWeek',
         slotMinTime: '09:00:00',
         slotMaxTime: '19:00:00',
         resources: [
@@ -57,14 +57,10 @@ document.addEventListener('DOMContentLoaded', function () {
         editable: false,
         eventDataTransform: function (eventData) {
             console.log(eventData.color);
-
-
-
             var today = new Date();
             if (today - eventData.start < 0 && today.getDay() != 1) {
                 eventData.editable = true;
             }
-
         },
         selectable: true,
         eventClick: function (info) {

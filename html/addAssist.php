@@ -182,8 +182,8 @@
                     <div class="col-6">
                         <img class="w-75" style="filter: grayscale(100%)" src="../img/logo.png" alt="logo">
                         <div>
-                            Rua Comandante Pinho e Freitas nº337<br>
-                            3750-127 Águeda<br>
+                            Rua Eng. José Bastos Xavier nº33<br>
+                            3750-144 Águeda<br>
                             NIF: 508 726 655<br>
                             Tlf: 234 077 051<br>
                             Email: tecnica@segimprima.pt

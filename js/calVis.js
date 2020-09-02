@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
     calendar = new FullCalendar.Calendar(calendarEl, {
         schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
-        initialView: 'timeGridDay',
+        initialView: 'timeGridWeek',
         slotMinTime: '09:00:00',
         slotMaxTime: '19:00:00',
         locale: 'pt-pt',

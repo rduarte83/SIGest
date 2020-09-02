@@ -10,7 +10,7 @@ function createDT() {
         },
         dom: 'Bfrtip',
         columnDefs: [
-            // {"visible": false, "targets": 0}
+            {"visible": false, "targets": 0}
         ],
         buttons: {
             buttons: [

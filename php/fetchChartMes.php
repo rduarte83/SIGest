@@ -2,12 +2,17 @@
 include_once 'db.php';
 
 $query = "
-            SELECT comercial, valor FROM vendas WHERE mes = '2020-09'
+            SELECT comercial, valor FROM vendas WHERE mes = :data
                 ";
 
 $statement = $conn->prepare($query);
-$statement->execute();
+$statement->execute(
+    array(
+        ':data' => $_POST["data"]
+    )
+);
 $result = $statement->fetchAll();
+
 $data = array();
 $total = array();
 $mes = array();
