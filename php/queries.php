@@ -681,9 +681,9 @@ if ($_POST['op'] == 'fetchAssS') {
 if ($_POST['op'] == 'addAss') {
     $query = "
 			INSERT INTO assistencias(cliente_id, produto_id, data_p, motivo, local, 
-			                         tecnico, entregue, problema, data_i, data_i_end, prioridade) 
+			                         tecnico, entregue, problema, data_i, data_i_end, obs, prioridade) 
 			    VALUES (:cliente_id, :produto_id, :data_p, :motivo, :local, 
-			            :tecnico, :entregue, :problema, :data_i, DATE_ADD(:data_i, INTERVAL 30 MINUTE), :prio)
+			            :tecnico, :entregue, :problema, :data_i, DATE_ADD(:data_i, INTERVAL 30 MINUTE), :obs, :prio)
 		";
     $statement = $conn->prepare($query);
     $result = $statement->execute(
@@ -697,6 +697,7 @@ if ($_POST['op'] == 'addAss') {
             ':entregue' => $_POST["entregue"],
             ':problema' => $_POST["problema"],
             ':data_i' => $_POST["data_i"],
+            ':obs' => $_POST["obs"],
             ':prio' => $_POST["prio"]
         )
     );
@@ -1131,7 +1132,7 @@ if ($_POST['op'] == 'userAp') {
 if ($_POST['op'] == 'fetchHoras') {
     $output = array();
     $query = "
-        SELECT h.*, c.cliente FROM horas h INNER JOIN clientes c on h.cliente_id = c.nif; 
+        SELECT h.*, SUM(a.tempo)/60 AS gasto, c.cliente FROM horas h INNER JOIN assistencias a ON a.cliente_id = h.cliente_id INNER JOIN clientes c ON c.nif = a.cliente_id GROUP BY a.cliente_id; 
         ";
 
     $statement = $conn->prepare($query);
@@ -1166,10 +1167,8 @@ if ($_POST['op'] == 'fetchHoras') {
 
 if ($_POST['op'] == 'addHoras') {
     $query = "
-			INSERT INTO horas(cliente_id, data, total, gasto) 
-			    VALUES (:cliente_id, :data, :total, 
-			            (SELECT SUM(tempo)/60 FROM assistencias WHERE cliente_id=:cliente_id AND data_i >= :data) 
-            )
+			INSERT INTO horas(cliente_id, data, total) 
+			    VALUES (:cliente_id, :data, :total)
 		";
 
     $statement = $conn->prepare($query);
@@ -1253,3 +1252,80 @@ if ($_POST['op'] == 'addVendas') {
         )
     );
 }
+
+if ($_POST['op'] == 'fetchVendas') {
+    $output = array();
+    $query = "
+        SELECT * FROM VENDAS ORDER BY mes ASC 
+        ";
+
+    $statement = $conn->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $data = array();
+
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["id"];
+        $sub_array[] = $row["comercial"];
+        $sub_array[] = $row["mes"];
+        $sub_array[] = $row["valor"];
+
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
+if ($_POST['op'] == 'fetchVendasMes') {
+    $output = array();
+    $query = "
+        SELECT * FROM VENDAS WHERE mes=:mes
+        ";
+
+    $statement = $conn->prepare($query);
+    $statement->execute(
+        array(
+            ':mes' => $_POST["mes"]
+        )
+    );
+    $result = $statement->fetchAll();
+    $data = array();
+
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["id"];
+        $sub_array[] = $row["comercial"];
+        $sub_array[] = $row["mes"];
+        $sub_array[] = $row["valor"];
+
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
+if ($_POST['op'] == 'fetchMes') {
+    $output = array();
+    $query = "
+        SELECT DISTINCT mes FROM VENDAS ORDER BY mes ASC 
+        ";
+
+    $statement = $conn->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $data = array();
+
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["mes"];
+        $data[] = $sub_array;
+    }
+
+    echo json_encode($data);
+}
+

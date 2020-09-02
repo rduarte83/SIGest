@@ -67,6 +67,14 @@ TODO-alterar estrutura de ficheiros
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
+                                <label class="col-form-label col-sm-2">Seleccionar Mês</label>
+                                <select class="custom-select form-control" id="periodo" name="periodo" required>
+                                </select>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
                                 <!-- Insert Content Here -->
                                 <canvas id="chart"></canvas>
                             </div>

@@ -48,13 +48,20 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <!-- Insert Content Here -->
+                                <label class="col-form-label col-sm-2">Seleccionar Mês</label>
+                                <select class="custom-select form-control" id="periodo" name="periodo" required>
+                                </select>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
                                 <table id="table" class="table table-bordered table-hover">
                                     <thead>
+                                    <th>id</th>
                                     <th>Comercial</th>
                                     <th>Mês</th>
                                     <th>Valor</th>
-                                    <th>Operações</th>
                                     </thead>
                                     <tbody>
                                     </tbody>
