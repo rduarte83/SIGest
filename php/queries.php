@@ -541,7 +541,6 @@ if ($_POST['op'] == 'fetchAss') {
         $sub_array[] = $row["estado"];
         $sub_array[] = $row["facturado"];
         $sub_array[] = $row["factura"];
-
         $sub_array[] = '
                     <a href="details-ass.php" class="details btn btn-primary btn-sm" data-id="' . $row["id"] . '">
                         <i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Detalhes"></i>
@@ -596,6 +595,7 @@ if ($_POST['op'] == 'fetchAssCli') {
         $sub_array[] = $row["problema"];
         $sub_array[] = $row["data_i"];
         $sub_array[] = $row["obs"];
+        $sub_array[] = $row["tempo"];
         $sub_array[] = $row["valor"];
         $sub_array[] = $row["estado"];
         $sub_array[] = $row["facturado"];

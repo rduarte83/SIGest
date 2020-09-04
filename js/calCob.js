@@ -45,9 +45,11 @@ document.addEventListener('DOMContentLoaded', function () {
         themeSystem: 'bootstrap',
         editable: false,
         eventDataTransform: function (eventData) {
-            var today = new Date();
-            if (today - eventData.start < 0 || today.getDay() != 1) {
-                eventData.editable = true;
+            var selectedDate = moment(eventData.start, 'YYYY-MM-DD');
+            var now = moment(new Date(), 'YYYY-MM-DD');
+            var dif = selectedDate.diff(now, 'weeks');
+            if (dif < 0 ) {
+                eventData.editable = false;
             }
         },
         selectable: true,

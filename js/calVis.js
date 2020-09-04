@@ -44,6 +44,14 @@ document.addEventListener('DOMContentLoaded', function () {
         events: '../php/fetchCalVis.php',
         themeSystem: 'bootstrap',
         editable: true,
+        eventDataTransform: function (eventData) {
+            var selectedDate = moment(eventData.start, 'YYYY-MM-DD');
+            var now = moment(new Date(), 'YYYY-MM-DD');
+            var dif = selectedDate.diff(now, 'weeks');
+            if (dif < 0 ) {
+                eventData.editable = false;
+            }
+        },
         selectable: true,
         eventClick: function (info) {
             localStorage.setItem("vis_id", info.event.id);

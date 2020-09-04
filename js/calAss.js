@@ -54,12 +54,13 @@ document.addEventListener('DOMContentLoaded', function () {
         expandRows: true,
         events: '../php/fetchCalAss.php',
         themeSystem: 'bootstrap',
-        editable: false,
+        editable: true,
         eventDataTransform: function (eventData) {
-            console.log(eventData.color);
-            var today = new Date();
-            if (today - eventData.start < 0 && today.getDay() != 1) {
-                eventData.editable = true;
+            var selectedDate = moment(eventData.start, 'YYYY-MM-DD');
+            var now = moment(new Date(), 'YYYY-MM-DD');
+            var dif = selectedDate.diff(now, 'weeks');
+            if (dif < 0 ) {
+                eventData.editable = false;
             }
         },
         selectable: true,

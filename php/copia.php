@@ -364,3 +364,31 @@ if ($_POST['op'] == 'addCons') {
         )
     );
 }
+
+if ($_POST['op'] == 'fetchRentCopia') {
+    $output = array();
+    $query = "
+            SELECT c.*, co.valor, co.inc, co.preco_p, co.preco_c, c1.ult_p, c1.ult_c
+                FROM contagens c1 LEFT JOIN contagens c2
+                ON (c1.contrato_id = c2.contrato_id AND c1.id < c2.id)
+                INNER JOIN consumiveis c ON c1.contrato_id = c.id 
+                INNER JOIN contratos co ON co.id = c1.contrato_id
+                WHERE c2.id IS NULL
+        ";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute();
+    $result = $statement->fetchAll();
+    $data = array();
+
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["id"];
+        $sub_array[] = $row["tonerP"] * $row["precoTP"] / $row["inc"];
+
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
