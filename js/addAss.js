@@ -108,15 +108,22 @@ $('#addForm').on('submit', function (e) {
                     $("#resp-p").text(dataResult.data[0][20]);
                     $("#contacto-p").text(dataResult.data[0][21]);
 
-                    window.print();
                     window.onafterprint = function () {
-                        console.log("PRINTED");
-                        var search = new URLSearchParams(window.location.search);
-                        if (search.has("op")) {
-                            var param = search.get("op");
-                            if (param == "cal") window.location.href = "../html/calAss.php";
-                        } else window.location.href = "../html/assistencias.php";
-                    }
+                        $(window).off('mousemove', window.onafterprint);
+                        console.log('Print Dialog Closed..');
+                    };
+
+                    window.print();
+
+                    setTimeout(function () {
+                        $(window).one('mousemove', window.onafterprint);
+                    }, 1);
+
+                    var search = new URLSearchParams(window.location.search);
+                    if (search.has("op")) {
+                        var param = search.get("op");
+                        if (param == "cal") window.location.href = "../html/calAss.php";
+                    } else window.location.href = "../html/assistencias.php";
                 }
             });
         }

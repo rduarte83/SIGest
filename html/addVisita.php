@@ -81,7 +81,7 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Comercial</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="vendedor" name="vendedor" class="form-control" required>
+                                    <input type="text" value="<?php echo $_SESSION['username'] ?>" id="vendedor" name="vendedor" class="form-control" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">

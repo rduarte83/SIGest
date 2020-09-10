@@ -41,6 +41,7 @@ foreach ($resultV as $row) {
     $sub_array['start'] = $row["ult_vis"];
     $sub_array['end'] = $row["ult_vis_end"];
     $sub_array['resourceId'] = $row["username"];
+    $sub_array['vis'] = "vis";
     $data[] = $sub_array;
 }
 echo json_encode($data);

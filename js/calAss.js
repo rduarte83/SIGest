@@ -65,8 +65,10 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         selectable: true,
         eventClick: function (info) {
-            localStorage.setItem("ass_id", info.event.id);
-            window.location.href = "../html/editAss.php?op=cal";
+            if (info.event.extendedProps.vis != "vis") {
+                localStorage.setItem("ass_id", info.event.id);
+                window.location.href = "../html/editAss.php?op=cal";
+            };
         },
         select: function (info) {
            console.log(info);

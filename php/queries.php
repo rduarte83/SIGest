@@ -279,9 +279,9 @@ if ($_POST['op'] == 'fetchProdCli') {
 if ($_POST['op'] == 'addVis') {
     $query = "
 			INSERT INTO visitas (cliente_id, ult_vis, ult_vis_end, motivo_id, descricao, vendedor, tecnico) 
-			            VALUES (:cliente_id, :ult_vis, DATE_ADD(:ult_vis, INTERVAL 30 MINUTE), :motivo_id, :descricao, :vendedor, :tecnico);
+			            VALUES (:cliente_id, :ult_vis, DATE_ADD(:ult_vis, INTERVAL 60 MINUTE), :motivo_id, :descricao, :vendedor, :tecnico);
             INSERT INTO visitas (cliente_id, ult_vis, ult_vis_end, motivo_id, descricao, vendedor, tecnico) 
-			            VALUES (:cliente_id, :prox_vis, DATE_ADD(:prox_vis, INTERVAL 30 MINUTE), :motivo_id_prox, :descricao_prox, :vendedor, :tecnico_prox);    
+			            VALUES (:cliente_id, :prox_vis, DATE_ADD(:prox_vis, INTERVAL 60 MINUTE), :motivo_id_prox, :descricao_prox, :vendedor, :tecnico_prox);    
 		";
 
     $statement = $conn->prepare($query);
@@ -683,7 +683,7 @@ if ($_POST['op'] == 'addAss') {
 			INSERT INTO assistencias(cliente_id, produto_id, data_p, motivo, local, 
 			                         tecnico, entregue, problema, data_i, data_i_end, obs, prioridade) 
 			    VALUES (:cliente_id, :produto_id, :data_p, :motivo, :local, 
-			            :tecnico, :entregue, :problema, :data_i, DATE_ADD(:data_i, INTERVAL 30 MINUTE), :obs, :prio)
+			            :tecnico, :entregue, :problema, :data_i, DATE_ADD(:data_i, INTERVAL 60 MINUTE), :obs, :prio)
 		";
     $statement = $conn->prepare($query);
     $result = $statement->execute(
@@ -1011,7 +1011,7 @@ if ($_POST['op'] == 'fetchCobCli') {
 if ($_POST['op'] == 'addCob') {
     $query = "
 			INSERT INTO cobrancas (cliente_id, data, motivo, descricao, data_end) 
-			    VALUES (:cliente_id, :data, :motivo, :descricao, DATE_ADD(:data, INTERVAL 30 MINUTE))     
+			    VALUES (:cliente_id, :data, :motivo, :descricao, DATE_ADD(:data, INTERVAL 60 MINUTE))     
 		";
 
     $statement = $conn->prepare($query);

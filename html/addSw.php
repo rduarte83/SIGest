@@ -64,6 +64,7 @@
                                         <option value="Pix">Pix</option>
                                         <option value="ZoneSoft">ZoneSoft</option>
                                         <option value="Sage">Sage</option>
+                                        <option value="Kasperksy">Kasperksy</option>
                                     </select>
                                 </div>
                             </div>
