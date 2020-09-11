@@ -1,10 +1,28 @@
-$(document).on('click','.edit', function () {
-    var id = $(this).attr("data-id");
+var id;
+
+$(document).on('click', '.edit', function () {
+    id = $(this).attr("data-id");
     localStorage.setItem("id", id);
 });
 
-$(document).on('click','.delete', function (e) {
-    var id = $(this).attr("data-id");
+$(document).on('click', '.obs', function () {
+    id = $(this).attr("data-id");
+    $.ajax({
+        url: '../php/queries.php',
+        type: 'POST',
+        data: {
+            op: 'fetchObs',
+            id: id
+        },
+        success: function (dataResult) {
+            dataResult = JSON.parse(dataResult);
+            $("#obs").text(dataResult.data[0]);
+        }
+    });
+});
+
+$(document).on('click', '.delete', function () {
+    id = $(this).attr("data-id");
     Swal.fire({
         icon: 'info',
         position: 'top',
@@ -35,6 +53,18 @@ $(document).on('click','.delete', function (e) {
             });
         }
     });
+});
+
+$("#addForm").on('submit', function (e) {
+    $("#id").val(id);
+
+    $.ajax({
+        data: new FormData(this),
+        contentType: false,
+        processData: false,
+        type: "post",
+        url: "../php/queries.php",
+    })
 });
 
 $(document).ready(function () {

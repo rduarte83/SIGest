@@ -1,4 +1,4 @@
-<?php include_once '../php/session.php'?>
+<?php include_once '../php/session.php' ?>
 
 <!DOCTYPE html>
 <html>
@@ -87,6 +87,33 @@
 
 </div>
 <!-- ./wrapper -->
+
+<div class="modal fade" id="modal-lg">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form method="post" id="addForm" enctype="multipart/form-data" class="form-horizontal">
+                <div class="modal-header">
+                    <h4 class="modal-title">Observações</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <textarea class="form-control" id="obs" name="obs" rows="20"></textarea>
+                    <input type="hidden" name="op" value="editObs">
+                    <input type="hidden" id="id" name="id" class="form-control">
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-success float-right">Confirmar</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 
 <script src="../js/clientes.js"></script>
 </body>

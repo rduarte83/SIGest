@@ -22,6 +22,9 @@ if ($_POST['op'] == 'fetchCli') {
         $sub_array[] = $row["email"];
         $sub_array[] = $row["comercial"];
         $sub_array[] = '
+                    <a href="#modal-lg" class="obs btn btn-primary btn-sm" data-id="' . $row["nif"] . ' " data-toggle="modal">
+                        <i class="fa fa-comment" aria-hidden="true" data-toggle="tooltip" title="Observações"></i>
+                    </a>
                     <a href="editCli.php" class="edit btn btn-info btn-sm" data-id="' . $row["nif"] . ' ">
                         <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>
                     </a>
@@ -88,6 +91,42 @@ if ($_POST['op'] == 'fetchCliS') {
         "data" => $data
     );
     echo json_encode($output);
+}
+
+if ($_POST['op'] == 'fetchObs') {
+    $output = array();
+    $query = "SELECT obs FROM clientes WHERE nif=:nif";
+
+    $statement = $conn->prepare($query);
+    $statement->execute(
+        array(
+            ':nif' => $_POST["id"]
+        )
+    );
+    $result = $statement->fetchAll();
+    $data = array();
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["obs"];
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
+if ($_POST['op'] == 'editObs') {
+    $query = "
+                UPDATE clientes SET obs=:obs WHERE nif=:nif
+    ";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':nif' => $_POST["id"],
+            ':obs' => $_POST["obs"],
+        )
+    );
 }
 
 if ($_POST['op'] == 'editCli') {
