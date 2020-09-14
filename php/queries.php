@@ -85,6 +85,7 @@ if ($_POST['op'] == 'fetchCliS') {
         $sub_array[] = $row["contacto"];
         $sub_array[] = $row["email"];
         $sub_array[] = $row["comercial"];
+        $sub_array[] = $row["obs"];
         $data[] = $sub_array;
     }
     $output = array(
@@ -132,7 +133,8 @@ if ($_POST['op'] == 'editObs') {
 if ($_POST['op'] == 'editCli') {
     $query = "
                 UPDATE clientes SET nif=:nif, id=:id, cliente=:cliente, morada=:morada, zona=:zona,
-                    responsavel=:responsavel, contacto=:contacto, email=:email, comercial=:comercial WHERE nif=:nif
+                    responsavel=:responsavel, contacto=:contacto, email=:email, comercial=:comercial, 
+                    obs=:obs WHERE nif=:nif
     ";
     $statement = $conn->prepare($query);
     $result = $statement->execute(
@@ -145,7 +147,8 @@ if ($_POST['op'] == 'editCli') {
             ':responsavel' => $_POST["responsavel"],
             ':contacto' => $_POST["contacto"],
             ':email' => $_POST["email"],
-            ':comercial' => $_POST["comercial"]
+            ':comercial' => $_POST["comercial"],
+            ':obs' => $_POST["obs"]
         )
     );
 }

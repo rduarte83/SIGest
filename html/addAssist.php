@@ -105,6 +105,7 @@
                                             <option value="Loja 1">Loja 1</option>
                                             <option value="Loja 2">Loja 2</option>
                                             <option value="Loja 3">Loja 3</option>
+                                            <option value="Assistência Remota">Assistência Remota</option>
                                         </select>
                                     </div>
                                 </div>

@@ -1,10 +1,30 @@
-var ctx = $("#chart");
-var chart, url;
+function createDT() {
+    $("#table").DataTable({
+        processing: true,
+        ajax: {
+            url: "php/stats.php",
+            type: "POST",
+            data: {
+                op: 'fetchStats'
+            }
+        },
+        paging: false,
+        searching: false,
+        bInfo: false,
+        responsive: true,
+        autoWidth: false,
+        contentType: false,
+        processData: false,
+        language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
+    });
+}
 
 $(document).ready(function () {
+    createDT();
+
     //Fetch Mes
     $.ajax({
-        url: "php/queries.php",
+        url: "php/stats.php",
         type: "POST",
         data: {
             op: 'fetchMes'
@@ -20,78 +40,34 @@ $(document).ready(function () {
         }
     });
 
-    //Fetch Chart info
-    $.ajax({
-        url: "php/fetchChart.php",
-        type: "post",
-        success: function (dataResult) {
-            var dataResult = JSON.parse(dataResult);
-            console.log(dataResult);
-
-            chart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: dataResult.comercial,
-                    datasets: [{
-                        data: dataResult.total,
-                        backgroundColor: [
-                            'red',
-                            'blue',
-                            'yellow',
-                            'green',
-                            'black',
-                            'white'
-                        ]
-                    }]
+    $("#periodo").on('change', function () {
+        if ($.fn.dataTable.isDataTable('#table')) {
+            $("#table").DataTable().destroy();
+        }
+        ;
+        if ($("#periodo").val() == 0) {
+            createDT();
+        } else {
+            console.log( $("#periodo").val() );
+            $("#table").DataTable({
+                processing: true,
+                ajax: {
+                    url: "php/stats.php",
+                    type: "POST",
+                    data: {
+                        op: 'fetchStatsS',
+                        mes: $("#periodo").val()
+                    },
                 },
-                options: {
-                    plugins: {
-                        labels: {
-                            render: 'value',
-                            fontSize: 20,
-                            fontStyle: 'bold',
-                            fontColor: 'black',
-                        }
-                    },
-                    title: {
-                        display: true,
-                        text: 'Vendas mensais por Comercial'
-                    },
-                    tooltips: {
-                        intersect: false
-                    },
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
+                paging: false,
+                searching: false,
+                bInfo: false,
+                responsive: true,
+                autoWidth: false,
+                contentType: false,
+                processData: false,
+                language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
             });
         }
     });
-
-
-    $("#periodo").on('change', function () {
-        if ($("#periodo").val() == 0) url = "php/fetchChart.php";
-        else url = "php/fetchChartMes.php"
-
-        $.ajax({
-            url: url,
-            type: "post",
-            data: {
-              data: $("#periodo").val()
-            },
-            success: function (dataResult) {
-                var dataResult = JSON.parse(dataResult);
-                console.log(dataResult);
-                chart.data.labels = dataResult.comercial;
-                chart.data.datasets.forEach((dataset) => {
-                    dataset.data = dataResult.total;
-                });
-                chart.update();
-            }
-        })
-    })
-})
+});
