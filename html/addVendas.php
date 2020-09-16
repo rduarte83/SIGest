@@ -76,7 +76,7 @@
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <input type="hidden" name="op" value="addVendas">
-                            <a href="horas.php">
+                            <a href="vendas.php">
                                 <button type="button" class="btn btn-default ">Cancelar</button>
                             </a>
                             <button type="submit" class="btn btn-success float-right">Confirmar</button>

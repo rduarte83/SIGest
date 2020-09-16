@@ -19,4 +19,3 @@ $data["total"] = $total;
 $data["comercial"] = $mes;
 
 echo json_encode($data);
-//echo date("Y");

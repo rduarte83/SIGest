@@ -16,14 +16,13 @@ $(document).ready(function () {
     });
 
     //<!-- Add vendas -->
-    $('#addForm').on('submit', function (e) {
-        e.preventDefault();
+    $('#addForm').on('submit', function () {
         $.ajax({
             data: new FormData(this),
             contentType: false,
             processData: false,
             type: "post",
-            url: "../php/queries.php"
+            url: "../php/queries.php",
         });
     });
 });
