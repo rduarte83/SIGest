@@ -855,11 +855,7 @@ if ($_POST['op'] == 'fetchTec') {
 
 if ($_POST['op'] == 'fetchCom') {
     $output = array();
-    if ($_SESSION["role"] == "comercial") {
-        $query = "SELECT * FROM users WHERE username='" . $_SESSION["username"] . "'";
-    } else {
-        $query = "SELECT * FROM users WHERE role='comercial'";
-    }
+    $query = "SELECT * FROM users WHERE role='comercial'";
     $statement = $conn->prepare($query);
     $statement->execute();
     $result = $statement->fetchAll();

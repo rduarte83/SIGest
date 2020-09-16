@@ -145,62 +145,55 @@
                 }
                 ?>
 
-                <?php
-                if ($_SESSION["role"] != "comercial") {
-                    ?>
-                    <li class="nav-item has-treeview
+                <li class="nav-item has-treeview
+                    <?= (basename($_SERVER['PHP_SELF']) == "assistencias.php") |
+                (basename($_SERVER['PHP_SELF']) == "addAssist.php") |
+                (basename($_SERVER['PHP_SELF']) == "penAss.php") |
+                (basename($_SERVER['PHP_SELF']) == "calAss.php")
+                    ? "menu-open" : ""; ?>">
+                    <a href="#" class="nav-link
                     <?= (basename($_SERVER['PHP_SELF']) == "assistencias.php") |
                     (basename($_SERVER['PHP_SELF']) == "addAssist.php") |
                     (basename($_SERVER['PHP_SELF']) == "penAss.php") |
                     (basename($_SERVER['PHP_SELF']) == "calAss.php")
-                        ? "menu-open" : ""; ?>">
-                        <a href="#" class="nav-link
-                    <?= (basename($_SERVER['PHP_SELF']) == "assistencias.php") |
-                        (basename($_SERVER['PHP_SELF']) == "addAssist.php") |
-                        (basename($_SERVER['PHP_SELF']) == "penAss.php") |
-                        (basename($_SERVER['PHP_SELF']) == "calAss.php")
-                            ? "active" : ""; ?>">
-                            <i class="nav-icon fa fa-wrench"></i>
-                            <p>Assistências Técnicas
-                                <i class="fa fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview menu-open">
-                            <li class="nav-item">
-                                <a href="/sigest/html/calAss.php"
-                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "calAss.php") ? "active" : ""; ?>">
-                                    <i class="fa fa-calendar nav-icon"></i>
-                                    <p>Calendário de Assistências</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/sigest/html/assistencias.php"
-                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "assistencias.php") ? "active" : ""; ?>">
-                                    <i class="fa fa-list nav-icon"></i>
-                                    <p>Listar Assistências</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/sigest/html/penAss.php"
-                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "penAss.php") ? "active" : ""; ?>">
-                                    <i class="nav-icon fa fa-history"></i>
-                                    <p>Assistências Pendentes</p>
-                                    <span class="badge badge-danger right" id="assPen"></span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/sigest/html/addAssist.php"
-                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "addAssist.php") ? "active" : ""; ?>">
-                                    <i class="fa fa-plus-circle nav-icon"></i>
-                                    <p>Nova Assistência</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <?php
-                }
-                ?>
+                        ? "active" : ""; ?>">
+                        <i class="nav-icon fa fa-wrench"></i>
+                        <p>Assistências Técnicas
+                            <i class="fa fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview menu-open">
+                        <li class="nav-item">
+                            <a href="/sigest/html/calAss.php"
+                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "calAss.php") ? "active" : ""; ?>">
+                                <i class="fa fa-calendar nav-icon"></i>
+                                <p>Calendário de Assistências</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/sigest/html/assistencias.php"
+                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "assistencias.php") ? "active" : ""; ?>">
+                                <i class="fa fa-list nav-icon"></i>
+                                <p>Listar Assistências</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/sigest/html/penAss.php"
+                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "penAss.php") ? "active" : ""; ?>">
+                                <i class="nav-icon fa fa-history"></i>
+                                <p>Assistências Pendentes</p>
+                                <span class="badge badge-danger right" id="assPen"></span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/sigest/html/addAssist.php"
+                               class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "addAssist.php") ? "active" : ""; ?>">
+                                <i class="fa fa-plus-circle nav-icon"></i>
+                                <p>Nova Assistência</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
                 <li class="nav-item has-treeview
                     <?= (basename($_SERVER['PHP_SELF']) == "horas.php") |
@@ -232,7 +225,6 @@
                         </li>
                     </ul>
                 </li>
-
 
 
                 <?php

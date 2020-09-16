@@ -93,6 +93,8 @@
                                             <option value="Manutenção">Manutenção</option>
                                             <option value="Assistência de Hardware">Assistência de Hardware</option>
                                             <option value="Assistência de Software">Assistência de Software</option>
+                                            <option value="Instalação de Impressora a Contrato">Instalação de Impressora a Contrato</option>
+                                            <option value="Instalação de Software">Instalação de Software</option>
                                         </select>
                                     </div>
                                 </div>
