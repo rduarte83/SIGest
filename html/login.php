@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
 
             // Set parameters
-            $param_username = trim($_POST["username"]);
+            $param_username = trim(strtolower($_POST["username"]));
 
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {

@@ -7,18 +7,17 @@ if ($_POST['op'] == 'fetchStats') {
     $query = "SELECT
                 (SELECT COUNT(vis) AS apresentacao FROM 
                     (SELECT MIN(ult_vis) AS vis FROM visitas 
-                    WHERE motivo_id=1 AND vendedor=:v GROUP BY cliente_id) AS X) AS contactos,
+                    WHERE motivo_id=1 AND vendedor=:c GROUP BY cliente_id) AS X) AS contactos,
                 (SELECT COUNT(cliente_id) FROM visitas 
-                    WHERE motivo_id=8 AND vendedor=:v) AS entregas,
+                    WHERE motivo_id=8 AND vendedor=:c) AS entregas,
                 (SELECT COUNT(DISTINCT cliente_id) FROM visitas 
-                    WHERE motivo_id=8 AND vendedor=:v)  AS clientes,
+                    WHERE motivo_id=8 AND vendedor=:c)  AS clientes,
                 (SELECT SUM(valor) FROM VENDAS WHERE comercial=:c) AS valor
                 ";
 
     $statement = $conn->prepare($query);
     $statement->execute(
         array(
-            ':v' => $_SESSION["id"],
             ':c' => $_SESSION["username"]
         )
     );
@@ -29,6 +28,7 @@ if ($_POST['op'] == 'fetchStats') {
         $sub_array[] = $row["contactos"];
         $sub_array[] = $row["entregas"];
         $sub_array[] = $row["clientes"];
+        if (is_null($row["valor"])) $row["valor"] = 0;
         $sub_array[] = $row["valor"];
         $data[] = $sub_array;
     }
@@ -48,15 +48,14 @@ if ($_POST['op'] == 'fetchStatsS') {
                     WHERE motivo_id=8 AND vendedor=:v AND EXTRACT(YEAR_MONTH FROM ult_vis)=:mes) AS entregas,
                 (SELECT COUNT(DISTINCT cliente_id) FROM visitas 
                     WHERE motivo_id=8 AND vendedor=:v AND EXTRACT(YEAR_MONTH FROM ult_vis)=:mes)  AS clientes,
-                (SELECT SUM(valor) FROM VENDAS WHERE comercial=:c AND mes=:mes) AS valor
+                (SELECT SUM(valor) FROM VENDAS WHERE comercial=:v AND mes=:mes) AS valor
                 ";
 
     $statement = $conn->prepare($query);
     $statement->execute(
         array(
-            ':v' => $_SESSION["id"],
-            ':c' => $_SESSION["username"],
-            ':mes' => substr_replace($_POST["mes"], "-", 4 , 0)
+            ':v' => $_SESSION["username"],
+            ':mes' => $_POST["mes"]
         )
     );
     $result = $statement->fetchAll();
@@ -66,6 +65,7 @@ if ($_POST['op'] == 'fetchStatsS') {
         $sub_array[] = $row["contactos"];
         $sub_array[] = $row["entregas"];
         $sub_array[] = $row["clientes"];
+        if (is_null($row["valor"])) $row["valor"] = 0;
         $sub_array[] = $row["valor"];
         $data[] = $sub_array;
     }

@@ -20,14 +20,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
 
             // Set parameters
-            $param_username = trim($_POST["username"]);
+            $param_username = trim(strtolower($_POST["username"]));
 
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
                 if ($stmt->rowCount() == 1) {
                     $username_err = "O utilizador já existe.";
                 } else {
-                    $username = trim($_POST["username"]);
+                    $username = trim(strtolower($_POST["username"]));
                 }
             } else {
                 echo "Ocorreu um erro. Tente mais tarde";

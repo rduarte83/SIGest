@@ -35,7 +35,6 @@ $(document).ready(function () {
         success: function (dataResult) {
             var dataResult = JSON.parse(dataResult);
             console.log(dataResult);
-
             $("#periodo").html("");
             $("#periodo").html('<option value="0">Todos</option>');
             $.each(dataResult, function () {
@@ -59,14 +58,14 @@ $(document).ready(function () {
                     datasets: [{
                         data: dataResult.total,
                         backgroundColor: [
-                            'red',
-                            'green',
-                            'blue',
-                            'yellow',
                             'orange',
+                            'blue',
                             'cyan',
+                            'green',
+                            'red',
+                            'indigo',
                             'pink',
-                            'aquamarine'
+                            'yellow'
                         ],
                     }],
                 },
