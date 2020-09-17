@@ -13,12 +13,11 @@ $(document).ready(function () {
             console.log(dataResult.data[0]);
 
             $("#id").val(dataResult.data[0][0]);
-            $("#data_p").val(dataResult.data[0][3]);
-            $("#motivo").val(dataResult.data[0][4]);
+            $("#data_p").val(moment(dataResult.data[0][3]).format('YYYY-MM-DDThh:mm'));
             $("#local").val(dataResult.data[0][5]);
             $("#entregue").val(dataResult.data[0][7]);
             $("#problema").val(dataResult.data[0][8]);
-            $("#data_i").val(dataResult.data[0][9]);
+            $("#data_i").val(moment(dataResult.data[0][9]).format('YYYY-MM-DDThh:mm'));
             $("#resolucao").val(dataResult.data[0][10]);
             $("#obs").val(dataResult.data[0][11]);
             $("#material").val(dataResult.data[0][12]);
@@ -29,8 +28,11 @@ $(document).ready(function () {
             $("#factura").val(dataResult.data[0][17]);
 
             var cli_id = dataResult.data[0][22];
-            var prod_id = dataResult.data[0][23]
-            var t_id = dataResult.data[0][24]
+            var prod_id = dataResult.data[0][23];
+            var t_id = dataResult.data[0][24];
+
+            //Select Motivo
+            $("#motivo").val(dataResult.data[0][4]);
 
             //Fetch Client
             $.ajax({
@@ -73,7 +75,7 @@ $(document).ready(function () {
                 }
             });
 
-            //Fetch Tecnicos
+            //Fetch Tecnico
             $.ajax({
                 url: "../php/queries.php",
                 type: "POST",

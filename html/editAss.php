@@ -90,13 +90,27 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Motivo</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="motivo" name="motivo" class="form-control">
+                                    <select name="motivo" id="motivo" class="custom-select form-control">
+                                        <option value="0">Seleccionar Motivo</option>
+                                        <option value="Manutenção">Manutenção</option>
+                                        <option value="Assistência de Hardware">Assistência de Hardware</option>
+                                        <option value="Assistência de Software">Assistência de Software</option>
+                                        <option value="Instalação de Impressora a Contrato">Instalação de Impressora a Contrato</option>
+                                        <option value="Instalação de Software">Instalação de Software</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Local</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="local" name="local" class="form-control">
+                                    <select name="local" id="local" class="custom-select form-control">
+                                        <option value="0">Seleccionar Local</option>
+                                        <option value="Cliente">Cliente</option>
+                                        <option value="Loja 1">Loja 1</option>
+                                        <option value="Loja 2">Loja 2</option>
+                                        <option value="Loja 3">Loja 3</option>
+                                        <option value="Assistência Remota">Assistência Remota</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -115,14 +129,13 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Problema</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="problema" id="problema" rows="8"
-                                              ></textarea>
+                                    <textarea class="form-control" name="problema" id="problema" rows="8"></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Data Intervenção</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="data_i" name="data_i" class="form-control" >
+                                    <input type="datetime-local" id="data_i" name="data_i" class="form-control" >
                                 </div>
                             </div>
                             <div class="form-group row">
