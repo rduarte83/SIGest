@@ -1,3 +1,12 @@
+<!--
+TODO: Reformular Contratos SW
+TODO: Contratos copia - inserir comercial
+TODO: contratos SW - inserir vendedor
+TODO: stats - administrativo
+TODO: Admin - stats
+TODO: change PW
+-->
+
 <?php include_once 'php/session.php' ?>
 
 <!DOCTYPE html>

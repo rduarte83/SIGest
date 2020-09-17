@@ -1291,62 +1291,6 @@ if ($_POST['op'] == 'addVendas') {
     );
 }
 
-if ($_POST['op'] == 'fetchVendas') {
-    $output = array();
-    $query = "
-        SELECT * FROM VENDAS ORDER BY mes ASC 
-        ";
-
-    $statement = $conn->prepare($query);
-    $statement->execute();
-    $result = $statement->fetchAll();
-    $data = array();
-
-    foreach ($result as $row) {
-        $sub_array = array();
-        $sub_array[] = $row["id"];
-        $sub_array[] = $row["comercial"];
-        $sub_array[] = $row["mes"];
-        $sub_array[] = $row["valor"];
-
-        $data[] = $sub_array;
-    }
-    $output = array(
-        "data" => $data
-    );
-    echo json_encode($output);
-}
-
-if ($_POST['op'] == 'fetchVendasMes') {
-    $output = array();
-    $query = "
-        SELECT * FROM VENDAS WHERE mes=:mes
-        ";
-
-    $statement = $conn->prepare($query);
-    $statement->execute(
-        array(
-            ':mes' => $_POST["mes"]
-        )
-    );
-    $result = $statement->fetchAll();
-    $data = array();
-
-    foreach ($result as $row) {
-        $sub_array = array();
-        $sub_array[] = $row["id"];
-        $sub_array[] = $row["comercial"];
-        $sub_array[] = $row["mes"];
-        $sub_array[] = $row["valor"];
-
-        $data[] = $sub_array;
-    }
-    $output = array(
-        "data" => $data
-    );
-    echo json_encode($output);
-}
-
 if ($_POST['op'] == 'fetchMes') {
     $output = array();
     $query = "

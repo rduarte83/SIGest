@@ -21,7 +21,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-6">
+                <div class="col-12">
                     <div class="card">
                         <div class="card-body">
                             <label class="col-form-label col-sm">Seleccionar Mês</label>
@@ -31,6 +31,11 @@
                         <!-- /.card-body -->
                     </div>
                     <!-- /.card -->
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-9">
                     <div class="card">
                         <div class="card-body">
                             <!-- Insert Content Here -->
@@ -39,12 +44,11 @@
                         <!-- /.card-body -->
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-3">
                     <div class="card">
                         <div class="card-body">
                             <table id="table" class="table table-bordered table-hover">
                                 <thead>
-                                <th>id</th>
                                 <th>Comercial</th>
                                 <th>Mês</th>
                                 <th>Valor</th>
@@ -66,4 +70,4 @@
     <!-- /.content -->
 </div>
 
-<script src="js/vendas.js"></script>
+<script src="js/stats/admin.js"></script>

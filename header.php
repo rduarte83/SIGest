@@ -397,49 +397,14 @@
                 if ($_SESSION["role"] == "admin") {
                     ?>
                     <li class="nav-item has-treeview
-                    <?= (basename($_SERVER['PHP_SELF']) == "vendas.php") |
-                    (basename($_SERVER['PHP_SELF']) == "addVendas.php")
-                        ? "menu-open" : ""; ?>">
-                        <a href="#" class="nav-link
-                    <?= (basename($_SERVER['PHP_SELF']) == "vendas.php") |
+                    <?= (basename($_SERVER['PHP_SELF']) == "users.php") |
+                        (basename($_SERVER['PHP_SELF']) == "auditoria.php") |
                         (basename($_SERVER['PHP_SELF']) == "addVendas.php")
-                            ? "active" : ""; ?>">
-                            <i class="nav-icon fa fa-balance-scale"></i>
-                            <p>Resultados
-                                <i class="fa fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="/sigest/html/vendas.php"
-                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "vendas.php") ? "active" : ""; ?>">
-                                    <i class="fa fa-money nav-icon"></i>
-                                    <p>Vendas Mensais</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/sigest/html/addVendas.php"
-                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "addVendas.php") ? "active" : ""; ?>">
-                                    <i class="fa fa-group nav-icon"></i>
-                                    <p>Adicionar Vendas</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <?php
-                }
-                ?>
-
-                <?php
-                if ($_SESSION["role"] == "admin") {
-                    ?>
-                    <li class="nav-item has-treeview
-                    <?= (basename($_SERVER['PHP_SELF']) == "users.php") |
-                    (basename($_SERVER['PHP_SELF']) == "auditoria.php")
                         ? "menu-open" : ""; ?>">
                         <a href="#" class="nav-link
                     <?= (basename($_SERVER['PHP_SELF']) == "users.php") |
-                        (basename($_SERVER['PHP_SELF']) == "auditoria.php")
+                        (basename($_SERVER['PHP_SELF']) == "auditoria.php") |
+                        (basename($_SERVER['PHP_SELF']) == "addVendas.php")
                             ? "active" : ""; ?>">
                             <i class="nav-icon fa fa-lock"></i>
                             <p>Administração
@@ -447,6 +412,13 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/sigest/html/addVendas.php"
+                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "addVendas.php") ? "active" : ""; ?>">
+                                    <i class="fa fa-group nav-icon"></i>
+                                    <p>Adicionar Vendas</p>
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a href="/sigest/html/users.php"
                                    class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "users.php") ? "active" : ""; ?>">

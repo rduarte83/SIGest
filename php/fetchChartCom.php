@@ -30,6 +30,6 @@ foreach ($result as $row) {
     $sub_array[] = $row["valor"];
 }
 $data["total"] = $sub_array;
-$data["stats"] = ["Contactos", "Entregas", "Clientes", "Vendas"];
+$data["stats"] = ["Novos Contactos", "Número Vendas", "Novos Clientes", "Valor Vendas"];
 
 echo json_encode($data);

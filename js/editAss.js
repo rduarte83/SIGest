@@ -10,7 +10,6 @@ $(document).ready(function () {
         },
         success: function (dataResult) {
             var dataResult = JSON.parse(dataResult);
-
             console.log(dataResult.data[0]);
 
             $("#id").val(dataResult.data[0][0]);
@@ -91,10 +90,6 @@ $(document).ready(function () {
                     });
                 }
             });
-
-            if (dataResult.statusCode == 201) {
-                alert(dataResult);
-            }
         }
     });
 });

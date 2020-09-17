@@ -5,35 +5,15 @@ function createDT() {
     $("#table").DataTable({
         processing: true,
         ajax: {
-            url: "/sigest/php/queries.php",
+            url: "/sigest/php/stats.php",
             type: "POST",
             data: {
-                op: 'fetchVendas'
+                op: "fetchTec",
             }
         },
-        dom: 'Bfrtip',
-        columnDefs: [
-            {"visible": false, "targets": 0}
-        ],
-        buttons: {
-            buttons: [
-                {
-                    extend: 'print',
-                    'text': '<i class="fa fa-print" aria-hidden="true"></i>',
-                    "className": 'btn btn-default btn-xs'
-                },
-                {
-                    extend: 'pdf',
-                    'text': '<i class="fa fa-file-pdf-o" aria-hidden="true"></i>',
-                    "className": 'btn btn-default btn-xs'
-                },
-                {
-                    extend: 'excel',
-                    'text': '<i class="fa fa-file-excel-o" aria-hidden="true"></i>',
-                    "className": 'btn btn-default btn-xs'
-                }
-            ],
-        },
+        paging: false,
+        searching: false,
+        bInfo: false,
         responsive: true,
         autoWidth: false,
         contentType: false,
@@ -47,10 +27,10 @@ $(document).ready(function () {
 
     //Fetch Mes
     $.ajax({
-        url: "/sigest/php/queries.php",
+        url: "/sigest/php/stats.php",
         type: "POST",
         data: {
-            op: 'fetchMes'
+            op: 'fetchMesT'
         },
         success: function (dataResult) {
             var dataResult = JSON.parse(dataResult);
@@ -65,7 +45,7 @@ $(document).ready(function () {
 
     //Fetch Chart info
     $.ajax({
-        url: "/sigest/php/fetchChart.php",
+        url: "/sigest/php/fetchChartTec.php",
         type: "post",
         success: function (dataResult) {
             var dataResult = JSON.parse(dataResult);
@@ -74,18 +54,20 @@ $(document).ready(function () {
             chart = new Chart(ctx, {
                 type: 'pie',
                 data: {
-                    labels: dataResult.comercial,
+                    labels: dataResult.stats,
                     datasets: [{
                         data: dataResult.total,
                         backgroundColor: [
-                            'red',
+                            'orange',
                             'blue',
-                            'yellow',
+                            'cyan',
                             'green',
-                            'black',
-                            'white'
-                        ]
-                    }]
+                            'red',
+                            'indigo',
+                            'pink',
+                            'yellow'
+                        ],
+                    }],
                 },
                 options: {
                     plugins: {
@@ -98,7 +80,7 @@ $(document).ready(function () {
                     },
                     title: {
                         display: true,
-                        text: 'Vendas mensais por Comercial'
+                        text: 'Estatísticas dos Técnicos'
                     },
                     tooltips: {
                         intersect: false
@@ -122,42 +104,25 @@ $(document).ready(function () {
         ;
         if ($("#periodo").val() == 0) {
             createDT();
-            url = "/sigest/php/fetchChart.php";
+            url = "/sigest/php/fetchChartTec.php";
 
         } else {
             console.log( $("#periodo").val() );
-            url = "/sigest/php/fetchChartMes.php"
+            url = "/sigest/php/fetchChartTecMes.php";
 
             $("#table").DataTable({
                 processing: true,
                 ajax: {
-                    url: "/sigest/php/queries.php",
+                    url: "/sigest/php/stats.php",
                     type: "POST",
                     data: {
-                        op: 'fetchVendasMes',
+                        op: "fetchTecS",
                         mes: $("#periodo").val()
-                    },
+                    }
                 },
-                dom: 'Bfrtip',
-                buttons: {
-                    buttons: [
-                        {
-                            extend: 'print',
-                            'text': '<i class="fa fa-print" aria-hidden="true"></i>',
-                            "className": 'btn btn-default btn-xs'
-                        },
-                        {
-                            extend: 'pdf',
-                            'text': '<i class="fa fa-file-pdf-o" aria-hidden="true"></i>',
-                            "className": 'btn btn-default btn-xs'
-                        },
-                        {
-                            extend: 'excel',
-                            'text': '<i class="fa fa-file-excel-o" aria-hidden="true"></i>',
-                            "className": 'btn btn-default btn-xs'
-                        }
-                    ],
-                },
+                paging: false,
+                searching: false,
+                bInfo: false,
                 responsive: true,
                 autoWidth: false,
                 contentType: false,
@@ -170,12 +135,12 @@ $(document).ready(function () {
             url: url,
             type: "post",
             data: {
-                data: $("#periodo").val()
+                mes: $("#periodo").val()
             },
             success: function (dataResult) {
                 var dataResult = JSON.parse(dataResult);
                 console.log(dataResult);
-                chart.data.labels = dataResult.comercial;
+                chart.data.labels = dataResult.stats;
                 chart.data.datasets.forEach((dataset) => {
                     dataset.data = dataResult.total;
                 });

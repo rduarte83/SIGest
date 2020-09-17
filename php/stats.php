@@ -97,7 +97,7 @@ if ($_POST['op'] == 'fetchMes') {
 if ($_POST['op'] == 'fetchVendas') {
     $output = array();
     $query = "
-        SELECT * FROM VENDAS WHERE comercial=:comercial ORDER BY mes ASC 
+        SELECT * FROM VENDAS ORDER BY mes ASC 
         ";
 
     $statement = $conn->prepare($query);
@@ -107,8 +107,9 @@ if ($_POST['op'] == 'fetchVendas') {
 
     foreach ($result as $row) {
         $sub_array = array();
+        $sub_array[] = $row["comercial"];
+        $sub_array[] = $row["mes"];
         $sub_array[] = $row["valor"];
-
         $data[] = $sub_array;
     }
     $output = array(
@@ -120,7 +121,7 @@ if ($_POST['op'] == 'fetchVendas') {
 if ($_POST['op'] == 'fetchVendasMes') {
     $output = array();
     $query = "
-        SELECT * FROM VENDAS WHERE mes=:mes
+        SELECT comercial, mes, SUM(valor) AS valor FROM vendas WHERE mes = '2020-09' GROUP BY comercial
         ";
 
     $statement = $conn->prepare($query);
@@ -134,11 +135,9 @@ if ($_POST['op'] == 'fetchVendasMes') {
 
     foreach ($result as $row) {
         $sub_array = array();
-        $sub_array[] = $row["id"];
         $sub_array[] = $row["comercial"];
         $sub_array[] = $row["mes"];
         $sub_array[] = $row["valor"];
-
         $data[] = $sub_array;
     }
     $output = array(

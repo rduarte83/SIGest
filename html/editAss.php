@@ -8,15 +8,12 @@
     <title>SIGest | Editar Assistência</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- Font Awesome -->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
     <!-- DataTables -->
     <link rel="stylesheet" type="text/css"
           href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/b-1.6.2/b-html5-1.6.2/r-2.2.5/datatables.min.css"/>
-
     <!-- Theme style -->
     <link rel="stylesheet" href="../css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
@@ -24,6 +21,7 @@
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
+
     <?php include '../header.php' ?>
 
     <!-- Content Wrapper. Contains page content -->
@@ -86,7 +84,7 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Data Pedido</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="data_p" name="data_p" class="form-control">
+                                    <input type="datetime-local" id="data_p" name="data_p" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group row">

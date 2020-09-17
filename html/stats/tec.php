@@ -30,6 +30,12 @@
                         </div>
                         <!-- /.card-body -->
                     </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <div class="row">
+                <div class="col-9">
                     <div class="card">
                         <div class="card-body">
                             <!-- Insert Content Here -->
@@ -37,6 +43,8 @@
                         </div>
                         <!-- /.card-body -->
                     </div>
+                </div>
+                <div class="col-3">
                     <div class="card">
                         <div class="card-body">
                             <table id="table" class="table table-bordered table-hover">
@@ -56,9 +64,7 @@
                         </div>
                         <!-- /.card-body -->
                     </div>
-                    <!-- /.card -->
                 </div>
-                <!-- /.col -->
             </div>
             <!-- /.row -->
         </div>
@@ -68,4 +74,4 @@
 </div>
 <!-- /.content-wrapper -->
 
-<script src="js/tec.js"></script>
+<script src="js/stats/tec.js"></script>
