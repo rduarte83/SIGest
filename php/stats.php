@@ -175,7 +175,6 @@ if ($_POST['op'] == 'fetchTec') {
         $sub_array[] = $row["assSW"];
         $sub_array[] = $row["factHW"];
         $sub_array[] = $row["factSW"];
-        $sub_array[] = $row["factSW"];
         $sub_array[] = $row["manut"];
         $sub_array[] = $row["instImp"];
         $sub_array[] = $row["instSW"];

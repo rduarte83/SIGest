@@ -2,7 +2,7 @@
 include_once 'db.php';
 
 $query = "
-            SELECT comercial, valor FROM vendas WHERE mes = :data
+            SELECT comercial, SUM(valor) FROM vendas WHERE mes = :data
                 ";
 
 $statement = $conn->prepare($query);

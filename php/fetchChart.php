@@ -4,7 +4,6 @@ include_once 'db.php';
 $query = "
             SELECT comercial, SUM(valor) AS total FROM vendas GROUP BY comercial
                 ";
-
 $statement = $conn->prepare($query);
 $statement->execute();
 $result = $statement->fetchAll();

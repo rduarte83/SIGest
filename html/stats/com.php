@@ -32,6 +32,12 @@
                     </div>
                     <div class="card">
                         <div class="card-body">
+                            <!-- Insert Content Here -->
+                            <canvas id="chart"></canvas>
+                        </div>
+                        <!-- /.card-body -->
+                    <div class="card">
+                        <div class="card-body">
                             <table id="table" class="table table-bordered table-hover">
                                 <thead>
                                 <th>Novos Contactos</th>

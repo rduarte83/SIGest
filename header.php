@@ -506,6 +506,6 @@
         integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg=="
         crossorigin="anonymous"></script>
 <!-- Chart.js labels plugin -->
-<script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
 <!-- AdminLTE App -->
 <script type="text/javascript" src="/sigest/js/adminlte.min.js"></script>
