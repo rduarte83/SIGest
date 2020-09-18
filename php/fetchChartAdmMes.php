@@ -3,14 +3,9 @@ include_once 'db.php';
 include_once 'session.php';
 
 $query = "SELECT
-                (SELECT COUNT(vis) AS apresentacao FROM 
-                    (SELECT MIN(ult_vis) AS vis FROM visitas 
-                    WHERE motivo_id=1 AND vendedor=:v AND EXTRACT(YEAR_MONTH FROM ult_vis)=:mes GROUP BY cliente_id) AS X) AS contactos,
-                (SELECT COUNT(cliente_id) FROM visitas 
-                    WHERE motivo_id=8 AND vendedor=:v AND EXTRACT(YEAR_MONTH FROM ult_vis)=:mes) AS entregas,
-                (SELECT COUNT(DISTINCT cliente_id) FROM visitas 
-                    WHERE motivo_id=8 AND vendedor=:v AND EXTRACT(YEAR_MONTH FROM ult_vis)=:mes)  AS clientes,
-                (SELECT SUM(valor) FROM VENDAS WHERE comercial=:v AND mes=:mes) AS valor
+            (SELECT COUNT(id) FROM cobrancas WHERE motivo='Cobrança' AND estado='Concluido') AS cobrancas,
+            (SELECT COUNT(id) FROM cobrancas WHERE motivo='Acompanhamento') AS acompanhamento,
+            (SELECT SUM(valor) FROM vendas WHERE comercial=:c) AS vendas
                 ";
 $statement = $conn->prepare($query);
 $statement->execute(

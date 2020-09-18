@@ -2,13 +2,13 @@
 include_once 'db.php';
 
 $query = "
-            SELECT comercial, SUM(valor) as valor FROM vendas WHERE mes = '2020-09' GROUP BY comercial
+            SELECT comercial, SUM(valor) as valor FROM vendas WHERE mes=:mes GROUP BY comercial
                 ";
 
 $statement = $conn->prepare($query);
 $statement->execute(
     array(
-        ':data' => $_POST["data"]
+        ':mes' => $_POST["mes"]
     )
 );
 $result = $statement->fetchAll();

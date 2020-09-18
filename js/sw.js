@@ -50,7 +50,7 @@ $(document).ready(function () {
         createdRow: function (row, data) {
             console.log(data);
             //86400000 - 1 day in ms")
-            if (Math.round((Date.now() - new Date(data[6]).getTime()) / 86400000) >= 180)
+            if (Math.round((Date.now() - new Date(data[6]).getTime()) / 86400000) >= 180 && data[2] != 'ZoneSoft')
                 $(row).addClass('red');
         },
         order: [[6, 'asc']],

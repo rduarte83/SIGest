@@ -2,9 +2,10 @@
 TODO: Reformular Contratos SW
 TODO: Contratos copia - inserir comercial
 TODO: contratos SW - inserir vendedor
-TODO: stats - administrativo
+TODO: Administrativo - stats
 TODO: Admin - stats
-TODO: change PW
+TODO: change PW - bugged
+TODO: logs
 -->
 
 <?php include_once 'php/session.php' ?>
@@ -32,6 +33,7 @@ TODO: change PW
     if ($_SESSION["role"] == "comercial") include 'html/stats/com.php';
     if ($_SESSION["role"] == "tecnico") include 'html/stats/tec.php';
     if ($_SESSION["role"] == "admin") include 'html/stats/admin.php';
+    if ($_SESSION["role"] == "administrativo") include 'html/stats/administrativo.php';
     include 'footer.php';
     ?>
 </div>

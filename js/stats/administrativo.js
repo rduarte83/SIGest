@@ -8,7 +8,7 @@ function createDT() {
             url: "/sigest/php/stats.php",
             type: "POST",
             data: {
-                op: 'fetchVendas'
+                op: "fetchStatsAdm"
             }
         },
         paging: false,
@@ -27,10 +27,10 @@ $(document).ready(function () {
 
     //Fetch Mes
     $.ajax({
-        url: "/sigest/php/queries.php",
+        url: "/sigest/php/stats.php",
         type: "POST",
         data: {
-            op: 'fetchMes'
+            op: 'fetchMesAdm'
         },
         success: function (dataResult) {
             var dataResult = JSON.parse(dataResult);
@@ -45,16 +45,16 @@ $(document).ready(function () {
 
     //Fetch Chart info
     $.ajax({
-        url: "/sigest/php/fetchChart.php",
+        url: "/sigest/php/fetchChartAdm.php",
         type: "post",
         success: function (dataResult) {
             var dataResult = JSON.parse(dataResult);
-            console.log(dataResult);
+            console.log(dataResult.data);
 
             chart = new Chart(ctx, {
                 type: 'pie',
                 data: {
-                    labels: dataResult.comercial,
+                    labels: dataResult.stats,
                     datasets: [{
                         data: dataResult.total,
                         backgroundColor: [
@@ -67,7 +67,7 @@ $(document).ready(function () {
                             'pink',
                             'yellow'
                         ],
-                    }]
+                    }],
                 },
                 options: {
                     plugins: {
@@ -80,7 +80,7 @@ $(document).ready(function () {
                     },
                     title: {
                         display: true,
-                        text: 'Vendas mensais por Comercial'
+                        text: 'Estatísticas dos Administrativos'
                     },
                     tooltips: {
                         intersect: false
@@ -100,14 +100,14 @@ $(document).ready(function () {
     $("#periodo").on('change', function () {
         if ($.fn.dataTable.isDataTable('#table')) {
             $("#table").DataTable().destroy();
-        }
-        ;
+        };
         if ($("#periodo").val() == 0) {
             createDT();
-            url = "/sigest/php/fetchChart.php";
+            url = "/sigest/php/fetchChartAdm.php";
 
         } else {
-            url = "/sigest/php/fetchChartMes.php"
+            console.log( $("#periodo").val() );
+            url = "/sigest/php/fetchChartAdmMes.php";
 
             $("#table").DataTable({
                 processing: true,
@@ -115,9 +115,9 @@ $(document).ready(function () {
                     url: "/sigest/php/stats.php",
                     type: "POST",
                     data: {
-                        op: 'fetchVendasMes',
+                        op: "fetchStatsAdmMes",
                         mes: $("#periodo").val()
-                    },
+                    }
                 },
                 paging: false,
                 searching: false,
@@ -129,7 +129,6 @@ $(document).ready(function () {
                 language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
             });
         }
-
         $.ajax({
             url: url,
             type: "post",
@@ -139,7 +138,7 @@ $(document).ready(function () {
             success: function (dataResult) {
                 var dataResult = JSON.parse(dataResult);
                 console.log(dataResult);
-                chart.data.labels = dataResult.comercial;
+                chart.data.labels = dataResult.stats;
                 chart.data.datasets.forEach((dataset) => {
                     dataset.data = dataResult.total;
                 });
