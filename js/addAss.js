@@ -8,6 +8,7 @@ $(document).ready(function () {
         var end = search.get("end");
         var id = search.get("id");
         $("#data_i").val(start);
+        $("#data_i_end").val(end);
     }
 
     //Fetch Clientes - autocomplete

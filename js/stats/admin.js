@@ -1,5 +1,4 @@
-var ctx = $("#chart");
-var chart, url;
+var chartCom, url;
 
 function createDT() {
     $("#table").DataTable({
@@ -51,7 +50,7 @@ $(document).ready(function () {
             var dataResult = JSON.parse(dataResult);
             console.log(dataResult);
 
-            chart = new Chart(ctx, {
+            chartCom = new Chart($("#chartCom"), {
                 type: 'pie',
                 data: {
                     labels: dataResult.comercial,
@@ -139,11 +138,11 @@ $(document).ready(function () {
             success: function (dataResult) {
                 var dataResult = JSON.parse(dataResult);
                 console.log(dataResult);
-                chart.data.labels = dataResult.comercial;
-                chart.data.datasets.forEach((dataset) => {
+                chartCom.data.labels = dataResult.comercial;
+                chartCom.data.datasets.forEach((dataset) => {
                     dataset.data = dataResult.total;
                 });
-                chart.update();
+                chartCom.update();
             }
         })
     });

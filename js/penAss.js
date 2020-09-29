@@ -103,7 +103,10 @@ $(document).ready(function () {
             if (Math.round((Date.now() - new Date(data[8]).getTime()) / 86400000) >= 5 && data[11] == 'Resolvido')
                 datatable.rows($(row)).remove();
         },
-        order: [8, 'desc'],
+        columnDefs: [
+            {visible: false, targets: [2,3,5]}
+        ],
+        order: [0, 'desc'],
         dom: 'Bfrtip',
         buttons: {
             buttons: [

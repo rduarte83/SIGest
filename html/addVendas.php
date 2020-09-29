@@ -50,7 +50,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form method="post" action="vendas.php" id="addForm" enctype="multipart/form-data" class="form-horizontal">
+                    <form method="post" action="../index.php" id="addForm" enctype="multipart/form-data" class="form-horizontal">
                         <div class="card-body">
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Comercial</label>
@@ -63,7 +63,7 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Valor</label>
                                 <div class="col-sm-10">
-                                    <input type="number" id="valor" name="valor" class="form-control" required>
+                                    <input type="number" step="0.01" id="valor" name="valor" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -76,7 +76,7 @@
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <input type="hidden" name="op" value="addVendas">
-                            <a href="vendas.php">
+                            <a href="../index.php">
                                 <button type="button" class="btn btn-default ">Cancelar</button>
                             </a>
                             <button type="submit" class="btn btn-success float-right">Confirmar</button>

@@ -93,9 +93,9 @@ function createDT() {
             },
         },
         columnDefs: [
-            {visible: false, targets: [5, 6, 7]}
+            {visible: false, targets: [11,13,14]}
         ],
-        order: [8, 'desc'],
+        order: [0, 'desc'],
         dom: 'Bfrtip',
         buttons: {
             buttons: [

@@ -53,7 +53,7 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="assistencias.php" method="post" id="addForm" enctype="multipart/form-data"
+                        <form action="calAss.php" method="post" id="addForm" enctype="multipart/form-data"
                               class="form-horizontal">
                             <div class="card-body">
                                 <div class="form-group row">
@@ -158,7 +158,7 @@
                             <!-- /.card-body -->
                             <div class="card-footer">
                                 <input type="hidden" name="op" value="addAss">
-                                <a href="assistencias.php">
+                                <a href="calAss.php">
                                     <button type="button" class="btn btn-default ">Cancelar</button>
                                 </a>
                                 <button type="submit" class="btn btn-success float-right">Confirmar</button>

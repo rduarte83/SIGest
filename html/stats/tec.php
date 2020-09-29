@@ -33,18 +33,7 @@
                     <!-- /.card -->
                 </div>
                 <!-- /.col -->
-            </div>
-            <div class="row">
-                <div class="col-9">
-                    <div class="card">
-                        <div class="card-body">
-                            <!-- Insert Content Here -->
-                            <canvas id="chart"></canvas>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                </div>
-                <div class="col-3">
+                <div class="col-12">
                     <div class="card">
                         <div class="card-body">
                             <table id="table" class="table table-bordered table-hover">
@@ -61,6 +50,15 @@
                                 <tbody>
                                 </tbody>
                             </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <!-- Insert Content Here -->
+                            <canvas id="chart"></canvas>
                         </div>
                         <!-- /.card-body -->
                     </div>

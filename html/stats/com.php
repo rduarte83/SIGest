@@ -32,20 +32,9 @@
                     </div>
                 </div>
             </div>
+            <!-- /.row -->
             <div class="row">
-                <div class="col-9">
-                    <div class="card">
-                        <div class="card-body">
-                            <!-- Insert Content Here -->
-                            <canvas id="chart"></canvas>
-                        </div>
-                        <!-- /.card-body -->
-                        <!-- /.card -->
-                    </div>
-                    <!-- /.col -->
-                </div>
-                <!-- /.row -->
-                <div class="col-3">
+                <div class="col-12">
                     <div class="card">
                         <div class="card-body">
                             <table id="table" class="table table-bordered table-hover">
@@ -61,6 +50,19 @@
                         </div>
                         <!-- /.card-body -->
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <!-- Insert Content Here -->
+                            <canvas id="chart"></canvas>
+                        </div>
+                        <!-- /.card-body -->
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
                 </div>
             </div>
             <!-- /.container-fluid -->
