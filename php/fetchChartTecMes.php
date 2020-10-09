@@ -9,8 +9,7 @@ $query = "SELECT
             (SELECT COUNT(id) FROM assistencias WHERE motivo='Assistência de Software' AND facturado='Sim' AND factura>0 AND tecnico=:t AND EXTRACT(YEAR_MONTH FROM data_i)=:mes) AS factSW,
             (SELECT COUNT(id) FROM assistencias WHERE motivo='Manutenção' AND tecnico=:t AND EXTRACT(YEAR_MONTH FROM data_i)=:mes) AS manut,
             (SELECT COUNT(id) FROM assistencias WHERE motivo='Instalação de Impressora a Contrato' AND tecnico=:t AND EXTRACT(YEAR_MONTH FROM data_i)=:mes) AS instImp,
-            (SELECT COUNT(id) FROM assistencias WHERE motivo='Instalação de Software' AND tecnico=:t AND EXTRACT(YEAR_MONTH FROM data_i)=:mes) AS instSW,
-            (SELECT SUM(valor) FROM VENDAS WHERE comercial=:c AND mes=:mes) AS valor 
+            (SELECT COUNT(id) FROM assistencias WHERE motivo='Instalação de Software' AND tecnico=:t AND EXTRACT(YEAR_MONTH FROM data_i)=:mes) AS instSW 
                 ";
 $statement = $conn->prepare($query);
 $statement->execute(
@@ -33,11 +32,9 @@ foreach ($result as $row) {
     $sub_array[] = $row["manut"];
     $sub_array[] = $row["instImp"];
     $sub_array[] = $row["instSW"];
-    if (is_null($row["valor"])) $row["valor"] = 0;
-    $sub_array[] = $row["valor"];
 }
 $data["total"] = $sub_array;
 $data["stats"] = ["Assist HW", "Assist SW", "Assist HW Fact",
-    "Assist SW Fact", "Manutenções", "Instalações Imp", "Instalações SW", "Vendas"];
+    "Assist SW Fact", "Manutenções", "Instalações Imp", "Instalações SW"];
 
 echo json_encode($data);

@@ -469,8 +469,8 @@
 <script type="text/javascript"
         src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/b-1.6.2/b-html5-1.6.2/b-print-1.6.2/r-2.2.5/datatables.min.js"></script>
 <!-- FullCalendar -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.2.0/main.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.2.0/locales/pt.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.3.2/main.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.3.2/locales/pt.js"></script>
 <!-- SweetAlert2 -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <!-- Chart.JS -->

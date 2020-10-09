@@ -874,6 +874,26 @@ if ($_POST['op'] == 'fetchCom') {
     echo json_encode($output);
 }
 
+if ($_POST['op'] == 'fetchComVis') {
+    $output = array();
+    $query = "SELECT * FROM users WHERE role='comercial'";
+    $statement = $conn->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $data = array();
+
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["id"];
+        $sub_array[] = $row["username"];
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
 if ($_POST['op'] == 'fetchLastAss') {
     $output = array();
     $query = "
@@ -1294,7 +1314,7 @@ if ($_POST['op'] == 'addVendas') {
 if ($_POST['op'] == 'fetchMes') {
     $output = array();
     $query = "
-        SELECT DISTINCT mes FROM VENDAS ORDER BY mes ASC 
+        SELECT DISTINCT mes FROM vendas ORDER BY mes ASC 
         ";
 
     $statement = $conn->prepare($query);

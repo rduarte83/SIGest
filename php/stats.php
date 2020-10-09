@@ -97,7 +97,7 @@ if ($_POST['op'] == 'fetchMes') {
 if ($_POST['op'] == 'fetchVendas') {
     $output = array();
     $query = "
-        SELECT * FROM VENDAS ORDER BY mes ASC 
+        SELECT * FROM vendas ORDER BY mes ASC 
         ";
 
     $statement = $conn->prepare($query);

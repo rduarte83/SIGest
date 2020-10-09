@@ -8,8 +8,14 @@ $query = "
                 INNER JOIN motivos m ON v.motivo_id=m.id
                 ";
 
-if( $_SESSION["role"] == "comercial") {
-    $query .= " WHERE vendedor=" . "'" .$_SESSION["username"] . "'";
+if ($_SESSION["role"] == "comercial") {
+    $query .= " WHERE vendedor=" . "'" . $_SESSION["username"] . "'";
+}
+
+if (isset($_POST["op"])) {
+    if ($_POST["op"] == "com") {
+        $query .= " WHERE vendedor=" . "'" . $_POST['com'] . "'";
+    }
 }
 
 $statement = $conn->prepare($query);

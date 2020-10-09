@@ -1,4 +1,4 @@
-<?php include_once '../php/session.php'?>
+<?php include_once '../php/session.php' ?>
 
 <!DOCTYPE html>
 <html>
@@ -10,7 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome Icons -->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+          crossorigin="anonymous">
     <!-- FullCalendar style -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.2.0/main.min.css">
     <!-- Theme style -->
@@ -46,6 +47,21 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
+                <?php if ($_SESSION["role"] == 'admin') {
+                    echo '
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <label class="col-form-label col-sm">Seleccionar Comercial</label>
+                                <select class="custom-select form-control" id="com" name="com" required>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                ';} ?>
+
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -66,7 +82,7 @@
     </div>
     <!-- /.content-wrapper -->
 
-    <?php include '../footer.php' ?>
+    <?php include ' ../footer . php' ?>
 </div>
 <!-- ./wrapper -->
 

@@ -28,14 +28,11 @@
                             <select class="custom-select form-control" id="periodo" name="periodo" required>
                             </select>
                         </div>
-                        <!-- /.card-body -->
                     </div>
-                    <!-- /.card -->
                 </div>
-
             </div>
             <div class="row">
-                <div class="col-6">
+                <div class="col-12">
                     <div class="card">
                         <div class="card-body">
                             <!-- Insert Content Here -->
@@ -44,38 +41,9 @@
                         <!-- /.card-body -->
                     </div>
                 </div>
-                <div class="col-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <table id="table" class="table table-bordered table-hover">
-                                <thead>
-                                <th>Comercial</th>
-                                <th>Mês</th>
-                                <th>Valor</th>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-
-                    <!-- /.col -->
-                </div>
-                <!-- /.row -->
             </div>
-
             <div class="row">
-                <div class="col-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <!-- Insert Content Here -->
-                            <canvas id="chartTec"></canvas>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                </div>
-                <div class="col-6">
+                <div class="col-12">
                     <div class="card">
                         <div class="card-body">
                             <table id="table" class="table table-bordered table-hover">
@@ -90,15 +58,16 @@
                         </div>
                         <!-- /.card-body -->
                     </div>
-
-                    <!-- /.col -->
                 </div>
-                <!-- /.row -->
+                <!-- /.col -->
             </div>
         </div>
-        <!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
+        <!-- /.row -->
+</div>
+</div>
+<!-- /.container-fluid -->
+</section>
+<!-- /.content -->
 </div>
 
 <script src="js/stats/admin.js"></script>

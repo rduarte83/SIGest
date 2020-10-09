@@ -9,8 +9,7 @@ $query = "SELECT
                 (SELECT COUNT(cliente_id) FROM visitas 
                     WHERE motivo_id=8 AND vendedor=:v AND EXTRACT(YEAR_MONTH FROM ult_vis)=:mes) AS entregas,
                 (SELECT COUNT(DISTINCT cliente_id) FROM visitas 
-                    WHERE motivo_id=8 AND vendedor=:v AND EXTRACT(YEAR_MONTH FROM ult_vis)=:mes)  AS clientes,
-                (SELECT SUM(valor) FROM VENDAS WHERE comercial=:v AND mes=:mes) AS valor
+                    WHERE motivo_id=8 AND vendedor=:v AND EXTRACT(YEAR_MONTH FROM ult_vis)=:mes)  AS clientes
                 ";
 $statement = $conn->prepare($query);
 $statement->execute(
@@ -27,10 +26,8 @@ foreach ($result as $row) {
     $sub_array[] = $row["contactos"];
     $sub_array[] = $row["entregas"];
     $sub_array[] = $row["clientes"];
-    if (is_null($row["valor"])) $row["valor"] = 0;
-    $sub_array[] = $row["valor"];
 }
 $data["total"] = $sub_array;
-$data["stats"] = ["Novos Contactos", "Número Vendas", "Novos Clientes", "Valor Vendas"];
+$data["stats"] = ["Novos Contactos", "Número Vendas", "Novos Clientes"];
 
 echo json_encode($data);
