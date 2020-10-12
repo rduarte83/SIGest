@@ -2,15 +2,6 @@ $(document).ready(function () {
     var now = moment().format("YYYY-MM-DDTHH:mm");
     $("#data_p").val(now);
 
-    var search = new URLSearchParams(window.location.search);
-    if (search.has("start")) {
-        var start = search.get("start");
-        var end = search.get("end");
-        var id = search.get("id");
-        $("#data_i").val(start);
-        $("#data_i_end").val(end);
-    }
-
     //Fetch Clientes - autocomplete
     $.ajax({
         type: 'post',
@@ -59,9 +50,7 @@ $(document).ready(function () {
             var dataResult = JSON.parse(dataResult);
             $("#tecnico").html('<option value="0">Seleccionar Técnico</option>');
             $.each(dataResult.data, function () {
-                if (this[1] == id) {
-                    $("#tecnico").append($("<option/>").val(this[0]).text(this[1]).prop("selected", "selected"));
-                } else $("#tecnico").append($("<option/>").val(this[0]).text(this[1]));
+                $("#tecnico").append($("<option/>").val(this[0]).text(this[1]));
             });
         }
     });
@@ -113,40 +102,13 @@ $('#addForm').on('submit', function (e) {
                         $(window).off('mousemove', window.onafterprint);
                         console.log('Print Dialog Closed..');
                     };
-
                     window.print();
 
-                    setTimeout(function () {
-                        $(window).one('mousemove', window.onafterprint);
-                    }, 1);
-
-                    var search = new URLSearchParams(window.location.search);
-                    if (search.has("op")) {
-                        var param = search.get("op");
-                        if (param == "cal") window.location.href = "../html/calAss.php";
-                    } else window.location.href = "../html/backup/assistencias.php";
+                    window.location.href = "calAss.php"
                 }
             });
         }
     });
-});
-
-$("#newCli").click(function (e) {
-    e.preventDefault();
-    var search = new URLSearchParams(window.location.search);
-    if (search.has("op")) {
-        var param = search.get("op");
-        if (param == "cal") window.location.href = "../html/addCli.php?op=cal";
-    } else window.location.href = "../html/addCli.php?op=ass";
-});
-
-$("#newProd").click(function (e) {
-    e.preventDefault();
-    var search = new URLSearchParams(window.location.search);
-    if (search.has("op")) {
-        var param = search.get("op");
-        if (param == "cal") window.location.href = "../html/addProduto.php?op=cal&cli=" + $("#cli").val();
-    } else window.location.href = "../html/addProduto.php?op=ass&cli=" + $("#cli").val();
 });
 
 

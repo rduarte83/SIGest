@@ -24,42 +24,12 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <label class="col-form-label col-sm">Seleccionar Mês</label>
-                            <select class="custom-select form-control" id="periodo" name="periodo" required>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
                             <!-- Insert Content Here -->
-                            <canvas id="chartCom"></canvas>
+                            <canvas id="chart"></canvas>
                         </div>
                         <!-- /.card-body -->
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <table id="table" class="table table-bordered table-hover">
-                                <thead>
-                                <th>Comercial</th>
-                                <th>Mês</th>
-                                <th>Valor</th>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                </div>
-                <!-- /.col -->
             </div>
         </div>
         <!-- /.row -->

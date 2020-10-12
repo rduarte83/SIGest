@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var selectedDate = moment(eventData.start, 'YYYY-MM-DD');
             var now = moment(new Date(), 'YYYY-MM-DD');
             var dif = selectedDate.diff(now, 'weeks');
-            if (dif < 0 ) {
+            if (dif < 0) {
                 eventData.editable = false;
             }
         },
@@ -75,14 +75,16 @@ document.addEventListener('DOMContentLoaded', function () {
             if (info.event.extendedProps.vis != "vis") {
                 localStorage.setItem("ass_id", info.event.id);
                 window.location.href = "../html/editAss.php?op=cal";
-            };
+            }
+            ;
         },
         select: function (info) {
-           console.log(info);
-           var start = moment(info.start).format("YYYY-MM-DDTHH:MM:SS");
-           var end = moment(info.end).format("YYYY-MM-DDTHH:MM:SS");
-           var id = info.resource.id;
-           window.location.href = "../html/addAssist.php?op=cal&start="+start+"&end="+end+"&id="+id;
+            var start = moment(info.start).format("YYYY-MM-DDTHH:MM:SS");
+            var end = moment(info.end).format("YYYY-MM-DDTHH:MM:SS");
+            var id = info.resource.id;
+
+            prompt("Insira ")
+            console.log(start+"/"+end+"/"+id);
         },
         eventResize: function (info) {
             updEvents(info);

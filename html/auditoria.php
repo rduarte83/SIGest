@@ -1,7 +1,7 @@
 <?php include_once '../php/session.php'?>
 
 <!DOCTYPE html>
-<html>
+<html lang="pt">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

@@ -21,14 +21,14 @@
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
+<div class="wrapper no-print">
 
     <?php include '../header.php' ?>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <div class="content-header">
+        <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
@@ -42,7 +42,7 @@
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
-        </div>
+        </section>
         <!-- /.content-header -->
 
         <!-- Main content -->
@@ -91,9 +91,9 @@
     <!-- /.content-wrapper -->
 
     <?php include '../footer.php' ?>
-
-    <?php include 'addAss.php' ?>
 </div>
+
+<?php include 'addAss.php'?>
 <!-- ./wrapper -->
 
 <script src="../js/penAss.js"></script>

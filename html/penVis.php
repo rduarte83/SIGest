@@ -1,7 +1,7 @@
-<?php include_once '../php/session.php'?>
+<?php include_once '../php/session.php' ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -24,7 +24,7 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <div class="content-header">
+        <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
@@ -38,7 +38,7 @@
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
-        </div>
+        </section>
         <!-- /.content-header -->
 
         <!-- Main content -->
@@ -46,14 +46,6 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <label class="col-form-label col-sm-2">Seleccionar Cliente</label>
-                                <select class="custom-select form-control" id="cli" name="cliente_id" required>
-                                </select>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
                         <!-- /.card -->
                         <div class="card">
                             <div class="card-body">
@@ -84,10 +76,10 @@
     </div>
     <!-- /.content-wrapper -->
 
-    <?php include '../footer.php'?>
-
-    <?php include 'addVisita.php'?>
+    <?php include '../footer.php' ?>
 </div>
+
+<?php include 'addVisita.php' ?>
 <!-- ./wrapper -->
 
 <script src="../js/penVis.js"></script>

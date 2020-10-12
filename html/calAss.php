@@ -1,7 +1,7 @@
-<?php include_once '../php/session.php'?>
+<?php include_once '../php/session.php' ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="pt">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
+<div class="wrapper no-print">
 
     <?php include '../header.php' ?>
 
@@ -38,7 +38,7 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="index.php">Início</a></li>
+                            <li class="breadcrumb-item"><a href="../index.php">Início</a></li>
                             <li class="breadcrumb-item active">Calendário de Assistências</li>
                         </ol>
                     </div><!-- /.col -->
@@ -71,9 +71,9 @@
     <!-- /.content-wrapper -->
 
     <?php include '../footer.php' ?>
-
-    <?php include 'addAss.php' ?>
 </div>
+
+<?php include 'addAss.php' ?>
 <!-- ./wrapper -->
 
 <!-- Local Script -->
