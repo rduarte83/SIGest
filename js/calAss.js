@@ -22,7 +22,7 @@ function updEvents(info) {
             tecnico: tecnico
         }
     });
-};
+}
 
 document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
@@ -76,15 +76,27 @@ document.addEventListener('DOMContentLoaded', function () {
                 localStorage.setItem("ass_id", info.event.id);
                 window.location.href = "../html/editAss.php?op=cal";
             }
-            ;
         },
         select: function (info) {
             var start = moment(info.start).format("YYYY-MM-DDTHH:MM:SS");
             var end = moment(info.end).format("YYYY-MM-DDTHH:MM:SS");
             var id = info.resource.id;
 
-            prompt("Insira ")
+            var event = prompt("Insira o assunto:")
             console.log(start+"/"+end+"/"+id);
+            console.log(event);
+
+            <!-- AddQuickVisita -->
+            $.ajax({
+                url: "../php/queries.php",
+                type: "post",
+                data: {
+                    op: 'addQVis',
+                    start: start,
+                    end: end,
+                    event: event
+                }
+            })
         },
         eventResize: function (info) {
             updEvents(info);

@@ -1331,3 +1331,44 @@ if ($_POST['op'] == 'fetchMes') {
     echo json_encode($data);
 }
 
+if ($_POST['op'] == 'addQAss') {
+    $query = "
+			INSERT INTO assistencias(cliente_id, produto_id, data_p, motivo, local, 
+			                         tecnico, entregue, problema, data_i, data_i_end, obs, prioridade) 
+			    VALUES (:cliente_id, :produto_id, :data_p, :motivo, :local, 
+			            :tecnico, :entregue, :problema, :data_i, DATE_ADD(:data_i, INTERVAL 60 MINUTE), :obs, :prio)
+		";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':cliente_id' => $_POST["c_id"],
+            ':produto_id' => $_POST["produto_id"],
+            ':data_p' => $_POST["data_p"],
+            ':motivo' => $_POST["motivo"],
+            ':local' => $_POST["local"],
+            ':tecnico' => $_POST["tecnico"],
+            ':entregue' => $_POST["entregue"],
+            ':problema' => $_POST["problema"],
+            ':data_i' => $_POST["data_i"],
+            ':obs' => $_POST["obs"],
+            ':prio' => $_POST["prio"]
+        )
+    );
+}
+
+if ($_POST['op'] == 'addQVis') {
+    $query = "
+			INSERT INTO visitas (ult_vis, ult_vis_end, descricao, vendedor) 
+			            VALUES (:ult_vis, :ult_vis_end, :desc, :vendedor);    
+		";
+
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':ult_vis' => $_POST["start"],
+            ':ult_vis_end' => $_POST["end"],
+            ':desc' => $_POST["event"],
+            ':vendedor' => $_SESSION["username"]
+        )
+    );
+}

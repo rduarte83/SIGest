@@ -67,7 +67,24 @@ document.addEventListener('DOMContentLoaded', function () {
                 window.location.href = "../html/editVis.php?op=cal";
             },
             select: function (info) {
-                window.location.href = "../html/addVisita.php?op=cal";
+                var start = moment(info.start).format("YYYY-MM-DDTHH:MM:SS");
+                var end = moment(info.end).format("YYYY-MM-DDTHH:MM:SS");
+
+                var event = prompt("Insira o assunto:")
+                console.log(start+"/"+end);
+                console.log(event);
+
+                <!-- AddQuickVisita -->
+                $.ajax({
+                    url: "../php/queries.php",
+                    type: "post",
+                    data: {
+                        op: 'addQVis',
+                        start: start,
+                        end: end,
+                        event: event
+                    }
+                })
             },
             eventResize: function (info) {
                 updEvents(info);
