@@ -67,6 +67,8 @@
     <!-- /.content-wrapper -->
 
     <?php include '../footer.php' ?>
+
+    <?php include 'addCob.php' ?>
 </div>
 <!-- ./wrapper -->
 

@@ -44,10 +44,17 @@ document.addEventListener('DOMContentLoaded', function () {
                     window.print();
                 },
                 bootstrapFontAwesome: 'fa-print'
-            }
+            },
+            new: {
+                text: 'Nova Assistência',
+                click: function () {
+                    $('#new').modal('show')
+                },
+                bootstrapFontAwesome: 'fa-plus'
+            },
         },
         headerToolbar: {
-            left: 'prev,next today',
+            left: 'prev,next today new',
             center: 'title',
             right: 'dayGridMonth,resourceTimeGridWeek,resourceTimeGridDay,listWeek print'
         },

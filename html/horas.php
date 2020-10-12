@@ -77,6 +77,8 @@
     <!-- /.content-wrapper -->
 
     <?php include '../footer.php' ?>
+
+    <?php include '../html/addHoras.php' ?>
 </div>
 <!-- ./wrapper -->
 

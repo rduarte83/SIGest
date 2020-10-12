@@ -56,17 +56,28 @@ function createDT() {
                 {
                     extend: 'print',
                     'text': '<i class="fa fa-print" aria-hidden="true"></i>',
-                    "className": 'btn btn-default btn-xs'
+                    "className": 'btn btn-default',
+                    titleAttr: 'Imprimir'
                 },
                 {
                     extend: 'pdf',
                     'text': '<i class="fa fa-file-pdf-o" aria-hidden="true"></i>',
-                    "className": 'btn btn-default btn-xs'
+                    "className": 'btn btn-default',
+                    titleAttr: 'Exportar p/PDF'
                 },
                 {
                     extend: 'excel',
                     'text': '<i class="fa fa-file-excel-o" aria-hidden="true"></i>',
-                    "className": 'btn btn-default btn-xs'
+                    "className": 'btn btn-default',
+                    titleAttr: 'Exportar p/Excel'
+                },
+                {
+                    text: '<i class="fa fa-plus" aria-hidden="true"></i>',
+                    className: 'btn btn-default',
+                    titleAttr: 'Novo Produto',
+                    action: function () {
+                        $('#new').modal('show')
+                    }
                 }
             ],
         },

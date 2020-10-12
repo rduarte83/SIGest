@@ -132,7 +132,7 @@ $("#addForm").on('submit', function (e) {
             if (search.has("op")) {
                 var param = search.get("op");
                 if (param == "cal") window.location.href = "../html/calAss.php";
-            } else window.location.href = "../html/assistencias.php";
+            } else window.location.href = "../html/backup/assistencias.php";
         }
     });
 });
@@ -179,7 +179,7 @@ $('#print').on('click', function (e) {
                 if (search.has("op")) {
                     var param = search.get("op");
                     if (param == "cal") window.location.href = "../html/calAss.php";
-                } else window.location.href = "../html/assistencias.php";
+                } else window.location.href = "../html/backup/assistencias.php";
             }
         }
     });

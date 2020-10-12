@@ -87,6 +87,7 @@
 
     <?php include '../footer.php' ?>
 
+    <?php include 'addSw.php' ?>
 </div>
 <!-- ./wrapper -->
 <script src="../js/sw.js"></script>

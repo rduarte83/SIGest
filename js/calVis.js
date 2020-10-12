@@ -35,12 +35,19 @@ document.addEventListener('DOMContentLoaded', function () {
                         window.print();
                     },
                     bootstrapFontAwesome: 'fa-print'
+                },
+                new: {
+                    text: 'Nova Visita',
+                    click: function () {
+                        $('#new').modal('show')
+                    },
+                    bootstrapFontAwesome: 'fa-plus'
                 }
             },
             headerToolbar: {
-                left: 'prev,next today',
+                left: 'prev,next today new',
                 center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek print'
             },
             expandRows: true,
             events: event,

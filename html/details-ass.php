@@ -38,7 +38,7 @@
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="../index.php">Início</a></li>
-                                <li class="breadcrumb-item"><a href="assistencias.php">Lista de Assistências</a></li>
+                                <li class="breadcrumb-item"><a href="backup/assistencias.php">Lista de Assistências</a></li>
                                 <li class="breadcrumb-item active">Detalhes</li>
                             </ol>
                         </div>
@@ -178,7 +178,7 @@
                             <!-- /.card-body -->
                             <div class="card-footer">
                                 <input type="hidden" name="op" value="editAss">
-                                <a href="assistencias.php">
+                                <a href="backup/assistencias.php">
                                     <button type="button" class="btn btn-default">Cancelar</button>
                                 </a>
                                 <a href="#" id="print" target="_blank"

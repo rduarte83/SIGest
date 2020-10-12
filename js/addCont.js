@@ -25,7 +25,7 @@ $("#fact").on('click', function () {
     else $("#op").val("addCont");
 });
 
-$('#addForm').on('submit', function (e) {
+$('#addFormC').on('submit', function (e) {
     e.preventDefault();
     $.ajax({
         data: new FormData(this),
@@ -39,8 +39,8 @@ $('#addForm').on('submit', function (e) {
                 var dataResult = JSON.parse(dataResult);
                 console.log(dataResult);
                 var contrato_id = $("#contrato option:selected").val()
-                var cont_p = $("#cont_p").val();
-                var cont_c = $("#cont_c").val();
+                var cont_p = $("#contP").val();
+                var cont_c = $("#contC").val();
                 var ult_p = dataResult.data[0][0];
                 var ult_c = dataResult.data[0][1];
                 var valor = dataResult.data[0][2];

@@ -85,6 +85,8 @@
 
     <?php include '../footer.php' ?>
 
+    <?php include 'addCli.php' ?>
+
 </div>
 <!-- ./wrapper -->
 

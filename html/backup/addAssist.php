@@ -12,13 +12,13 @@
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../css/adminlte.min.css">
+    <link rel="stylesheet" href="../../css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <!-- JQuery UI -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="no-print">
@@ -35,7 +35,7 @@
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="../index.php">Início</a></li>
+                                <li class="breadcrumb-item"><a href="../../index.php">Início</a></li>
                                 <li class="breadcrumb-item active">Nova Assistência Técnica</li>
                             </ol>
                         </div>
@@ -53,7 +53,7 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="calAss.php" method="post" id="addForm" enctype="multipart/form-data"
+                        <form action="../calAss.php" method="post" id="addForm" enctype="multipart/form-data"
                               class="form-horizontal">
                             <div class="card-body">
                                 <div class="form-group row">
@@ -158,7 +158,7 @@
                             <!-- /.card-body -->
                             <div class="card-footer">
                                 <input type="hidden" name="op" value="addAss">
-                                <a href="calAss.php">
+                                <a href="../calAss.php">
                                     <button type="button" class="btn btn-default ">Cancelar</button>
                                 </a>
                                 <button type="submit" class="btn btn-success float-right">Confirmar</button>
@@ -183,7 +183,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-6">
-                        <img class="w-75" style="filter: grayscale(100%)" src="../img/logo.png" alt="logo">
+                        <img class="w-75" style="filter: grayscale(100%)" src="../../img/logo.png" alt="logo">
                         <div>
                             Rua Eng. José Bastos Xavier nº33<br>
                             3750-144 Águeda<br>
@@ -333,6 +333,6 @@
 </div>
 <!-- ./wrapper -->
 
-<script src="../js/addAss.js"></script>
+<script src="../../js/addAss.js"></script>
 </body>
 </html>

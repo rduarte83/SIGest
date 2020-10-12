@@ -14,17 +14,25 @@ function createDT() {
                 {
                     extend: 'print',
                     'text': '<i class="fa fa-print" aria-hidden="true"></i>',
-                    "className": 'btn btn-default btn-xs'
+                    "className": 'btn btn-default'
                 },
                 {
                     extend: 'pdf',
                     'text': '<i class="fa fa-file-pdf-o" aria-hidden="true"></i>',
-                    "className": 'btn btn-default btn-xs'
+                    "className": 'btn btn-default'
                 },
                 {
                     extend: 'excel',
                     'text': '<i class="fa fa-file-excel-o" aria-hidden="true"></i>',
-                    "className": 'btn btn-default btn-xs'
+                    "className": 'btn btn-default'
+                },
+                {
+                    text: '<i class="fa fa-plus" aria-hidden="true"></i>',
+                    className: 'btn btn-default',
+                    titleAttr: 'Nova Visita',
+                    action: function () {
+                        $('#new').modal('show')
+                    }
                 }
             ],
         },

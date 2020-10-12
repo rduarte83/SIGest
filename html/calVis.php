@@ -82,7 +82,9 @@
     </div>
     <!-- /.content-wrapper -->
 
-    <?php include ' ../footer . php' ?>
+    <?php include '../footer.php'?>
+
+    <?php include 'addVisita.php'?>
 </div>
 <!-- ./wrapper -->
 

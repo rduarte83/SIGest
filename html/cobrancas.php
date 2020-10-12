@@ -88,7 +88,9 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    <?php include '../footer.php' ?>
+    <?php include '../footer.php'?>
+
+    <?php include 'addCob.php'?>
 </div>
 <!-- ./wrapper -->
 <script src="../js/cobrancas.js"></script>

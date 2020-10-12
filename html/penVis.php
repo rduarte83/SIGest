@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>SIGest | Visitas Pendentes</title>
+    <title>SIGest | Lista de Visitas</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome Icons -->
@@ -28,12 +28,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Visitas em atraso</h1>
+                        <h1 class="m-0 text-dark">Lista de Visitas</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="index.php">Início</a></li>
-                            <li class="breadcrumb-item active">Visitas Pendentes</li>
+                            <li class="breadcrumb-item active">Lista de Visitas</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -84,7 +84,9 @@
     </div>
     <!-- /.content-wrapper -->
 
-    <?php include '../footer.php' ?>
+    <?php include '../footer.php'?>
+
+    <?php include 'addVisita.php'?>
 </div>
 <!-- ./wrapper -->
 
