@@ -134,11 +134,12 @@ if ($_POST['op'] == 'editCli') {
     $query = "
                 UPDATE clientes SET nif=:nif, id=:id, cliente=:cliente, morada=:morada, zona=:zona,
                     responsavel=:responsavel, contacto=:contacto, email=:email, comercial=:comercial, 
-                    obs=:obs WHERE nif=:nif
+                    obs=:obs WHERE nif=:oldNif
     ";
     $statement = $conn->prepare($query);
     $result = $statement->execute(
         array(
+            ':oldNif' => $_POST["oldNif"],
             ':nif' => $_POST["nif"],
             ':id' => $_POST["id"],
             ':cliente' => $_POST["cliente"],
@@ -978,6 +979,7 @@ if ($_POST['op'] == 'fetchCob') {
         $sub_array[] = $row["data"];
         $sub_array[] = $row["motivo"];
         $sub_array[] = $row["descricao"];
+        $sub_array[] = $row["estado"];
         $sub_array[] = '
                     <a href="editCob.php" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '">
                         <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>
@@ -1018,6 +1020,7 @@ if ($_POST['op'] == 'fetchCobS') {
         $sub_array[] = $row["data"];
         $sub_array[] = $row["motivo"];
         $sub_array[] = $row["descricao"];
+        $sub_array[] = $row["estado"];
         $sub_array[] = $row["cliente_id"];
         $data[] = $sub_array;
     }
@@ -1049,6 +1052,7 @@ if ($_POST['op'] == 'fetchCobCli') {
         $sub_array[] = $row["data"];
         $sub_array[] = $row["motivo"];
         $sub_array[] = $row["descricao"];
+        $sub_array[] = $row["estado"];
         $sub_array[] = '
                     <a href="editCob.php" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '">
                         <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>
@@ -1067,20 +1071,39 @@ if ($_POST['op'] == 'fetchCobCli') {
 }
 
 if ($_POST['op'] == 'addCob') {
-    $query = "
-			INSERT INTO cobrancas (cliente_id, data, motivo, descricao, data_end) 
-			    VALUES (:cliente_id, :data, :motivo, :descricao, DATE_ADD(:data, INTERVAL 60 MINUTE))     
+    if (isset($_POST["dataNew"])) {
+        $query = "
+			INSERT INTO cobrancas (cliente_id, data, motivo, descricao, estado, data_end) 
+			    VALUES (:cliente_id, :data, :motivo, :descricao, :estado, DATE_ADD(:data, INTERVAL 60 MINUTE));
+			INSERT INTO cobrancas (cliente_id, data, motivo, descricao, estado, data_end) 
+			    VALUES (:cliente_id, :dataNew, :motivo, :descricao, :estado, DATE_ADD(:data, INTERVAL 60 MINUTE));
 		";
-
-    $statement = $conn->prepare($query);
-    $result = $statement->execute(
-        array(
-            ':cliente_id' => $_POST["c_id"],
-            ':data' => $_POST["data"],
-            ':motivo' => $_POST["motivo"],
-            ':descricao' => $_POST["descricao"]
-        )
-    );
+        $statement = $conn->prepare($query);
+        $result = $statement->execute(
+            array(
+                ':cliente_id' => $_POST["c_id"],
+                ':data' => $_POST["data"],
+                ':motivo' => $_POST["motivo"],
+                ':descricao' => $_POST["descricao"],
+                ':estado' => $_POST["estado"],
+                ':dataNew' => $_POST["dataNew"]
+            )
+        );
+    } else {
+        $query = "
+			INSERT INTO cobrancas (cliente_id, data, motivo, descricao, data_end) 
+			    VALUES (:cliente_id, :data, :motivo, :descricao, DATE_ADD(:data, INTERVAL 60 MINUTE));
+		";
+        $statement = $conn->prepare($query);
+        $result = $statement->execute(
+            array(
+                ':cliente_id' => $_POST["c_id"],
+                ':data' => $_POST["data"],
+                ':motivo' => $_POST["motivo"],
+                ':descricao' => $_POST["descricao"]
+            )
+        );
+    }
 }
 
 if ($_POST['op'] == 'delCob') {
@@ -1097,7 +1120,7 @@ if ($_POST['op'] == 'delCob') {
 
 if ($_POST['op'] == 'editCob') {
     $query = "
-                UPDATE cobrancas SET cliente_id=:cliente_id, data=:data, motivo=:motivo, descricao=:descricao 
+                UPDATE cobrancas SET cliente_id=:cliente_id, data=:data, motivo=:motivo, descricao=:descricao, estado=:estado 
                     WHERE id=:id               
     ";
     $statement = $conn->prepare($query);
@@ -1107,7 +1130,8 @@ if ($_POST['op'] == 'editCob') {
             ':cliente_id' => $_POST["cliente_id"],
             ':data' => $_POST["data"],
             ':motivo' => $_POST["motivo"],
-            ':descricao' => $_POST["descricao"]
+            ':descricao' => $_POST["descricao"],
+            ':estado' => $_POST["estado"]
         )
     );
 }
@@ -1359,7 +1383,7 @@ if ($_POST['op'] == 'addQAss') {
 if ($_POST['op'] == 'addQVis') {
     $query = "
 			INSERT INTO visitas (ult_vis, ult_vis_end, descricao, vendedor) 
-			            VALUES (:ult_vis, :ult_vis_end, :desc, :vendedor);    
+			            VALUES (:ult_vis, :ult_vis_end, :desc, :vendedor); 
 		";
 
     $statement = $conn->prepare($query);

@@ -48,6 +48,7 @@ $(document).ready(function () {
 });
 
 $("#addForm").on('submit', function (e) {
+    $("#oldNif").val(id);
     $.ajax({
         data: new FormData(this),
         contentType: false,

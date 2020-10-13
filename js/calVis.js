@@ -83,8 +83,13 @@ document.addEventListener('DOMContentLoaded', function () {
                         start: start,
                         end: end,
                         event: event
+                    },
+                    success: function () {
+                        calendar.refetchEvents();
                     }
+
                 })
+                calendar.render();
             },
             eventResize: function (info) {
                 updEvents(info);

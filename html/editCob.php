@@ -59,6 +59,15 @@
                     <form action="visitas.php" method="post" id="addForm" enctype="multipart/form-data" class="form-horizontal">
                         <div class="card-body">
                             <div class="form-group row">
+                                <label class="col-form-label col-sm-2">Estado</label>
+                                <div class="col-sm-10">
+                                    <select name="estado" id="estado" class="form-control">
+                                        <option value="Resolvido">Resolvido</option>
+                                        <option value="Pendente">Pendente</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Cliente</label>
                                 <div class="col-sm-10">
                                     <select class="custom-select form-control" name="cliente_id" id="cli" required>

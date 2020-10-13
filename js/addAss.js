@@ -2,6 +2,8 @@ $(document).ready(function () {
     var now = moment().format("YYYY-MM-DDTHH:mm");
     $("#data_p").val(now);
 
+    console.log(now);
+
     //Fetch Clientes - autocomplete
     $.ajax({
         type: 'post',
@@ -97,6 +99,8 @@ $('#addForm').on('submit', function (e) {
                     $("#zona-p").text(dataResult.data[0][19]);
                     $("#resp-p").text(dataResult.data[0][20]);
                     $("#contacto-p").text(dataResult.data[0][21]);
+
+                    $("#new").modal('close');
 
                     window.onafterprint = function () {
                         $(window).off('mousemove', window.onafterprint);

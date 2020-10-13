@@ -93,7 +93,7 @@
 <div class="modal fade" id="modal-lg">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form method="post" id="addForm" enctype="multipart/form-data" class="form-horizontal">
+            <form method="post" id="addFormC" enctype="multipart/form-data" class="form-horizontal">
                 <div class="modal-header">
                     <h4 class="modal-title">Observações</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -103,7 +103,7 @@
                 <div class="modal-body">
                     <textarea class="form-control" id="obs" name="obs" rows="20"></textarea>
                     <input type="hidden" name="op" value="editObs">
-                    <input type="hidden" id="id" name="id" class="form-control">
+                    <input type="hidden" id="idC" name="id" class="form-control">
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>

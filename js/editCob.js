@@ -14,10 +14,10 @@ $(document).ready(function () {
 
             $("#id").val(dataResult.data[0][0]);
             $("#data").val(dataResult.data[0][2]);
-            $("#mot").val(dataResult.data[0][3]).change();
+            $("#mot").val(dataResult.data[0][3]);
             $("#descricao").val(dataResult.data[0][4]);
-
-            var cli_id = dataResult.data[0][5];
+            $("#estado").val(dataResult.data[0][5]);
+            var cli_id = dataResult.data[0][6];
 
             //Fetch Client
             $.ajax({

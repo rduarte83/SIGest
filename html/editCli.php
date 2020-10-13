@@ -116,6 +116,7 @@
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <input type="hidden" name="op" value="editCli">
+                            <input type="hidden" name="oldNif" id="oldNif">
                             <a href="clientes.php">
                                 <button type="button" class="btn btn-default ">Cancelar</button>
                             </a>

@@ -8,19 +8,20 @@
     <title>SIGest | Lista de Cobranças</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- Font Awesome -->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
     <!-- DataTables -->
     <link rel="stylesheet" type="text/css"
           href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/b-1.6.2/b-html5-1.6.2/r-2.2.5/datatables.min.css"/>
-
     <!-- Theme style -->
     <link rel="stylesheet" href="../css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- JQuery UI -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -54,7 +55,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <label class="col-form-label col-sm-2">Seleccionar Cliente</label>
-                                <select class="custom-select form-control" id="cli" name="cliente_id" required>
+                                <select class="custom-select form-control" id="selCli" name="cliente_id" required>
                                 </select>
                             </div>
                             <!-- /.card-body -->
@@ -69,6 +70,7 @@
                                     <th>Data</th>
                                     <th>Motivo</th>
                                     <th>Descrição</th>
+                                    <th>Estado</th>
                                     <th>Operações</th>
                                     </thead>
                                     <tbody>

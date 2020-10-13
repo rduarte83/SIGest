@@ -19,6 +19,8 @@ $(document).ready(function () {
             });
         }
     });
+
+    $(".new").hide();
 });
 
 //<!-- Add cob -->
@@ -38,6 +40,17 @@ $('#addForm').on('submit', function (e) {
             } else window.location.href = "../html/cobrancas.php";
         }
     });
+});
+
+$("#estado").on('change', function () {
+    console.log($("#estado").val());
+
+    if ($("#estado").val() == 'Pendente') {
+        $(".new").show();
+    }
+    if ($("#estado").val() == 'Resolvido') {
+        $(".new").hide();
+    }
 });
 
 

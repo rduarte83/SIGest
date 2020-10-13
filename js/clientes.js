@@ -55,9 +55,8 @@ $(document).on('click', '.delete', function () {
     });
 });
 
-$("#addForm").on('submit', function (e) {
+$("#addFormC").on('submit', function (e) {
     $("#id").val(id);
-
     $.ajax({
         data: new FormData(this),
         contentType: false,

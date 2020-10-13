@@ -96,21 +96,21 @@ $(document).ready(function () {
         },
         success: function (dataResult) {
             var dataResult = JSON.parse(dataResult);
-            $("#cli").html("");
-            $("#cli").html('<option value="0">Todos</option>');
+            $("#selCli").html("");
+            $("#selCli").html('<option value="0">Todos</option>');
             $.each(dataResult.data, function () {
-                $("#cli").append($("<option/>").val(this[0]).text(this[2]));
+                $("#selCli").append($("<option/>").val(this[0]).text(this[2]));
             });
         }
     });
 });
 
-$("#cli").on('change', function () {
+$("#selCli").on('change', function () {
     if ($.fn.dataTable.isDataTable('#table')) {
         $("#table").DataTable().destroy();
     }
     ;
-    if ($("#cli").val() == 0) {
+    if ($("#selCli").val() == 0) {
         createDT();
     } else {
         $("#table").DataTable({
@@ -119,7 +119,7 @@ $("#cli").on('change', function () {
                 url: "../php/queries.php",
                 type: "POST",
                 data: {
-                    cliente_id: $("#cli").val(),
+                    cliente_id: $("#selCli").val(),
                     op: 'fetchCobCli'
                 },
                 columnDefs: [
