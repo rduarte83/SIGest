@@ -1,7 +1,5 @@
 <!--
 TODO: Reformular Contratos SW
-TODO: Contratos copia - inserir comercial
-TODO: contratos SW - inserir vendedor
 TODO: Administrativo - stats
 TODO: Admin - stats
 TODO: change PW - bugged

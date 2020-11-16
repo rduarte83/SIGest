@@ -184,6 +184,14 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="/sigest/html/rmas.php"
+                           class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "rmas.php") ? "active" : ""; ?>">
+                            <i class="fa fa-ambulance nav-icon"></i>
+                            <p>RMAs</p>
+                        </a>
+                    </li>
                     <?php ;
                 }
                 ?>

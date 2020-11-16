@@ -11,7 +11,6 @@ $(document).ready(function () {
             $("#contrato").html("");
             $("#contrato").html('<option value="0">Seleccionar Contrato</option>');
             $.each(dataResult.data, function () {
-                console.log(this);
                 $("#contrato").append($("<option/>").val(this[0]).text(this[1] + " - " +
                     this[2] + " " + this[3] + " " + this[4]));
             });

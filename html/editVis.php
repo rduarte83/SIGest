@@ -38,7 +38,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="../index.php">Início</a></li>
-                            <li class="breadcrumb-item"><a href="visitas.php">Lista de Visitas</a></li>
+                            <li class="breadcrumb-item"><a href="calVis.php">Lista de Visitas</a></li>
                             <li class="breadcrumb-item active">Editar</li>
                         </ol>
                     </div>
@@ -56,7 +56,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form action="visitas.php" method="post" id="addForm" enctype="multipart/form-data" class="form-horizontal">
+                    <form action="calVis.php" method="post" id="addForm" enctype="multipart/form-data" class="form-horizontal">
                         <div class="card-body">
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Cliente</label>
@@ -101,7 +101,7 @@
                         <div class="card-footer">
                             <input type="hidden" name="id" id="id">
                             <input type="hidden" name="op" value="editVis">
-                            <a href="visitas.php">
+                            <a href="calVis.php">
                                 <button type="button" class="btn btn-default ">Cancelar</button>
                             </a>
                             <button type="submit" class="btn btn-success float-right">Confirmar</button>

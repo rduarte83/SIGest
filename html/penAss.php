@@ -1,4 +1,4 @@
-<?php include_once '../php/session.php'?>
+<?php include_once '../php/session.php' ?>
 
 <!DOCTYPE html>
 <html>
@@ -93,7 +93,7 @@
     <?php include '../footer.php' ?>
 </div>
 
-<?php include 'addAss.php'?>
+<?php include 'addAss.php' ?>
 <!-- ./wrapper -->
 
 <script src="../js/penAss.js"></script>

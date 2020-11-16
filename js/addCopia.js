@@ -1,4 +1,29 @@
+$("#radioC").on('change', function () {
+    var selC = $("input[name='radioC']:checked").val();
+    if (selC === 'new') {
+        $("#existC").hide();
+        $("#newC").show();
+    } else {
+        $("#existC").show();
+        $("#newC").hide();
+    }
+});
+
+$("#radioP").on('change', function () {
+    var selP = $("input[name='radioP']:checked").val();
+    if (selP === 'new') {
+        $("#existP").hide();
+        $("#newP").show();
+    } else {
+        $("#existP").show();
+        $("#newP").hide();
+    }
+});
+
 $(document).ready(function () {
+    $("#newC").hide();
+    $("#newP").hide();
+
     //Fetch Clientes - autocomplete
     $.ajax({
         type: 'post',
@@ -9,13 +34,29 @@ $(document).ready(function () {
         success: function (dataResult) {
             var dataResult = JSON.parse(dataResult);
 
-            $("#cliente").autocomplete({
+            $("#cli").autocomplete({
                 source: dataResult,
                 minLength: 2,
                 select: function (event, ui) {
-                    $("#cliente").val(ui.item.value);
-                    $("#cliente_id").val(ui.item.id);
+                    $("#cli").val(ui.item.value);
+                    $("#c_id").val(ui.item.id);
                 }
+            });
+        }
+    });
+
+    //Fetch Comercial
+    $.ajax({
+        url: "../php/queries.php",
+        type: "POST",
+        data: {
+            op: 'fetchCom',
+        },
+        success: function (dataResult) {
+            var dataResult = JSON.parse(dataResult);
+            $("#comercial").html('<option value="0">Seleccionar Comercial</option>');
+            $.each(dataResult.data, function () {
+                $("#comercial").append($("<option/>").val(this[0]).text(this[1]));
             });
         }
     });
@@ -45,18 +86,40 @@ $(document).ready(function () {
 });
 
 //<!-- Add copia -->
-$('#addForm').on('submit', function () {
-    $.ajax({
-        data: new FormData(this),
-        contentType: false,
-        processData: false,
-        type: "post",
-        url: "../php/copia.php",
-        success: function (dataResult) {
-            var dataResult = JSON.parse(dataResult);
-            if (dataResult.statusCode == 201) {
-                alert(dataResult);
-            }
-        }
-    });
+$('#addForm').on('submit', function (e) {
+    e.preventDefault();
+
+    var selC = $("input[name='radioC']:checked").val();
+    var selP = $("input[name='radioP']:checked").val();
+
+    if (selC === 'new') {
+        $('#op').val("addCopiaNC");
+
+        console.log( $('#op').val() );
+
+        $.ajax({
+            data: new FormData(this),
+            contentType: false,
+            processData: false,
+            type: "post",
+            url: "../php/copia.php"
+        });
+    } else if (selP === 'new') {
+        $('#op').val("addCopiaNP");
+        $.ajax({
+            data: new FormData(this),
+            contentType: false,
+            processData: false,
+            type: "post",
+            url: "../php/copia.php"
+        });
+    } else {
+        $.ajax({
+            data: new FormData(this),
+            contentType: false,
+            processData: false,
+            type: "post",
+            url: "../php/copia.php",
+        });
+    }
 });

@@ -1,4 +1,4 @@
-<?php include_once '../php/session.php'?>
+<?php include_once '../php/session.php' ?>
 
 <!DOCTYPE html>
 <html>
@@ -94,10 +94,10 @@
     </div>
     <!-- /.content-wrapper -->
 
-    <?php include '../footer.php'?>
+    <?php include 'addCopia.php' ?>
 
-    <?php include 'addCopia.php'?>
-    <?php include 'addContagem.php'?>
+
+    <?php include '../footer.php' ?>
 
 </div>
 <!-- ./wrapper -->

@@ -1,10 +1,10 @@
-$(document).on('click','.details', function () {
-    var contrato_id = $(this).attr("data-id");
-    localStorage.setItem("contrato_id", contrato_id);
+$(document).on('click', '.edit', function (e) {
+    var rma_id = $(this).attr("data-id");
+    localStorage.setItem("rma_id", rma_id);
 });
 
-$(document).on('click','.delete', function () {
-    var contrato_id = $(this).attr("data-id");
+$(document).on('click', '.delete', function () {
+    var rma_id = $(this).attr("data-id");
     Swal.fire({
         icon: 'info',
         position: 'top',
@@ -16,11 +16,11 @@ $(document).on('click','.delete', function () {
     }).then((result) => {
         if (result.value) {
             $.ajax({
-                url: '../php/copia.php',
+                url: '../php/queries.php',
                 type: 'POST',
                 data: {
-                    op: 'delCopia',
-                    contrato_id: contrato_id
+                    op: 'delCob',
+                    rma_id: rma_id
                 },
                 success: function () {
                     Swal.fire({
@@ -37,64 +37,41 @@ $(document).on('click','.delete', function () {
     });
 });
 
-$(document).on('click','.edit', function () {
-    var contrato_id = $(this).attr("data-id");
-    localStorage.setItem("contrato_id", contrato_id);
-});
-
-$(document).ready(function () {
+function createDT() {
     $("#table").DataTable({
         processing: true,
         ajax: {
-            url: "../php/copia.php",
+            url: "../php/queries.php",
             type: "POST",
             data: {
-                op: 'fetchCopia'
-            }
+                op: 'fetchRMA'
+            },
         },
-        createdRow: function (row, data) {
-            //86400000 - 1 day in ms")
-            if (Math.round((Date.now() - new Date(data[4]).getTime()) / 86400000) >= 90)
-                $(row).addClass('red');
-        },
+        order: [[ 0, "desc" ]],
         dom: 'Bfrtip',
-        columnDefs: [
-            {"visible": false, "targets": [6,7,8,9]}
-        ],
         buttons: {
             buttons: [
                 {
                     extend: 'print',
                     'text': '<i class="fa fa-print" aria-hidden="true"></i>',
-                    "className": 'btn btn-default',
-                    titleAttr: 'Imprimir'
+                    "className": 'btn btn-default'
                 },
                 {
                     extend: 'pdf',
                     'text': '<i class="fa fa-file-pdf-o" aria-hidden="true"></i>',
-                    "className": 'btn btn-default',
-                    titleAttr: 'Exportar p/PDF'
+                    "className": 'btn btn-default'
                 },
                 {
                     extend: 'excel',
                     'text': '<i class="fa fa-file-excel-o" aria-hidden="true"></i>',
-                    "className": 'btn btn-default',
-                    titleAttr: 'Exportar p/Excel'
+                    "className": 'btn btn-default'
                 },
                 {
                     text: '<i class="fa fa-plus" aria-hidden="true"></i>',
                     className: 'btn btn-default',
-                    titleAttr: 'Novo Contrato',
+                    titleAttr: 'Nova Visita',
                     action: function () {
                         $('#new').modal('show')
-                    }
-                },
-                {
-                    text: '<i class="fa fa-check" aria-hidden="true"></i>',
-                    className: 'btn btn-default',
-                    titleAttr: 'Nova Contagem',
-                    action: function () {
-                        $('#newCZZZZ').modal('show')
                     }
                 }
             ],
@@ -105,4 +82,8 @@ $(document).ready(function () {
         processData: false,
         language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
     });
+};
+
+$(document).ready(function () {
+    createDT();
 });

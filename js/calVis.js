@@ -5,6 +5,9 @@ function updEvents(info) {
     var end = moment(info.event.end).format("YYYY-MM-DD HH:MM:SS");
     var id = info.event.id;
 
+    console.log(info.event.start);
+    console.log(info.event.end);
+
     $.ajax({
         type: 'post',
         url: '../php/updEvents.php',
@@ -64,32 +67,49 @@ document.addEventListener('DOMContentLoaded', function () {
             selectable: true,
             eventClick: function (info) {
                 localStorage.setItem("vis_id", info.event.id);
-                window.location.href = "../html/editVis.php?op=cal";
+                //Check QVis
+                $.ajax({
+                    url: "../php/queries.php",
+                    type: "post",
+                    data: {
+                        op: 'checkQVis',
+                        id: info.event.id
+                    },
+                    success: function (dataResult) {
+                        var dataResult = JSON.parse(dataResult);
+                        var res = dataResult.data[0];
+                        if (res[0] == null) {
+                            //prompt("Editar evento:", info.event.title);
+                        }
+                        else window.location.href = "../html/editVis.php?op=cal";
+                    }
+                })
             },
             select: function (info) {
                 var start = moment(info.start).format("YYYY-MM-DDTHH:MM:SS");
                 var end = moment(info.end).format("YYYY-MM-DDTHH:MM:SS");
 
-                var event = prompt("Insira o assunto:")
-                console.log(start+"/"+end);
-                console.log(event);
+                var event = prompt("Insira o assunto:");
 
-                <!-- AddQuickVisita -->
-                $.ajax({
-                    url: "../php/queries.php",
-                    type: "post",
-                    data: {
-                        op: 'addQVis',
-                        start: start,
-                        end: end,
-                        event: event
-                    },
-                    success: function () {
-                        calendar.refetchEvents();
-                    }
+                if (event) {
+                    <!-- AddQuickVisita -->
+                    end = moment(info.end).add(1, 'h').format("YYYY-MM-DDTHH:MM:SS");
+                    $.ajax({
+                        url: "../php/queries.php",
+                        type: "post",
+                        data: {
+                            op: 'addQVis',
+                            start: start,
+                            end: end,
+                            event: event
+                        },
+                        success: function () {
+                            calendar.refetchEvents();
+                        }
 
-                })
-                calendar.render();
+                    });
+                    calendar.render();
+                }
             },
             eventResize: function (info) {
                 updEvents(info);

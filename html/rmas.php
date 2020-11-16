@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SIGest | Lista de Cobranças</title>
+    <title>SIGest | Lista de RMAs</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -35,12 +35,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Lista de Cobranças</h1>
+                        <h1>Lista de RMAs</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="/sigest/index.php">Início</a></li>
-                            <li class="breadcrumb-item active">Lista de Cobranças</li>
+                            <li class="breadcrumb-item active">Lista de RMAs</li>
                         </ol>
                     </div>
                 </div>
@@ -57,12 +57,14 @@
                                 <table id="table" class="table table-bordered table-hover">
                                     <thead>
                                     <th>Id</th>
-                                    <th>Cliente</th>
                                     <th>Data</th>
+                                    <th>Cliente</th>
+                                    <th>Produto</th>
+                                    <th>Fornecedor</th>
+                                    <th>Núm. Série</th>
                                     <th>Motivo</th>
-                                    <th>Descrição</th>
-                                    <th>Estado</th>
-                                    <th>Operações</th>
+                                    <th>Núm. Factura</th>
+                                    <th>Resolução</th>
                                     </thead>
                                     <tbody>
                                     </tbody>
@@ -83,9 +85,9 @@
     <!-- /.content-wrapper -->
     <?php include '../footer.php'?>
 
-    <?php include 'addCob.php'?>
+    <?php include 'addRMA.php'?>
 </div>
 <!-- ./wrapper -->
-<script src="../js/cobrancas.js"></script>
+<script src="../js/rmas.js"></script>
 </body>
 </html>

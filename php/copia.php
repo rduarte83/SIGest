@@ -301,7 +301,7 @@ if ($_POST['op'] == 'addCopia') {
             ':produto'  => $_POST["produto"],
             ':inicio'       => $_POST["inicio"],
             ':fim'          => $_POST["fim"],
-            ':tipo'         => $_POST["tipo"],
+            ':tipoC'         => $_POST["tipoC"],
             ':valor'        => $_POST["valor"],
             ':inc'          => $_POST["inc"],
             ':preco_p'      => $_POST["preco_p"],
@@ -311,6 +311,81 @@ if ($_POST['op'] == 'addCopia') {
         )
     );
 }
+
+if ($_POST['op'] == 'addCopiaNC') {
+    $query = "
+			    INSERT INTO clientes(nif, id, cliente, morada, zona, responsavel, contacto, email, comercial) 
+			        VALUES (:nif, :id, :cliente, :morada, :zona, :responsavel, :contacto, :email, :comercial);
+                INSERT INTO produtos(tipo, marca, modelo, num_serie, cliente_id) 
+                    VALUES (:tipo, :marca, :modelo, :num_serie, :nif);
+                INSERT INTO contratos(cliente_id, produto, inicio, fim, tipo, valor, inc, preco_p, preco_c)
+                    VALUES (:nif, (SELECT id FROM produtos WHERE cliente_id = :nif ORDER BY id DESC LIMIT 1),
+                            :inicio, :fim, :tipoC, :valor, :inc, :preco_p, :preco_c);
+                INSERT INTO contagens(contrato_id, ult_p, ult_c, ult_data) 
+	                VALUES ((SELECT id FROM contratos WHERE cliente_id = :nif ORDER BY id DESC LIMIT 1), 
+	                        :ult_p, :ult_c, CURDATE());
+		";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':nif' => $_POST["nif"],
+            ':id' => $_POST["id"],
+            ':cliente' => $_POST["cliente"],
+            ':morada' => $_POST["morada"],
+            ':zona' => $_POST["zona"],
+            ':responsavel' => $_POST["responsavel"],
+            ':contacto' => $_POST["contacto"],
+            ':email' => $_POST["email"],
+            ':comercial' => $_POST["comercial"],
+            ':tipo' => $_POST["tipo"],
+            ':marca' => $_POST["marca"],
+            ':modelo' => $_POST["modelo"],
+            ':num_serie' => $_POST["num_serie"],
+            ':inicio'       => $_POST["inicio"],
+            ':fim'          => $_POST["fim"],
+            ':tipoC'         => $_POST["tipoC"],
+            ':valor'        => $_POST["valor"],
+            ':inc'          => $_POST["inc"],
+            ':preco_p'      => $_POST["preco_p"],
+            ':preco_c'      => $_POST["preco_c"],
+            ':ult_p'      => $_POST["cont_p"],
+            ':ult_c'      => $_POST["cont_c"]
+        )
+    );
+}
+
+if ($_POST['op'] == 'addCopiaNP') {
+    $query = "
+                INSERT INTO produtos(tipo, marca, modelo, num_serie, cliente_id) 
+                    VALUES (:tipo, :marca, :modelo, :num_serie, :c_id);
+                INSERT INTO contratos(cliente_id, produto, inicio, fim, tipo, valor, inc, preco_p, preco_c)
+                    VALUES (:c_id, (SELECT id FROM produtos WHERE cliente_id = :c_id ORDER BY id DESC LIMIT 1),
+                            :inicio, :fim, :tipoC, :valor, :inc, :preco_p, :preco_c);
+                INSERT INTO contagens(contrato_id, ult_p, ult_c, ult_data) 
+	                VALUES ((SELECT id FROM contratos WHERE cliente_id = :c_id ORDER BY ID DESC LIMIT 1), 
+	                        :ult_p, :ult_c, CURDATE());
+		";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':c_id' => $_POST["c_id"],
+            ':tipo' => $_POST["tipo"],
+            ':marca' => $_POST["marca"],
+            ':modelo' => $_POST["modelo"],
+            ':num_serie' => $_POST["num_serie"],
+            ':inicio'       => $_POST["inicio"],
+            ':fim'          => $_POST["fim"],
+            ':tipoC'         => $_POST["tipoC"],
+            ':valor'        => $_POST["valor"],
+            ':inc'          => $_POST["inc"],
+            ':preco_p'      => $_POST["preco_p"],
+            ':preco_c'      => $_POST["preco_c"],
+            ':ult_p'      => $_POST["cont_p"],
+            ':ult_c'      => $_POST["cont_c"]
+        )
+    );
+}
+
 
 if ($_POST['op'] == 'delCopia') {
     $query = "

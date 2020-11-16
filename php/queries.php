@@ -404,7 +404,8 @@ if ($_POST['op'] == 'fetchVis') {
         SELECT v.*, c.cliente, m.motivo, u.username FROM visitas v  
             INNER JOIN clientes c ON v.cliente_id=c.nif
             INNER JOIN motivos m ON v.motivo_id=m.id
-            INNER JOIN users u ON v.tecnico=u.id
+            INNER JOIN users u ON v.tecnico=u.id            
+            ORDER BY id DESC
         ";
 
     $statement = $conn->prepare($query);
@@ -746,6 +747,78 @@ if ($_POST['op'] == 'addAss') {
     );
 }
 
+if ($_POST['op'] == 'addAssNC') {
+    $query = "
+			    INSERT INTO clientes(nif, id, cliente, morada, zona, responsavel, contacto, email, comercial) 
+			        VALUES (:nif, :id, :cliente, :morada, :zona, :responsavel, :contacto, :email, :comercial);
+                INSERT INTO produtos(tipo, marca, modelo, num_serie, cliente_id) 
+                    VALUES (:tipo, :marca, :modelo, :num_serie, :nif);
+                INSERT INTO assistencias(cliente_id, produto_id, data_p, motivo, local, 
+                            tecnico, entregue, problema, data_i, data_i_end, obs, prioridade)
+                    VALUES(:nif, (SELECT id FROM produtos WHERE cliente_id = :nif ORDER BY id DESC LIMIT 1), :data_p, 
+                           :motivo, :local, :tecnico, :entregue, :problema, :data_i, 
+                           DATE_ADD(:data_i, INTERVAL 60 MINUTE), :obs, :prio);
+		";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':nif' => $_POST["nif"],
+            ':id' => $_POST["id"],
+            ':cliente' => $_POST["cliente"],
+            ':morada' => $_POST["morada"],
+            ':zona' => $_POST["zona"],
+            ':responsavel' => $_POST["responsavel"],
+            ':contacto' => $_POST["contacto"],
+            ':email' => $_POST["email"],
+            ':comercial' => $_POST["comercial"],
+            ':tipo' => $_POST["tipo"],
+            ':marca' => $_POST["marca"],
+            ':modelo' => $_POST["modelo"],
+            ':num_serie' => $_POST["num_serie"],
+            ':data_p' => $_POST["data_p"],
+            ':motivo' => $_POST["motivo"],
+            ':local' => $_POST["local"],
+            ':tecnico' => $_POST["tecnico"],
+            ':entregue' => $_POST["entregue"],
+            ':problema' => $_POST["problema"],
+            ':data_i' => $_POST["data_i"],
+            ':obs' => $_POST["obs"],
+            ':prio' => $_POST["prio"]
+        )
+    );
+}
+
+if ($_POST['op'] == 'addAssNP') {
+    $query = "
+                INSERT INTO produtos(tipo, marca, modelo, num_serie, cliente_id) 
+                    VALUES (:tipo, :marca, :modelo, :num_serie, :c_id);
+                INSERT INTO assistencias(cliente_id, produto_id, data_p, motivo, local, 
+                            tecnico, entregue, problema, data_i, data_i_end, obs, prioridade)
+                    VALUES(:c_id, (SELECT id FROM produtos WHERE cliente_id = :c_id ORDER BY id DESC LIMIT 1), :data_p, 
+                           :motivo, :local, :tecnico, :entregue, :problema, :data_i, 
+                           DATE_ADD(:data_i, INTERVAL 60 MINUTE), :obs, :prio);
+		";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':c_id' => $_POST["c_id"],
+            ':tipo' => $_POST["tipo"],
+            ':marca' => $_POST["marca"],
+            ':modelo' => $_POST["modelo"],
+            ':num_serie' => $_POST["num_serie"],
+            ':data_p' => $_POST["data_p"],
+            ':motivo' => $_POST["motivo"],
+            ':local' => $_POST["local"],
+            ':tecnico' => $_POST["tecnico"],
+            ':entregue' => $_POST["entregue"],
+            ':problema' => $_POST["problema"],
+            ':data_i' => $_POST["data_i"],
+            ':obs' => $_POST["obs"],
+            ':prio' => $_POST["prio"]
+        )
+    );
+}
+
 if ($_POST['op'] == 'addFact') {
     $query = "
             UPDATE assistencias SET valor = :valor, facturado = 'Sim', factura = :numFact WHERE id = :ass_id
@@ -963,8 +1036,8 @@ if ($_POST['op'] == 'fetchCliAuto') {
 
 if ($_POST['op'] == 'fetchCob') {
     $output = array();
-    $query = "
-        SELECT o.*, c.cliente FROM cobrancas o INNER JOIN clientes c ON o.cliente_id=c.nif 
+    $query = "    
+        SELECT o.*, c.cliente FROM cobrancas o INNER JOIN clientes c ON o.cliente_id=c.nif
         ";
 
     $statement = $conn->prepare($query);
@@ -1395,4 +1468,30 @@ if ($_POST['op'] == 'addQVis') {
             ':vendedor' => $_SESSION["username"]
         )
     );
+}
+
+if ($_POST['op'] == 'checkQVis') {
+    $output = array();
+    $query = "
+        SELECT * FROM visitas WHERE id=:id ; 
+        ";
+
+    $statement = $conn->prepare($query);
+    $statement->execute(
+        array(
+            ':id' => $_POST["id"],
+        )
+    );
+    $result = $statement->fetchAll();
+    $data = array();
+
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["cliente_id"];
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
 }

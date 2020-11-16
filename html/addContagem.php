@@ -39,9 +39,7 @@
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="op" id="op" value="addCont">
-                    <a href="copia.php">
-                        <button type="button" class="btn btn-default ">Cancelar</button>
-                    </a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-success float-right">Confirmar</button>
                 </div>
             </div>
