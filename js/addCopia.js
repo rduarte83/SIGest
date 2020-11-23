@@ -62,22 +62,22 @@ $(document).ready(function () {
     });
 
     //Fetch Product
-    $("#cliente").on('change', function () {
+    $("#cli").on('change', function () {
         //Fetch Product
         $.ajax({
             url: "../php/copia.php",
             type: "POST",
             data: {
                 op: 'fetchProdCli',
-                cliente_id: $("#cliente_id").val()
+                cliente_id: $("#c_id").val()
             },
             success: function (dataResult) {
                 var dataResult = JSON.parse(dataResult);
-                $("#equip").html("");
-                $("#equip").html('<option value="0">Seleccionar Produto</option>');
+                $("#prod").html("");
+                $("#prod").html('<option value="0">Seleccionar Produto</option>');
                 $.each(dataResult.data, function () {
                     console.log(this);
-                    $("#equip").append($("<option/>").val(this[0]).text(this[1] + " " +
+                    $("#prod").append($("<option/>").val(this[0]).text(this[1] + " " +
                         this[2] + " " + this[3] + " " + this[4]));
                 });
             }

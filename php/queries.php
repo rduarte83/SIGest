@@ -529,7 +529,7 @@ if ($_POST['op'] == 'fetchVisPen') {
         SELECT v.*, c.cliente, m.motivo FROM visitas v  
             INNER JOIN clientes c ON v.cliente_id=c.nif
             INNER JOIN motivos m ON v.motivo_id=m.id
-            HAVING v.ult_vis < CURDATE() ORDER BY v.ult_vis
+            HAVING v.ult_vis < CURDATE() ORDER BY v.ult_vis DESC
         ";
     $statement = $conn->prepare($query);
     $statement->execute();

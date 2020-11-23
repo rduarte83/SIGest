@@ -1,6 +1,6 @@
 <div class="modal fade" id="new" tabindex="-1" role="dialog" aria-labelledby="Novo Produto" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
-        <form method="post" id="addForm" enctype="multipart/form-data" class="form-horizontal">
+        <form method="post" id="addForm" action="copia.php" enctype="multipart/form-data" class="form-horizontal">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title text-bold">Novo Contrato de Cópia</h5>

@@ -3,7 +3,7 @@
         <form method="post" id="addForm" enctype="multipart/form-data" class="form-horizontal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title text-bold">Nova Visita</h5>
+                    <h5 class="modal-title text-bold">Novo Evento</h5>
                 </div>
                 <div class="modal-body">
                     <div class="form-group row">
@@ -47,27 +47,27 @@
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-form-label col-sm-2">Próxima Visita</label>
+                        <label class="col-form-label col-sm-2">Próximo Evento</label>
                         <div class="col-sm-10">
                             <input type="datetime-local" id="prox_vis" name="prox_vis" class="form-control" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-form-label col-sm-2">Motivo Próx. Visita</label>
+                        <label class="col-form-label col-sm-2">Motivo Próx. Evento</label>
                         <div class="col-sm-10">
                             <select class="custom-select form-control" name="motivo_id_prox" id="mot_prox" required>
                             </select>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-form-label col-sm-2">Descrição Próx. Visita</label>
+                        <label class="col-form-label col-sm-2">Descrição Próx. Evento</label>
                         <div class="col-sm-10">
                             <textarea class="form-control" name="descricao_prox" id="descricao_prox"
                                       rows="8"></textarea>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-form-label col-sm-2">Técnico Próx. Visita</label>
+                        <label class="col-form-label col-sm-2">Técnico Próx. Evento</label>
                         <div class="col-sm-10">
                             <select name="tecnico" id="tecnico_prox" class="form-control"></select>
                         </div>
@@ -75,7 +75,7 @@
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="op" value="addVis">
-                    <a href="visitas.php">
+                    <a href="calVis.php">
                         <button type="button" class="btn btn-default ">Cancelar</button>
                     </a>
                     <button type="submit" class="btn btn-success float-right">Confirmar</button>

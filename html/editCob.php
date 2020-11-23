@@ -56,7 +56,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form action="visitas.php" method="post" id="addForm" enctype="multipart/form-data" class="form-horizontal">
+                    <form action="cobrancas.php" method="post" id="addForm" enctype="multipart/form-data" class="form-horizontal">
                         <div class="card-body">
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Estado</label>

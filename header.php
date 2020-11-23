@@ -126,7 +126,7 @@
                         (basename($_SERVER['PHP_SELF']) == "penVis.php")
                             ? "active" : ""; ?>">
                             <i class="nav-icon fa fa-user"></i>
-                            <p>Visitas
+                            <p>Eventos
                                 <i class="fa fa-angle-left right"></i>
                             </p>
                         </a>
@@ -135,14 +135,14 @@
                                 <a href="/sigest/html/calVis.php"
                                    class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "calVis.php") ? "active" : ""; ?>">
                                     <i class="fa fa-calendar nav-icon"></i>
-                                    <p>Calendário de Visitas</p>
+                                    <p>Calendário de Eventos</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="/sigest/html/penVis.php"
                                    class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "penVis.php") ? "active" : ""; ?>">
                                     <i class="nav-icon fa fa-list"></i>
-                                    <p>Lista de Visitas</p>
+                                    <p>Lista de Eventos</p>
                                 </a>
                             </li>
                         </ul>
