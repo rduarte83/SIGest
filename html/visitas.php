@@ -59,6 +59,7 @@
                                     <th>Motivo</th>
                                     <th>Comercial</th>
                                     <th>Descrição</th>
+                                    <th>OP</th>
                                     </thead>
                                     <tbody>
                                     </tbody>

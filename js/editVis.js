@@ -31,8 +31,6 @@ $(document).ready(function () {
                 },
                 success: function (dataResult) {
                     var dataResult = JSON.parse(dataResult);
-                    console.log(dataResult.data[0]);
-
                     $("#prox_vis").val(moment(dataResult.data[0][2]).format('YYYY-MM-DDTHH:mm'));
                     $("#mot_prox").val(dataResult.data[0][3]);
                     $("#descricao_prox").val(dataResult.data[0][6]);

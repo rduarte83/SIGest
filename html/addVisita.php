@@ -136,12 +136,6 @@
                                       rows="8"></textarea>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-form-label col-sm-2">Técnico Próx. Evento</label>
-                        <div class="col-sm-10">
-                            <select name="tecnico" id="tecnico_prox" class="form-control"></select>
-                        </div>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="op" id="op" value="addVis">

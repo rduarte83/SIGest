@@ -386,27 +386,23 @@ if ($_POST['op'] == 'delVis') {
     $statement = $conn->prepare($query);
     $result = $statement->execute(
         array(
-            ':id' => $_POST["id"],
+            ':id' => $_POST["vis_id"],
         )
     );
 }
 
 if ($_POST['op'] == 'editVis') {
     $query = "
-                UPDATE visitas SET cliente_id=:cliente_id, ult_vis=:ult_vis, motivo_id=:motivo_id, descricao=:descricao,
-                                   vendedor=:vendedor, tecnico=:tecnico
-                                    WHERE id=:id
+                UPDATE visitas SET ult_vis=:ult_vis, motivo_id=:motivo_id, descricao=:descricao 
+                    WHERE id=:id
     ";
     $statement = $conn->prepare($query);
     $result = $statement->execute(
         array(
             ':id' => $_POST["id"],
-            ':cliente_id' => $_POST["cliente_id"],
             ':ult_vis' => $_POST["ult_vis"],
             ':motivo_id' => $_POST["motivo_id"],
-            ':descricao' => $_POST["descricao"],
-            ':vendedor' => $_POST["vendedor"],
-            ':tecnico' => $_POST["tecnico"]
+            ':descricao' => $_POST["descricao"]
         )
     );
 }
@@ -455,7 +451,6 @@ if ($_POST['op'] == 'fetchVis') {
         $sub_array[] = $row["ult_vis"];
         $sub_array[] = $row["motivo"];
         $sub_array[] = $row["vendedor"];
-        $sub_array[] = $row["username"];
         $sub_array[] = $row["descricao"];
         $sub_array[] = '
                     <a href="editVis.php" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '">
