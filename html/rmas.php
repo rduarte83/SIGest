@@ -57,14 +57,17 @@
                                 <table id="table" class="table table-bordered table-hover">
                                     <thead>
                                     <th>Id</th>
-                                    <th>Data</th>
+                                    <th>Data Envio</th>
                                     <th>Cliente</th>
                                     <th>Produto</th>
                                     <th>Fornecedor</th>
                                     <th>Núm. Série</th>
                                     <th>Motivo</th>
                                     <th>Núm. Factura</th>
+                                    <th>Data Factura</th>
                                     <th>Resolução</th>
+                                    <th>Observações</th>
+                                    <th>Operações</th>
                                     </thead>
                                     <tbody>
                                     </tbody>

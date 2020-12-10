@@ -1,6 +1,6 @@
-<div class="modal fade" id="newC" tabindex="-1" role="dialog" aria-labelledby="Novo Produto" aria-hidden="true">
+<div class="modal fade" id="newCount" tabindex="-1" role="dialog" aria-labelledby="Nova Contagem" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
-        <form method="post" id="addFormC" enctype="multipart/form-data" class="form-horizontal">
+        <form method="post" id="addFormC" action="copia.php" enctype="multipart/form-data" class="form-horizontal">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title text-bold">Nova Contagem</h5>

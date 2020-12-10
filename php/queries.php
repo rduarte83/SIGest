@@ -321,16 +321,51 @@ if ($_POST['op'] == 'fetchProdCli') {
 
 if ($_POST['op'] == 'addVis') {
     $query = "
-			INSERT INTO visitas (cliente_id, ult_vis, ult_vis_end, motivo_id, descricao, vendedor, tecnico) 
-			            VALUES (:cliente_id, :ult_vis, DATE_ADD(:ult_vis, INTERVAL 60 MINUTE), :motivo_id, :descricao, :vendedor, :tecnico);
+			INSERT INTO visitas (cliente_id, ult_vis, ult_vis_end, motivo_id, descricao, vendedor, tecnico, update) 
+			            VALUES (:cliente_id, :ult_vis, DATE_ADD(:ult_vis, INTERVAL 60 MINUTE), :motivo_id, :descricao, :vendedor, :tecnico, now());
             INSERT INTO visitas (cliente_id, ult_vis, ult_vis_end, motivo_id, descricao, vendedor, tecnico) 
-			            VALUES (:cliente_id, :prox_vis, DATE_ADD(:prox_vis, INTERVAL 60 MINUTE), :motivo_id_prox, :descricao_prox, :vendedor, :tecnico_prox);    
+			            VALUES (:cliente_id, :prox_vis, DATE_ADD(:prox_vis, INTERVAL 60 MINUTE), :motivo_id_prox, :descricao_prox, :vendedor, :tecnico_prox, now());    
 		";
 
     $statement = $conn->prepare($query);
     $result = $statement->execute(
         array(
             ':cliente_id' => $_POST["c_id"],
+            ':ult_vis' => $_POST["ult_vis"],
+            ':motivo_id' => $_POST["motivo_id"],
+            ':descricao' => $_POST["descricao"],
+            ':vendedor' => $_POST["vendedor"],
+            ':tecnico' => $_POST["tecnico"],
+            ':prox_vis' => $_POST["prox_vis"],
+            ':motivo_id_prox' => $_POST["motivo_id"],
+            ':descricao_prox' => $_POST["descricao"],
+            ':tecnico_prox' => $_POST["tecnico"]
+        )
+    );
+}
+
+if ($_POST['op'] == 'addVisNC') {
+    $query = "
+			INSERT INTO clientes(nif, id, cliente, morada, zona, responsavel, contacto, email, comercial) 
+			        VALUES (:nif, :id, :cliente, :morada, :zona, :responsavel, :contacto, :email, :comercial);
+            INSERT INTO visitas (cliente_id, ult_vis, ult_vis_end, motivo_id, descricao, vendedor, tecnico) 
+			            VALUES (:nif, :ult_vis, DATE_ADD(:ult_vis, INTERVAL 60 MINUTE), :motivo_id, :descricao, :vendedor, :tecnico);
+            INSERT INTO visitas (cliente_id, ult_vis, ult_vis_end, motivo_id, descricao, vendedor, tecnico) 
+			            VALUES (:nif, :prox_vis, DATE_ADD(:prox_vis, INTERVAL 60 MINUTE), :motivo_id_prox, :descricao_prox, :vendedor, :tecnico_prox);    
+		";
+
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':nif' => $_POST["nif"],
+            ':id' => $_POST["id"],
+            ':cliente' => $_POST["cliente"],
+            ':morada' => $_POST["morada"],
+            ':zona' => $_POST["zona"],
+            ':responsavel' => $_POST["responsavel"],
+            ':contacto' => $_POST["contacto"],
+            ':email' => $_POST["email"],
+            ':comercial' => $_POST["comercial"],
             ':ult_vis' => $_POST["ult_vis"],
             ':motivo_id' => $_POST["motivo_id"],
             ':descricao' => $_POST["descricao"],
@@ -529,7 +564,36 @@ if ($_POST['op'] == 'fetchVisPen') {
         SELECT v.*, c.cliente, m.motivo FROM visitas v  
             INNER JOIN clientes c ON v.cliente_id=c.nif
             INNER JOIN motivos m ON v.motivo_id=m.id
-            HAVING v.ult_vis < CURDATE() ORDER BY v.ult_vis DESC
+            HAVING v.ult_vis < v.update
+        ";
+    $statement = $conn->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $data = array();
+
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["id"];
+        $sub_array[] = $row["cliente"];
+        $sub_array[] = $row["ult_vis"];
+        $sub_array[] = $row["motivo"];
+        $sub_array[] = $row["vendedor"];
+        $sub_array[] = $row["descricao"];
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
+if ($_POST['op'] == 'fetchVisPenToday') {
+    $output = array();
+    $query = "
+        SELECT v.*, c.cliente, m.motivo FROM visitas v  
+            INNER JOIN clientes c ON v.cliente_id=c.nif
+            INNER JOIN motivos m ON v.motivo_id=m.id
+            HAVING v.ult_vis < CURDATE() AND descricao = '' 
         ";
     $statement = $conn->prepare($query);
     $statement->execute();
@@ -1494,4 +1558,95 @@ if ($_POST['op'] == 'checkQVis') {
         "data" => $data
     );
     echo json_encode($output);
+}
+
+if ($_POST['op'] == 'fetchRMA') {
+    $output = array();
+    $query = "    
+        SELECT r.*, c.cliente FROM rmas r INNER JOIN clientes c ON r.cliente_id=c.nif
+        ";
+
+    $statement = $conn->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $data = array();
+
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["id"];
+        $sub_array[] = $row["data_e"];
+        $sub_array[] = $row["cliente_id"];
+        $sub_array[] = $row["produto"];
+        $sub_array[] = $row["fornecedor"];
+        $sub_array[] = $row["num_serie"];
+        $sub_array[] = $row["motivo"];
+        $sub_array[] = $row["num_factura"];
+        $sub_array[] = $row["data_f"];
+        $sub_array[] = $row["resolucao"];
+        $sub_array[] = $row["obs"];
+        $sub_array[] = '
+                    <a href="editRMA.php" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '">
+                        <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>
+                    </a>
+                    <a href="#" class="delete btn btn-danger btn-sm" data-id="' . $row["id"] . '">
+                        <i class="fa fa-trash" aria-hidden="true" data-toggle="tooltip" title="Eliminar"></i>
+                    </a>
+                    ';
+
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
+if ($_POST['op'] == 'addRMA') {
+    if (isset($_POST["dataNew"])) {
+        $query = "
+			INSERT INTO rmas (data_e, cliente_id, produto, fornecedor, num_serie, motivo, num_factura, data_f, resolucao, obs) 
+			    VALUES (:data_e, :cliente_id, :produto, :fornecedor, :num_serie, :motivo, :num_factura, :data_f, :resolucao, :obs)
+		";
+        $statement = $conn->prepare($query);
+        $result = $statement->execute(
+            array(
+                ':data_e' => $_POST["data_e"],
+                ':cliente_id' => $_POST["c_id"],
+                ':produto' => $_POST["produto"],
+                ':fornecedor' => $_POST["fornecedor"],
+                ':num_serie' => $_POST["num_serie"],
+                ':motivo' => $_POST["motivo"],
+                ':num_factura' => $_POST["num_factura"],
+                ':data_f' => $_POST["data_f"],
+                ':resolucao' => $_POST["resolucao"],
+                ':obs' => $_POST["obs"],
+            )
+        );
+    } else {
+        $query = "
+			INSERT INTO cobrancas (cliente_id, data, motivo, descricao, data_end) 
+			    VALUES (:cliente_id, :data, :motivo, :descricao, DATE_ADD(:data, INTERVAL 60 MINUTE));
+		";
+        $statement = $conn->prepare($query);
+        $result = $statement->execute(
+            array(
+                ':cliente_id' => $_POST["c_id"],
+                ':data' => $_POST["data"],
+                ':motivo' => $_POST["motivo"],
+                ':descricao' => $_POST["descricao"]
+            )
+        );
+    }
+}
+
+if ($_POST['op'] == 'delRMA') {
+    $query = "
+                DELETE FROM rmas WHERE id = :rma_id
+    ";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':rma_id' => $_POST["rma_id"],
+        )
+    );
 }

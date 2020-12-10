@@ -1,4 +1,4 @@
-$(document).on('click', '.edit', function (e) {
+$(document).on('click', '.edit', function () {
     var rma_id = $(this).attr("data-id");
     localStorage.setItem("rma_id", rma_id);
 });
@@ -19,7 +19,7 @@ $(document).on('click', '.delete', function () {
                 url: '../php/queries.php',
                 type: 'POST',
                 data: {
-                    op: 'delCob',
+                    op: 'delRMA',
                     rma_id: rma_id
                 },
                 success: function () {
@@ -69,7 +69,7 @@ function createDT() {
                 {
                     text: '<i class="fa fa-plus" aria-hidden="true"></i>',
                     className: 'btn btn-default',
-                    titleAttr: 'Nova Visita',
+                    titleAttr: 'Novo RMA',
                     action: function () {
                         $('#new').modal('show')
                     }

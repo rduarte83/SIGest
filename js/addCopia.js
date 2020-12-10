@@ -87,7 +87,6 @@ $(document).ready(function () {
 
 //<!-- Add copia -->
 $('#addForm').on('submit', function (e) {
-    e.preventDefault();
 
     var selC = $("input[name='radioC']:checked").val();
     var selP = $("input[name='radioP']:checked").val();

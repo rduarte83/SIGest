@@ -8,6 +8,12 @@ function createDT() {
                 op: 'fetchVisPen'
             },
         },
+        createdRow: function (row, data) {
+            console.log(data);
+            //86400000 - 1 day in ms")
+            if (Math.round((Date.now() - new Date(data[2]).getTime()) / 86400000) >= 2)
+                $(row).addClass('red');
+        },
         dom: 'Bfrtip',
         buttons: {
             buttons: [
@@ -35,6 +41,20 @@ function createDT() {
                     titleAttr: 'Nova Visita',
                     action: function () {
                         $('#new').modal('show')
+                    }
+                },
+                {
+                    text: 'Hoje',
+                    className: 'btn btn-default',
+                    titleAttr: 'Hoje',
+                    action: function () {
+                        $.ajax({
+                            url: '../php/queries.php',
+                            type: 'POST',
+                            data: {
+                                op: 'fetchVisPenToday'
+                            }
+                        });
                     }
                 }
             ],

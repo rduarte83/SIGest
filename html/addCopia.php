@@ -150,6 +150,8 @@
                                 <option value="mensal">Mensal</option>
                                 <option value="trimestral">Trimestral</option>
                                 <option value="anual">Anual</option>
+                                <option value="renting">Renting</option>
+                                <option value="cliente">Cliente</option>
                             </select>
                         </div>
                     </div>

@@ -1,4 +1,17 @@
+$("#radioC").on('change', function () {
+    var selC = $("input[name='radioC']:checked").val();
+    if (selC === 'new') {
+        $("#existC").hide();
+        $("#newC").show();
+    } else {
+        $("#existC").show();
+        $("#newC").hide();
+    }
+});
+
 $(document).ready(function () {
+    $("#newC").hide();
+
     //Fetch Clientes - autocomplete
     $.ajax({
         type: 'post',
@@ -33,6 +46,22 @@ $(document).ready(function () {
                         }
                     });
                 }
+            });
+        }
+    });
+
+    //Fetch Comercial
+    $.ajax({
+        url: "../php/queries.php",
+        type: "POST",
+        data: {
+            op: 'fetchCom',
+        },
+        success: function (dataResult) {
+            var dataResult = JSON.parse(dataResult);
+            $("#comercial").html('<option value="0">Seleccionar Comercial</option>');
+            $.each(dataResult.data, function () {
+                $("#comercial").append($("<option/>").val(this[0]).text(this[1]));
             });
         }
     });
@@ -84,17 +113,29 @@ $(document).ready(function () {
 
 //<!-- Add visit -->
 $('#addForm').on('submit', function (e) {
-    e.preventDefault();
-    $.ajax({
-        data: new FormData(this),
-        contentType: false,
-        processData: false,
-        type: "post",
-        url: "../php/queries.php",
-        success: function (dataResult) {
-            window.location.href = "../html/calVis.php";
-        }
-    });
+    var selC = $("input[name='radioC']:checked").val();
+
+    if (selC === 'new') {
+        $('#op').val("addVisNC");
+
+        console.log($('#op').val());
+
+        $.ajax({
+            data: new FormData(this),
+            contentType: false,
+            processData: false,
+            type: "post",
+            url: "../php/queries.php",
+        });
+    } else {
+        $.ajax({
+            data: new FormData(this),
+            contentType: false,
+            processData: false,
+            type: "post",
+            url: "../php/queries.php",
+        });
+    }
 });
 
 

@@ -94,7 +94,7 @@ $(document).ready(function () {
                     className: 'btn btn-default',
                     titleAttr: 'Nova Contagem',
                     action: function () {
-                        $('#newCZZZZ').modal('show')
+                        $('#newCount').modal('show')
                     }
                 }
             ],
