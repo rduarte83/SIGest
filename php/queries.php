@@ -321,9 +321,9 @@ if ($_POST['op'] == 'fetchProdCli') {
 
 if ($_POST['op'] == 'addVis') {
     $query = "
-			INSERT INTO visitas (cliente_id, ult_vis, ult_vis_end, motivo_id, descricao, vendedor, tecnico, update) 
+			INSERT INTO visitas (cliente_id, ult_vis, ult_vis_end, motivo_id, descricao, vendedor, tecnico, updated) 
 			            VALUES (:cliente_id, :ult_vis, DATE_ADD(:ult_vis, INTERVAL 60 MINUTE), :motivo_id, :descricao, :vendedor, :tecnico, now());
-            INSERT INTO visitas (cliente_id, ult_vis, ult_vis_end, motivo_id, descricao, vendedor, tecnico) 
+            INSERT INTO visitas (cliente_id, ult_vis, ult_vis_end, motivo_id, descricao, vendedor, tecnico, updated) 
 			            VALUES (:cliente_id, :prox_vis, DATE_ADD(:prox_vis, INTERVAL 60 MINUTE), :motivo_id_prox, :descricao_prox, :vendedor, :tecnico_prox, now());    
 		";
 
@@ -500,11 +500,46 @@ if ($_POST['op'] == 'fetchVisS') {
         $sub_array[] = $row["ult_vis"];
         $sub_array[] = $row["motivo"];
         $sub_array[] = $row["vendedor"];
-        $sub_array[] = $row["tecnico"];
+        $sub_array[] = $row["username"];
         $sub_array[] = $row["descricao"];
         $sub_array[] = $row["cliente_id"];
-        $sub_array[] = $row["tecnico"];
-        $sub_array[] = $row["motivo_id"];
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
+if ($_POST['op'] == 'fetchVisSN') {
+    $output = array();
+    $query = "
+        SELECT v.*, c.cliente, m.motivo, u.username FROM visitas v  
+            INNER JOIN clientes c ON v.cliente_id=c.nif
+            INNER JOIN motivos m ON v.motivo_id=m.id
+            INNER JOIN users u ON v.tecnico=u.id
+            WHERE v.cliente_id = :cliente_id AND v.id > :id LIMIT 1
+        ";
+
+    $statement = $conn->prepare($query);
+    $statement->execute(
+        array(
+            ':id' => $_POST["id"],
+            ':cliente_id' => $_POST["cliente_id"]
+        )
+    );
+    $result = $statement->fetchAll();
+    $data = array();
+
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["id"];
+        $sub_array[] = $row["cliente"];
+        $sub_array[] = $row["ult_vis"];
+        $sub_array[] = $row["motivo"];
+        $sub_array[] = $row["vendedor"];
+        $sub_array[] = $row["username"];
+        $sub_array[] = $row["descricao"];
 
         $data[] = $sub_array;
     }
@@ -564,7 +599,7 @@ if ($_POST['op'] == 'fetchVisPen') {
         SELECT v.*, c.cliente, m.motivo FROM visitas v  
             INNER JOIN clientes c ON v.cliente_id=c.nif
             INNER JOIN motivos m ON v.motivo_id=m.id
-            HAVING v.ult_vis < v.update
+            HAVING v.ult_vis_end >= v.updated
         ";
     $statement = $conn->prepare($query);
     $statement->execute();
@@ -579,6 +614,14 @@ if ($_POST['op'] == 'fetchVisPen') {
         $sub_array[] = $row["motivo"];
         $sub_array[] = $row["vendedor"];
         $sub_array[] = $row["descricao"];
+        $sub_array[] = '
+                    <a href="editVis.php" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '">
+                        <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>
+                    </a>
+                    <a href="#" class="delete btn btn-danger btn-sm" data-id="' . $row["id"] . '">
+                        <i class="fa fa-trash" aria-hidden="true" data-toggle="tooltip" title="Eliminar"></i>
+                    </a>
+                    ';
         $data[] = $sub_array;
     }
     $output = array(
@@ -593,7 +636,7 @@ if ($_POST['op'] == 'fetchVisPenToday') {
         SELECT v.*, c.cliente, m.motivo FROM visitas v  
             INNER JOIN clientes c ON v.cliente_id=c.nif
             INNER JOIN motivos m ON v.motivo_id=m.id
-            HAVING v.ult_vis < CURDATE() AND descricao = '' 
+            HAVING DATE(ult_vis) = CURDATE()
         ";
     $statement = $conn->prepare($query);
     $statement->execute();

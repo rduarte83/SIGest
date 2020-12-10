@@ -1,5 +1,44 @@
+$(document).on('click', '.delete', function () {
+    var vis_id = $(this).attr("data-id");
+    Swal.fire({
+        icon: 'info',
+        position: 'top',
+        title: 'Tem a certeza que deseja eliminar este registo?',
+        text: 'Esta acção não pode ser revertida!',
+        showCancelButton: true,
+        confirmButtonText: 'Confirmar',
+        cancelButtonText: 'Cancelar',
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: '../php/queries.php',
+                type: 'POST',
+                data: {
+                    op: 'delVis',
+                    vis_id: vis_id
+                },
+                success: function () {
+                    Swal.fire({
+                        icon: 'success',
+                        position: 'top',
+                        title: 'Eliminado!',
+                        text: 'Registo eliminado com sucesso!'
+                    }).then(function () {
+                        location.reload();
+                    });
+                }
+            });
+        }
+    });
+});
+
+$(document).on('click', '.edit', function () {
+    var vis_id = $(this).attr("data-id");
+    localStorage.setItem("vis_id", vis_id);
+});
+
 function createDT() {
-    $("#table").DataTable({
+    var table = $("#table").DataTable({
         processing: true,
         ajax: {
             url: "../php/queries.php",
@@ -48,13 +87,16 @@ function createDT() {
                     className: 'btn btn-default',
                     titleAttr: 'Hoje',
                     action: function () {
-                        $.ajax({
-                            url: '../php/queries.php',
-                            type: 'POST',
-                            data: {
-                                op: 'fetchVisPenToday'
-                            }
-                        });
+                        var tmp = table.ajax.url();
+                        if (tmp == "../php/queries.php") {
+                            table.button(4).text("Todos");
+                            table.ajax.url("../php/fetchVisToday.php");
+                            table.ajax.reload();
+                        } else {
+                            table.button(4).text("Hoje");
+                            table.ajax.url("../php/queries.php");
+                            table.ajax.reload();
+                        }
                     }
                 }
             ],
@@ -70,5 +112,4 @@ function createDT() {
 $(document).ready(function () {
     createDT();
 });
-
 

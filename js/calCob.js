@@ -66,8 +66,8 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         select: function (info) {
             console.log(info);
-            var start = moment(info.start).format("YYYY-MM-DDTHH:MM:SS");
-            var end = moment(info.end).format("YYYY-MM-DDTHH:MM:SS");
+            var start = moment(info.start).format("YYYY-MM-DDTHH:mm:SS");
+            var end = moment(info.end).format("YYYY-MM-DDTHH:mm:SS");
             var id = info.resource.id;
             window.location.href = "../html/addCob.php?op=cal&start="+start+"&end="+end+"&id="+id;
         },

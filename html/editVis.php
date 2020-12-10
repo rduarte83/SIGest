@@ -56,26 +56,27 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form action="calVis.php" method="post" id="addForm" enctype="multipart/form-data" class="form-horizontal">
+                    <form action="calVis.php" method="post" id="addForm" enctype="multipart/form-data"
+                          class="form-horizontal">
                         <div class="card-body">
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Cliente</label>
                                 <div class="col-sm-10">
-                                    <select class="custom-select form-control" name="cliente_id" id="cli" required>
+                                    <input type="text" id="cli" name="cliente_id" class="form-control" readonly>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Data</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="ult_vis" name="ult_vis" class="form-control" required>
+                                    <input type="datetime-local" id="ult_vis" name="ult_vis" class="form-control"
+                                           required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Motivo</label>
                                 <div class="col-sm-10">
-                                    <select class="custom-select form-control" name="motivo_id" id="mot" required>
-                                    </select>
+                                    <input type="text" id="mot" name="motivo_id" class="form-control" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -85,15 +86,22 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-sm-2">Comercial</label>
+                                <label class="col-form-label col-sm-2">Próx. Data</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="vendedor" name="vendedor" class="form-control" required>
+                                    <input type="datetime-local" id="prox_vis" name="prox_vis" class="form-control"
+                                           required>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-sm-2">Técnico</label>
+                                <label class="col-form-label col-sm-2">Motivo Próx. Evento</label>
                                 <div class="col-sm-10">
-                                    <select name="tecnico" id="tecnico" class="form-control"></select>
+                                    <input type="text" id="mot_prox" name="motivo_id_prox" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-sm-2">Descrição Próx. Evento</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" name="descricao_prox" id="descricao_prox" rows="8"></textarea>
                                 </div>
                             </div>
                         </div>

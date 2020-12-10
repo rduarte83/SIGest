@@ -86,14 +86,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 })
             },
             select: function (info) {
-                var start = moment(info.start).format("YYYY-MM-DDTHH:MM:SS");
-                var end = moment(info.end).format("YYYY-MM-DDTHH:MM:SS");
+                var start = moment(info.start).format("YYYY-MM-DDTHH:mm:SS");
+                var end = moment(info.end).format("YYYY-MM-DDTHH:mm:SS");
 
                 var event = prompt("Insira o assunto:");
 
                 if (event) {
                     <!-- AddQuickVisita -->
-                    end = moment(info.end).add(1, 'h').format("YYYY-MM-DDTHH:MM:SS");
+                    end = moment(info.end).add(1, 'h').format("YYYY-MM-DDTHH:mm:SS");
                     $.ajax({
                         url: "../php/queries.php",
                         type: "post",

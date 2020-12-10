@@ -78,8 +78,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         },
         select: function (info) {
-            var start = moment(info.start).format("YYYY-MM-DDTHH:MM:SS");
-            var end = moment(info.end).format("YYYY-MM-DDTHH:MM:SS");
+            var start = moment(info.start).format("YYYY-MM-DDTHH:mm:SS");
+            var end = moment(info.end).format("YYYY-MM-DDTHH:mm:SS");
             var id = info.resource.id;
 
             //var event = prompt("Insira o assunto:")

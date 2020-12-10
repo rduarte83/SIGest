@@ -13,11 +13,11 @@ $(document).ready(function () {
             console.log(dataResult.data[0]);
 
             $("#id").val(dataResult.data[0][0]);
-            $("#data_p").val(moment(dataResult.data[0][3]).format('YYYY-MM-DDThh:mm'));
+            $("#data_p").val(moment(dataResult.data[0][3]).format('YYYY-MM-DDTHH:mm'));
             $("#local").val(dataResult.data[0][5]);
             $("#entregue").val(dataResult.data[0][7]);
             $("#problema").val(dataResult.data[0][8]);
-            $("#data_i").val(moment(dataResult.data[0][9]).format('YYYY-MM-DDThh:mm'));
+            $("#data_i").val(moment(dataResult.data[0][9]).format('YYYY-MM-DDTHH:mm'));
             $("#resolucao").val(dataResult.data[0][10]);
             $("#obs").val(dataResult.data[0][11]);
             $("#material").val(dataResult.data[0][12]);
