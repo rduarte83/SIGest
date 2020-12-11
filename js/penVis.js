@@ -118,9 +118,13 @@ $(document).ready(function () {
         $("#table tbody").on('click', 'tr', function () {
             var data = table.row(this).data();
             localStorage.setItem("vis_id", data[0]);
-            location.href = "/sigest/html/editVis.php"
+            if (location.pathname.includes("penVis")) {
+                location.href = "/sigest/html/editVis.php?op=penVis";
+            }
+            if (location.pathname.includes("index")) {
+                location.href = "/sigest/html/editVis.php?op=index";
+            }
         });
-    }
-    ;
+    };
 });
 
