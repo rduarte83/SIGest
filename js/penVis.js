@@ -61,6 +61,7 @@ $(document).ready(function () {
             columnDefs: [
                 {visible: false, targets: 4}
             ],
+            order: [2 , "asc"],
             buttons: {
                 buttons: [
                     {

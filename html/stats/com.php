@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Estatísticas</h1>
+                    <h1 class="m-0 text-dark">Dashboard</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -23,6 +23,7 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="card">
+                        <div class="card-header"><b>Estatísticas</b></div>
                         <div class="card-body">
                             <label class="col-form-label">Seleccionar Mês</label>
                             <select class="custom-select form-control" id="periodo" name="periodo" required>
@@ -33,6 +34,7 @@
                                 <th>Num Vendas</th>
                                 <th>Novos Clientes</th>
                                 <th>Valor Vendas</th>
+                                <th>Eventos Pendentes</th>
                                 </thead>
                                 <tbody>
                                 </tbody>
@@ -51,6 +53,9 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="card">
+                        <div class="card-header">
+                            <b>Eventos Pendentes</b>
+                        </div>
                         <div class="card-body">
                             <table id="table" class="table table-bordered table-hover">
                                 <thead>

@@ -393,7 +393,7 @@ if ($_POST['op'] == 'delVis') {
 
 if ($_POST['op'] == 'editVis') {
     $query = "
-                UPDATE visitas SET ult_vis=:ult_vis, motivo_id=:motivo_id, descricao=:descricao 
+                UPDATE visitas SET ult_vis=:ult_vis, motivo_id=:motivo_id, descricao=:descricao, updated=now() 
                     WHERE id=:id;
     ";
     $statement = $conn->prepare($query);

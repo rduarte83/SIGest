@@ -12,7 +12,12 @@ if ($_POST['op'] == 'fetchStats') {
                     WHERE motivo_id=8 AND vendedor=:c) AS entregas,
                 (SELECT COUNT(DISTINCT cliente_id) FROM visitas 
                     WHERE motivo_id=8 AND vendedor=:c)  AS clientes,
-                (SELECT SUM(valor) FROM VENDAS WHERE comercial=:c) AS valor
+                (SELECT SUM(valor) FROM VENDAS WHERE comercial=:c) AS valor,
+                (SELECT COUNT(v.id) FROM visitas v 
+                    INNER JOIN clientes c ON v.cliente_id=c.nif
+                    INNER JOIN motivos m ON v.motivo_id=m.id
+                    WHERE v.ult_vis_end >= v.updated AND vendedor=:c) AS eventos
+
                 ";
 
     $statement = $conn->prepare($query);
@@ -30,6 +35,7 @@ if ($_POST['op'] == 'fetchStats') {
         $sub_array[] = $row["clientes"];
         if (is_null($row["valor"])) $row["valor"] = 0;
         $sub_array[] = $row["valor"];
+        $sub_array[] = $row["eventos"];
         $data[] = $sub_array;
     }
     $output = array(
@@ -47,8 +53,13 @@ if ($_POST['op'] == 'fetchStatsS') {
                 (SELECT COUNT(cliente_id) FROM visitas 
                     WHERE motivo_id=8 AND vendedor=:v AND EXTRACT(YEAR_MONTH FROM ult_vis)=:mes) AS entregas,
                 (SELECT COUNT(DISTINCT cliente_id) FROM visitas 
-                    WHERE motivo_id=8 AND vendedor=:v AND EXTRACT(YEAR_MONTH FROM ult_vis)=:mes)  AS clientes,
-                (SELECT SUM(valor) FROM VENDAS WHERE comercial=:v AND mes=:mes) AS valor
+                    WHERE motivo_id=8 AND vendedor=:v AND EXTRACT(YEAR_MONTH FROM ult_vis)=:mes) AS clientes,
+                (SELECT SUM(valor) FROM vendas WHERE comercial=:v AND mes=:mes) AS valor,
+                (SELECT COUNT(v.id) FROM visitas v 
+                    INNER JOIN clientes c ON v.cliente_id=c.nif
+                    INNER JOIN motivos m ON v.motivo_id=m.id
+                    WHERE v.ult_vis_end >= v.updated AND vendedor=:v AND EXTRACT(YEAR_MONTH FROM ult_vis)=:mes) AS eventos
+                
                 ";
 
     $statement = $conn->prepare($query);
@@ -67,6 +78,7 @@ if ($_POST['op'] == 'fetchStatsS') {
         $sub_array[] = $row["clientes"];
         if (is_null($row["valor"])) $row["valor"] = 0;
         $sub_array[] = $row["valor"];
+        $sub_array[] = $row["eventos"];
         $data[] = $sub_array;
     }
     $output = array(
