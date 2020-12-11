@@ -2,7 +2,7 @@ var ctx = $("#chart");
 var chart, url;
 
 function createDT() {
-    $("#table").DataTable({
+    $("#tableStats").DataTable({
         processing: true,
         ajax: {
             url: "/sigest/php/stats.php",
@@ -98,8 +98,8 @@ $(document).ready(function () {
     });
 
     $("#periodo").on('change', function () {
-        if ($.fn.dataTable.isDataTable('#table')) {
-            $("#table").DataTable().destroy();
+        if ($.fn.dataTable.isDataTable('#tableStats')) {
+            $("#tableStats").DataTable().destroy();
         };
         if ($("#periodo").val() == 0) {
             createDT();
@@ -109,7 +109,7 @@ $(document).ready(function () {
             console.log( $("#periodo").val() );
             url = "/sigest/php/fetchChartComMes.php";
 
-            $("#table").DataTable({
+            $("#tableStats").DataTable({
                 processing: true,
                 ajax: {
                     url: "/sigest/php/stats.php",

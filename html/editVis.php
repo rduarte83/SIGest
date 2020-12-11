@@ -76,7 +76,8 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Motivo</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="mot" name="motivo_id" class="form-control" readonly>
+                                    <input type="text" id="mot" name="motivo" class="form-control" readonly>
+                                    <input type="hidden" id="mot_id" name="motivo_id">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -85,7 +86,7 @@
                                     <textarea class="form-control" name="descricao" id="descricao" rows="8"></textarea>
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <!--<div class="form-group row">
                                 <label class="col-form-label col-sm-2">Próx. Data</label>
                                 <div class="col-sm-10">
                                     <input type="datetime-local" id="prox_vis" name="prox_vis" class="form-control"
@@ -103,7 +104,7 @@
                                 <div class="col-sm-10">
                                     <textarea class="form-control" name="descricao_prox" id="descricao_prox" rows="8"></textarea>
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">

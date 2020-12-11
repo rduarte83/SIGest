@@ -21,23 +21,13 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12">
+                <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <label class="col-form-label col-sm-2">Seleccionar Mês</label>
+                            <label class="col-form-label">Seleccionar Mês</label>
                             <select class="custom-select form-control" id="periodo" name="periodo" required>
                             </select>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                </div>
-            </div>
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <table id="table" class="table table-bordered table-hover">
+                            <table id="tableStats" class="table table-bordered table-hover">
                                 <thead>
                                 <th>Novos Contactos</th>
                                 <th>Num Vendas</th>
@@ -50,10 +40,6 @@
                         </div>
                         <!-- /.card-body -->
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
                     <div class="card">
                         <div class="card-body">
                             <!-- Insert Content Here -->
@@ -62,6 +48,31 @@
                         <!-- /.card-body -->
                         <!-- /.card -->
                     </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <table id="table" class="table table-bordered table-hover">
+                                <thead>
+                                <th>Id</th>
+                                <th>Cliente</th>
+                                <th>Ultima Visita</th>
+                                <th>Motivo</th>
+                                <th>Comercial</th>
+                                <th>Descrição</th>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-6">
+
                     <!-- /.col -->
                 </div>
             </div>
@@ -72,3 +83,4 @@
 <!-- /.content-wrapper -->
 
 <script src="js/stats/com.js"></script>
+<script src="js/penVis.js"></script>

@@ -20,8 +20,9 @@ $(document).ready(function () {
             $("#vendedor").val(dataResult.data[0][4]);
             $("#descricao").val(dataResult.data[0][6]);
             $("#cliente_id").val(dataResult.data[0][7]);
+            $("#mot_id").val(dataResult.data[0][8]);
 
-            $.ajax({
+            /*$.ajax({
                 url: "../php/queries.php",
                 type: "post",
                 data: {
@@ -31,15 +32,14 @@ $(document).ready(function () {
                 },
                 success: function (dataResult) {
                     var dataResult = JSON.parse(dataResult);
+                    console.log(dataResult.data.length);
                     $("#prox_vis").val(moment(dataResult.data[0][2]).format('YYYY-MM-DDTHH:mm'));
                     $("#mot_prox").val(dataResult.data[0][3]);
                     $("#descricao_prox").val(dataResult.data[0][6]);
                 }
-            });
+            });*/
         }
     });
-
-
 });
 
 $("#addForm").on('submit', function (e) {

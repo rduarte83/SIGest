@@ -394,7 +394,7 @@ if ($_POST['op'] == 'delVis') {
 if ($_POST['op'] == 'editVis') {
     $query = "
                 UPDATE visitas SET ult_vis=:ult_vis, motivo_id=:motivo_id, descricao=:descricao 
-                    WHERE id=:id
+                    WHERE id=:id;
     ";
     $statement = $conn->prepare($query);
     $result = $statement->execute(
@@ -405,6 +405,7 @@ if ($_POST['op'] == 'editVis') {
             ':descricao' => $_POST["descricao"]
         )
     );
+
 }
 
 if ($_POST['op'] == 'fetchMot') {
@@ -498,6 +499,7 @@ if ($_POST['op'] == 'fetchVisS') {
         $sub_array[] = $row["username"];
         $sub_array[] = $row["descricao"];
         $sub_array[] = $row["cliente_id"];
+        $sub_array[] = $row["motivo_id"];
         $data[] = $sub_array;
     }
     $output = array(
@@ -610,9 +612,6 @@ if ($_POST['op'] == 'fetchVisPen') {
         $sub_array[] = $row["vendedor"];
         $sub_array[] = $row["descricao"];
         $sub_array[] = '
-                    <a href="editVis.php" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '">
-                        <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>
-                    </a>
                     <a href="#" class="delete btn btn-danger btn-sm" data-id="' . $row["id"] . '">
                         <i class="fa fa-trash" aria-hidden="true" data-toggle="tooltip" title="Eliminar"></i>
                     </a>
