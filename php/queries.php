@@ -4,8 +4,11 @@ include_once 'session.php';
 
 if ($_POST['op'] == 'fetchCli') {
     $output = array();
-    $query = "SELECT * FROM clientes ORDER BY cliente ASC";
-
+    if ($_SESSION["role"] == "admin" || $_SESSION["role"] == "administrativo") {
+        $query = "SELECT * FROM clientes ORDER BY cliente ASC";
+    } else {
+        $query = "SELECT * FROM clientes WHERE comercial='" . $_SESSION["username"] . "'";
+    }
     $statement = $conn->prepare($query);
     $statement->execute();
     $result = $statement->fetchAll();
@@ -432,13 +435,19 @@ if ($_POST['op'] == 'fetchMot') {
 
 if ($_POST['op'] == 'fetchVis') {
     $output = array();
-    $query = "
-        SELECT v.*, c.cliente, m.motivo, u.username FROM visitas v  
+    if ($_SESSION["role"] == "admin" || $_SESSION["role"] == "administrativo") {
+        $query = "SELECT v.*, c.cliente, m.motivo, u.username FROM visitas v  
             INNER JOIN clientes c ON v.cliente_id=c.nif
             INNER JOIN motivos m ON v.motivo_id=m.id
-            INNER JOIN users u ON v.tecnico=u.id            
-            ORDER BY id DESC
-        ";
+            INNER JOIN users u ON v.tecnico=u.id
+            ";
+    } else {
+        $query = "SELECT v.*, c.cliente, m.motivo, u.username FROM visitas v  
+            INNER JOIN clientes c ON v.cliente_id=c.nif
+            INNER JOIN motivos m ON v.motivo_id=m.id
+            INNER JOIN users u ON v.tecnico=u.id
+            WHERE v.vendedor='" . $_SESSION["username"] . "'";
+    }
 
     $statement = $conn->prepare($query);
     $statement->execute();
