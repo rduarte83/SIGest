@@ -4,8 +4,8 @@ include_once 'session.php';
 
 if ($_POST['op'] == 'fetchCli') {
     $output = array();
-    if ($_SESSION["role"] == "admin" || $_SESSION["role"] == "administrativo") {
-        $query = "SELECT * FROM clientes ORDER BY cliente ASC";
+    if ($_SESSION["role"] == "admin" || $_SESSION["role"] == "administrativo" || $_SESSION["role"] == "tecnico" ) {
+        $query = "SELECT * FROM clientes";
     } else {
         $query = "SELECT * FROM clientes WHERE comercial='" . $_SESSION["username"] . "'";
     }
