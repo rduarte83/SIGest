@@ -605,8 +605,8 @@ if ($_POST['op'] == 'fetchVisPen') {
         SELECT v.*, c.cliente, m.motivo FROM visitas v  
             INNER JOIN clientes c ON v.cliente_id=c.nif
             INNER JOIN motivos m ON v.motivo_id=m.id
-            HAVING v.ult_vis_end >= v.updated
-        ";
+            WHERE v.ult_vis_end >= v.updated AND vendedor='" . $_SESSION["username"] . "'"
+        ;
     $statement = $conn->prepare($query);
     $statement->execute();
     $result = $statement->fetchAll();
@@ -620,11 +620,6 @@ if ($_POST['op'] == 'fetchVisPen') {
         $sub_array[] = $row["motivo"];
         $sub_array[] = $row["vendedor"];
         $sub_array[] = $row["descricao"];
-        $sub_array[] = '
-                    <a href="#" class="delete btn btn-danger btn-sm" data-id="' . $row["id"] . '">
-                        <i class="fa fa-trash" aria-hidden="true" data-toggle="tooltip" title="Eliminar"></i>
-                    </a>
-                    ';
         $data[] = $sub_array;
     }
     $output = array(

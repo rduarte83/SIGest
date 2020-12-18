@@ -47,6 +47,7 @@ function createDT() {
                 op: 'fetchVis'
             },
         },
+        "order": [ 2, "desc" ],
         dom: 'Bfrtip',
         buttons: {
             buttons: [

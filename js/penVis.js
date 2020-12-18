@@ -1,4 +1,6 @@
 $(document).on('click', '.delete', function () {
+    $("a").removeClass("edit");
+
     var vis_id = $(this).attr("data-id");
     Swal.fire({
         icon: 'info',
