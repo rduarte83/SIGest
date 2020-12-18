@@ -9,7 +9,7 @@
                     <div class="form-group row">
                         <label class="col-form-label col-sm-2">Data Envio</label>
                         <div class="col-sm-10">
-                            <input type="datetime-local" id="data_e" name="data_e" class="form-control" required>
+                            <input type="date" id="data_e" name="data_e" class="form-control" required>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -46,13 +46,13 @@
                     <div class="form-group row">
                         <label class="col-form-label col-sm-2">Núm. Factura</label>
                         <div class="col-sm-10">
-                            <input type="text" id="num_factura" name="num_factura" class="form-control" required>
+                            <input type="text" id="num_f" name="num_f" class="form-control" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-form-label col-sm-2">Data Factura</label>
                         <div class="col-sm-10">
-                            <input type="date" id="data_factura" name="data_factura" class="form-control" required>
+                            <input type="date" id="data_f" name="data_f" class="form-control" required>
                         </div>
                     </div>
                     <div class="form-group row">

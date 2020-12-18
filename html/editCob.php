@@ -70,8 +70,7 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Cliente</label>
                                 <div class="col-sm-10">
-                                    <select class="custom-select form-control" name="cliente_id" id="cli" required>
-                                    </select>
+                                    <input type="text" name="cliente" id="cli" class="form-control" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">

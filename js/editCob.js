@@ -13,30 +13,11 @@ $(document).ready(function () {
             console.log(dataResult.data[0]);
 
             $("#id").val(dataResult.data[0][0]);
+            $("#cli").val(dataResult.data[0][1])
             $("#data").val(dataResult.data[0][2]);
             $("#mot").val(dataResult.data[0][3]);
             $("#descricao").val(dataResult.data[0][4]);
             $("#estado").val(dataResult.data[0][5]);
-            var cli_id = dataResult.data[0][6];
-
-            //Fetch Client
-            $.ajax({
-                url: "../php/queries.php",
-                type: "POST",
-                data: {
-                    op: 'fetchCli'
-                },
-                success: function (dataResult) {
-                    var dataResult = JSON.parse(dataResult);
-                    $("#cli").html("");
-                    $("#cli").html('<option value="0">Seleccionar Cliente</option>');
-                    $.each(dataResult.data, function () {
-                        if (this[0] == cli_id) {
-                            $("#cli").append($("<option/>").val(this[0]).text(this[2]).prop("selected", "selected"));
-                        } else $("#cli").append($("<option/>").val(this[0]).text(this[2]));
-                    });
-                }
-            });
         }
     });
 });

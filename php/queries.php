@@ -4,7 +4,7 @@ include_once 'session.php';
 
 if ($_POST['op'] == 'fetchCli') {
     $output = array();
-    if ($_SESSION["role"] == "admin" || $_SESSION["role"] == "administrativo" || $_SESSION["role"] == "tecnico" ) {
+    if ($_SESSION["role"] == "admin" || $_SESSION["role"] == "administrativo" || $_SESSION["role"] == "tecnico") {
         $query = "SELECT * FROM clientes";
     } else {
         $query = "SELECT * FROM clientes WHERE comercial='" . $_SESSION["username"] . "'";
@@ -605,8 +605,7 @@ if ($_POST['op'] == 'fetchVisPen') {
         SELECT v.*, c.cliente, m.motivo FROM visitas v  
             INNER JOIN clientes c ON v.cliente_id=c.nif
             INNER JOIN motivos m ON v.motivo_id=m.id
-            WHERE v.ult_vis_end >= v.updated AND vendedor='" . $_SESSION["username"] . "'"
-        ;
+            WHERE v.ult_vis_end >= v.updated AND vendedor='" . $_SESSION["username"] . "'";
     $statement = $conn->prepare($query);
     $statement->execute();
     $result = $statement->fetchAll();
@@ -1298,14 +1297,13 @@ if ($_POST['op'] == 'delCob') {
 
 if ($_POST['op'] == 'editCob') {
     $query = "
-                UPDATE cobrancas SET cliente_id=:cliente_id, data=:data, motivo=:motivo, descricao=:descricao, estado=:estado 
+                UPDATE cobrancas SET data=:data, motivo=:motivo, descricao=:descricao, estado=:estado 
                     WHERE id=:id               
     ";
     $statement = $conn->prepare($query);
     $result = $statement->execute(
         array(
             ':id' => $_POST["id"],
-            ':cliente_id' => $_POST["cliente_id"],
             ':data' => $_POST["data"],
             ':motivo' => $_POST["motivo"],
             ':descricao' => $_POST["descricao"],
@@ -1584,7 +1582,7 @@ if ($_POST['op'] == 'checkQVis') {
     $statement = $conn->prepare($query);
     $statement->execute(
         array(
-            ':id' => $_POST["id"],
+            ':id' => $_POST["id"]
         )
     );
     $result = $statement->fetchAll();
@@ -1606,7 +1604,6 @@ if ($_POST['op'] == 'fetchRMA') {
     $query = "    
         SELECT r.*, c.cliente FROM rmas r INNER JOIN clientes c ON r.cliente_id=c.nif
         ";
-
     $statement = $conn->prepare($query);
     $statement->execute();
     $result = $statement->fetchAll();
@@ -1616,15 +1613,16 @@ if ($_POST['op'] == 'fetchRMA') {
         $sub_array = array();
         $sub_array[] = $row["id"];
         $sub_array[] = $row["data_e"];
-        $sub_array[] = $row["cliente_id"];
+        $sub_array[] = $row["cliente"];
         $sub_array[] = $row["produto"];
         $sub_array[] = $row["fornecedor"];
         $sub_array[] = $row["num_serie"];
         $sub_array[] = $row["motivo"];
-        $sub_array[] = $row["num_factura"];
+        $sub_array[] = $row["num_f"];
         $sub_array[] = $row["data_f"];
         $sub_array[] = $row["resolucao"];
         $sub_array[] = $row["obs"];
+        $sub_array[] = $row["estado"];
         $sub_array[] = '
                     <a href="editRMA.php" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '">
                         <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>
@@ -1642,42 +1640,61 @@ if ($_POST['op'] == 'fetchRMA') {
     echo json_encode($output);
 }
 
-if ($_POST['op'] == 'addRMA') {
-    if (isset($_POST["dataNew"])) {
-        $query = "
-			INSERT INTO rmas (data_e, cliente_id, produto, fornecedor, num_serie, motivo, num_factura, data_f, resolucao, obs) 
-			    VALUES (:data_e, :cliente_id, :produto, :fornecedor, :num_serie, :motivo, :num_factura, :data_f, :resolucao, :obs)
-		";
-        $statement = $conn->prepare($query);
-        $result = $statement->execute(
-            array(
-                ':data_e' => $_POST["data_e"],
-                ':cliente_id' => $_POST["c_id"],
-                ':produto' => $_POST["produto"],
-                ':fornecedor' => $_POST["fornecedor"],
-                ':num_serie' => $_POST["num_serie"],
-                ':motivo' => $_POST["motivo"],
-                ':num_factura' => $_POST["num_factura"],
-                ':data_f' => $_POST["data_f"],
-                ':resolucao' => $_POST["resolucao"],
-                ':obs' => $_POST["obs"],
-            )
-        );
-    } else {
-        $query = "
-			INSERT INTO cobrancas (cliente_id, data, motivo, descricao, data_end) 
-			    VALUES (:cliente_id, :data, :motivo, :descricao, DATE_ADD(:data, INTERVAL 60 MINUTE));
-		";
-        $statement = $conn->prepare($query);
-        $result = $statement->execute(
-            array(
-                ':cliente_id' => $_POST["c_id"],
-                ':data' => $_POST["data"],
-                ':motivo' => $_POST["motivo"],
-                ':descricao' => $_POST["descricao"]
-            )
-        );
+if ($_POST['op'] == 'fetchRMAS') {
+    $output = array();
+    $query = "    
+        SELECT r.*, c.cliente FROM rmas r INNER JOIN clientes c ON r.cliente_id=c.nif WHERE r.id=:id
+        ";
+    $statement = $conn->prepare($query);
+    $statement->execute(
+        array(
+            ':id' => $_POST["rma_id"]
+        )
+    );
+    $result = $statement->fetchAll();
+    $data = array();
+
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["data_e"];
+        $sub_array[] = $row["cliente"];
+        $sub_array[] = $row["produto"];
+        $sub_array[] = $row["fornecedor"];
+        $sub_array[] = $row["num_serie"];
+        $sub_array[] = $row["motivo"];
+        $sub_array[] = $row["num_f"];
+        $sub_array[] = $row["data_f"];
+        $sub_array[] = $row["resolucao"];
+        $sub_array[] = $row["obs"];
+        $sub_array[] = $row["estado"];
+        $data[] = $sub_array;
     }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
+if ($_POST['op'] == 'addRMA') {
+    $query = "
+			INSERT INTO rmas (data_e, cliente_id, produto, fornecedor, num_serie, motivo, num_f, data_f, resolucao, obs, estado) 
+			    VALUES (:data_e, :cliente_id, :produto, :fornecedor, :num_serie, :motivo, :num_f, :data_f, :resolucao, :obs, 'Pendente')
+		";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':data_e' => $_POST["data_e"],
+            ':cliente_id' => $_POST["c_id"],
+            ':produto' => $_POST["produto"],
+            ':fornecedor' => $_POST["fornecedor"],
+            ':num_serie' => $_POST["num_serie"],
+            ':motivo' => $_POST["motivo"],
+            ':num_f' => $_POST["num_f"],
+            ':data_f' => $_POST["data_f"],
+            ':resolucao' => $_POST["resolucao"],
+            ':obs' => $_POST["obs"],
+        )
+    );
 }
 
 if ($_POST['op'] == 'delRMA') {
@@ -1688,6 +1705,30 @@ if ($_POST['op'] == 'delRMA') {
     $result = $statement->execute(
         array(
             ':rma_id' => $_POST["rma_id"],
+        )
+    );
+}
+
+if ($_POST['op'] == 'editRMA') {
+    $query = "
+                UPDATE rmas SET data_e=:data_e, produto=:produto, fornecedor=:fornecedor, num_serie=:num_serie,
+                    motivo=:motivo, num_f=:num_f, data_f=:data_f, resolucao=:resolucao, obs=:obs, estado=:estado
+                    WHERE id=:id
+    ";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':id' => $_POST["id"],
+            ':data_e' => $_POST["data_e"],
+            ':produto' => $_POST["produto"],
+            ':fornecedor' => $_POST["fornecedor"],
+            ':num_serie' => $_POST["num_serie"],
+            ':motivo' => $_POST["motivo"],
+            ':num_f' => $_POST["num_f"],
+            ':data_f' => $_POST["data_f"],
+            ':resolucao' => $_POST["resolucao"],
+            ':obs' => $_POST["obs"],
+            ':estado' => $_POST["estado"]
         )
     );
 }

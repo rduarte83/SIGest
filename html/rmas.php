@@ -67,7 +67,8 @@
                                     <th>Data Factura</th>
                                     <th>Resolução</th>
                                     <th>Observações</th>
-                                    <th>Operações</th>
+                                    <th>Estado</th>
+                                    <th>OP</th>
                                     </thead>
                                     <tbody>
                                     </tbody>

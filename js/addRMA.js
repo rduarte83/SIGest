@@ -19,8 +19,6 @@ $(document).ready(function () {
             });
         }
     });
-
-    $(".new").hide();
 });
 
 //<!-- Add RMA -->
