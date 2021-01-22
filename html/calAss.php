@@ -70,6 +70,8 @@
     </div>
     <!-- /.content-wrapper -->
 
+    <input type="hidden" id="sessionRole" value="<?=$_SESSION['role'] ?>"></input>
+
     <?php include '../footer.php' ?>
 </div>
 

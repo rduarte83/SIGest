@@ -26,6 +26,8 @@ function updEvents(info) {
 
 document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
+    var role = $("#sessionRole").val();
+    if (role === "admin") console.log(1); else console.log(0);
     calendar = new FullCalendar.Calendar(calendarEl, {
         schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
         initialView: 'resourceTimeGridWeek',
@@ -61,14 +63,9 @@ document.addEventListener('DOMContentLoaded', function () {
         expandRows: true,
         events: '../php/fetchCalAss.php',
         themeSystem: 'bootstrap',
-        editable: true,
         eventDataTransform: function (eventData) {
-            var selectedDate = moment(eventData.start, 'YYYY-MM-DD');
-            var now = moment(new Date(), 'YYYY-MM-DD');
-            var dif = selectedDate.diff(now, 'weeks');
-            if (dif < 0) {
-                eventData.editable = false;
-            }
+            if (role === "admin" || role === "administrativo") eventData.editable = true;
+            else eventData.editable = false;
         },
         selectable: true,
         eventClick: function (info) {

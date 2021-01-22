@@ -92,6 +92,7 @@ $(document).ready(function () {
                 op: 'fetchAss'
             },
         },
+        stateSave: true,
         createdRow: function (row, data) {
             console.log(data);
             //86400000 - 1 day in ms")
@@ -142,7 +143,6 @@ $(document).ready(function () {
         autoWidth: false,
         contentType: false,
         processData: false,
-        stateSave: true,
         language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
     });
 });

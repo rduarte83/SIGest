@@ -163,35 +163,12 @@
                 <?php
                 if ($_SESSION["role"] == "administrativo" || $_SESSION["role"] == "admin") {
                     ?>
-                    <li class="nav-item has-treeview
-                    <?= (basename($_SERVER['PHP_SELF']) == "cobrancas.php") |
-                    (basename($_SERVER['PHP_SELF']) == "calCob.php")
-                        ? "menu-open" : ""; ?>">
-                        <a href="#" class="nav-link
-                    <?= (basename($_SERVER['PHP_SELF']) == "cobrancas.php") |
-                        (basename($_SERVER['PHP_SELF']) == "calCob.php")
-                            ? "active" : ""; ?>">
-                            <i class="nav-icon fa fa-dollar"></i>
-                            <p>Cobranças
-                                <i class="fa fa-angle-left right"></i>
-                            </p>
+                    <li class="nav-item">
+                        <a href="/sigest/html/cobrancas.php"
+                           class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "cobrancas.php") ? "active" : ""; ?>">
+                            <i class="fa fa-eur nav-icon"></i>
+                            <p>Cobranças</p>
                         </a>
-                        <ul class="nav nav-treeview menu-open">
-                            <li class="nav-item">
-                                <a href="/sigest/html/calCob.php"
-                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "calCob.php") ? "active" : ""; ?>">
-                                    <i class="fa fa-calendar nav-icon"></i>
-                                    <p>Calendário de Cobranças</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/sigest/html/cobrancas.php"
-                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "cobrancas.php") ? "active" : ""; ?>">
-                                    <i class="fa fa-list nav-icon"></i>
-                                    <p>Listar Cobranças</p>
-                                </a>
-                            </li>
-                        </ul>
                     </li>
 
                     <li class="nav-item">
