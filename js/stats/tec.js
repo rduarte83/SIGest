@@ -1,4 +1,4 @@
-var ctx = $("#chart");
+var ctx = $("#chartT");
 var chart, url;
 
 function createDT() {
@@ -48,7 +48,7 @@ $(document).ready(function () {
         url: "/sigest/php/fetchChartTec.php",
         type: "post",
         success: function (dataResult) {
-            var dataResult = JSON.parse(dataResult);
+            dataResult = JSON.parse(dataResult);
             console.log(dataResult);
 
             chart = new Chart(ctx, {

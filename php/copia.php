@@ -97,13 +97,19 @@ if ($_POST['op'] == 'fetchContrato') {
 }
 
 if ($_POST['op'] == 'addCont') {
-    $query = "
-                UPDATE contagens 
-                    SET act_p=:cont_p, act_c=:cont_c, act_data=:data_cont 
+    $queryU = "
+                UPDATE contagens SET act_p=:cont_p, act_c=:cont_c, act_data=:data_cont 
                     WHERE contrato_id=:contrato_id ORDER BY id DESC LIMIT 1;
 		";
-    $statement = $conn->prepare($query);
-    $statement->execute(
+    $queryS = "
+                SELECT c.*, t.valor, t.inc, t.preco_p, t.preco_c FROM contagens c 
+                    INNER JOIN contratos t ON c.contrato_id=t.id 
+                    WHERE contrato_id=6 ORDER BY c.id DESC LIMIT 1;
+		";
+
+    // Update
+    $statementU = $conn->prepare($queryU);
+    $statementU->execute(
         array(
             ':contrato_id' => $_POST["contrato_id"],
             ':data_cont' => $_POST["data_cont"],
@@ -111,6 +117,31 @@ if ($_POST['op'] == 'addCont') {
             ':cont_c' => $_POST["cont_c"]
         )
     );
+
+    // Select
+    $statementS = $conn->prepare($queryS);
+    $statementS->execute(
+        array(
+            ':contrato_id' => $_POST["contrato_id"]
+        )
+    );
+    $result = $statementS->fetchAll();
+    $data = array();
+
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["ult_p"];
+        $sub_array[] = $row["ult_c"];
+        $sub_array[] = $row["valor"];
+        $sub_array[] = $row["inc"];
+        $sub_array[] = $row["preco_p"];
+        $sub_array[] = $row["preco_c"];
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
 }
 
 if ($_POST['op'] == 'addContFact') {
@@ -385,7 +416,6 @@ if ($_POST['op'] == 'addCopiaNP') {
         )
     );
 }
-
 
 if ($_POST['op'] == 'delCopia') {
     $query = "

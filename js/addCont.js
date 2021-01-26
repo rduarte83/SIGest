@@ -27,14 +27,12 @@ $("#fact").on('click', function () {
 $('#addFormC').on('submit', function (e) {
     e.preventDefault();
     $.ajax({
-        data: new FormData(this),
-        contentType: false,
-        processData: false,
-        type: "post",
-        url: "../php/copia.php",
-        success: function (dataResult) {
-            if ($("#op").val() == "addCont") window.location.href = "copia.php";
-            else {
+            data: new FormData(this),
+            contentType: false,
+            processData: false,
+            type: "post",
+            url: "../php/copia.php",
+            success: function (dataResult) {
                 var dataResult = JSON.parse(dataResult);
                 console.log(dataResult);
                 var contrato_id = $("#contrato option:selected").val()
@@ -47,9 +45,12 @@ $('#addFormC').on('submit', function (e) {
                 var preco_p = dataResult.data[0][4];
                 var preco_c = dataResult.data[0][5];
                 var total_p = (cont_p - ult_p - inc) * preco_p;
+                if (total_p < 0) total_p = 0;
+                console.log("Total_P: " + total_p);
                 var total_c = (cont_c - ult_c) * preco_c;
+                console.log("Total_C: " + total_c);
                 var total = Number(total_p) + Number(total_c);
-                if (total<0) total = 0;
+                if (total < 0) total = 0;
                 console.log("Total: " + total);
 
                 Swal.fire({
@@ -85,5 +86,5 @@ $('#addFormC').on('submit', function (e) {
                 }
             }
         }
-    });
+    );
 });

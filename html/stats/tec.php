@@ -10,6 +10,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="index.php">Início</a></li>
+                        <li class="breadcrumb-item active">Estatísticas</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -58,7 +59,7 @@
                     <div class="card">
                         <div class="card-body">
                             <!-- Insert Content Here -->
-                            <canvas id="chart"></canvas>
+                            <canvas id="chartT"></canvas>
                         </div>
                         <!-- /.card-body -->
                     </div>

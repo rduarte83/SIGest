@@ -35,7 +35,8 @@ document.addEventListener('DOMContentLoaded', function () {
         slotMaxTime: '19:00:00',
         resources: [
             {id: 'rui', building: 'Rui'},
-            {id: 'joao', building: 'João'}
+            {id: 'joao', building: 'João'},
+            {id: 'celso', building: 'Celso'}
         ],
         locale: 'pt-pt',
         weekends: false,
