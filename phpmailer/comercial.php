@@ -51,7 +51,7 @@ function comercialU($mail, $user)
         $table .= '</tr>';
     }
     $table .= '</tbody></table>';
-    echo $table;
+
     sendMail($mail, 'Eventos Pendentes', $table, $table);
 }
 
