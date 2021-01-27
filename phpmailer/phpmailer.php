@@ -16,12 +16,12 @@ function sendMail($recipient, $subject, $body, $altbody)
     $mail->CharSet = 'UTF-8';
     try {
         //Server settings
-        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
+        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                   // Enable verbose debug output
         $mail->isSMTP();                                         // Send using SMTP
         $mail->Host = 'mail.segimprima.pt';                      // Set the SMTP server to send through
         $mail->SMTPAuth = true;                                  // Enable SMTP authentication
         $mail->Username = 'sigest@segimprima.pt';                // SMTP username
-        $mail->Password = 'kGaO~pH[2qLv';                          // SMTP password
+        $mail->Password = '';                                    // SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;      // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
         $mail->Port = 587;                                       // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
