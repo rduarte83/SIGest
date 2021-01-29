@@ -11,9 +11,15 @@
     </ul>
     <ul class="navbar-nav ml-auto">
         <!-- Messages Dropdown Menu -->
+        <?php
+        if ($_SESSION["role"] == "admin") {
+        ?>
         <li class="nav-item">
-            <a class="nav-link" href="/sigest/html/password.php"> </a>
+            <a class="nav-link" id="penmail" href=#>Enviar Pendentes</a>
         </li>
+            <?php
+        }
+        ?>
         <li class="nav-item">
             <a class="nav-link" href="/sigest/html/logout.php">Terminar Sessão</a>
         </li>
@@ -287,3 +293,4 @@
         src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
 <!-- AdminLTE App -->
 <script type="text/javascript" src="/sigest/js/adminlte.min.js"></script>
+<script src="js/header.js"></script>
