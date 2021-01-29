@@ -1,31 +1,53 @@
-var ctx = $("#chartT");
+var ctx = $("#chart");
 var chart, url;
 
-function createDT() {
-    $("#table").DataTable({
+
+function createDTT() {
+    $("#tableT").DataTable({
         processing: true,
         ajax: {
             url: "/sigest/php/stats.php",
             type: "POST",
             data: {
-                op: "fetchTec",
+                op: "fetchAdmTec",
             }
         },
         paging: false,
         searching: false,
         bInfo: false,
         responsive: true,
-        autoWidth: false,
-        contentType: false,
+        autoWidth: true,
+        processData: false,
+        language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
+    });
+}
+
+function createDTC() {
+    $("#tableC").DataTable({
+        processing: true,
+        ajax: {
+            url: "/sigest/php/stats.php",
+            type: "POST",
+            data: {
+                op: "fetchAdmCom",
+            }
+        },
+        paging: false,
+        searching: false,
+        bInfo: false,
+        responsive: true,
+        autoWidth: true,
         processData: false,
         language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
     });
 }
 
 $(document).ready(function () {
-    createDT();
+    createDTT();
 
-    //Fetch Mes
+    createDTC();
+
+    //Fetch Mes Tec
     $.ajax({
         url: "/sigest/php/stats.php",
         type: "POST",
@@ -34,124 +56,90 @@ $(document).ready(function () {
         },
         success: function (dataResult) {
             var dataResult = JSON.parse(dataResult);
-            console.log(dataResult);
-            $("#periodo").html("");
-            $("#periodo").html('<option value="0">Todos</option>');
+            $("#periodoT").html("");
+            $("#periodoT").html('<option value="0">Todos</option>');
             $.each(dataResult, function () {
-                $("#periodo").append($("<option/>").val(this[0]).text(this[0]));
+                $("#periodoT").append($("<option/>").val(this[0]).text(this[0]));
             });
         }
     });
-
-    //Fetch Chart info
-    $.ajax({
-        url: "/sigest/php/fetchChartTec.php",
-        type: "post",
-        success: function (dataResult) {
-            dataResult = JSON.parse(dataResult);
-            console.log(dataResult);
-
-            chart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: dataResult.stats,
-                    datasets: [{
-                        data: dataResult.total,
-                        backgroundColor: [
-                            'orange',
-                            'blue',
-                            'cyan',
-                            'green',
-                            'red',
-                            'indigo',
-                            'pink',
-                            'yellow'
-                        ],
-                    }],
-                },
-                options: {
-                    plugins: {
-                        labels: {
-                            render: 'value',
-                            fontSize: 20,
-                            fontStyle: 'bold',
-                            fontColor: 'black',
-                        }
-                    },
-                    title: {
-                        display: true,
-                        text: 'Estatísticas dos Técnicos'
-                    },
-                    tooltips: {
-                        intersect: false
-                    },
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-            });
-        }
-    });
-
-    $("#periodo").on('change', function () {
-        if ($.fn.dataTable.isDataTable('#table')) {
-            $("#table").DataTable().destroy();
+    $("#periodoT").on('change', function () {
+        if ($.fn.dataTable.isDataTable('#tableT')) {
+            $("#tableT").DataTable().destroy();
         }
         ;
-        if ($("#periodo").val() == 0) {
-            createDT();
-            url = "/sigest/php/fetchChartTec.php";
-
+        if ($("#periodoT").val() == 0) {
+            createDTT();
         } else {
-            console.log( $("#periodo").val() );
-            url = "/sigest/php/fetchChartTecMes.php";
+            console.log($("#periodoT").val());
 
-            $("#table").DataTable({
+            $("#tableT").DataTable({
                 processing: true,
                 ajax: {
                     url: "/sigest/php/stats.php",
                     type: "POST",
                     data: {
-                        op: "fetchTecS",
-                        mes: $("#periodo").val()
+                        op: "fetchAdmTecS",
+                        mes: $("#periodoT").val()
                     }
                 },
                 paging: false,
                 searching: false,
                 bInfo: false,
                 responsive: true,
-                autoWidth: false,
+                autoWidth: true,
                 contentType: false,
                 processData: false,
                 language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
             });
         }
-
-        $.ajax({
-            url: url,
-            type: "post",
-            data: {
-                mes: $("#periodo").val()
-            },
-            success: function (dataResult) {
-                var dataResult = JSON.parse(dataResult);
-                console.log(dataResult);
-                chart.data.labels = dataResult.stats;
-                chart.data.datasets.forEach((dataset) => {
-                    dataset.data = dataResult.total;
-                });
-                chart.update();
-            }
-        })
     });
 
-
-
-
+    //Fetch Mes Com
+    $.ajax({
+        url: "/sigest/php/stats.php",
+        type: "POST",
+        data: {
+            op: 'fetchMesC'
+        },
+        success: function (dataResult) {
+            var dataResult = JSON.parse(dataResult);
+            $("#periodoC").html("");
+            $("#periodoC").html('<option value="0">Todos</option>');
+            $.each(dataResult, function () {
+                $("#periodoC").append($("<option/>").val(this[0]).text(this[0]));
+            });
+        }
+    });
+    $("#periodoC").on('change', function () {
+        if ($.fn.dataTable.isDataTable('#tableC')) {
+            $("#tableC").DataTable().destroy();
+        }
+        ;
+        if ($("#periodoC").val() == 0) {
+            createDTC();
+        } else {
+            $("#tableC").DataTable({
+                processing: true,
+                ajax: {
+                    url: "/sigest/php/stats.php",
+                    type: "POST",
+                    data: {
+                        op: "fetchAdmComS",
+                        mes: $("#periodoC").val()
+                    }
+                },
+                paging: false,
+                searching: false,
+                bInfo: false,
+                responsive: true,
+                autoWidth: true,
+                contentType: false,
+                processData: false,
+                language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
+            });
+        }
+    });
 
     $.ajax({
         url: "/sigest/php/fetchChart.php",
@@ -166,8 +154,8 @@ $(document).ready(function () {
                 type: 'bar',
                 options: {
                     title: {
-                      display: true,
-                      text: 'Vendas por Comercial',
+                        display: true,
+                        text: 'Vendas por Comercial',
                     },
                     plugins: {
                         labels: {
@@ -185,7 +173,6 @@ $(document).ready(function () {
             addData(barChart, 'tiago', '#0000ff');
         }
     });
-
 });
 
 function addData(chart, label, color) {
@@ -198,7 +185,6 @@ function addData(chart, label, color) {
         },
         success: function (dataResult) {
             dataResult = JSON.parse(dataResult);
-            console.log(dataResult);
             chart.data.datasets.push({
                 label: label,
                 backgroundColor: color,

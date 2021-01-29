@@ -17,7 +17,6 @@ if ($_POST['op'] == 'fetchStats') {
                     INNER JOIN clientes c ON v.cliente_id=c.nif
                     INNER JOIN motivos m ON v.motivo_id=m.id
                     WHERE v.ult_vis_end >= v.updated AND vendedor=:c) AS eventos
-
                 ";
 
     $statement = $conn->prepare($query);
@@ -33,8 +32,6 @@ if ($_POST['op'] == 'fetchStats') {
         $sub_array[] = $row["contactos"];
         $sub_array[] = $row["entregas"];
         $sub_array[] = $row["clientes"];
-        if (is_null($row["valor"])) $row["valor"] = 0;
-        $sub_array[] = $row["valor"];
         $sub_array[] = $row["eventos"];
         $data[] = $sub_array;
     }
@@ -87,7 +84,26 @@ if ($_POST['op'] == 'fetchStatsS') {
     echo json_encode($output);
 }
 
-if ($_POST['op'] == 'fetchMes') {
+if ($_POST['op'] == 'fetchMesT') {
+    $output = array();
+    $query = "
+        SELECT DISTINCT(EXTRACT(YEAR_MONTH FROM data_i)) AS YM FROM assistencias ORDER BY YM 
+        ";
+
+    $statement = $conn->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $data = array();
+
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["YM"];
+        $data[] = $sub_array;
+    }
+    echo json_encode($data);
+}
+
+if ($_POST['op'] == 'fetchMesC') {
     $output = array();
     $query = "
         SELECT DISTINCT(EXTRACT(YEAR_MONTH FROM ult_vis)) AS YM FROM visitas ORDER BY YM 
@@ -167,8 +183,7 @@ if ($_POST['op'] == 'fetchTec') {
             (SELECT COUNT(id) FROM assistencias WHERE motivo='Assistência de Software' AND facturado='Sim' AND factura>0 AND tecnico=:t) AS factSW,
             (SELECT COUNT(id) FROM assistencias WHERE motivo='Manutenção' AND tecnico=:t) AS manut,
             (SELECT COUNT(id) FROM assistencias WHERE motivo='Instalação de Impressora a Contrato' AND tecnico=:t) AS instImp,
-            (SELECT COUNT(id) FROM assistencias WHERE motivo='Instalação de Software' AND tecnico=:t) AS instSW,
-            (SELECT SUM(valor) FROM vendas WHERE comercial=:c ) AS valor 
+            (SELECT COUNT(id) FROM assistencias WHERE motivo='Instalação de Software' AND tecnico=:t) AS instSW 
                 ";
 
     $statement = $conn->prepare($query);
@@ -189,7 +204,6 @@ if ($_POST['op'] == 'fetchTec') {
         $sub_array[] = $row["manut"];
         $sub_array[] = $row["instImp"];
         $sub_array[] = $row["instSW"];
-        $sub_array[] = $row["valor"];
         $data[] = $sub_array;
     }
     $output = array(
@@ -240,10 +254,9 @@ if ($_POST['op'] == 'fetchTecS') {
     echo json_encode($output);
 }
 
-if ($_POST['op'] == 'fetchMesT') {
-    $output = array();
+if ($_POST['op'] == 'fetchAdmTec') {
     $query = "
-        SELECT DISTINCT(EXTRACT(YEAR_MONTH FROM data_i)) AS YM FROM assistencias ORDER BY YM 
+        SELECT * FROM users WHERE role='tecnico'
         ";
 
     $statement = $conn->prepare($query);
@@ -253,10 +266,173 @@ if ($_POST['op'] == 'fetchMesT') {
 
     foreach ($result as $row) {
         $sub_array = array();
-        $sub_array[] = $row["YM"];
-        $data[] = $sub_array;
+        $query = "SELECT
+            (SELECT '" . $row["username"] . "') AS tecnico,
+            (SELECT COUNT(id) FROM assistencias WHERE motivo='Assistência de Hardware' AND tecnico=" . $row["id"] . ") AS assHW,
+            (SELECT COUNT(id) FROM assistencias WHERE motivo='Assistência de Software' AND tecnico=" . $row["id"] . ") AS assSW,
+            (SELECT COUNT(id) FROM assistencias WHERE motivo='Assistência de Hardware' AND facturado='Sim' AND factura>0 AND tecnico=" . $row["id"] . ") AS factHW,
+            (SELECT COUNT(id) FROM assistencias WHERE motivo='Assistência de Software' AND facturado='Sim' AND factura>0 AND tecnico=" . $row["id"] . ") AS factSW,
+            (SELECT COUNT(id) FROM assistencias WHERE motivo='Manutenção' AND tecnico=" . $row["id"] . ") AS manut,
+            (SELECT COUNT(id) FROM assistencias WHERE motivo='Instalação de Impressora a Contrato' AND tecnico=" . $row["id"] . ") AS instImp,
+            (SELECT COUNT(id) FROM assistencias WHERE motivo='Instalação de Software' AND tecnico=" . $row["id"] . ") AS instSW 
+                ";
+        $statement = $conn->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        foreach ($result as $row) {
+            $sub_array[] = $row["tecnico"];
+            $sub_array[] = $row["assHW"];
+            $sub_array[] = $row["assSW"];
+            $sub_array[] = $row["factHW"];
+            $sub_array[] = $row["factSW"];
+            $sub_array[] = $row["manut"];
+            $sub_array[] = $row["instImp"];
+            $sub_array[] = $row["instSW"];
+            $data[] = $sub_array;
+        }
     }
-    echo json_encode($data);
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
+if ($_POST['op'] == 'fetchAdmTecS') {
+    $query = "
+        SELECT * FROM users WHERE role='tecnico'
+        ";
+
+    $statement = $conn->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $data = array();
+
+    foreach ($result as $row) {
+        $sub_array = array();
+        $query = "SELECT
+            (SELECT '" . $row["username"] . "') AS tecnico,
+            (SELECT COUNT(id) FROM assistencias WHERE motivo='Assistência de Hardware' AND EXTRACT(YEAR_MONTH FROM data_i)=:mes AND tecnico=" . $row["id"] . ") AS assHW,
+            (SELECT COUNT(id) FROM assistencias WHERE motivo='Assistência de Software' AND EXTRACT(YEAR_MONTH FROM data_i)=:mes AND tecnico=" . $row["id"] . ") AS assSW,
+            (SELECT COUNT(id) FROM assistencias WHERE motivo='Assistência de Hardware' AND EXTRACT(YEAR_MONTH FROM data_i)=:mes AND facturado='Sim' AND factura>0 AND tecnico=" . $row["id"] . ") AS factHW,
+            (SELECT COUNT(id) FROM assistencias WHERE motivo='Assistência de Software' AND EXTRACT(YEAR_MONTH FROM data_i)=:mes AND facturado='Sim' AND factura>0 AND tecnico=" . $row["id"] . ") AS factSW,
+            (SELECT COUNT(id) FROM assistencias WHERE motivo='Manutenção' AND EXTRACT(YEAR_MONTH FROM data_i)=:mes AND tecnico=" . $row["id"] . ") AS manut,
+            (SELECT COUNT(id) FROM assistencias WHERE motivo='Instalação de Impressora a Contrato' AND tecnico=" . $row["id"] . ") AS instImp,
+            (SELECT COUNT(id) FROM assistencias WHERE motivo='Instalação de Software' AND tecnico=" . $row["id"] . ") AS instSW 
+                ";
+        $statement = $conn->prepare($query);
+        $statement->execute(
+            array(
+                ':mes' => $_POST["mes"]
+            )
+        );
+        $result = $statement->fetchAll();
+        foreach ($result as $row) {
+            $sub_array[] = $row["tecnico"];
+            $sub_array[] = $row["assHW"];
+            $sub_array[] = $row["assSW"];
+            $sub_array[] = $row["factHW"];
+            $sub_array[] = $row["factSW"];
+            $sub_array[] = $row["manut"];
+            $sub_array[] = $row["instImp"];
+            $sub_array[] = $row["instSW"];
+            $data[] = $sub_array;
+        }
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+if ($_POST['op'] == 'fetchAdmCom') {
+    $query = "
+        SELECT * FROM users WHERE role='comercial'
+        ";
+
+    $statement = $conn->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $data = array();
+
+    foreach ($result as $row) {
+        $sub_array = array();
+        $query = "SELECT
+					 (SELECT '" . $row["username"] . "') AS comercial,
+                (SELECT COUNT(vis) AS apresentacao FROM 
+                    (SELECT MIN(ult_vis) AS vis FROM visitas 
+                    WHERE motivo_id=1 AND vendedor='" . $row["username"] . "' GROUP BY cliente_id) AS X) AS contactos,
+                (SELECT COUNT(cliente_id) FROM visitas 
+                    WHERE motivo_id=8 AND vendedor='" . $row["username"] . "') AS entregas,
+                (SELECT COUNT(DISTINCT cliente_id) FROM visitas 
+                    WHERE motivo_id=8 AND vendedor='" . $row["username"] . "')  AS clientes,
+                (SELECT COUNT(v.id) FROM visitas v 
+                    INNER JOIN clientes c ON v.cliente_id=c.nif
+                    INNER JOIN motivos m ON v.motivo_id=m.id
+                    WHERE v.ult_vis_end >= v.updated AND vendedor='" . $row["username"] . "') AS eventos
+                ";
+        $statement = $conn->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        foreach ($result as $row) {
+            $sub_array[] = $row["comercial"];
+            $sub_array[] = $row["contactos"];
+            $sub_array[] = $row["entregas"];
+            $sub_array[] = $row["clientes"];
+            $sub_array[] = $row["eventos"];
+            $data[] = $sub_array;
+        }
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
+if ($_POST['op'] == 'fetchAdmComS') {
+    $query = "
+        SELECT * FROM users WHERE role='comercial'
+        ";
+
+    $statement = $conn->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $data = array();
+
+    foreach ($result as $row) {
+        $sub_array = array();
+        $query = "SELECT
+					 (SELECT '" . $row["username"] . "') AS comercial,
+                (SELECT COUNT(vis) AS apresentacao FROM 
+                    (SELECT MIN(ult_vis) AS vis FROM visitas 
+                    WHERE motivo_id=1 AND EXTRACT(YEAR_MONTH FROM ult_vis)=:mes AND vendedor='" . $row["username"] . "' GROUP BY cliente_id) AS X) AS contactos,
+                (SELECT COUNT(cliente_id) FROM visitas 
+                    WHERE motivo_id=8 AND EXTRACT(YEAR_MONTH FROM ult_vis)=:mes AND vendedor='" . $row["username"] . "') AS entregas,
+                (SELECT COUNT(DISTINCT cliente_id) FROM visitas 
+                    WHERE motivo_id=8 AND EXTRACT(YEAR_MONTH FROM ult_vis)=:mes AND vendedor='" . $row["username"] . "')  AS clientes,
+                (SELECT COUNT(v.id) FROM visitas v 
+                    INNER JOIN clientes c ON v.cliente_id=c.nif
+                    INNER JOIN motivos m ON v.motivo_id=m.id
+                    WHERE v.ult_vis_end >= v.updated AND EXTRACT(YEAR_MONTH FROM ult_vis)=:mes AND vendedor='" . $row["username"] . "') AS eventos
+                ";
+        $statement = $conn->prepare($query);
+        $statement->execute(
+            array(
+                ':mes' => $_POST["mes"]
+            )
+        );
+        $result = $statement->fetchAll();
+        foreach ($result as $row) {
+            $sub_array[] = $row["comercial"];
+            $sub_array[] = $row["contactos"];
+            $sub_array[] = $row["entregas"];
+            $sub_array[] = $row["clientes"];
+            $sub_array[] = $row["eventos"];
+            $data[] = $sub_array;
+        }
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
 }
 
 if ($_POST['op'] == 'fetchStatsAdm') {

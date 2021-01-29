@@ -46,7 +46,6 @@
                                 <th>Manutenções</th>
                                 <th>Instalações Imp</th>
                                 <th>Instalações SW</th>
-                                <th>Vendas</th>
                                 </thead>
                                 <tbody>
                                 </tbody>

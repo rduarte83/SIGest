@@ -23,55 +23,69 @@
             <div class="row">
                 <div class="col-6">
                     <div class="card">
+                        <div class="card-header text-bold">Comerciais</div>
                         <div class="card-body">
-                            <!-- Insert Content Here -->
-                            <canvas id="chart"></canvas>
+                            <div class="card">
+                                <div class="card-body">
+                                    <canvas id="chart"></canvas>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <label class="col-form-label">Seleccionar Mês</label class="col-form-label">
+                                    <select class="custom-select form-control" id="periodoC" name="periodo" required>
+                                    </select>
+                                </div>
+                                <div class="card-body">
+                                    <table id="tableC" class="table table-bordered table-hover">
+                                        <thead>
+                                        <th>Comercial</th>
+                                        <th>Contactos</th>
+                                        <th>Entregas</th>
+                                        <th>Clientes</th>
+                                        <th>Eventos</th>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
-                        <!-- /.card-body -->
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="card">
+                        <div class="card-header text-bold">Técnicos</div>
                         <div class="card-body">
-                            <label class="col-form-label">Seleccionar Mês</label>
-                            <select class="custom-select form-control" id="periodo" name="periodo" required>
-                            </select>
+                            <div class="card">
+                                <div class="card-header">
+                                    <label class="col-form-label">Seleccionar Mês</label>
+                                    <select class="custom-select form-control" id="periodoT" name="periodo" required>
+                                    </select>
+                                </div>
+                                <div class="card-body">
+                                    <table id="tableT" class="table table-bordered table-hover">
+                                        <thead>
+                                        <th>Técnico</th>
+                                        <th>Assist HW</th>
+                                        <th>Assist SW</th>
+                                        <th>Assist HW Fact</th>
+                                        <th>Assist SW Fact</th>
+                                        <th>Manutenções</th>
+                                        <th>Instalações Impressoras</th>
+                                        <th>Instalações SW</th>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <table id="table" class="table table-bordered table-hover">
-                                <thead>
-                                <th>Assist HW</th>
-                                <th>Assist SW</th>
-                                <th>Assist HW Fact</th>
-                                <th>Assist SW Fact</th>
-                                <th>Manutenções</th>
-                                <th>Instalações Imp</th>
-                                <th>Instalações SW</th>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <!-- Insert Content Here -->
-                            <canvas id="chartT"></canvas>
-                        </div>
-                        <!-- /.card-body -->
                     </div>
                 </div>
             </div>
         </div>
-        <!-- /.row -->
-</div>
-</div>
-<!-- /.container-fluid -->
-</section>
-<!-- /.content -->
+    </section>
 </div>
 
 <script src="js/stats/admin.js"></script>
