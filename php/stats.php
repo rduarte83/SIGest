@@ -343,6 +343,7 @@ if ($_POST['op'] == 'fetchAdmTecS') {
     );
     echo json_encode($output);
 }
+
 if ($_POST['op'] == 'fetchAdmCom') {
     $query = "
         SELECT * FROM users WHERE role='comercial'
@@ -435,28 +436,23 @@ if ($_POST['op'] == 'fetchAdmComS') {
     echo json_encode($output);
 }
 
-if ($_POST['op'] == 'fetchStatsAdm') {
+if ($_POST['op'] == 'fetchAdmPenCom') {
     $output = array();
-    $query = "SELECT
-            (SELECT COUNT(id) FROM cobrancas WHERE motivo='Cobrança' AND estado='Concluido') AS cobrancas,
-            (SELECT COUNT(id) FROM cobrancas WHERE motivo='Acompanhamento') AS acompanhamento,
-            (SELECT SUM(valor) FROM vendas WHERE comercial=:c) AS valor
+    $query = "
+            SELECT v.vendedor, v.ult_vis, c.cliente, m.motivo FROM visitas v 
+                INNER JOIN clientes c ON v.cliente_id=c.nif INNER JOIN motivos m ON v.motivo_id=m.id 
+                WHERE v.descricao='' ORDER BY ult_vis
                 ";
-
     $statement = $conn->prepare($query);
-    $statement->execute(
-        array(
-            ':c' => $_SESSION["username"]
-        )
-    );
+    $statement->execute();
     $result = $statement->fetchAll();
     $data = array();
     foreach ($result as $row) {
         $sub_array = array();
-        $sub_array[] = $row["cobrancas"];
-        $sub_array[] = $row["acompanhamento"];
-        if (is_null($row["valor"])) $row["valor"] = 0;
-        $sub_array[] = $row["valor"];
+        $sub_array[] = $row["vendedor"];
+        $sub_array[] = $row["ult_vis"];
+        $sub_array[] = $row["cliente"];
+        $sub_array[] = $row["motivo"];
         $data[] = $sub_array;
     }
     $output = array(
@@ -465,29 +461,74 @@ if ($_POST['op'] == 'fetchStatsAdm') {
     echo json_encode($output);
 }
 
-if ($_POST['op'] == 'fetchStatsAdmMes') {
+if ($_POST['op'] == 'fetchAdmPenTec') {
     $output = array();
-    $query = "SELECT
-            (SELECT COUNT(id) FROM cobrancas WHERE motivo='Cobrança' AND estado='Concluido' AND EXTRACT(YEAR_MONTH FROM data)=:mes ) AS cobrancas,
-            (SELECT COUNT(id) FROM cobrancas WHERE motivo='Acompanhamento' AND EXTRACT(YEAR_MONTH FROM data)=:mes) AS acompanhamento,
-            (SELECT SUM(valor) FROM vendas WHERE comercial=:c AND EXTRACT(YEAR_MONTH FROM mes)=:mes) AS valor
+    $query = "
+            SELECT u.username, a.data_i, c.cliente, a.motivo, a.local, a.problema FROM assistencias a INNER JOIN 
+                clientes c ON a.cliente_id=c.nif INNER JOIN users u ON a.tecnico=u.id 
+                WHERE DATE(data_i) <= DATE(NOW()) AND a.estado='Pendente' 
+                ORDER BY a.data_i
                 ";
-
     $statement = $conn->prepare($query);
-    $statement->execute(
-        array(
-            ':c' => $_SESSION["username"],
-            ':mes' => $_POST["mes"]
-        )
-    );
+    $statement->execute();
     $result = $statement->fetchAll();
     $data = array();
     foreach ($result as $row) {
         $sub_array = array();
-        $sub_array[] = $row["cobrancas"];
-        $sub_array[] = $row["acompanhamento"];
-        if (is_null($row["valor"])) $row["valor"] = 0;
-        $sub_array[] = $row["valor"];
+        $sub_array[] = $row["username"];
+        $sub_array[] = $row["data_i"];
+        $sub_array[] = $row["cliente"];
+        $sub_array[] = $row["motivo"];
+        $sub_array[] = $row["local"];
+        $sub_array[] = $row["problema"];
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
+if ($_POST['op'] == 'fetchAdmPenCob') {
+    $output = array();
+    $query = "
+            SELECT c.*, cli.cliente FROM cobrancas c INNER JOIN clientes cli ON c.cliente_id=cli.nif 
+                WHERE estado = 'Pendente'
+                ";
+    $statement = $conn->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $data = array();
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["cliente"];
+        $sub_array[] = $row["data"];
+        $sub_array[] = $row["motivo"];
+        $sub_array[] = $row["descricao"];
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
+if ($_POST['op'] == 'fetchAdmPenRma') {
+    $output = array();
+    $query = "
+            SELECT r.*, c.cliente FROM rmas r INNER JOIN clientes c ON r.cliente_id=c.nif 
+                WHERE estado = 'Pendente'
+                ";
+    $statement = $conn->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $data = array();
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["cliente"];
+        $sub_array[] = $row["data_e"];
+        $sub_array[] = $row["produto"];
+        $sub_array[] = $row["motivo"];
         $data[] = $sub_array;
     }
     $output = array(

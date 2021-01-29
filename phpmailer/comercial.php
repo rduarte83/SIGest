@@ -3,7 +3,7 @@ function comercial($mail)
 {
     require '../php/db.php';
     $query = "
-                SELECT v.ult_vis, c.cliente, m.motivo, v.vendedor FROM visitas v 
+                SELECT v.vendedor, v.ult_vis, c.cliente, m.motivo FROM visitas v 
                     INNER JOIN clientes c ON v.cliente_id=c.nif INNER JOIN motivos m ON v.motivo_id=m.id 
                     WHERE v.descricao='' 
                     ORDER BY ult_vis

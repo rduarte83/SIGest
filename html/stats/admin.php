@@ -1,35 +1,35 @@
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0 text-dark">Estatísticas</h1>
-                </div><!-- /.col -->
+                </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="index.php">Início</a></li>
                         <li class="breadcrumb-item active">Estatísticas</li>
                     </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <canvas id="chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-6">
                     <div class="card">
                         <div class="card-header text-bold">Comerciais</div>
                         <div class="card-body">
-                            <div class="card">
-                                <div class="card-body">
-                                    <canvas id="chart"></canvas>
-                                </div>
-                            </div>
                             <div class="card">
                                 <div class="card-header">
                                     <label class="col-form-label">Seleccionar Mês</label class="col-form-label">
@@ -44,6 +44,21 @@
                                         <th>Entregas</th>
                                         <th>Clientes</th>
                                         <th>Eventos</th>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header text-bold">Eventos Pendentes</div>
+                                <div class="card-body">
+                                    <table id="tableCP" class="table table-bordered table-hover">
+                                        <thead>
+                                        <th>Comercial</th>
+                                        <th>Data</th>
+                                        <th>Cliente</th>
+                                        <th>Motivo</th>
                                         </thead>
                                         <tbody>
                                         </tbody>
@@ -80,6 +95,57 @@
                                     </table>
                                 </div>
                             </div>
+                            <div class="card">
+                                <div class="card-header text-bold">Assistências Pendentes</div>
+                                <div class="card-body">
+                                    <table id="tableTP" class="table table-bordered table-hover">
+                                        <thead>
+                                        <th>Comercial</th>
+                                        <th>Data</th>
+                                        <th>Cliente</th>
+                                        <th>Motivo</th>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header text-bold">Cobranças Pendentes</div>
+                        <div class="card-body">
+                            <table id="tableCobP" class="table table-bordered table-hover">
+                                <thead>
+                                <th>Cliente</th>
+                                <th>Data</th>
+                                <th>Motivo</th>
+                                <th>Descrição</th>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header text-bold">RMAs Pendentes</div>
+                        <div class="card-body">
+                            <table id="tableRmaP" class="table table-bordered table-hover">
+                                <thead>
+                                <th>Cliente</th>
+                                <th>Data</th>
+                                <th>Motivo</th>
+                                <th>Descrição</th>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

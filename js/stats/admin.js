@@ -1,7 +1,6 @@
 var ctx = $("#chart");
 var chart, url;
 
-
 function createDTT() {
     $("#tableT").DataTable({
         processing: true,
@@ -16,7 +15,7 @@ function createDTT() {
         searching: false,
         bInfo: false,
         responsive: true,
-        autoWidth: true,
+        autoWidth: false,
         processData: false,
         language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
     });
@@ -36,18 +35,118 @@ function createDTC() {
         searching: false,
         bInfo: false,
         responsive: true,
-        autoWidth: true,
+        autoWidth: false,
         processData: false,
         language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
     });
 }
 
+function createDTCP() {
+    $("#tableCP").DataTable({
+        processing: true,
+        ajax: {
+            url: "/sigest/php/stats.php",
+            type: "POST",
+            data: {
+                op: "fetchAdmPenCom",
+            }
+        },
+        searching: false,
+        responsive: true,
+        autoWidth: false,
+        contentType: false,
+        processData: false,
+        lengthChange: false,
+
+        language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
+    });
+}
+
+function createDTTP() {
+    $("#tableTP").DataTable({
+        processing: true,
+        ajax: {
+            url: "/sigest/php/stats.php",
+            type: "POST",
+            data: {
+                op: "fetchAdmPenTec",
+            }
+        },
+        searching: false,
+        responsive: true,
+        autoWidth: false,
+        contentType: false,
+        processData: false,
+        lengthChange: false,
+
+        language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
+    });
+}
+
+function createDTCobP() {
+    $("#tableCobP").DataTable({
+        processing: true,
+        ajax: {
+            url: "/sigest/php/stats.php",
+            type: "POST",
+            data: {
+                op: "fetchAdmPenCob",
+            }
+        },
+        searching: false,
+        responsive: true,
+        autoWidth: false,
+        contentType: false,
+        processData: false,
+        lengthChange: false,
+        language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
+    });
+}
+
+function createDTRmaP() {
+    $("#tableRmaP").DataTable({
+        processing: true,
+        ajax: {
+            url: "/sigest/php/stats.php",
+            type: "POST",
+            data: {
+                op: "fetchAdmPenRma",
+            }
+        },
+        searching: false,
+        responsive: true,
+        autoWidth: false,
+        contentType: false,
+        processData: false,
+        lengthChange: false,
+
+        language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
+    });
+}
+
+function addData(chart, label, color) {
+    $.ajax({
+        url: "/sigest/php/fetchChart.php",
+        type: "post",
+        data: {
+            'op': 'data',
+            'com': label
+        },
+        success: function (dataResult) {
+            dataResult = JSON.parse(dataResult);
+            chart.data.datasets.push({
+                label: label,
+                backgroundColor: color,
+                data: dataResult
+            });
+            chart.update();
+        }
+    });
+};
+
 $(document).ready(function () {
+    //Stats Tec
     createDTT();
-
-    createDTC();
-
-    //Fetch Mes Tec
     $.ajax({
         url: "/sigest/php/stats.php",
         type: "POST",
@@ -87,7 +186,7 @@ $(document).ready(function () {
                 searching: false,
                 bInfo: false,
                 responsive: true,
-                autoWidth: true,
+                autoWidth: false,
                 contentType: false,
                 processData: false,
                 language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
@@ -95,7 +194,8 @@ $(document).ready(function () {
         }
     });
 
-    //Fetch Mes Com
+    //Stats Com
+    createDTC();
     $.ajax({
         url: "/sigest/php/stats.php",
         type: "POST",
@@ -140,7 +240,6 @@ $(document).ready(function () {
             });
         }
     });
-
     $.ajax({
         url: "/sigest/php/fetchChart.php",
         type: "post",
@@ -173,24 +272,13 @@ $(document).ready(function () {
             addData(barChart, 'tiago', '#0000ff');
         }
     });
-});
 
-function addData(chart, label, color) {
-    $.ajax({
-        url: "/sigest/php/fetchChart.php",
-        type: "post",
-        data: {
-            'op': 'data',
-            'com': label
-        },
-        success: function (dataResult) {
-            dataResult = JSON.parse(dataResult);
-            chart.data.datasets.push({
-                label: label,
-                backgroundColor: color,
-                data: dataResult
-            });
-            chart.update();
-        }
-    });
-};
+    //Pen Tecnicos
+    createDTCP();
+    //Pen Comerciais
+    createDTTP();
+    //Pen Cobrancas
+    createDTCobP();
+    //Pen RMAs
+    createDTRmaP();
+});
