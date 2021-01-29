@@ -30,7 +30,7 @@ $(document).ready(function () {
         url: "/sigest/php/stats.php",
         type: "POST",
         data: {
-            op: 'fetchMes'
+            op: 'fetchMesC'
         },
         success: function (dataResult) {
             var dataResult = JSON.parse(dataResult);

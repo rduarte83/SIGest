@@ -4,6 +4,7 @@ include_once 'comercial.php';
 include_once 'phpmailer.php';
 
 tecnica('geral@segimprima.com');
+tecnica('comercial@segimprima.pt');
 tecnicaU('joao@segimprima.pt', 'joao');
 tecnicaU('celso@segimprima.pt', 'celso');
 tecnicaU('rui@segimprima.pt', 'rui');

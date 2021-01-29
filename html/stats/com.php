@@ -34,7 +34,6 @@
                                 <th>Novos Contactos</th>
                                 <th>Num Vendas</th>
                                 <th>Novos Clientes</th>
-                                <th>Valor Vendas</th>
                                 <th>Eventos Pendentes</th>
                                 </thead>
                                 <tbody>

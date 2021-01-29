@@ -12,7 +12,6 @@ if ($_POST['op'] == 'fetchStats') {
                     WHERE motivo_id=8 AND vendedor=:c) AS entregas,
                 (SELECT COUNT(DISTINCT cliente_id) FROM visitas 
                     WHERE motivo_id=8 AND vendedor=:c)  AS clientes,
-                (SELECT SUM(valor) FROM VENDAS WHERE comercial=:c) AS valor,
                 (SELECT COUNT(v.id) FROM visitas v 
                     INNER JOIN clientes c ON v.cliente_id=c.nif
                     INNER JOIN motivos m ON v.motivo_id=m.id

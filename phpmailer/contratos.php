@@ -3,12 +3,11 @@ function comercial($mail)
 {
     require '../php/db.php';
     $query = "
-        SELECT v.*, c.cliente, m.motivo FROM visitas v  
-            INNER JOIN clientes c ON v.cliente_id=c.nif
-            INNER JOIN motivos m ON v.motivo_id=m.id
-            WHERE v.ult_vis_end >= v.updated ORDER BY ult_vis
-            ";
-
+                SELECT v.vendedor, v.ult_vis, c.cliente, m.motivo FROM visitas v 
+                    INNER JOIN clientes c ON v.cliente_id=c.nif INNER JOIN motivos m ON v.motivo_id=m.id 
+                    WHERE v.descricao='' 
+                    ORDER BY ult_vis
+                ";
     $statement = $conn->prepare($query);
     $statement->execute();
     $result = $statement->fetchAll();
@@ -32,10 +31,9 @@ function comercialU($mail, $user)
 {
     require '../php/db.php';
     $query = "
-                SELECT v.*, c.cliente, m.motivo FROM visitas v  
-                    INNER JOIN clientes c ON v.cliente_id=c.nif
-                    INNER JOIN motivos m ON v.motivo_id=m.id
-                    WHERE v.ult_vis_end >= v.updated AND vendedor=" . "'" . $user . "' 
+                SELECT v.ult_vis, c.cliente, m.motivo, v.vendedor FROM visitas v 
+                    INNER JOIN clientes c ON v.cliente_id=c.nif INNER JOIN motivos m ON v.motivo_id=m.id 
+                    WHERE v.descricao='' AND vendedor=" . "'" . $user . "' 
                     ORDER BY ult_vis
                 ";
     $statement = $conn->prepare($query);
@@ -56,5 +54,3 @@ function comercialU($mail, $user)
 
     sendMail($mail, 'Eventos Pendentes', $table, $table);
 }
-
-
