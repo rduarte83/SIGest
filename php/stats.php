@@ -460,6 +460,35 @@ if ($_POST['op'] == 'fetchAdmPenCom') {
     echo json_encode($output);
 }
 
+if ($_POST['op'] == 'fetchAdmPenComS') {
+    $output = array();
+    $query = "
+            SELECT v.vendedor, v.ult_vis, c.cliente, m.motivo FROM visitas v 
+                INNER JOIN clientes c ON v.cliente_id=c.nif INNER JOIN motivos m ON v.motivo_id=m.id 
+                WHERE v.descricao='' AND vendedor = :user
+                ";
+    $statement = $conn->prepare($query);
+    $statement->execute(
+        array(
+            ':user' => $_POST["user"]
+        )
+    );
+    $result = $statement->fetchAll();
+    $data = array();
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["vendedor"];
+        $sub_array[] = $row["ult_vis"];
+        $sub_array[] = $row["cliente"];
+        $sub_array[] = $row["motivo"];
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
 if ($_POST['op'] == 'fetchAdmPenTec') {
     $output = array();
     $query = "
@@ -470,6 +499,37 @@ if ($_POST['op'] == 'fetchAdmPenTec') {
                 ";
     $statement = $conn->prepare($query);
     $statement->execute();
+    $result = $statement->fetchAll();
+    $data = array();
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["username"];
+        $sub_array[] = $row["data_i"];
+        $sub_array[] = $row["cliente"];
+        $sub_array[] = $row["motivo"];
+        $sub_array[] = $row["local"];
+        $sub_array[] = $row["problema"];
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
+if ($_POST['op'] == 'fetchAdmPenTecS') {
+    $output = array();
+    $query = "
+            SELECT u.username, a.data_i, c.cliente, a.motivo, a.local, a.problema FROM assistencias a INNER JOIN 
+                clientes c ON a.cliente_id=c.nif INNER JOIN users u ON a.tecnico=u.id 
+                WHERE DATE(data_i) <= DATE(NOW()) AND a.estado='Pendente' AND u.id = :user 
+                ";
+    $statement = $conn->prepare($query);
+    $statement->execute(
+        array(
+            ':user' => $_POST["user"]
+        )
+    );
     $result = $statement->fetchAll();
     $data = array();
     foreach ($result as $row) {

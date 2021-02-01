@@ -33,7 +33,7 @@
                             <div class="card">
                                 <div class="card-header">
                                     <label class="col-form-label">Seleccionar Mês</label class="col-form-label">
-                                    <select class="custom-select form-control" id="periodoC" name="periodo" required>
+                                    <select class="custom-select form-control" id="periodoMC" name="periodo" required>
                                     </select>
                                 </div>
                                 <div class="card-body">
@@ -52,17 +52,24 @@
                             </div>
                             <div class="card">
                                 <div class="card-header text-bold">Eventos Pendentes</div>
-                                <div class="card-body">
-                                    <table id="tableCP" class="table table-bordered table-hover">
-                                        <thead>
-                                        <th>Comercial</th>
-                                        <th>Data</th>
-                                        <th>Cliente</th>
-                                        <th>Motivo</th>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <label class="col-form-label">Seleccionar Comercial</label class="col-form-label">
+                                        <select class="custom-select form-control" id="periodoC" name="periodo" required>
+                                        </select>
+                                    </div>
+                                    <div class="card-body">
+                                        <table id="tableCP" class="table table-bordered table-hover">
+                                            <thead>
+                                            <th>Comercial</th>
+                                            <th>Data</th>
+                                            <th>Cliente</th>
+                                            <th>Motivo</th>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -75,7 +82,7 @@
                             <div class="card">
                                 <div class="card-header">
                                     <label class="col-form-label">Seleccionar Mês</label>
-                                    <select class="custom-select form-control" id="periodoT" name="periodo" required>
+                                    <select class="custom-select form-control" id="periodoMT" name="periodo" required>
                                     </select>
                                 </div>
                                 <div class="card-body">
@@ -97,18 +104,26 @@
                             </div>
                             <div class="card">
                                 <div class="card-header text-bold">Assistências Pendentes</div>
-                                <div class="card-body">
-                                    <table id="tableTP" class="table table-bordered table-hover">
-                                        <thead>
-                                        <th>Comercial</th>
-                                        <th>Data</th>
-                                        <th>Cliente</th>
-                                        <th>Motivo</th>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <label class="col-form-label">Seleccionar Técnico</label class="col-form-label">
+                                        <select class="custom-select form-control" id="periodoT" name="periodo" required>
+                                        </select>
+                                    </div>
+                                    <div class="card-body">
+                                        <table id="tableTP" class="table table-bordered table-hover">
+                                            <thead>
+                                            <th>Técnico</th>
+                                            <th>Data</th>
+                                            <th>Cliente</th>
+                                            <th>Motivo</th>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>

@@ -197,22 +197,22 @@ $(document).ready(function () {
         },
         success: function (dataResult) {
             var dataResult = JSON.parse(dataResult);
-            $("#periodoT").html("");
-            $("#periodoT").html('<option value="0">Todos</option>');
+            $("#periodoMT").html("");
+            $("#periodoMT").html('<option value="0">Todos</option>');
             $.each(dataResult, function () {
-                $("#periodoT").append($("<option/>").val(this[0]).text(this[0]));
+                $("#periodoMT").append($("<option/>").val(this[0]).text(this[0]));
             });
         }
     });
-    $("#periodoT").on('change', function () {
+    $("#periodoMT").on('change', function () {
         if ($.fn.dataTable.isDataTable('#tableT')) {
             $("#tableT").DataTable().destroy();
         }
         ;
-        if ($("#periodoT").val() == 0) {
+        if ($("#periodoMT").val() == 0) {
             createDTT();
         } else {
-            console.log($("#periodoT").val());
+            console.log($("#periodoMT").val());
 
             $("#tableT").DataTable({
                 processing: true,
@@ -221,7 +221,7 @@ $(document).ready(function () {
                     type: "POST",
                     data: {
                         op: "fetchAdmTecS",
-                        mes: $("#periodoT").val()
+                        mes: $("#periodoMT").val()
                     }
                 },
                 paging: false,
@@ -231,6 +231,51 @@ $(document).ready(function () {
                 autoWidth: false,
                 contentType: false,
                 processData: false,
+                language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
+            });
+        }
+    });
+
+    //Pen Tec
+    createDTTP();
+    $.ajax({
+        url: "/sigest/php/queries.php",
+        type: "POST",
+        data: {
+            op: 'fetchTec'
+        },
+        success: function (dataResult) {
+            var dataResult = JSON.parse(dataResult);
+            $("#periodoT").html("");
+            $("#periodoT").html('<option value="0">Todos</option>');
+            $.each(dataResult.data, function () {
+                $("#periodoT").append($("<option/>").val(this[0]).text(this[1]));
+            });
+        }
+    });
+    $("#periodoT").on('change', function () {
+        if ($.fn.dataTable.isDataTable('#tableTP')) {
+            $("#tableTP").DataTable().destroy();
+        };
+        if ($("#periodoT").val() == 0) {
+            createDTTP();
+        } else {
+            $("#tableTP").DataTable({
+                processing: true,
+                ajax: {
+                    url: "/sigest/php/stats.php",
+                    type: "POST",
+                    data: {
+                        op: "fetchAdmPenTecS",
+                        user: $("#periodoT").val()
+                    }
+                },
+                searching: false,
+                responsive: true,
+                autoWidth: false,
+                contentType: false,
+                processData: false,
+                lengthChange: false,
                 language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
             });
         }
@@ -246,19 +291,19 @@ $(document).ready(function () {
         },
         success: function (dataResult) {
             var dataResult = JSON.parse(dataResult);
-            $("#periodoC").html("");
-            $("#periodoC").html('<option value="0">Todos</option>');
+            $("#periodoMC").html("");
+            $("#periodoMC").html('<option value="0">Todos</option>');
             $.each(dataResult, function () {
-                $("#periodoC").append($("<option/>").val(this[0]).text(this[0]));
+                $("#periodoMC").append($("<option/>").val(this[0]).text(this[0]));
             });
         }
     });
-    $("#periodoC").on('change', function () {
+    $("#periodoMC").on('change', function () {
         if ($.fn.dataTable.isDataTable('#tableC')) {
             $("#tableC").DataTable().destroy();
         }
         ;
-        if ($("#periodoC").val() == 0) {
+        if ($("#periodoMC").val() == 0) {
             createDTC();
         } else {
             $("#tableC").DataTable({
@@ -268,7 +313,7 @@ $(document).ready(function () {
                     type: "POST",
                     data: {
                         op: "fetchAdmComS",
-                        mes: $("#periodoC").val()
+                        mes: $("#periodoMC").val()
                     }
                 },
                 paging: false,
@@ -315,10 +360,51 @@ $(document).ready(function () {
         }
     });
 
-    //Pen Tecnicos
+    //Pen Com
     createDTCP();
-    //Pen Comerciais
-    createDTTP();
+    $.ajax({
+        url: "/sigest/php/queries.php",
+        type: "POST",
+        data: {
+            op: 'fetchCom'
+        },
+        success: function (dataResult) {
+            var dataResult = JSON.parse(dataResult);
+            $("#periodoC").html("");
+            $("#periodoC").html('<option value="0">Todos</option>');
+            $.each(dataResult.data, function () {
+                $("#periodoC").append($("<option/>").val(this[0]).text(this[1]));
+            });
+        }
+    });
+    $("#periodoC").on('change', function () {
+        if ($.fn.dataTable.isDataTable('#tableCP')) {
+            $("#tableCP").DataTable().destroy();
+        };
+        if ($("#periodoC").val() == 0) {
+            createDTCP();
+        } else {
+            $("#tableCP").DataTable({
+                processing: true,
+                ajax: {
+                    url: "/sigest/php/stats.php",
+                    type: "POST",
+                    data: {
+                        op: "fetchAdmPenComS",
+                        user: $("#periodoC").text()
+                    }
+                },
+                searching: false,
+                responsive: true,
+                autoWidth: false,
+                contentType: false,
+                processData: false,
+                lengthChange: false,
+                language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
+            });
+        }
+    });
+
     //Pen Cobrancas
     createDTCobP();
     //Pen RMAs
