@@ -5,37 +5,28 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Estatísticas</h1>
-                </div><!-- /.col -->
+                    <h1 class="m-0 text-dark">Dashboard</h1>
+                </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="index.php">Início</a></li>
-                        <li class="breadcrumb-item active">Estatísticas</li>
+                        <li class="breadcrumb-item active">Dashboard</li>
                     </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- /.content-header -->
 
-    <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-header">
                             <label class="col-form-label col-sm-2">Seleccionar Mês</label>
                             <select class="custom-select form-control" id="periodo" name="periodo" required>
                             </select>
                         </div>
-                        <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
-                </div>
-                <!-- /.col -->
-                <div class="col-12">
-                    <div class="card">
                         <div class="card-body">
                             <table id="table" class="table table-bordered table-hover">
                                 <thead>
@@ -51,25 +42,20 @@
                                 </tbody>
                             </table>
                         </div>
-                        <!-- /.card-body -->
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <!-- Insert Content Here -->
-                            <canvas id="chartT"></canvas>
-                        </div>
-                        <!-- /.card-body -->
                     </div>
                 </div>
             </div>
-            <!-- /.row -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <canvas id="chartT"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- /.container-fluid -->
     </section>
-    <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
 
 <script src="js/stats/tec.js"></script>

@@ -1033,7 +1033,7 @@ if ($_POST['op'] == 'fetchTec') {
 
 if ($_POST['op'] == 'fetchCom') {
     $output = array();
-    $query = "SELECT * FROM users WHERE role='comercial'";
+    $query = "SELECT * FROM users WHERE role!='admin'";
     $statement = $conn->prepare($query);
     $statement->execute();
     $result = $statement->fetchAll();

@@ -13,10 +13,10 @@
         <!-- Messages Dropdown Menu -->
         <?php
         if ($_SESSION["role"] == "admin") {
-        ?>
-        <li class="nav-item">
-            <a class="nav-link" id="dRep" href=#>Relatório Diário</a>
-        </li>
+            ?>
+            <li class="nav-item">
+                <a class="nav-link" id="dRep" href=#>Relatório Diário</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" id="mRep" href=#>Relatório Mensal</a>
             </li>
@@ -296,4 +296,4 @@
         src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
 <!-- AdminLTE App -->
 <script type="text/javascript" src="/sigest/js/adminlte.min.js"></script>
-<script src="js/header.js"></script>
+<script src="/sigest/js/header.js"></script>

@@ -57,8 +57,20 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Comercial</label>
                         <div class="col-sm-10">
-                            <select name="comercial" id="comercial" class="form-control">
-                            </select>
+                            <?php
+                            if ($_SESSION["role"] != "comercial") {
+                                ?>
+                                <select name="comercial" id="comercial" class="form-control">
+                                </select>
+                                <?php
+                            } else {
+                                ?>
+                                <input type="text" value="<?php echo $_SESSION['username'] ?>" id="comercial"
+                                       name="comercial"
+                                       class="form-control" readonly>
+                                <?php
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
