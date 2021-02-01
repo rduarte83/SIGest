@@ -554,3 +554,55 @@ if ($_POST['op'] == 'fetchMesAdm') {
     }
     echo json_encode($data);
 }
+
+if ($_POST['op'] == 'fetchPenCopia') {
+    $output = array();
+    $query = "
+                SELECT c.cliente, p.*, co.* FROM contratos co 
+                    INNER JOIN clientes c ON co.cliente_id=c.nif
+                    INNER JOIN produtos p ON co.produto=p.id 							
+                    WHERE DATEDIFF(CURDATE(), fim)>=180 
+                ";
+
+    $statement = $conn->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $data = array();
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["inicio"];
+        $sub_array[] = $row["fim"];
+        $sub_array[] = $row["cliente"];
+        $sub_array[] = $row["tipo"] . ' ' . $row["marca"] . ' ' . $row["modelo"];
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
+if ($_POST['op'] == 'fetchPenSW') {
+    $output = array();
+    $query = "
+                SELECT * FROM software WHERE DATEDIFF(CURDATE(), data)>=180 
+                ";
+
+    $statement = $conn->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $data = array();
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["data"];
+        $sub_array[] = $row["cliente"];
+        $sub_array[] = $row["sw"];
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
+

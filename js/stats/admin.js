@@ -124,6 +124,48 @@ function createDTRmaP() {
     });
 }
 
+function createDTCopiaP() {
+    $("#tableCopiaP").DataTable({
+        processing: true,
+        ajax: {
+            url: "/sigest/php/stats.php",
+            type: "POST",
+            data: {
+                op: "fetchPenCopia",
+            }
+        },
+        searching: false,
+        responsive: true,
+        autoWidth: false,
+        contentType: false,
+        processData: false,
+        lengthChange: false,
+
+        language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
+    });
+}
+
+function createDTSWP() {
+    $("#tableSWP").DataTable({
+        processing: true,
+        ajax: {
+            url: "/sigest/php/stats.php",
+            type: "POST",
+            data: {
+                op: "fetchPenSW",
+            }
+        },
+        searching: false,
+        responsive: true,
+        autoWidth: false,
+        contentType: false,
+        processData: false,
+        lengthChange: false,
+
+        language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
+    });
+}
+
 function addData(chart, label, color) {
     $.ajax({
         url: "/sigest/php/fetchChart.php",
@@ -281,4 +323,8 @@ $(document).ready(function () {
     createDTCobP();
     //Pen RMAs
     createDTRmaP();
+    //Pen Copia
+    createDTCopiaP();
+    //Pen SW
+    createDTSWP();
 });

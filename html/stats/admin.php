@@ -117,6 +117,41 @@
             <div class="row">
                 <div class="col-6">
                     <div class="card">
+                        <div class="card-header text-bold">Contratos de Cópia a expirar em menos de 6 meses</div>
+                        <div class="card-body">
+                            <table id="tableCopiaP" class="table table-bordered table-hover">
+                                <thead>
+                                <th>Início</th>
+                                <th>Fim</th>
+                                <th>Cliente</th>
+                                <th>Produto</th>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header text-bold">Contratos de Software a expirar em menos de 6 meses</div>
+                        <div class="card-body">
+                            <table id="tableSWP" class="table table-bordered table-hover">
+                                <thead>
+                                <th>Data</th>
+                                <th>Cliente</th>
+                                <th>SW</th>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
                         <div class="card-header text-bold">Cobranças Pendentes</div>
                         <div class="card-body">
                             <table id="tableCobP" class="table table-bordered table-hover">
