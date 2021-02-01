@@ -166,6 +166,27 @@ function createDTSWP() {
     });
 }
 
+function createDTCompras() {
+    $("#tableCompras").DataTable({
+        processing: true,
+        ajax: {
+            url: "/sigest/php/stats.php",
+            type: "POST",
+            data: {
+                op: "fetchCompras",
+            }
+        },
+        searching: false,
+        responsive: true,
+        autoWidth: false,
+        contentType: false,
+        processData: false,
+        lengthChange: false,
+
+        language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
+    });
+}
+
 function addData(chart, label, color) {
     $.ajax({
         url: "/sigest/php/fetchChart.php",
@@ -404,6 +425,52 @@ $(document).ready(function () {
             });
         }
     });
+
+    //Compras6
+    createDTCompras();
+    $.ajax({
+        url: "/sigest/php/queries.php",
+        type: "POST",
+        data: {
+            op: 'fetchCom'
+        },
+        success: function (dataResult) {
+            var dataResult = JSON.parse(dataResult);
+            $("#periodoCompras").html("");
+            $("#periodoCompras").html('<option value="0">Todos</option>');
+            $.each(dataResult.data, function () {
+                $("#periodoCompras").append($("<option/>").val(this[0]).text(this[1]));
+            });
+        }
+    });
+    $("#periodoC").on('change', function () {
+        if ($.fn.dataTable.isDataTable('#tableCP')) {
+            $("#tableCP").DataTable().destroy();
+        };
+        if ($("#periodoC").val() == 0) {
+            createDTCP();
+        } else {
+            $("#tableCP").DataTable({
+                processing: true,
+                ajax: {
+                    url: "/sigest/php/stats.php",
+                    type: "POST",
+                    data: {
+                        op: "fetchAdmPenComS",
+                        user: $("#periodoC").text()
+                    }
+                },
+                searching: false,
+                responsive: true,
+                autoWidth: false,
+                contentType: false,
+                processData: false,
+                lengthChange: false,
+                language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
+            });
+        }
+    });
+
 
     //Pen Cobrancas
     createDTCobP();

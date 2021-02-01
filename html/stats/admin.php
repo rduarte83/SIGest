@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="col-6">
                     <div class="card">
-                        <div class="card-header text-bold">Comerciais</div>
+                        <div class="card-header text-bold text-uppercase">Comerciais</div>
                         <div class="card-body">
                             <div class="card">
                                 <div class="card-header">
@@ -51,33 +51,94 @@
                                 </div>
                             </div>
                             <div class="card">
-                                <div class="card-header text-bold">Eventos Pendentes</div>
-                                <div class="card">
-                                    <div class="card-header">
-                                        <label class="col-form-label">Seleccionar Comercial</label class="col-form-label">
-                                        <select class="custom-select form-control" id="periodoC" name="periodo" required>
-                                        </select>
+                                <div class="card-header text-bold text-uppercase">Eventos Pendentes</div>
+                                <div class="card-body">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <label class="col-form-label">Seleccionar
+                                                Comercial</label class="col-form-label">
+                                            <select class="custom-select form-control" id="periodoC" name="periodo"
+                                                    required>
+                                            </select>
+                                        </div>
+                                        <div class="card-body">
+                                            <table id="tableCP" class="table table-bordered table-hover">
+                                                <thead>
+                                                <th>Comercial</th>
+                                                <th>Data</th>
+                                                <th>Cliente</th>
+                                                <th>Motivo</th>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                    <div class="card-body">
-                                        <table id="tableCP" class="table table-bordered table-hover">
-                                            <thead>
-                                            <th>Comercial</th>
-                                            <th>Data</th>
-                                            <th>Cliente</th>
-                                            <th>Motivo</th>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header text-bold text-uppercase">Clientes sem Compras à mais de 6 meses</div>
+                                <div class="card-body">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <label class="col-form-label">Seleccionar
+                                                Comercial</label class="col-form-label">
+                                            <select class="custom-select form-control" id="periodoCompras"
+                                                    name="periodo"
+                                                    required>
+                                            </select>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="card">
+                                                <table id="tableCompras" class="table table-bordered table-hover">
+                                                    <thead>
+                                                    <th>Cliente</th>
+                                                    <th>Comercial</th>
+                                                    <th>Última Compra</th>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="card">
+                        <div class="card-header text-bold text-uppercase">Contratos de Cópia a expirar em menos de 6 meses</div>
+                        <div class="card-body">
+                            <table id="tableCopiaP" class="table table-bordered table-hover">
+                                <thead>
+                                <th>Início</th>
+                                <th>Fim</th>
+                                <th>Cliente</th>
+                                <th>Produto</th>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header text-bold text-uppercase">Contratos de Software a expirar em menos de 6 meses</div>
+                        <div class="card-body">
+                            <table id="tableSWP" class="table table-bordered table-hover">
+                                <thead>
+                                <th>Data</th>
+                                <th>Cliente</th>
+                                <th>SW</th>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-6">
                     <div class="card">
-                        <div class="card-header text-bold">Técnicos</div>
+                        <div class="card-header text-bold text-uppercase">Técnicos</div>
                         <div class="card-body">
                             <div class="card">
                                 <div class="card-header">
@@ -103,71 +164,35 @@
                                 </div>
                             </div>
                             <div class="card">
-                                <div class="card-header text-bold">Assistências Pendentes</div>
-                                <div class="card">
-                                    <div class="card-header">
-                                        <label class="col-form-label">Seleccionar Técnico</label class="col-form-label">
-                                        <select class="custom-select form-control" id="periodoT" name="periodo" required>
-                                        </select>
-                                    </div>
-                                    <div class="card-body">
-                                        <table id="tableTP" class="table table-bordered table-hover">
-                                            <thead>
-                                            <th>Técnico</th>
-                                            <th>Data</th>
-                                            <th>Cliente</th>
-                                            <th>Motivo</th>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
+                                <div class="card-header text-bold text-uppercase">Assistências Pendentes</div>
+                                <div class="card-body">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <label class="col-form-label">Seleccionar
+                                                Técnico</label class="col-form-label">
+                                            <select class="custom-select form-control" id="periodoT" name="periodo"
+                                                    required>
+                                            </select>
+                                        </div>
+                                        <div class="card-body">
+                                            <table id="tableTP" class="table table-bordered table-hover">
+                                                <thead>
+                                                <th>Técnico</th>
+                                                <th>Data</th>
+                                                <th>Cliente</th>
+                                                <th>Motivo</th>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6">
                     <div class="card">
-                        <div class="card-header text-bold">Contratos de Cópia a expirar em menos de 6 meses</div>
-                        <div class="card-body">
-                            <table id="tableCopiaP" class="table table-bordered table-hover">
-                                <thead>
-                                <th>Início</th>
-                                <th>Fim</th>
-                                <th>Cliente</th>
-                                <th>Produto</th>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="card">
-                        <div class="card-header text-bold">Contratos de Software a expirar em menos de 6 meses</div>
-                        <div class="card-body">
-                            <table id="tableSWP" class="table table-bordered table-hover">
-                                <thead>
-                                <th>Data</th>
-                                <th>Cliente</th>
-                                <th>SW</th>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6">
-                    <div class="card">
-                        <div class="card-header text-bold">Cobranças Pendentes</div>
+                        <div class="card-header text-bold text-uppercase">Cobranças Pendentes</div>
                         <div class="card-body">
                             <table id="tableCobP" class="table table-bordered table-hover">
                                 <thead>
@@ -181,10 +206,8 @@
                             </table>
                         </div>
                     </div>
-                </div>
-                <div class="col-6">
                     <div class="card">
-                        <div class="card-header text-bold">RMAs Pendentes</div>
+                        <div class="card-header text-bold text-uppercase">RMAs Pendentes</div>
                         <div class="card-body">
                             <table id="tableRmaP" class="table table-bordered table-hover">
                                 <thead>

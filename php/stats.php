@@ -665,4 +665,54 @@ if ($_POST['op'] == 'fetchPenSW') {
     echo json_encode($output);
 }
 
+if ($_POST['op'] == 'fetchCompras') {
+    $output = array();
+    $query = "
+            SELECT c.cliente, v1.vendedor, (v1.ult_vis) AS data FROM visitas v1 
+                INNER JOIN clientes c ON v1.cliente_id=c.nif 
+                LEFT JOIN visitas v2 ON v1.cliente_id = v2.cliente_id AND v1.id < v2.id
+                WHERE v2.id IS NULL AND v1.motivo_id=8 AND DATEDIFF(CURDATE(), DATE(v1.ult_vis))>=60;
+                ";
+    $statement = $conn->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $data = array();
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["cliente"];
+        $sub_array[] = $row["vendedor"];
+        $sub_array[] = $row["data"];
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
+if ($_POST['op'] == 'fetchComprasS') {
+    $output = array();
+    $query = "
+            SELECT c.cliente, v1.* FROM visitas v1 
+                INNER JOIN clientes c ON v1.cliente_id=c.nif 
+                LEFT JOIN visitas v2 ON v1.cliente_id = v2.cliente_id AND v1.id < v2.id
+                WHERE v2.id IS NULL AND v1.motivo_id=8 AND DATEDIFF(CURDATE(), DATE(v1.ult_vis))>=60;
+                ";
+    $statement = $conn->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $data = array();
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["cliente"];
+        $sub_array[] = $row["vendedor"];
+        $sub_array[] = $row["data"];
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
 

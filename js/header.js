@@ -1,8 +1,17 @@
-$("#penmail").click(function () {
+$("#dRep").click(function () {
     $.ajax({
-        url: "phpmailer/index.php",
+        url: "phpmailer/dRep.php",
         success: function () {
-            alert("Email enviado com sucesso!")
+            alert("Relatório Diário enviado com sucesso!")
+        }
+    });
+});
+
+$("#mRep").click(function () {
+    $.ajax({
+        url: "phpmailer/mRep.php",
+        success: function () {
+            alert("Relatório Mensal enviado com sucesso!")
         }
     });
 });

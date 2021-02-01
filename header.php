@@ -15,8 +15,11 @@
         if ($_SESSION["role"] == "admin") {
         ?>
         <li class="nav-item">
-            <a class="nav-link" id="penmail" href=#>Enviar Pendentes</a>
+            <a class="nav-link" id="dRep" href=#>Relatório Diário</a>
         </li>
+            <li class="nav-item">
+                <a class="nav-link" id="mRep" href=#>Relatório Mensal</a>
+            </li>
             <?php
         }
         ?>

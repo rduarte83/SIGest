@@ -36,7 +36,7 @@ function rmas($mail)
     $result = $statement->fetchAll();
 
     $table = '<table border="1"><thead>
-            <tr><th>Data</th><th>Cliente</th><th>Produto</th><th>Fornecedor</th><th>Motivo</th></tr>
+            <tr><th>Data Envio</th><th>Cliente</th><th>Produto</th><th>Fornecedor</th><th>Motivo</th></tr>
             </thead><tbody>';
     foreach ($result as $row) {
         $table .= '<tr>';
