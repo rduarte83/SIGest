@@ -431,6 +431,7 @@ $(document).ready(function () {
         if ($("#periodoC").val() == 0) {
             createDTCP();
         } else {
+            console.log($("#periodoC").val());
             $("#tableCP").DataTable({
                 processing: true,
                 ajax: {

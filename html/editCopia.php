@@ -59,6 +59,15 @@
                     <form method="post" action="copia.php" id="addForm" enctype="multipart/form-data" class="form-horizontal">
                         <div class="card-body">
                             <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Estado</label>
+                                <div class="col-sm-10">
+                                    <select class="custom-select form-control" name="estado" id="estado" required>
+                                        <option value="Activo">Activo</option>
+                                        <option value="Inactivo">Inactivo</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Cliente</label>
                                 <div class="col-sm-10">
                                     <select class="custom-select form-control" name="cliente_id" id="cli" required>

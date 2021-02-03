@@ -26,11 +26,10 @@ if ($_POST['op'] == 'fetchCopia') {
     $data = array();
 
     foreach ($result as $row) {
-        $prod = $row["tipo"] ." ". $row["marca"] ." ". $row["modelo"];
         $sub_array = array();
         $sub_array[] = $row["id"];
         $sub_array[] = $row["cliente"];
-        $sub_array[] = $prod;
+        $sub_array[] = $row["tipo"] ." ". $row["marca"] ." ". $row["modelo"];
         $sub_array[] = $row["inicio"];
         $sub_array[] = $row["fim"];
         $sub_array[] = $row["tipo"];
@@ -41,10 +40,11 @@ if ($_POST['op'] == 'fetchCopia') {
         $sub_array[] = $row["ult_p"];
         $sub_array[] = $row["ult_c"];
         $sub_array[] = $row["ult_data"];
-        $sub_array[] = $row["act_p"];;
+        $sub_array[] = $row["act_p"];
         $sub_array[] = $row["act_c"];
         $sub_array[] = $row["act_data"];
         $sub_array[] = $row["facturar"];
+        $sub_array[] = $row["estadoC"];
         $sub_array[] = '
                     <a href="details-copia.php" class="details btn btn-primary btn-sm" data-id="' . $row["id"] . '">
                         <i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Detalhes"></i>
@@ -228,7 +228,7 @@ if ($_POST['op'] == 'fetchContS') {
             SELECT c.*, l.cliente, p.tipo, p.marca, p.modelo FROM contratos c 
                 INNER JOIN clientes l ON c.cliente_id = l.nif 
                 INNER JOIN produtos p ON c.produto = p.id
-                WHERE c.id = :contrato_id;
+                WHERE c.id = :contrato_id
         ";
     $statement = $conn->prepare($query);
     $result = $statement->execute(
@@ -254,6 +254,7 @@ if ($_POST['op'] == 'fetchContS') {
         $sub_array[] = $row["modelo"];
         $sub_array[] = $row["cliente_id"];
         $sub_array[] = $row["produto"];
+        $sub_array[] = $row["estado"];
         $data[] = $sub_array;
     }
     $output = array(
@@ -325,11 +326,11 @@ if ($_POST['op'] == 'addCopia') {
     $statement = $conn->prepare($query);
     $result = $statement->execute(
         array(
-            ':cliente_id'   => $_POST["cliente_id"],
-            ':produto'  => $_POST["produto"],
+            ':cliente_id'   => $_POST["c_id"],
+            ':produto'  => $_POST["produto_id"],
             ':inicio'       => $_POST["inicio"],
             ':fim'          => $_POST["fim"],
-            ':tipoC'         => $_POST["tipoC"],
+            ':tipo'         => $_POST["tipo"],
             ':valor'        => $_POST["valor"],
             ':inc'          => $_POST["inc"],
             ':preco_p'      => $_POST["preco_p"],
@@ -429,7 +430,7 @@ if ($_POST['op'] == 'delCopia') {
 if ($_POST['op'] == 'editCopia') {
     $query = "UPDATE contratos SET cliente_id=:cliente_id, produto=:produto, 
                      inicio=:inicio, fim=:fim, tipo=:tipo, valor=:valor, inc=:inc, 
-                     preco_p=:preco_p, preco_c=:preco_c WHERE id=:id                
+                     preco_p=:preco_p, preco_c=:preco_c, estado=:estado WHERE id=:id                
     ";
     $statement = $conn->prepare($query);
     $result = $statement->execute(
@@ -443,7 +444,8 @@ if ($_POST['op'] == 'editCopia') {
             ':valor'   => $_POST["valor"],
             ':inc'   => $_POST["inc"],
             ':preco_p'   => $_POST["preco_p"],
-            ':preco_c'   => $_POST["preco_c"]
+            ':preco_c'   => $_POST["preco_c"],
+            ':estado'   => $_POST["estado"]
         )
     );
 }

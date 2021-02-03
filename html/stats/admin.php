@@ -65,6 +65,7 @@
                                         <div class="card-body">
                                             <table id="tableCP" class="table table-bordered table-hover">
                                                 <thead>
+                                                <th>id</th>
                                                 <th>Comercial</th>
                                                 <th>Data</th>
                                                 <th>Cliente</th>

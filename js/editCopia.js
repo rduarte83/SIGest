@@ -12,6 +12,7 @@ $(document).ready(function () {
         },
         success: function (dataResult) {
             var dataResult = JSON.parse(dataResult);
+            console.log(dataResult.data);
             $("#inicio").val(dataResult.data[0][1]);
             $("#fim").val(dataResult.data[0][2]);
             $("#tipo").val(dataResult.data[0][3]);
@@ -19,7 +20,7 @@ $(document).ready(function () {
             $("#inc").val(dataResult.data[0][5]);
             $("#preco_p").val(dataResult.data[0][6]);
             $("#preco_c").val(dataResult.data[0][7]);
-
+            $("#estado").val(dataResult.data[0][13]);
             var cli_id = dataResult.data[0][11];
             var prod_id = dataResult.data[0][12];
 

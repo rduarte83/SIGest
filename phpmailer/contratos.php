@@ -6,7 +6,7 @@ function copia($mail)
                 SELECT c.cliente, p.*, co.* FROM contratos co 
                     INNER JOIN clientes c ON co.cliente_id=c.nif
                     INNER JOIN produtos p ON co.produto=p.id 							
-                    WHERE DATEDIFF(CURDATE(), fim)>=180
+                    WHERE DATEDIFF(CURDATE(), fim)>=180 AND estadoC = 'Activo'
                 ";
     $statement = $conn->prepare($query);
     $statement->execute();

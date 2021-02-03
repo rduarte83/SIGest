@@ -466,7 +466,7 @@ if ($_POST['op'] == 'fetchAdmPenComS') {
     $query = "
             SELECT v.id, v.vendedor, v.ult_vis, c.cliente, m.motivo FROM visitas v 
                 INNER JOIN clientes c ON v.cliente_id=c.nif INNER JOIN motivos m ON v.motivo_id=m.id 
-                WHERE v.ult_vis_end >= v.updated ORDER BY ult_vis AND vendedor = :user
+                WHERE v.ult_vis_end >= v.updated AND vendedor = :user ORDER BY ult_vis 
                 ";
     $statement = $conn->prepare($query);
     $statement->execute(
@@ -625,7 +625,7 @@ if ($_POST['op'] == 'fetchPenCopia') {
                 SELECT c.cliente, p.*, co.* FROM contratos co 
                     INNER JOIN clientes c ON co.cliente_id=c.nif
                     INNER JOIN produtos p ON co.produto=p.id 							
-                    WHERE DATEDIFF(CURDATE(), fim)>=180 
+                    WHERE DATEDIFF(CURDATE(), fim)>=180 AND estadoC = 'Activo' 
                 ";
 
     $statement = $conn->prepare($query);

@@ -74,6 +74,7 @@
                                     <th>Nova Contagem Cor</th>
                                     <th>Nova Data</th>
                                     <th>Total a Facturar</th>
+                                    <th>Estado</th>
                                     <th>OP</th>
                                     </thead>
                                     <tbody id="table-body">
