@@ -127,14 +127,12 @@
                     <li class="nav-item has-treeview
                     <?=
                     (basename($_SERVER['PHP_SELF']) == "calVis.php") |
-                    (basename($_SERVER['PHP_SELF']) == "visitas.php") |
-                    (basename($_SERVER['PHP_SELF']) == "penVis.php")
+                    (basename($_SERVER['PHP_SELF']) == "visitas.php")
                         ? "menu-open" : ""; ?>">
                         <a href="#" class="nav-link
                     <?=
                         (basename($_SERVER['PHP_SELF']) == "calVis.php") |
-                        (basename($_SERVER['PHP_SELF']) == "visitas.php") |
-                        (basename($_SERVER['PHP_SELF']) == "penVis.php")
+                        (basename($_SERVER['PHP_SELF']) == "visitas.php")
                             ? "active" : ""; ?>">
                             <i class="nav-icon fa fa-user"></i>
                             <p>Eventos
@@ -154,13 +152,6 @@
                                    class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "visitas.php") ? "active" : ""; ?>">
                                     <i class="nav-icon fa fa-list"></i>
                                     <p>Lista de Eventos</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/sigest/html/penVis.php"
-                                   class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "penVis.php") ? "active" : ""; ?>">
-                                    <i class="nav-icon fa fa-exclamation-circle"></i>
-                                    <p>Eventos Pendentes</p>
                                 </a>
                             </li>
                         </ul>

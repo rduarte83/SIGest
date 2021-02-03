@@ -57,7 +57,6 @@ $("#addForm").on('submit', function (e) {
                 var param = search.get("op");
                 if (param == "cal") window.location.href = "../html/calVis.php";
                 if (param == "index") window.location.href = "../index.php";
-                if (param == "penVis") window.location.href = "../html/penVis.php";
             }
         }
     });

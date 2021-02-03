@@ -438,9 +438,9 @@ if ($_POST['op'] == 'fetchAdmComS') {
 if ($_POST['op'] == 'fetchAdmPenCom') {
     $output = array();
     $query = "
-            SELECT v.vendedor, v.ult_vis, c.cliente, m.motivo FROM visitas v 
+            SELECT v.id, v.vendedor, v.ult_vis, c.cliente, m.motivo FROM visitas v 
                 INNER JOIN clientes c ON v.cliente_id=c.nif INNER JOIN motivos m ON v.motivo_id=m.id 
-                WHERE v.descricao='' ORDER BY ult_vis
+                WHERE v.ult_vis_end >= v.updated ORDER BY ult_vis
                 ";
     $statement = $conn->prepare($query);
     $statement->execute();
@@ -448,6 +448,7 @@ if ($_POST['op'] == 'fetchAdmPenCom') {
     $data = array();
     foreach ($result as $row) {
         $sub_array = array();
+        $sub_array[] = $row["id"];
         $sub_array[] = $row["vendedor"];
         $sub_array[] = $row["ult_vis"];
         $sub_array[] = $row["cliente"];
@@ -463,9 +464,9 @@ if ($_POST['op'] == 'fetchAdmPenCom') {
 if ($_POST['op'] == 'fetchAdmPenComS') {
     $output = array();
     $query = "
-            SELECT v.vendedor, v.ult_vis, c.cliente, m.motivo FROM visitas v 
+            SELECT v.id, v.vendedor, v.ult_vis, c.cliente, m.motivo FROM visitas v 
                 INNER JOIN clientes c ON v.cliente_id=c.nif INNER JOIN motivos m ON v.motivo_id=m.id 
-                WHERE v.descricao='' AND vendedor = :user
+                WHERE v.ult_vis_end >= v.updated ORDER BY ult_vis AND vendedor = :user
                 ";
     $statement = $conn->prepare($query);
     $statement->execute(
@@ -477,6 +478,7 @@ if ($_POST['op'] == 'fetchAdmPenComS') {
     $data = array();
     foreach ($result as $row) {
         $sub_array = array();
+        $sub_array[] = $row["id"];
         $sub_array[] = $row["vendedor"];
         $sub_array[] = $row["ult_vis"];
         $sub_array[] = $row["cliente"];
@@ -492,7 +494,7 @@ if ($_POST['op'] == 'fetchAdmPenComS') {
 if ($_POST['op'] == 'fetchAdmPenTec') {
     $output = array();
     $query = "
-            SELECT u.username, a.data_i, c.cliente, a.motivo, a.local, a.problema FROM assistencias a INNER JOIN 
+            SELECT a.id, u.username, a.data_i, c.cliente, a.motivo, a.local, a.problema FROM assistencias a INNER JOIN 
                 clientes c ON a.cliente_id=c.nif INNER JOIN users u ON a.tecnico=u.id 
                 WHERE DATE(data_i) <= DATE(NOW()) AND a.estado='Pendente' 
                 ORDER BY a.data_i
@@ -503,6 +505,7 @@ if ($_POST['op'] == 'fetchAdmPenTec') {
     $data = array();
     foreach ($result as $row) {
         $sub_array = array();
+        $sub_array[] = $row["id"];
         $sub_array[] = $row["username"];
         $sub_array[] = $row["data_i"];
         $sub_array[] = $row["cliente"];
@@ -520,7 +523,7 @@ if ($_POST['op'] == 'fetchAdmPenTec') {
 if ($_POST['op'] == 'fetchAdmPenTecS') {
     $output = array();
     $query = "
-            SELECT u.username, a.data_i, c.cliente, a.motivo, a.local, a.problema FROM assistencias a INNER JOIN 
+            SELECT a.id, u.username, a.data_i, c.cliente, a.motivo, a.local, a.problema FROM assistencias a INNER JOIN 
                 clientes c ON a.cliente_id=c.nif INNER JOIN users u ON a.tecnico=u.id 
                 WHERE DATE(data_i) <= DATE(NOW()) AND a.estado='Pendente' AND u.id = :user 
                 ";
@@ -534,6 +537,7 @@ if ($_POST['op'] == 'fetchAdmPenTecS') {
     $data = array();
     foreach ($result as $row) {
         $sub_array = array();
+        $sub_array[] = $row["id"];
         $sub_array[] = $row["username"];
         $sub_array[] = $row["data_i"];
         $sub_array[] = $row["cliente"];
@@ -668,10 +672,10 @@ if ($_POST['op'] == 'fetchPenSW') {
 if ($_POST['op'] == 'fetchCompras') {
     $output = array();
     $query = "
-            SELECT c.cliente, v1.vendedor, (v1.ult_vis) AS data FROM visitas v1 
+            SELECT v1.id, c.cliente, v1.vendedor, (v1.ult_vis) AS data FROM visitas v1 
                 INNER JOIN clientes c ON v1.cliente_id=c.nif 
                 LEFT JOIN visitas v2 ON v1.cliente_id = v2.cliente_id AND v1.id < v2.id
-                WHERE v2.id IS NULL AND v1.motivo_id=8 AND DATEDIFF(CURDATE(), DATE(v1.ult_vis))>=60;
+                WHERE v2.id IS NULL AND v1.motivo_id=8 AND DATEDIFF(CURDATE(), DATE(v1.ult_vis))>=60
                 ";
     $statement = $conn->prepare($query);
     $statement->execute();
@@ -679,6 +683,7 @@ if ($_POST['op'] == 'fetchCompras') {
     $data = array();
     foreach ($result as $row) {
         $sub_array = array();
+        $sub_array[] = $row["id"];
         $sub_array[] = $row["cliente"];
         $sub_array[] = $row["vendedor"];
         $sub_array[] = $row["data"];
@@ -693,17 +698,23 @@ if ($_POST['op'] == 'fetchCompras') {
 if ($_POST['op'] == 'fetchComprasS') {
     $output = array();
     $query = "
-            SELECT c.cliente, v1.* FROM visitas v1 
+            SELECT v1.id, c.cliente, v1.vendedor, (v1.ult_vis) AS data FROM visitas v1 
                 INNER JOIN clientes c ON v1.cliente_id=c.nif 
                 LEFT JOIN visitas v2 ON v1.cliente_id = v2.cliente_id AND v1.id < v2.id
-                WHERE v2.id IS NULL AND v1.motivo_id=8 AND DATEDIFF(CURDATE(), DATE(v1.ult_vis))>=60;
+                WHERE v2.id IS NULL AND v1.motivo_id=8 AND DATEDIFF(CURDATE(), DATE(v1.ult_vis))>=60
+                AND v1.vendedor = :user
                 ";
     $statement = $conn->prepare($query);
-    $statement->execute();
+    $statement->execute(
+        array(
+            ':user' => $_POST["user"]
+        )
+    );
     $result = $statement->fetchAll();
     $data = array();
     foreach ($result as $row) {
         $sub_array = array();
+        $sub_array[] = $row["id"];
         $sub_array[] = $row["cliente"];
         $sub_array[] = $row["vendedor"];
         $sub_array[] = $row["data"];

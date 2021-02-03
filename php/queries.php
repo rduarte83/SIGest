@@ -1732,3 +1732,35 @@ if ($_POST['op'] == 'editRMA') {
         )
     );
 }
+
+if ($_POST['op'] == 'remarcar') {
+    $query = "
+                INSERT INTO assistencias(cliente_id, produto_id, data_p, motivo, local, 
+			                         tecnico, entregue, problema, data_i, data_i_end, obs, prioridade) 
+			    VALUES (:cliente_id, :produto_id, :data_p, :motivo, :local, 
+			            :tecnico, :entregue, :problema, :data_i, DATE_ADD(:data_i, INTERVAL 60 MINUTE), :obs, :prio)         
+    ";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':id' => $_POST["id"],
+            ':cliente_id' => $_POST["cliente_id"],
+            ':produto_id' => $_POST["produto"],
+            ':data_p' => $_POST["data_p"],
+            ':motivo' => $_POST["motivo"],
+            ':local' => $_POST["local"],
+            ':tecnico' => $_POST["tecnico"],
+            ':entregue' => $_POST["entregue"],
+            ':problema' => $_POST["problema"],
+            ':data_i' => $_POST["data_i"],
+            ':resolucao' => $_POST["resolucao"],
+            ':obs' => $_POST["obs"],
+            ':material' => $_POST["material"],
+            ':tempo' => $_POST["tempo"],
+            ':valor' => $_POST["valor"],
+            ':estado' => $_POST["estado"],
+            ':facturado' => $_POST["facturado"],
+            ':factura' => $_POST["factura"]
+        )
+    );
+}

@@ -37,6 +37,9 @@ function createDTC() {
         responsive: true,
         autoWidth: false,
         processData: false,
+        columnDefs: [
+            {visible: false, targets: 0}
+        ],
         language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
     });
 }
@@ -57,8 +60,18 @@ function createDTCP() {
         contentType: false,
         processData: false,
         lengthChange: false,
-
+        columnDefs: [
+            {visible: false, targets: 0}
+        ],
         language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
+    });
+    $("#tableCP tbody").on('click', 'tr', function () {
+        var data = $("#tableCP").DataTable().row(this).data();
+        console.log(data);
+        localStorage.setItem("vis_id", data[0]);
+        if (location.pathname.includes("index")) {
+            location.href = "/sigest/html/editVis.php?op=index";
+        }
     });
 }
 
@@ -78,8 +91,18 @@ function createDTTP() {
         contentType: false,
         processData: false,
         lengthChange: false,
-
+        columnDefs: [
+            {visible: false, targets: 0}
+        ],
         language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
+    });
+    $("#tableTP tbody").on('click', 'tr', function () {
+        var data = $("#tableTP").DataTable().row(this).data();
+        console.log(data);
+        localStorage.setItem("ass_id", data[0]);
+        if (location.pathname.includes("index")) {
+            location.href = "/sigest/html/editAss.php?op=index";
+        }
     });
 }
 
@@ -119,7 +142,6 @@ function createDTRmaP() {
         contentType: false,
         processData: false,
         lengthChange: false,
-
         language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
     });
 }
@@ -140,7 +162,6 @@ function createDTCopiaP() {
         contentType: false,
         processData: false,
         lengthChange: false,
-
         language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
     });
 }
@@ -182,7 +203,9 @@ function createDTCompras() {
         contentType: false,
         processData: false,
         lengthChange: false,
-
+        columnDefs: [
+            {visible: false, targets: 0}
+        ],
         language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
     });
 }
@@ -270,7 +293,7 @@ $(document).ready(function () {
             $("#periodoT").html("");
             $("#periodoT").html('<option value="0">Todos</option>');
             $.each(dataResult.data, function () {
-                $("#periodoT").append($("<option/>").val(this[0]).text(this[1]));
+                $("#periodoT").append($("<option/>").val(this[1]).text(this[1]));
             });
         }
     });
@@ -297,6 +320,9 @@ $(document).ready(function () {
                 contentType: false,
                 processData: false,
                 lengthChange: false,
+                columnDefs: [
+                    {visible: false, targets: 0}
+                ],
                 language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
             });
         }
@@ -394,7 +420,7 @@ $(document).ready(function () {
             $("#periodoC").html("");
             $("#periodoC").html('<option value="0">Todos</option>');
             $.each(dataResult.data, function () {
-                $("#periodoC").append($("<option/>").val(this[0]).text(this[1]));
+                $("#periodoC").append($("<option/>").val(this[1]).text(this[1]));
             });
         }
     });
@@ -412,7 +438,7 @@ $(document).ready(function () {
                     type: "POST",
                     data: {
                         op: "fetchAdmPenComS",
-                        user: $("#periodoC").text()
+                        user: $("#periodoC").val()
                     }
                 },
                 searching: false,
@@ -421,6 +447,9 @@ $(document).ready(function () {
                 contentType: false,
                 processData: false,
                 lengthChange: false,
+                columnDefs: [
+                    {visible: false, targets: 0}
+                ],
                 language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
             });
         }
@@ -439,25 +468,25 @@ $(document).ready(function () {
             $("#periodoCompras").html("");
             $("#periodoCompras").html('<option value="0">Todos</option>');
             $.each(dataResult.data, function () {
-                $("#periodoCompras").append($("<option/>").val(this[0]).text(this[1]));
+                $("#periodoCompras").append($("<option/>").val(this[1]).text(this[1]));
             });
         }
     });
-    $("#periodoC").on('change', function () {
-        if ($.fn.dataTable.isDataTable('#tableCP')) {
-            $("#tableCP").DataTable().destroy();
+    $("#periodoCompras").on('change', function () {
+        if ($.fn.dataTable.isDataTable('#tableCompras')) {
+            $("#tableCompras").DataTable().destroy();
         };
-        if ($("#periodoC").val() == 0) {
-            createDTCP();
+        if ($("#periodoCompras").val() == 0) {
+            createDTCompras();
         } else {
-            $("#tableCP").DataTable({
+            $("#tableCompras").DataTable({
                 processing: true,
                 ajax: {
                     url: "/sigest/php/stats.php",
                     type: "POST",
                     data: {
-                        op: "fetchAdmPenComS",
-                        user: $("#periodoC").text()
+                        op: "fetchComprasS",
+                        user: $("#periodoCompras").val()
                     }
                 },
                 searching: false,
@@ -466,11 +495,13 @@ $(document).ready(function () {
                 contentType: false,
                 processData: false,
                 lengthChange: false,
+                columnDefs: [
+                    {visible: false, targets: 0}
+                ],
                 language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
             });
         }
     });
-
 
     //Pen Cobrancas
     createDTCobP();

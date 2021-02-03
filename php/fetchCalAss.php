@@ -19,9 +19,12 @@ foreach ($result as $row) {
     $sub_array['start'] = $row["data_i"];
     $sub_array['end'] = $row["data_i_end"];
     $sub_array['resourceId'] = $row["username"];
-    if ($row['estado'] == "Resolvido" || $row['estado'] == "Não Resolvido") $sub_array['color'] = "#808080";
-    elseif ($row['prioridade'] == "Alta") $sub_array['color'] = "#FF0000";
-    else $sub_array['color'] = "#007bff";
+    if ($row['prioridade'] == "Alta") $sub_array['color'] = "#0275d8";
+    else $sub_array['color'] = "#5bc0de";
+    if ($row['estado'] == "Resolvido") $sub_array['color'] = "292b2c";
+    elseif ($row['estado'] == "Não Resolvido") $sub_array['color'] = "#d9534f";
+    elseif ($row['estado'] == "Aguarda Peças") $sub_array['color'] = "#f0ad4e";
+
     $data[] = $sub_array;
 }
 

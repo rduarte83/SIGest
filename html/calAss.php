@@ -54,27 +54,32 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
+                                <div class="row text-center">
+                                    <div class="col bg-primary">Alta</div>
+                                    <div class="col bg-info">Baixa</div>
+                                    <div class="col bg-gray">Resolvido</div>
+                                    <div class="col bg-danger">Não Resolvido</div>
+                                    <div class="col bg-warning">Aguarda Peças</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
                                 <div id="calendar"></div>
                             </div>
-                            <!-- /.card-body -->
                         </div>
-                        <!-- /.card -->
                     </div>
-                    <!-- /.col -->
                 </div>
-                <!-- /.row -->
             </div>
-            <!-- /.container-fluid -->
         </section>
-        <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
-
-    <input type="hidden" id="sessionRole" value="<?=$_SESSION['role'] ?>"></input>
-
+    <input type="hidden" id="sessionRole" value="<?= $_SESSION['role'] ?>"></input>
     <?php include '../footer.php' ?>
 </div>
-
 <?php include 'addAss.php' ?>
 <!-- ./wrapper -->
 

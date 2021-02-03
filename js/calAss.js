@@ -80,10 +80,6 @@ document.addEventListener('DOMContentLoaded', function () {
             var end = moment(info.end).format("YYYY-MM-DDTHH:mm:SS");
             var id = info.resource.id;
 
-            //var event = prompt("Insira o assunto:")
-            //console.log(start+"/"+end+"/"+id);
-            //console.log(event);
-
         },
         eventResize: function (info) {
             updEvents(info);

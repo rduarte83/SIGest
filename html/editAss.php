@@ -36,7 +36,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="../index.php">Início</a></li>
-                            <li class="breadcrumb-item"><a href="backup/assistencias.php">Lista de Assistências</a></li>
+                            <li class="breadcrumb-item"><a href="penAss.php">Lista de Assistências</a></li>
                             <li class="breadcrumb-item active">Editar</li>
                         </ol>
                     </div>
@@ -67,6 +67,22 @@
                                     </select>
                                 </div>
                             </div>
+                            <div id="reForm">
+                                <div class="form-group row">
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-10">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="reCheck">
+                                            <label class="form-check-label">Reagendar</label>
+                                        </div>
+                                    </div>
+                                    <label class="col-form-label col-sm-2 data">Nova Data</label>
+                                    <div class="col-sm-10">
+                                        <input type="datetime-local" id="data_new" name="data_new"
+                                               class="form-control data">
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Cliente</label>
                                 <div class="col-sm-10">
@@ -95,7 +111,9 @@
                                         <option value="Manutenção">Manutenção</option>
                                         <option value="Assistência de Hardware">Assistência de Hardware</option>
                                         <option value="Assistência de Software">Assistência de Software</option>
-                                        <option value="Instalação de Impressora a Contrato">Instalação de Impressora a Contrato</option>
+                                        <option value="Instalação de Impressora a Contrato">Instalação de Impressora a
+                                            Contrato
+                                        </option>
                                         <option value="Instalação de Software">Instalação de Software</option>
                                     </select>
                                 </div>
@@ -123,7 +141,7 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Material Entregue</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="entregue" name="entregue" class="form-control" >
+                                    <input type="text" id="entregue" name="entregue" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -135,60 +153,60 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Data Intervenção</label>
                                 <div class="col-sm-10">
-                                    <input type="datetime-local" id="data_i" name="data_i" class="form-control" >
+                                    <input type="datetime-local" id="data_i" name="data_i" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Resolucao do Problema</label>
                                 <div class="col-sm-10">
                                     <textarea class="form-control" name="resolucao" id="resolucao" rows="8"
-                                              ></textarea>
+                                    ></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Observações</label>
                                 <div class="col-sm-10">
                                     <textarea class="form-control" name="obs" id="obs" rows="3"
-                                              ></textarea>
+                                    ></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Material Usado</label>
                                 <div class="col-sm-10">
                                     <textarea class="form-control" name="material" id="material" rows="5"
-                                              ></textarea>
+                                    ></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Tempo</label>
                                 <div class="col-sm-10">
-                                    <input type="number" id="tempo" name="tempo" class="form-control" >
+                                    <input type="number" id="tempo" name="tempo" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Valor</label>
                                 <div class="col-sm-10">
-                                    <input type="number" id="valor" name="valor" step="0.01" class="form-control" >
+                                    <input type="number" id="valor" name="valor" step="0.01" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Facturado</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="facturado" name="facturado" class="form-control" >
+                                    <input type="text" id="facturado" name="facturado" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2">Número de Factura</label>
                                 <div class="col-sm-10">
-                                    <input type="number" id="factura" name="factura" class="form-control" >
+                                    <input type="number" id="factura" name="factura" class="form-control">
                                 </div>
                             </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <input type="hidden" name="id" id="id">
-                            <input type="hidden" name="op" value="editAss">
-                            <a href="backup/assistencias.php">
+                            <input type="hidden" name="op" value="editAss" id="op">
+                            <a href="penAss.php">
                                 <button type="button" class="btn btn-default">Cancelar</button>
                             </a>
                             <button type="submit" class="btn btn-success float-right">Confirmar</button>

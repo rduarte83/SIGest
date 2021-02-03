@@ -8,6 +8,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="index.php">Início</a></li>
+                        <li class="breadcrumb-item"><a href="index.php">Início</a></li>
                         <li class="breadcrumb-item active">Dashboard</li>
                     </ol>
                 </div>
@@ -77,7 +78,7 @@
                                 </div>
                             </div>
                             <div class="card">
-                                <div class="card-header text-bold text-uppercase">Clientes sem Compras à mais de 6 meses</div>
+                                <div class="card-header text-bold text-uppercase">Clientes sem Compras à mais de 2 meses</div>
                                 <div class="card-body">
                                     <div class="card">
                                         <div class="card-header">
@@ -92,6 +93,7 @@
                                             <div class="card">
                                                 <table id="tableCompras" class="table table-bordered table-hover">
                                                     <thead>
+                                                    <th>ID</th>
                                                     <th>Cliente</th>
                                                     <th>Comercial</th>
                                                     <th>Última Compra</th>
@@ -177,6 +179,7 @@
                                         <div class="card-body">
                                             <table id="tableTP" class="table table-bordered table-hover">
                                                 <thead>
+                                                <th>id</th>
                                                 <th>Técnico</th>
                                                 <th>Data</th>
                                                 <th>Cliente</th>
