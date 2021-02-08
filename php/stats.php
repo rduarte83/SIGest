@@ -181,8 +181,9 @@ if ($_POST['op'] == 'fetchTec') {
             (SELECT COUNT(id) FROM assistencias WHERE motivo='Assistência de Hardware' AND facturado='Sim' AND factura>0 AND tecnico=:t) AS factHW,
             (SELECT COUNT(id) FROM assistencias WHERE motivo='Assistência de Software' AND facturado='Sim' AND factura>0 AND tecnico=:t) AS factSW,
             (SELECT COUNT(id) FROM assistencias WHERE motivo='Manutenção' AND tecnico=:t) AS manut,
+            (SELECT COUNT(id) FROM assistencias WHERE motivo='Case OKI' AND tecnico=:t) AS caseOKI,     
             (SELECT COUNT(id) FROM assistencias WHERE motivo='Instalação de Impressora a Contrato' AND tecnico=:t) AS instImp,
-            (SELECT COUNT(id) FROM assistencias WHERE motivo='Instalação de Software' AND tecnico=:t) AS instSW 
+            (SELECT COUNT(id) FROM assistencias WHERE motivo='Instalação de Software' AND tecnico=:t) AS instSW
                 ";
 
     $statement = $conn->prepare($query);
@@ -201,6 +202,7 @@ if ($_POST['op'] == 'fetchTec') {
         $sub_array[] = $row["factHW"];
         $sub_array[] = $row["factSW"];
         $sub_array[] = $row["manut"];
+        $sub_array[] = $row["caseOKI"];
         $sub_array[] = $row["instImp"];
         $sub_array[] = $row["instSW"];
         $data[] = $sub_array;
@@ -219,9 +221,9 @@ if ($_POST['op'] == 'fetchTecS') {
             (SELECT COUNT(id) FROM assistencias WHERE motivo='Assistência de Hardware' AND facturado='Sim' AND factura>0 AND tecnico=:t AND EXTRACT(YEAR_MONTH FROM data_i)=:mes) AS factHW,
             (SELECT COUNT(id) FROM assistencias WHERE motivo='Assistência de Software' AND facturado='Sim' AND factura>0 AND tecnico=:t AND EXTRACT(YEAR_MONTH FROM data_i)=:mes) AS factSW,
             (SELECT COUNT(id) FROM assistencias WHERE motivo='Manutenção' AND tecnico=:t AND EXTRACT(YEAR_MONTH FROM data_i)=:mes) AS manut,
+            (SELECT COUNT(id) FROM assistencias WHERE motivo='Case OKI' AND tecnico=:t AND EXTRACT(YEAR_MONTH FROM data_i)=:mes) AS caseOKI,
             (SELECT COUNT(id) FROM assistencias WHERE motivo='Instalação de Impressora a Contrato' AND tecnico=:t AND EXTRACT(YEAR_MONTH FROM data_i)=:mes) AS instImp,
-            (SELECT COUNT(id) FROM assistencias WHERE motivo='Instalação de Software' AND tecnico=:t AND EXTRACT(YEAR_MONTH FROM data_i)=:mes) AS instSW,
-            (SELECT SUM(valor) FROM VENDAS WHERE comercial=:c AND mes=:mes) AS valor 
+            (SELECT COUNT(id) FROM assistencias WHERE motivo='Instalação de Software' AND tecnico=:t AND EXTRACT(YEAR_MONTH FROM data_i)=:mes) AS instSW
                 ";
 
     $statement = $conn->prepare($query);
@@ -240,11 +242,11 @@ if ($_POST['op'] == 'fetchTecS') {
         $sub_array[] = $row["assSW"];
         $sub_array[] = $row["factHW"];
         $sub_array[] = $row["factSW"];
-        $sub_array[] = $row["factSW"];
         $sub_array[] = $row["manut"];
+        $sub_array[] = $row["caseOKI"];
         $sub_array[] = $row["instImp"];
         $sub_array[] = $row["instSW"];
-        $sub_array[] = $row["valor"];
+
         $data[] = $sub_array;
     }
     $output = array(

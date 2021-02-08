@@ -8,6 +8,7 @@ $query = "SELECT
             (SELECT COUNT(id) FROM assistencias WHERE motivo='Assistência de Hardware' AND facturado='Sim' AND factura>0 AND tecnico=:t) AS factHW,
             (SELECT COUNT(id) FROM assistencias WHERE motivo='Assistência de Software' AND facturado='Sim' AND factura>0 AND tecnico=:t) AS factSW,
             (SELECT COUNT(id) FROM assistencias WHERE motivo='Manutenção' AND tecnico=:t) AS manut,
+            (SELECT COUNT(id) FROM assistencias WHERE motivo='Case OKI' AND tecnico=:t) AS caseOKI,
             (SELECT COUNT(id) FROM assistencias WHERE motivo='Instalação de Impressora a Contrato' AND tecnico=:t) AS instImp,
             (SELECT COUNT(id) FROM assistencias WHERE motivo='Instalação de Software' AND tecnico=:t) AS instSW 
                 ";
@@ -28,11 +29,12 @@ foreach ($result as $row) {
     $sub_array[] = $row["factHW"];
     $sub_array[] = $row["factSW"];
     $sub_array[] = $row["manut"];
+    $sub_array[] = $row["caseOKI"];
     $sub_array[] = $row["instImp"];
     $sub_array[] = $row["instSW"];
 }
 $data["total"] = $sub_array;
 $data["stats"] = ["Assist HW", "Assist SW", "Assist HW Fact",
-    "Assist SW Fact", "Manutenções", "Instalações Imp", "Instalações SW"];
+    "Assist SW Fact", "Manutenções", "Cases OKI", "Instalações Imp", "Instalações SW"];
 
 echo json_encode($data);

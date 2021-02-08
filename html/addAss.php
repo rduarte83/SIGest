@@ -151,6 +151,7 @@
                                         Contrato
                                     </option>
                                     <option value="Instalação de Software">Instalação de Software</option>
+                                    <option value="Case OKI">Case OKI</option>
                                     <option value="Formação">Formação</option>
                                     <option value="Férias">Férias</option>
 

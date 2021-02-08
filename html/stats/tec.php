@@ -35,6 +35,7 @@
                                 <th>Assist HW Fact</th>
                                 <th>Assist SW Fact</th>
                                 <th>Manutenções</th>
+                                <th>Cases OKI</th>
                                 <th>Instalações Imp</th>
                                 <th>Instalações SW</th>
                                 </thead>

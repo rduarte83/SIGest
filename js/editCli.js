@@ -42,7 +42,9 @@ $(document).ready(function () {
             $("#responsavel").val(dataResult.data[0][5]);
             $("#contacto").val(dataResult.data[0][6]);
             $("#email").val(dataResult.data[0][7]);
+            $("#comercial").val(dataResult.data[0][8]);
             $("#obs").val(dataResult.data[0][9]);
+
         }
     });
 });
