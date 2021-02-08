@@ -726,4 +726,27 @@ if ($_POST['op'] == 'fetchComprasS') {
     echo json_encode($output);
 }
 
-
+if ($_POST['op'] == 'fetchDoc') {
+    $output = array();
+    $query = "
+            SELECT c.cliente, d.* FROM documentacao d INNER JOIN clientes c ON d.cliente_id=c.nif 
+                    WHERE DATE(data) <= DATE(NOW()) AND estado = 'Pendente'
+                ";
+    $statement = $conn->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $data = array();
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["id"];
+        $sub_array[] = $row["data"];
+        $sub_array[] = $row["cliente"];
+        $sub_array[] = $row["motivo"];
+        $sub_array[] = $row["descricao"];
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}

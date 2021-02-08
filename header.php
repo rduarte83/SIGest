@@ -178,6 +178,14 @@
                             <p>RMAs</p>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="/sigest/html/doc.php"
+                           class="nav-link <?= (basename($_SERVER['PHP_SELF']) == "doc.php") ? "active" : ""; ?>">
+                            <i class="fa fa-book nav-icon"></i>
+                            <p>Documentação</p>
+                        </a>
+                    </li>
                     <?php ;
                 }
                 ?>

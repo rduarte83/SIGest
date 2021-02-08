@@ -18,4 +18,4 @@ comercialU('pablo@segimprima.pt', 'pablo');
 
 cobrancas('geral@segimprima.pt');
 rmas('geral@segimprima.pt');
-
+docs('geral@segimprima.pt');

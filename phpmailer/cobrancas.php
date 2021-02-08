@@ -50,3 +50,29 @@ function rmas($mail)
     $table .= '</tbody></table>';
     sendMail($mail, 'RMAs Pendentes', $table, $table);
 }
+
+function docs($mail)
+{
+    require '../php/db.php';
+    $query = "
+                SELECT c.cliente, d.* FROM documentacao d INNER JOIN clientes c ON d.cliente_id=c.nif 
+                    WHERE estado = 'Pendente'
+                ";
+    $statement = $conn->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+
+    $table = '<table border="1"><thead>
+            <tr><th>Data</th><th>Cliente</th><th>Motivo</th><th>Descrição</th></tr>
+            </thead><tbody>';
+    foreach ($result as $row) {
+        $table .= '<tr>';
+        $table .= '<td>' . $row["data"] . '</td>';
+        $table .= '<td>' . $row["cliente"] . '</td>';
+        $table .= '<td>' . $row["motivo"] .   '</td>';
+        $table .= '<td>' . $row["descricao"] .   '</td>';
+        $table .= '</tr>';
+    }
+    $table .= '</tbody></table>';
+    sendMail($mail, 'Documentação Pendente', $table, $table);
+}

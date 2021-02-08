@@ -225,6 +225,22 @@
                             </table>
                         </div>
                     </div>
+                    <div class="card">
+                        <div class="card-header text-bold text-uppercase">Documentação Pendente</div>
+                        <div class="card-body">
+                            <table id="tableDoc" class="table table-bordered table-hover">
+                                <thead>
+                                <th>id</th>
+                                <th>Data</th>
+                                <th>Cliente</th>
+                                <th>Motivo</th>
+                                <th>Descrição</th>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

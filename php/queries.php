@@ -1312,6 +1312,161 @@ if ($_POST['op'] == 'editCob') {
     );
 }
 
+if ($_POST['op'] == 'fetchDoc') {
+    $output = array();
+    $query = "    
+        SELECT d.*, c.cliente FROM documentacao d INNER JOIN clientes c ON d.cliente_id=c.nif
+        ";
+
+    $statement = $conn->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $data = array();
+
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["id"];
+        $sub_array[] = $row["cliente"];
+        $sub_array[] = $row["data"];
+        $sub_array[] = $row["motivo"];
+        $sub_array[] = $row["descricao"];
+        $sub_array[] = $row["estado"];
+        $sub_array[] = '
+                    <a href="editDoc.php" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '">
+                        <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>
+                    </a>
+                    <a href="#" class="delete btn btn-danger btn-sm" data-id="' . $row["id"] . '">
+                        <i class="fa fa-trash" aria-hidden="true" data-toggle="tooltip" title="Eliminar"></i>
+                    </a>
+                    ';
+
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
+if ($_POST['op'] == 'fetchDocS') {
+    $output = array();
+    $query = "
+        SELECT d.*, c.cliente FROM documentacao d INNER JOIN clientes c ON d.cliente_id=c.nif
+            WHERE d.id=:id;
+        ";
+
+    $statement = $conn->prepare($query);
+    $statement->execute(
+        array(
+            ':id' => $_POST["doc_id"],
+        )
+    );
+    $result = $statement->fetchAll();
+    $data = array();
+
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["id"];
+        $sub_array[] = $row["cliente"];
+        $sub_array[] = $row["data"];
+        $sub_array[] = $row["motivo"];
+        $sub_array[] = $row["descricao"];
+        $sub_array[] = $row["estado"];
+        $sub_array[] = $row["cliente_id"];
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
+if ($_POST['op'] == 'fetchDocCli') {
+    $output = array();
+    $query = "
+       SELECT d.*, c.cliente FROM documentacao d INNER JOIN clientes c ON d.cliente_id=c.nif 
+            WHERE cliente_id=:cliente_id
+        ";
+
+    $statement = $conn->prepare($query);
+    $statement->execute(
+        array(
+            ':cliente_id' => $_POST["cliente_id"]
+        )
+    );
+    $result = $statement->fetchAll();
+    $data = array();
+
+    foreach ($result as $row) {
+        $sub_array = array();
+        $sub_array[] = $row["id"];
+        $sub_array[] = $row["cliente"];
+        $sub_array[] = $row["data"];
+        $sub_array[] = $row["motivo"];
+        $sub_array[] = $row["descricao"];
+        $sub_array[] = $row["estado"];
+        $sub_array[] = '
+                    <a href="editCob.php" class="edit btn btn-info btn-sm" data-id="' . $row["id"] . '">
+                        <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" title="Editar"></i>
+                    </a>
+                    <a href="#" class="delete btn btn-danger btn-sm" data-id="' . $row["id"] . '">
+                        <i class="fa fa-trash" aria-hidden="true" data-toggle="tooltip" title="Eliminar"></i>
+                    </a>
+                    ';
+
+        $data[] = $sub_array;
+    }
+    $output = array(
+        "data" => $data
+    );
+    echo json_encode($output);
+}
+
+if ($_POST['op'] == 'addDoc') {
+    $query = "        
+			INSERT INTO documentacao (cliente_id, data, motivo, descricao) 
+			    VALUES (:cliente_id, :data, :motivo, :descricao);
+		";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':cliente_id' => $_POST["c_id"],
+            ':data' => $_POST["data"],
+            ':motivo' => $_POST["motivo"],
+            ':descricao' => $_POST["descricao"]
+        )
+    );
+}
+
+if ($_POST['op'] == 'delDoc') {
+    $query = "
+                DELETE FROM documentacao WHERE id = :doc_id
+    ";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':doc_id' => $_POST["doc_id"],
+        )
+    );
+}
+
+if ($_POST['op'] == 'editDoc') {
+    $query = "
+                UPDATE documentacao SET data=:data, motivo=:motivo, descricao=:descricao, estado=:estado 
+                    WHERE id=:id               
+    ";
+    $statement = $conn->prepare($query);
+    $result = $statement->execute(
+        array(
+            ':id' => $_POST["id"],
+            ':data' => $_POST["data"],
+            ':motivo' => $_POST["motivo"],
+            ':descricao' => $_POST["descricao"],
+            ':estado' => $_POST["estado"]
+        )
+    );
+}
+
 if ($_POST['op'] == 'fetchUsers') {
     $output = array();
     $query = "

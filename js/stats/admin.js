@@ -210,6 +210,29 @@ function createDTCompras() {
     });
 }
 
+function createDTDoc() {
+    $("#tableDoc").DataTable({
+        processing: true,
+        ajax: {
+            url: "/sigest/php/stats.php",
+            type: "POST",
+            data: {
+                op: "fetchDoc",
+            }
+        },
+        searching: false,
+        responsive: true,
+        autoWidth: false,
+        contentType: false,
+        processData: false,
+        lengthChange: false,
+        columnDefs: [
+            {visible: false, targets: 0}
+        ],
+        language: {"url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"}
+    });
+}
+
 function addData(chart, label, color) {
     $.ajax({
         url: "/sigest/php/fetchChart.php",
@@ -512,4 +535,6 @@ $(document).ready(function () {
     createDTCopiaP();
     //Pen SW
     createDTSWP();
+    //Pend Doc
+    createDTDoc();
 });
